@@ -1,0 +1,6 @@
+# Target labels
+ ITKVideoCore
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/Video/Core/src/itkTemporalRegion.cxx
+/Users/antoinerosset/ITK/Modules/Video/Core/src/itkTemporalDataObject.cxx
+/Users/antoinerosset/ITK/Modules/Video/Core/src/itkTemporalProcessObject.cxx

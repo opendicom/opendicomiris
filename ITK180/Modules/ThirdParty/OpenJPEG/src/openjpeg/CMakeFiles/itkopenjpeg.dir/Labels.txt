@@ -1,0 +1,46 @@
+# Target labels
+ ITKOpenJPEG
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/tcd.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/bio.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/cio.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/dwt.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/event.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/image.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/j2k.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/j2k_lib.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/jp2.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/jpt.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/mct.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/mqc.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/openjpeg.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/pi.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/raw.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/t1.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/tgt.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/profile.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/invert.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/function_list.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/t2.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/bio.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/cio.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/dwt.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/event.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/image.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/j2k.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/j2k_lib.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/jp2.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/jpt.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/mct.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/mqc.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/openjpeg.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/pi.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/int.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/raw.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/t1.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/t2.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/tcd.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/tgt.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/profile.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/invert.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/OpenJPEG/src/openjpeg/function_list.h

@@ -1,0 +1,18 @@
+/**
+ \defgroup ITKAntiAlias ITKAntiAlias 
+ This module contains classes for applying antialiasing
+filters to images. This is typically done to smooth the outcome of
+segmentations, previous to extracting contours or surfaces from them. Note that
+you can also achieve effects similar to anti-aliasing by using a binary
+segmentation as input to a level set filter. 
+ \par Dependencies:
+ \li \ref ITKCurvatureFlow 
+ \li \ref ITKLevelSets 
+ \dot 
+ graph "ITKAntiAlias" { 
+ "ITKAntiAlias" -- "ITKCurvatureFlow"; 
+ "ITKAntiAlias" -- "ITKLevelSets"; 
+ } 
+ \enddot 
+ */
+

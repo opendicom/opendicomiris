@@ -1,0 +1,8 @@
+# Target labels
+ ITKBioCell
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/Segmentation/BioCell/src/itkBioGenome.cxx
+/Users/antoinerosset/ITK/Modules/Segmentation/BioCell/src/itkBioGene.cxx
+/Users/antoinerosset/ITK/Modules/Segmentation/BioCell/src/itkBioGeneNetwork.cxx
+/Users/antoinerosset/ITK/Modules/Segmentation/BioCell/src/itkBioCellBase.cxx
+/Users/antoinerosset/ITK/Modules/Segmentation/BioCell/src/itkBioCellularAggregateBase.cxx

@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/v3p/netlib/linalg/lsqrBase.cxx
+lsqrBase.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/v3p/netlib/linalg/lsqrBase.h
+math.h
+-
+
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/v3p/netlib/linalg/lsqrBase.h
+iostream
+-
+

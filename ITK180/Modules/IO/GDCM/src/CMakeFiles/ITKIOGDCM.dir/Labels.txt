@@ -1,0 +1,6 @@
+# Target labels
+ ITKIOGDCM
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/IO/GDCM/src/itkGDCMImageIO.cxx
+/Users/antoinerosset/ITK/Modules/IO/GDCM/src/itkGDCMImageIOFactory.cxx
+/Users/antoinerosset/ITK/Modules/IO/GDCM/src/itkGDCMSeriesFileNames.cxx

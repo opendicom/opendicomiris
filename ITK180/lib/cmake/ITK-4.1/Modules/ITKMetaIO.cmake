@@ -1,0 +1,5 @@
+set(ITKMetaIO_LOADED 1)
+set(ITKMetaIO_DEPENDS "ITKZLIB")
+set(ITKMetaIO_LIBRARIES "ITKMetaIO")
+set(ITKMetaIO_INCLUDE_DIRS "/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO;/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO")
+set(ITKMetaIO_LIBRARY_DIRS "")

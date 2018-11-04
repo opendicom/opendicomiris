@@ -1,0 +1,5 @@
+set(ITKExpat_LOADED 1)
+set(ITKExpat_DEPENDS "")
+set(ITKExpat_LIBRARIES "ITKEXPAT")
+set(ITKExpat_INCLUDE_DIRS "${ITK_INSTALL_PREFIX}/include/ITK-4.1")
+set(ITKExpat_LIBRARY_DIRS "")

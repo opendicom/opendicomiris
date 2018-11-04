@@ -1,0 +1,1648 @@
+Determining if the C compiler works failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/Applications/CMake\ 2.8-7.app/Contents/bin/cmakexbuild -project CMAKE_TRY_COMPILE.xcode build -target cmTryCompileExec -buildstyle Development 
+xcodebuild: error: option '-buildstyle' is no longer supported
+
+Usage: xcodebuild [-project <projectname>] [[-target <targetname>]...|-alltargets] [-configuration <configurationname>] [-arch <architecture>]... [-sdk [<sdkname>|<sdkpath>]] [<buildsetting>=<value>]... [<buildaction>]...
+       xcodebuild [-project <projectname>] -scheme <schemeName> [-configuration <configurationname>] [-arch <architecture>]... [-sdk [<sdkname>|<sdkpath>]] [<buildsetting>=<value>]... [<buildaction>]...
+       xcodebuild -workspace <workspacename> -scheme <schemeName> [-configuration <configurationname>] [-arch <architecture>]... [-sdk [<sdkname>|<sdkpath>]] [<buildsetting>=<value>]... [<buildaction>]...
+       xcodebuild -version [-sdk [<sdkfullpath>|<sdkname>] [<infoitem>] ]
+       xcodebuild -list [[-project <projectname>]|[-workspace <workspacename>]]
+       xcodebuild -showsdks
+Options:
+    -usage                print full usage
+    -verbose              provide additional status output
+    -license              Show License agreement!
+    -project NAME         build the project NAME
+    -target NAME          build the target NAME
+    -alltargets           build all targets
+    -workspace NAME       build the workspace NAME
+    -scheme NAME          build the scheme NAME
+    -configuration NAME   use the build configuration NAME for building each target
+    -xcconfig PATH        apply the build settings defined in the file at PATH as overrides
+    -arch ARCH            build each target for the architecture ARCH; this will override architectures defined in the project
+    -sdk SDK              use SDK as the name or path of the base SDK when building the project
+    -parallelizeTargets   build independent targets in parallel
+    -jobs NUMBER          specify the maximum number of concurrent build operations
+    -showsdks             display a compact list of the installed SDKs
+    -list                 lists the targets and configurations in a project, or the schemes in a workspace
+    -find BINARY          display the full path to BINARY in the provided SDK
+    -version              display the version of Xcode; with -sdk will display info about one or all installed SDKs
+
+
+Determining if the C compiler works failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/Applications/CMake\ 2.8-7.app/Contents/bin/cmakexbuild -project CMAKE_TRY_COMPILE.xcode build -target cmTryCompileExec -buildstyle Development 
+xcodebuild: error: option '-buildstyle' is no longer supported
+
+Usage: xcodebuild [-project <projectname>] [[-target <targetname>]...|-alltargets] [-configuration <configurationname>] [-arch <architecture>]... [-sdk [<sdkname>|<sdkpath>]] [<buildsetting>=<value>]... [<buildaction>]...
+       xcodebuild [-project <projectname>] -scheme <schemeName> [-configuration <configurationname>] [-arch <architecture>]... [-sdk [<sdkname>|<sdkpath>]] [<buildsetting>=<value>]... [<buildaction>]...
+       xcodebuild -workspace <workspacename> -scheme <schemeName> [-configuration <configurationname>] [-arch <architecture>]... [-sdk [<sdkname>|<sdkpath>]] [<buildsetting>=<value>]... [<buildaction>]...
+       xcodebuild -version [-sdk [<sdkfullpath>|<sdkname>] [<infoitem>] ]
+       xcodebuild -list [[-project <projectname>]|[-workspace <workspacename>]]
+       xcodebuild -showsdks
+Options:
+    -usage                print full usage
+    -verbose              provide additional status output
+    -license              Show License agreement!
+    -project NAME         build the project NAME
+    -target NAME          build the target NAME
+    -alltargets           build all targets
+    -workspace NAME       build the workspace NAME
+    -scheme NAME          build the scheme NAME
+    -configuration NAME   use the build configuration NAME for building each target
+    -xcconfig PATH        apply the build settings defined in the file at PATH as overrides
+    -arch ARCH            build each target for the architecture ARCH; this will override architectures defined in the project
+    -sdk SDK              use SDK as the name or path of the base SDK when building the project
+    -parallelizeTargets   build independent targets in parallel
+    -jobs NUMBER          specify the maximum number of concurrent build operations
+    -showsdks             display a compact list of the installed SDKs
+    -list                 lists the targets and configurations in a project, or the schemes in a workspace
+    -find BINARY          display the full path to BINARY in the provided SDK
+    -version              display the version of Xcode; with -sdk will display info about one or all installed SDKs
+
+
+Performing C SOURCE FILE Test C_HAS_WARNING-Wno-long-double failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/src.c.o
+/usr/bin/gcc   -DC_HAS_WARNING-Wno-long-double   -Wno-long-double -o CMakeFiles/cmTryCompileExec.dir/src.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/src.c
+cc1: error: unrecognized command line option "-Wno-long-double"
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/src.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+Source file was:
+int main(void) { return 0; }
+Performing C++ SOURCE FILE Test CXX_HAS_WARNING-Wno-long-double failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/src.cxx.o
+/usr/bin/c++    -DCXX_HAS_WARNING-Wno-long-double   -Wno-long-double -o CMakeFiles/cmTryCompileExec.dir/src.cxx.o -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/src.cxx
+cc1plus: error: unrecognized command line option "-Wno-long-double"
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/src.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+Source file was:
+int main() { return 0;}
+Performing C++ SOURCE FILE Test CXX_HAS_DISABLE_OPTIMIZATION_FLAG failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/src.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -DCXX_HAS_DISABLE_OPTIMIZATION_FLAG   -o CMakeFiles/cmTryCompileExec.dir/src.cxx.o -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/src.cxx
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/src.cxx:1: error: expected unqualified-id before '-' token
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/src.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+Source file was:
+-O0
+Checking for non-standard argument to stl allocator<>::max_size failed to compile with the following output:
+Change Dir: /Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/kwsysPlatformTestsCXX.cxx.o
+/usr/bin/c++   -DTEST_KWSYS_STL_HAS_ALLOCATOR_MAX_SIZE_ARGUMENT -DKWSYS_STL_HAVE_STD=1 -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel      -o CMakeFiles/cmTryCompileExec.dir/kwsysPlatformTestsCXX.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/kwsysPlatformTestsCXX.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/kwsysPlatformTestsCXX.cxx: In function 'void f(const std::allocator<char>&)':
+/Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/kwsysPlatformTestsCXX.cxx:247: error: no matching function for call to 'std::allocator<char>::max_size(long unsigned int) const'
+/usr/include/c++/4.2.1/ext/new_allocator.h:100: note: candidates are: size_t __gnu_cxx::new_allocator<_Tp>::max_size() const [with _Tp = char]
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/kwsysPlatformTestsCXX.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Checking whether "<>" is needed for template friends failed to compile with the following output:
+Change Dir: /Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/kwsysPlatformTestsCXX.cxx.o
+/usr/bin/c++   -DTEST_KWSYS_CXX_HAS_NULL_TEMPLATE_ARGS -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel      -o CMakeFiles/cmTryCompileExec.dir/kwsysPlatformTestsCXX.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/kwsysPlatformTestsCXX.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/kwsysPlatformTestsCXX.cxx:132: warning: friend declaration 'int f(A<T>&)' declares a non-template function
+/Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/kwsysPlatformTestsCXX.cxx:132: warning: (if this is not what you intended, make sure the function template has already been declared and add <> after the function name here) -Wno-non-template-friend disables this warning
+/Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/kwsysPlatformTestsCXX.cxx: In function 'int f(A<T>&) [with T = int]':
+/Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/kwsysPlatformTestsCXX.cxx:138:   instantiated from here
+/Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/kwsysPlatformTestsCXX.cxx:134: error: 'int A<int>::x' is private
+/Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/kwsysPlatformTestsCXX.cxx:137: error: within this context
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/kwsysPlatformTestsCXX.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Checking whether struct stat has st_mtim member failed to compile with the following output:
+Change Dir: /Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/kwsysPlatformTestsCXX.cxx.o
+/usr/bin/c++   -DTEST_KWSYS_STAT_HAS_ST_MTIM -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel      -o CMakeFiles/cmTryCompileExec.dir/kwsysPlatformTestsCXX.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/kwsysPlatformTestsCXX.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/kwsysPlatformTestsCXX.cxx: In function 'int main()':
+/Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/kwsysPlatformTestsCXX.cxx:276: error: 'struct stat' has no member named 'st_mtim'
+/Users/antoinerosset/ITK/Modules/ThirdParty/KWSys/src/KWSys/kwsysPlatformTestsCXX.cxx:277: error: 'struct stat' has no member named 'st_mtim'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/kwsysPlatformTestsCXX.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Determining size of __int64 failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/KWSYS_SIZEOF___INT64.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow      -o CMakeFiles/cmTryCompileExec.dir/KWSYS_SIZEOF___INT64.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CheckTypeSize/KWSYS_SIZEOF___INT64.c
+/Users/antoinerosset/ITK/CMakeFiles/CheckTypeSize/KWSYS_SIZEOF___INT64.c:19: error: '__int64' undeclared here (not in a function)
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/KWSYS_SIZEOF___INT64.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+/Users/antoinerosset/ITK/CMakeFiles/CheckTypeSize/KWSYS_SIZEOF___INT64.c:
+#include <sys/types.h>
+#include <stdint.h>
+#include <stddef.h>
+
+
+#undef KEY
+#if defined(__i386)
+# define KEY '_','_','i','3','8','6'
+#elif defined(__x86_64)
+# define KEY '_','_','x','8','6','_','6','4'
+#elif defined(__ppc__)
+# define KEY '_','_','p','p','c','_','_'
+#elif defined(__ppc64__)
+# define KEY '_','_','p','p','c','6','4','_','_'
+#endif
+
+#define SIZE (sizeof(__int64))
+char info_size[] =  {'I', 'N', 'F', 'O', ':', 's','i','z','e','[',
+  ('0' + ((SIZE / 10000)%10)),
+  ('0' + ((SIZE / 1000)%10)),
+  ('0' + ((SIZE / 100)%10)),
+  ('0' + ((SIZE / 10)%10)),
+  ('0' +  (SIZE    % 10)),
+  ']',
+#ifdef KEY
+  ' ','k','e','y','[', KEY, ']',
+#endif
+  '\0'};
+
+#ifdef __CLASSIC_C__
+int main(argc, argv) int argc; char *argv[];
+#else
+int main(int argc, char *argv[])
+#endif
+{
+  int require = 0;
+  require += info_size[argc];
+  (void)argv;
+  return require;
+}
+
+
+Performing Test VCL_STATIC_CONST_INIT_NO_DEFN failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_STATIC_CONST_INIT_NO_DEFN   -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+Linking CXX executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/c++      -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_STATIC_CONST_INIT_NO_DEFN -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o  -o cmTryCompileExec  
+Undefined symbols for architecture x86_64:
+  "A::x", referenced from:
+      _main in vxl_platform_tests.cxx.o
+ld: symbol(s) not found for architecture x86_64
+collect2: ld returned 1 exit status
+make[1]: *** [cmTryCompileExec] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Performing Test VCL_OVERLOAD_CAST failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_OVERLOAD_CAST   -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx: In constructor 'vnl_vector_fixed<n, T>::vnl_vector_fixed()':
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:371: error: 'data_fixed' was not declared in this scope
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Performing Test VCL_NULL_TMPL_ARGS failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_NULL_TMPL_ARGS   -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx: In function 'T dot(const victor<T>&, const victor<T>&) [with T = double]':
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:430:   instantiated from here
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:419: error: 'double victor<double>::data [3]' is private
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:427: error: within this context
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:419: error: 'double victor<double>::data [3]' is private
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:427: error: within this context
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:419: error: 'double victor<double>::data [3]' is private
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:427: error: within this context
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:419: error: 'double victor<double>::data [3]' is private
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:427: error: within this context
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:419: error: 'double victor<double>::data [3]' is private
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:427: error: within this context
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:419: error: 'double victor<double>::data [3]' is private
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:427: error: within this context
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Performing Try-Run Test VCL_HAS_TEMPLATE_SYMBOLS failed to compile with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_HAS_TEMPLATE_SYMBOLS   -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+Linking CXX executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/c++      -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_HAS_TEMPLATE_SYMBOLS -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o  -o cmTryCompileExec  
+Undefined symbols for architecture x86_64:
+  "void function<double>(double*, int)", referenced from:
+      caller()    in vxl_platform_tests.cxx.o
+ld: symbol(s) not found for architecture x86_64
+collect2: ld returned 1 exit status
+make[1]: *** [cmTryCompileExec] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Performing Test VCL_NEEDS_NAMESPACE_STD failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_NEEDS_NAMESPACE_STD   -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx: In function 'void function()':
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:783: error: 'vector' was not declared in this scope
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:783: error: expected primary-expression before 'double'
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:783: error: expected `;' before 'double'
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:784: error: 'flaz' was not declared in this scope
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Performing Test VCL_HAS_SLICED_DESTRUCTOR_BUG succeeded with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_HAS_SLICED_DESTRUCTOR_BUG   -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+Linking CXX executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/c++      -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_HAS_SLICED_DESTRUCTOR_BUG -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o  -o cmTryCompileExec  
+
+
+Performing Test VCL_HAS_WORKING_STRINGSTREAM succeeded with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_HAS_WORKING_STRINGSTREAM   -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+Linking CXX executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/c++      -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_HAS_WORKING_STRINGSTREAM -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o  -o cmTryCompileExec  
+
+
+Performing Test VCL_HAS_LFS succeeded with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_HAS_LFS   -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+Linking CXX executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/c++      -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_HAS_LFS -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o  -o cmTryCompileExec  
+
+
+Performing Test VXL_HAS_DBGHELP_H failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_DBGHELP_H   -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1110:21: error: Windows.h: No such file or directory
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1111:21: error: DbgHelp.h: No such file or directory
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx: In function 'int main()':
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1113: error: 'MINIDUMP_EXCEPTION_INFORMATION' was not declared in this scope
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1113: error: expected `;' before 'dummy'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Performing Test VXL_APPLE_HAS_ISNAND failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_APPLE_HAS_ISNAND   -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx: In function 'int main()':
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1122: error: '__isnand' was not declared in this scope
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Determining if the include file ieeefp.h exists failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/CheckIncludeFile.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w     -o CMakeFiles/cmTryCompileExec.dir/CheckIncludeFile.cxx.o -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFile.cxx:1:20: error: ieeefp.h: No such file or directory
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckIncludeFile.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Determining if the std::shared_ptr<void> exist failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/CheckTypeExists.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w     -o CMakeFiles/cmTryCompileExec.dir/CheckTypeExists.cxx.o -c /Users/antoinerosset/ITK/CMakeTmp/CheckTypeExists.cxx
+/Users/antoinerosset/ITK/CMakeTmp/CheckTypeExists.cxx:4: error: variable or field 'cmakeRequireSymbol' declared void
+/Users/antoinerosset/ITK/CMakeTmp/CheckTypeExists.cxx:4: error: 'shared_ptr' is not a member of 'std'
+/Users/antoinerosset/ITK/CMakeTmp/CheckTypeExists.cxx:4: error: expected primary-expression before 'void'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckTypeExists.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+File /Users/antoinerosset/ITK/CMakeTmp/CheckTypeExists.c:
+/* */
+#include <memory>
+
+void cmakeRequireSymbol(std::shared_ptr<void> dummy){(void)dummy;}
+int main()
+{return 0;
+}
+
+Performing Test VXL_HAS_SSE2_HARDWARE_SUPPORT succeeded with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_SSE2_HARDWARE_SUPPORT   -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+Linking CXX executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/c++      -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_SSE2_HARDWARE_SUPPORT -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o  -o cmTryCompileExec  
+
+
+Performing Test VXL_HAS_ALIGNED_MALLOC failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_ALIGNED_MALLOC   -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1171:20: error: malloc.h: No such file or directory
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx: In function 'int main()':
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1174: error: '_aligned_malloc' was not declared in this scope
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1175: error: '_aligned_free' was not declared in this scope
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Performing Test VXL_HAS_MINGW_ALIGNED_MALLOC failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_MINGW_ALIGNED_MALLOC   -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1183:20: error: malloc.h: No such file or directory
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx: In function 'int main()':
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1186: error: '__mingw_aligned_malloc' was not declared in this scope
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1187: error: '__mingw_aligned_free' was not declared in this scope
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Performing Test VXL_HAS_POSIX_MEMALIGN failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_POSIX_MEMALIGN   -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx: In function 'int main()':
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1198: error: 'memalign' was not declared in this scope
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Performing Test VCL_COMPLEX_POW_WORKS succeeded with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_COMPLEX_POW_WORKS   -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+Linking CXX executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/c++      -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_COMPLEX_POW_WORKS -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o  -o cmTryCompileExec  
+
+
+Determining if the finitef exist failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function 'main':
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: 'finitef' undeclared (first use in this function)
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: (Each undeclared identifier is reported only once
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: for each function it appears in.)
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+File /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+void cmakeRequireSymbol(int dummy,...){(void)dummy;}
+int main()
+{
+#ifndef finitef
+  cmakeRequireSymbol(0,&finitef);
+#endif
+  return 0;
+}
+
+Determining if the finitel exist failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function 'main':
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: 'finitel' undeclared (first use in this function)
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: (Each undeclared identifier is reported only once
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: for each function it appears in.)
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+File /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <math.h>
+
+void cmakeRequireSymbol(int dummy,...){(void)dummy;}
+int main()
+{
+#ifndef finitel
+  cmakeRequireSymbol(0,&finitel);
+#endif
+  return 0;
+}
+
+Determining if the finite exist failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckSymbolExists.c:2:20: error: ieeefp.h: No such file or directory
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckSymbolExists.c: In function 'main':
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: 'finite' undeclared (first use in this function)
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: (Each undeclared identifier is reported only once
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckSymbolExists.c:8: error: for each function it appears in.)
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckSymbolExists.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+File /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <ieeefp.h>
+
+void cmakeRequireSymbol(int dummy,...){(void)dummy;}
+int main()
+{
+#ifndef finite
+  cmakeRequireSymbol(0,&finite);
+#endif
+  return 0;
+}
+
+Determining if the system is big endian passed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/TestEndianess.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/TestEndianess.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/TestEndianess.c
+Linking C executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/gcc     -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/TestEndianess.c.o  -o cmTryCompileExec  
+
+TestEndianess.c:
+/* A 16 bit integer is required. */
+typedef unsigned short cmakeint16;
+
+/* On a little endian machine, these 16bit ints will give "THIS IS LITTLE ENDIAN."
+   On a big endian machine the characters will be exchanged pairwise. */
+const cmakeint16 info_little[] =  {0x4854, 0x5349, 0x4920, 0x2053, 0x494c, 0x5454, 0x454c, 0x4520, 0x444e, 0x4149, 0x2e4e, 0x0000};
+
+/* on a big endian machine, these 16bit ints will give "THIS IS BIG ENDIAN."
+   On a little endian machine the characters will be exchanged pairwise. */
+const cmakeint16 info_big[] =     {0x5448, 0x4953, 0x2049, 0x5320, 0x4249, 0x4720, 0x454e, 0x4449, 0x414e, 0x2e2e, 0x0000};
+
+#ifdef __CLASSIC_C__
+int main(argc, argv) int argc; char *argv[];
+#else
+int main(int argc, char *argv[])
+#endif
+{
+  int require = 0;
+  require += info_little[argc];
+  require += info_big[argc];
+  (void)argv;
+  return require;
+}
+
+
+Performing Test VCL_CHAR_IS_SIGNED succeeded with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_CHAR_IS_SIGNED   -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+Linking CXX executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/c++      -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_CHAR_IS_SIGNED -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o  -o cmTryCompileExec  -lm 
+
+
+Looking for 8-bit int. Failed to compile with the following output:
+(FLAGS=-DVXL_HAS_TYPE_OF_SIZE)
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_TYPE_OF_SIZE -I/Users/antoinerosset/ITK/CMakeTmp    -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1051: error: conflicting declaration 'int (* verify_size)[8]'
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1050: error: 'verify_size' has a previous declaration as 'int (* verify_size)[16]'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Looking for 16-bit int. Failed to compile with the following output:
+(FLAGS=-DVXL_HAS_TYPE_OF_SIZE)
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_TYPE_OF_SIZE -I/Users/antoinerosset/ITK/CMakeTmp    -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1051: error: conflicting declaration 'int (* verify_size)[16]'
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1050: error: 'verify_size' has a previous declaration as 'int (* verify_size)[8]'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Looking for 16-bit int. Failed to compile with the following output:
+(FLAGS=-DVXL_HAS_TYPE_OF_SIZE)
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_TYPE_OF_SIZE -I/Users/antoinerosset/ITK/CMakeTmp    -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1051: error: conflicting declaration 'int (* verify_size)[16]'
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1050: error: 'verify_size' has a previous declaration as 'int (* verify_size)[32]'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Looking for 32-bit int. Failed to compile with the following output:
+(FLAGS=-DVXL_HAS_TYPE_OF_SIZE)
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_TYPE_OF_SIZE -I/Users/antoinerosset/ITK/CMakeTmp    -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1051: error: conflicting declaration 'int (* verify_size)[32]'
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1050: error: 'verify_size' has a previous declaration as 'int (* verify_size)[16]'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Looking for 32-bit int. Failed to compile with the following output:
+(FLAGS=-DVXL_HAS_TYPE_OF_SIZE)
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_TYPE_OF_SIZE -I/Users/antoinerosset/ITK/CMakeTmp    -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1051: error: conflicting declaration 'int (* verify_size)[32]'
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1050: error: 'verify_size' has a previous declaration as 'int (* verify_size)[64]'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Looking for 64-bit int. Failed to compile with the following output:
+(FLAGS=-DVXL_HAS_TYPE_OF_SIZE)
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_TYPE_OF_SIZE -I/Users/antoinerosset/ITK/CMakeTmp    -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1038: error: '__int64' was not declared in this scope
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1038: error: expected primary-expression before 'unsigned'
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1038: error: expected primary-expression before 'signed'
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1038: error: initializer expression list treated as compound expression
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1039: error: expected ',' or ';' before '{' token
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1050: error: '__int64' was not declared in this scope
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Looking for 32-bit float. Failed to compile with the following output:
+(FLAGS=-DVXL_HAS_TYPE_OF_SIZE)
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_TYPE_OF_SIZE -I/Users/antoinerosset/ITK/CMakeTmp    -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1051: error: conflicting declaration 'int (* verify_size)[32]'
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1050: error: 'verify_size' has a previous declaration as 'int (* verify_size)[128]'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Looking for 32-bit float. Failed to compile with the following output:
+(FLAGS=-DVXL_HAS_TYPE_OF_SIZE)
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_TYPE_OF_SIZE -I/Users/antoinerosset/ITK/CMakeTmp    -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1051: error: conflicting declaration 'int (* verify_size)[32]'
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1050: error: 'verify_size' has a previous declaration as 'int (* verify_size)[64]'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Looking for 64-bit float. Failed to compile with the following output:
+(FLAGS=-DVXL_HAS_TYPE_OF_SIZE)
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_TYPE_OF_SIZE -I/Users/antoinerosset/ITK/CMakeTmp    -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1051: error: conflicting declaration 'int (* verify_size)[64]'
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1050: error: 'verify_size' has a previous declaration as 'int (* verify_size)[32]'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Looking for 64-bit float. Failed to compile with the following output:
+(FLAGS=-DVXL_HAS_TYPE_OF_SIZE)
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_TYPE_OF_SIZE -I/Users/antoinerosset/ITK/CMakeTmp    -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1051: error: conflicting declaration 'int (* verify_size)[64]'
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1050: error: 'verify_size' has a previous declaration as 'int (* verify_size)[128]'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Looking for 96-bit float. Failed to compile with the following output:
+(FLAGS=-DVXL_HAS_TYPE_OF_SIZE)
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_TYPE_OF_SIZE -I/Users/antoinerosset/ITK/CMakeTmp    -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1051: error: conflicting declaration 'int (* verify_size)[96]'
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1050: error: 'verify_size' has a previous declaration as 'int (* verify_size)[32]'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Looking for 96-bit float. Failed to compile with the following output:
+(FLAGS=-DVXL_HAS_TYPE_OF_SIZE)
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_TYPE_OF_SIZE -I/Users/antoinerosset/ITK/CMakeTmp    -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1051: error: conflicting declaration 'int (* verify_size)[96]'
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1050: error: 'verify_size' has a previous declaration as 'int (* verify_size)[64]'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Looking for 96-bit float. Failed to compile with the following output:
+(FLAGS=-DVXL_HAS_TYPE_OF_SIZE)
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_TYPE_OF_SIZE -I/Users/antoinerosset/ITK/CMakeTmp    -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1051: error: conflicting declaration 'int (* verify_size)[96]'
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1050: error: 'verify_size' has a previous declaration as 'int (* verify_size)[128]'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Looking for 128-bit float. Failed to compile with the following output:
+(FLAGS=-DVXL_HAS_TYPE_OF_SIZE)
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_TYPE_OF_SIZE -I/Users/antoinerosset/ITK/CMakeTmp    -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1051: error: conflicting declaration 'int (* verify_size)[128]'
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1050: error: 'verify_size' has a previous declaration as 'int (* verify_size)[32]'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Looking for 128-bit float. Failed to compile with the following output:
+(FLAGS=-DVXL_HAS_TYPE_OF_SIZE)
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVXL_HAS_TYPE_OF_SIZE -I/Users/antoinerosset/ITK/CMakeTmp    -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1051: error: conflicting declaration 'int (* verify_size)[128]'
+/Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx:1050: error: 'verify_size' has a previous declaration as 'int (* verify_size)[64]'
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Determining if the function tell exists failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=tell   -o CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o   -c "/Applications/CMake 2.8-7.app/Contents/share/cmake-2.8/Modules/CheckFunctionExists.c"
+Linking C executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/gcc     -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=tell -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o  -o cmTryCompileExec  -lm 
+Undefined symbols for architecture x86_64:
+  "_tell", referenced from:
+      _main in CheckFunctionExists.c.o
+ld: symbol(s) not found for architecture x86_64
+collect2: ld returned 1 exit status
+make[1]: *** [cmTryCompileExec] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Performing Test VCL_NUMERIC_LIMITS_HAS_INFINITY succeeded with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_NUMERIC_LIMITS_HAS_INFINITY   -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+Linking CXX executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/c++      -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_NUMERIC_LIMITS_HAS_INFINITY -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o  -o cmTryCompileExec  -lm 
+
+
+Performing Test VCL_PROCESSOR_HAS_INFINITY succeeded with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_PROCESSOR_HAS_INFINITY   -o CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o -c /Users/antoinerosset/ITK/Modules/ThirdParty/VNL/src/vxl/config/cmake/config/vxl_platform_tests.cxx
+Linking CXX executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/c++      -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w -w  -DVCL_PROCESSOR_HAS_INFINITY -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/vxl_platform_tests.cxx.o  -o cmTryCompileExec  -lm 
+
+
+Determining if the system is big endian passed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/TestEndianess.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow      -o CMakeFiles/cmTryCompileExec.dir/TestEndianess.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/TestEndianess.c
+Linking C executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/gcc     -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow    -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/TestEndianess.c.o  -o cmTryCompileExec  
+
+TestEndianess.c:
+/* A 16 bit integer is required. */
+typedef unsigned short cmakeint16;
+
+/* On a little endian machine, these 16bit ints will give "THIS IS LITTLE ENDIAN."
+   On a big endian machine the characters will be exchanged pairwise. */
+const cmakeint16 info_little[] =  {0x4854, 0x5349, 0x4920, 0x2053, 0x494c, 0x5454, 0x454c, 0x4520, 0x444e, 0x4149, 0x2e4e, 0x0000};
+
+/* on a big endian machine, these 16bit ints will give "THIS IS BIG ENDIAN."
+   On a little endian machine the characters will be exchanged pairwise. */
+const cmakeint16 info_big[] =     {0x5448, 0x4953, 0x2049, 0x5320, 0x4249, 0x4720, 0x454e, 0x4449, 0x414e, 0x2e2e, 0x0000};
+
+#ifdef __CLASSIC_C__
+int main(argc, argv) int argc; char *argv[];
+#else
+int main(int argc, char *argv[])
+#endif
+{
+  int require = 0;
+  require += info_little[argc];
+  require += info_big[argc];
+  (void)argv;
+  return require;
+}
+
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o   -c "/Applications/CMake 2.8-7.app/Contents/share/cmake-2.8/Modules/CheckFunctionExists.c"
+Linking C executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/gcc     -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow   -DCHECK_FUNCTION_EXISTS=pthread_create -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o  -o cmTryCompileExec  -lpthreads 
+ld: library not found for -lpthreads
+collect2: ld returned 1 exit status
+make[1]: *** [cmTryCompileExec] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Performing C++ SOURCE FILE Test gcc_has_no_associative_math failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/src.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel   -Dgcc_has_no_associative_math   -fno-associative-math -o CMakeFiles/cmTryCompileExec.dir/src.cxx.o -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/src.cxx
+cc1plus: error: unrecognized command line option "-fno-associative-math"
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/src.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+Source file was:
+int main() { return 0;}
+Determining if files sys/time.h;winsock.h exist failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c:3:21: error: winsock.h: No such file or directory
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+Source:
+/* */
+#include <sys/time.h>
+#include <winsock.h>
+
+
+int main(){return 0;}
+
+Determining if files sys/time.h;byteswap.h exist failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c:3:22: error: byteswap.h: No such file or directory
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+Source:
+/* */
+#include <sys/time.h>
+#include <byteswap.h>
+
+
+int main(){return 0;}
+
+Determining if the include file rpc.h exists failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckIncludeFile.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/CheckIncludeFile.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFile.c:1:17: error: rpc.h: No such file or directory
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckIncludeFile.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Determining if the function _stricmp exists failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=_stricmp   -o CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o   -c "/Applications/CMake 2.8-7.app/Contents/share/cmake-2.8/Modules/CheckFunctionExists.c"
+Linking C executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/gcc     -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=_stricmp -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o  -o cmTryCompileExec  
+Undefined symbols for architecture x86_64:
+  "__stricmp", referenced from:
+      _main in CheckFunctionExists.c.o
+ld: symbol(s) not found for architecture x86_64
+collect2: ld returned 1 exit status
+make[1]: *** [cmTryCompileExec] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Determining if the function _strnicmp exists failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=_strnicmp   -o CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o   -c "/Applications/CMake 2.8-7.app/Contents/share/cmake-2.8/Modules/CheckFunctionExists.c"
+Linking C executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/gcc     -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=_strnicmp -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o  -o cmTryCompileExec  
+Undefined symbols for architecture x86_64:
+  "__strnicmp", referenced from:
+      _main in CheckFunctionExists.c.o
+ld: symbol(s) not found for architecture x86_64
+collect2: ld returned 1 exit status
+make[1]: *** [cmTryCompileExec] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Determining if the function _snprintf exists failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=_snprintf   -o CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o   -c "/Applications/CMake 2.8-7.app/Contents/share/cmake-2.8/Modules/CheckFunctionExists.c"
+Linking C executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/gcc     -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=_snprintf -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o  -o cmTryCompileExec  
+Undefined symbols for architecture x86_64:
+  "__snprintf", referenced from:
+      _main in CheckFunctionExists.c.o
+ld: symbol(s) not found for architecture x86_64
+collect2: ld returned 1 exit status
+make[1]: *** [cmTryCompileExec] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Performing C++ SOURCE FILE Test GDCM_HAVE_WCHAR_IFSTREAM failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec.dir/src.cxx.o
+/usr/bin/c++    -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow -Wno-deprecated -Wno-invalid-offsetof -Woverloaded-virtual -Wstrict-null-sentinel  -w  -DGDCM_HAVE_WCHAR_IFSTREAM   -o CMakeFiles/cmTryCompileExec.dir/src.cxx.o -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/src.cxx
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/src.cxx: In function 'int main()':
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/src.cxx:2: error: no matching function for call to 'std::basic_ifstream<char, std::char_traits<char> >::basic_ifstream(const wchar_t [10])'
+/usr/include/c++/4.2.1/fstream:465: note: candidates are: std::basic_ifstream<_CharT, _Traits>::basic_ifstream(const char*, std::_Ios_Openmode) [with _CharT = char, _Traits = std::char_traits<char>]
+/usr/include/c++/4.2.1/fstream:451: note:                 std::basic_ifstream<_CharT, _Traits>::basic_ifstream() [with _CharT = char, _Traits = std::char_traits<char>]
+/usr/include/c++/4.2.1/iosfwd:89: note:                 std::basic_ifstream<char, std::char_traits<char> >::basic_ifstream(const std::basic_ifstream<char, std::char_traits<char> >&)
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/src.cxx.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+Source file was:
+#include <fstream>
+int main() { const wchar_t fn[10] = {}; std::ifstream is( fn ); return 0;}
+Determining if files malloc.h exist failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c:2:20: error: malloc.h: No such file or directory
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+Source:
+/* */
+#include <malloc.h>
+
+
+int main(){return 0;}
+
+Determining if files windows.h exist failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c:2:21: error: windows.h: No such file or directory
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+Source:
+/* */
+#include <windows.h>
+
+
+int main(){return 0;}
+
+Determining if files ieeefp.h exist failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c:2:20: error: ieeefp.h: No such file or directory
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+Source:
+/* */
+#include <ieeefp.h>
+
+
+int main(){return 0;}
+
+Value of the 22nd bit of a 32-bit quiet-NaN is 1TestQnanhibit.c produced following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/TestQnanhibit.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/TestQnanhibit.c.o   -c /Users/antoinerosset/ITK/Modules/ThirdParty/NrrdIO/src/NrrdIO/CMake/TestQnanhibit.c
+Linking C executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/gcc     -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w   -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/TestQnanhibit.c.o  -o cmTryCompileExec  
+-DTEEM_QNANHIBIT=1
+
+
+Determining if the function WSAStartup exists in the ws2_32;m failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=WSAStartup   -o CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o   -c "/Applications/CMake 2.8-7.app/Contents/share/cmake-2.8/Modules/CheckFunctionExists.c"
+Linking C executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/gcc     -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=WSAStartup -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o  -o cmTryCompileExec  -lws2_32 -lm 
+ld: library not found for -lws2_32
+collect2: ld returned 1 exit status
+make[1]: *** [cmTryCompileExec] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Determining if the function gethostbyname exists in the wsock32;m failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=gethostbyname   -o CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o   -c "/Applications/CMake 2.8-7.app/Contents/share/cmake-2.8/Modules/CheckFunctionExists.c"
+Linking C executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/gcc     -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=gethostbyname -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o  -o cmTryCompileExec  -lwsock32 -lm 
+ld: library not found for -lwsock32
+collect2: ld returned 1 exit status
+make[1]: *** [cmTryCompileExec] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Determining if the function gethostname exists in the ucb;m failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=gethostname   -o CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o   -c "/Applications/CMake 2.8-7.app/Contents/share/cmake-2.8/Modules/CheckFunctionExists.c"
+Linking C executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/gcc     -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=gethostname -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o  -o cmTryCompileExec  -lucb -lm 
+ld: library not found for -lucb
+collect2: ld returned 1 exit status
+make[1]: *** [cmTryCompileExec] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Determining if the function connect exists in the socket;m failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=connect   -o CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o   -c "/Applications/CMake 2.8-7.app/Contents/share/cmake-2.8/Modules/CheckFunctionExists.c"
+Linking C executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/gcc     -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=connect -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o  -o cmTryCompileExec  -lsocket -lm 
+ld: library not found for -lsocket
+collect2: ld returned 1 exit status
+make[1]: *** [cmTryCompileExec] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Determining if files ;globus/common.h exist failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c:2:27: error: globus/common.h: No such file or directory
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+Source:
+/* */
+#include <globus/common.h>
+
+
+int main(){return 0;}
+
+Determining if files ;io.h exist failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c:2:16: error: io.h: No such file or directory
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+Source:
+/* */
+#include <io.h>
+
+
+int main(){return 0;}
+
+Determining if files ;mfhdf.h exist failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c:2:19: error: mfhdf.h: No such file or directory
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+Source:
+/* */
+#include <mfhdf.h>
+
+
+int main(){return 0;}
+
+Determining if files ;pdb.h exist failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c:2:17: error: pdb.h: No such file or directory
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+Source:
+/* */
+#include <pdb.h>
+
+
+int main(){return 0;}
+
+Determining if files pthread.h;setjmp.h;srbclient.h exist failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c:4:23: error: srbclient.h: No such file or directory
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+Source:
+/* */
+#include <pthread.h>
+#include <setjmp.h>
+#include <srbclient.h>
+
+
+int main(){return 0;}
+
+Determining if files pthread.h;setjmp.h;stddef.h;stdint.h;string.h;strings.h;sys/ioctl.h;sys/proc.h exist failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+In file included from /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c:9:
+/usr/include/sys/proc.h:118: error: field 'p_realtimer' has incomplete type
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+Source:
+/* */
+#include <pthread.h>
+#include <setjmp.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <string.h>
+#include <strings.h>
+#include <sys/ioctl.h>
+#include <sys/proc.h>
+
+
+int main(){return 0;}
+
+Determining if files pthread.h;setjmp.h;stddef.h;stdint.h;string.h;strings.h;sys/ioctl.h;sys/resource.h;sys/socket.h;sys/stat.h;sys/time.h;time.h;sys/timeb.h;sys/types.h;unistd.h;stdlib.h;memory.h;dlfcn.h;features.h exist failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c:20:22: error: features.h: No such file or directory
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+Source:
+/* */
+#include <pthread.h>
+#include <setjmp.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <string.h>
+#include <strings.h>
+#include <sys/ioctl.h>
+#include <sys/resource.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <time.h>
+#include <sys/timeb.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <memory.h>
+#include <dlfcn.h>
+#include <features.h>
+
+
+int main(){return 0;}
+
+Determining if files pthread.h;setjmp.h;stddef.h;stdint.h;string.h;strings.h;sys/ioctl.h;sys/resource.h;sys/socket.h;sys/stat.h;sys/time.h;time.h;sys/timeb.h;sys/types.h;unistd.h;stdlib.h;memory.h;dlfcn.h;inttypes.h;netinet/in.h;winsock2.h exist failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c
+/Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CheckIncludeFiles.c:22:22: error: winsock2.h: No such file or directory
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/CheckIncludeFiles.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+Source:
+/* */
+#include <pthread.h>
+#include <setjmp.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <string.h>
+#include <strings.h>
+#include <sys/ioctl.h>
+#include <sys/resource.h>
+#include <sys/socket.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <time.h>
+#include <sys/timeb.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <memory.h>
+#include <dlfcn.h>
+#include <inttypes.h>
+#include <netinet/in.h>
+#include <winsock2.h>
+
+
+int main(){return 0;}
+
+Determining size of __int64 failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/H5_SIZEOF___INT64.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/H5_SIZEOF___INT64.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CheckTypeSize/H5_SIZEOF___INT64.c
+/Users/antoinerosset/ITK/CMakeFiles/CheckTypeSize/H5_SIZEOF___INT64.c:19: error: '__int64' undeclared here (not in a function)
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/H5_SIZEOF___INT64.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+/Users/antoinerosset/ITK/CMakeFiles/CheckTypeSize/H5_SIZEOF___INT64.c:
+#include <sys/types.h>
+#include <stdint.h>
+#include <stddef.h>
+
+
+#undef KEY
+#if defined(__i386)
+# define KEY '_','_','i','3','8','6'
+#elif defined(__x86_64)
+# define KEY '_','_','x','8','6','_','6','4'
+#elif defined(__ppc__)
+# define KEY '_','_','p','p','c','_','_'
+#elif defined(__ppc64__)
+# define KEY '_','_','p','p','c','6','4','_','_'
+#endif
+
+#define SIZE (sizeof(__int64))
+char info_size[] =  {'I', 'N', 'F', 'O', ':', 's','i','z','e','[',
+  ('0' + ((SIZE / 10000)%10)),
+  ('0' + ((SIZE / 1000)%10)),
+  ('0' + ((SIZE / 100)%10)),
+  ('0' + ((SIZE / 10)%10)),
+  ('0' +  (SIZE    % 10)),
+  ']',
+#ifdef KEY
+  ' ','k','e','y','[', KEY, ']',
+#endif
+  '\0'};
+
+#ifdef __CLASSIC_C__
+int main(argc, argv) int argc; char *argv[];
+#else
+int main(int argc, char *argv[])
+#endif
+{
+  int require = 0;
+  require += info_size[argc];
+  (void)argv;
+  return require;
+}
+
+
+Determining size of off64_t failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/H5_SIZEOF_OFF64_T.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w     -o CMakeFiles/cmTryCompileExec.dir/H5_SIZEOF_OFF64_T.c.o   -c /Users/antoinerosset/ITK/CMakeFiles/CheckTypeSize/H5_SIZEOF_OFF64_T.c
+/Users/antoinerosset/ITK/CMakeFiles/CheckTypeSize/H5_SIZEOF_OFF64_T.c:19: error: 'off64_t' undeclared here (not in a function)
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/H5_SIZEOF_OFF64_T.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+/Users/antoinerosset/ITK/CMakeFiles/CheckTypeSize/H5_SIZEOF_OFF64_T.c:
+#include <sys/types.h>
+#include <stdint.h>
+#include <stddef.h>
+
+
+#undef KEY
+#if defined(__i386)
+# define KEY '_','_','i','3','8','6'
+#elif defined(__x86_64)
+# define KEY '_','_','x','8','6','_','6','4'
+#elif defined(__ppc__)
+# define KEY '_','_','p','p','c','_','_'
+#elif defined(__ppc64__)
+# define KEY '_','_','p','p','c','6','4','_','_'
+#endif
+
+#define SIZE (sizeof(off64_t))
+char info_size[] =  {'I', 'N', 'F', 'O', ':', 's','i','z','e','[',
+  ('0' + ((SIZE / 10000)%10)),
+  ('0' + ((SIZE / 1000)%10)),
+  ('0' + ((SIZE / 100)%10)),
+  ('0' + ((SIZE / 10)%10)),
+  ('0' +  (SIZE    % 10)),
+  ']',
+#ifdef KEY
+  ' ','k','e','y','[', KEY, ']',
+#endif
+  '\0'};
+
+#ifdef __CLASSIC_C__
+int main(argc, argv) int argc; char *argv[];
+#else
+int main(int argc, char *argv[])
+#endif
+{
+  int require = 0;
+  require += info_size[argc];
+  (void)argv;
+  return require;
+}
+
+
+Determining if the function setsysinfo exists failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=setsysinfo   -o CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o   -c "/Applications/CMake 2.8-7.app/Contents/share/cmake-2.8/Modules/CheckFunctionExists.c"
+Linking C executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/gcc     -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=setsysinfo -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o  -o cmTryCompileExec  -lm 
+Undefined symbols for architecture x86_64:
+  "_setsysinfo", referenced from:
+      _main in CheckFunctionExists.c.o
+ld: symbol(s) not found for architecture x86_64
+collect2: ld returned 1 exit status
+make[1]: *** [cmTryCompileExec] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Determining if the function fseeko64 exists failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=fseeko64   -o CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o   -c "/Applications/CMake 2.8-7.app/Contents/share/cmake-2.8/Modules/CheckFunctionExists.c"
+Linking C executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/gcc     -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=fseeko64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o  -o cmTryCompileExec  -lm 
+Undefined symbols for architecture x86_64:
+  "_fseeko64", referenced from:
+      _main in CheckFunctionExists.c.o
+ld: symbol(s) not found for architecture x86_64
+collect2: ld returned 1 exit status
+make[1]: *** [cmTryCompileExec] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Determining if the function ftello64 exists failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=ftello64   -o CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o   -c "/Applications/CMake 2.8-7.app/Contents/share/cmake-2.8/Modules/CheckFunctionExists.c"
+Linking C executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/gcc     -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DCHECK_FUNCTION_EXISTS=ftello64 -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/CheckFunctionExists.c.o  -o cmTryCompileExec  -lm 
+Undefined symbols for architecture x86_64:
+  "_ftello64", referenced from:
+      _main in CheckFunctionExists.c.o
+ld: symbol(s) not found for architecture x86_64
+collect2: ld returned 1 exit status
+make[1]: *** [cmTryCompileExec] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+
+Performing Other Test HAVE_OFF64_T failed with the following output:
+Change Dir: /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/HDF5Tests.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DHAVE_OFF64_T  -DHAVE_SYS_TIME_H -DHAVE_UNISTD_H -DHAVE_SYS_TYPES_H -DHAVE_SYS_SOCKET_H   -o CMakeFiles/cmTryCompileExec.dir/HDF5Tests.c.o   -c /Users/antoinerosset/ITK/Modules/ThirdParty/HDF5/src/itkhdf5/config/cmake/HDF5Tests.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/HDF5/src/itkhdf5/config/cmake/HDF5Tests.c: In function 'main':
+/Users/antoinerosset/ITK/Modules/ThirdParty/HDF5/src/itkhdf5/config/cmake/HDF5Tests.c:334: error: 'off64_t' undeclared (first use in this function)
+/Users/antoinerosset/ITK/Modules/ThirdParty/HDF5/src/itkhdf5/config/cmake/HDF5Tests.c:334: error: (Each undeclared identifier is reported only once
+/Users/antoinerosset/ITK/Modules/ThirdParty/HDF5/src/itkhdf5/config/cmake/HDF5Tests.c:334: error: for each function it appears in.)
+/Users/antoinerosset/ITK/Modules/ThirdParty/HDF5/src/itkhdf5/config/cmake/HDF5Tests.c:334: error: expected ';' before 'n'
+/Users/antoinerosset/ITK/Modules/ThirdParty/HDF5/src/itkhdf5/config/cmake/HDF5Tests.c:335: error: 'n' undeclared (first use in this function)
+make[1]: *** [CMakeFiles/cmTryCompileExec.dir/HDF5Tests.c.o] Error 1
+make: *** [cmTryCompileExec/fast] Error 2
+
+Test H5_ULONG_TO_FP_BOTTOM_BIT_ACCURATE Run failed with the following output and exit code:
+ Change Dir: /Users/antoinerosset/ITK/Modules/ThirdParty/HDF5/src/itkhdf5/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/Modules/ThirdParty/HDF5/src/itkhdf5/CMake/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/ConversionTests.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DH5_ULONG_TO_FP_BOTTOM_BIT_ACCURATE_TEST   -o CMakeFiles/cmTryCompileExec.dir/ConversionTests.c.o   -c /Users/antoinerosset/ITK/Modules/ThirdParty/HDF5/src/itkhdf5/config/cmake/ConversionTests.c
+Linking C executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/gcc     -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DH5_ULONG_TO_FP_BOTTOM_BIT_ACCURATE_TEST -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/ConversionTests.c.o  -o cmTryCompileExec  
+
+Test H5_FP_TO_ULLONG_RIGHT_MAXIMUM Run failed with the following output and exit code:
+ Change Dir: /Users/antoinerosset/ITK/Modules/ThirdParty/HDF5/src/itkhdf5/CMake/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/make "cmTryCompileExec/fast"
+/usr/bin/make -f CMakeFiles/cmTryCompileExec.dir/build.make CMakeFiles/cmTryCompileExec.dir/build
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_progress_report /Users/antoinerosset/ITK/Modules/ThirdParty/HDF5/src/itkhdf5/CMake/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec.dir/ConversionTests.c.o
+/usr/bin/gcc   -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DH5_FP_TO_ULLONG_RIGHT_MAXIMUM_TEST   -o CMakeFiles/cmTryCompileExec.dir/ConversionTests.c.o   -c /Users/antoinerosset/ITK/Modules/ThirdParty/HDF5/src/itkhdf5/config/cmake/ConversionTests.c
+Linking C executable cmTryCompileExec
+"/Applications/CMake 2.8-7.app/Contents/bin/cmake" -E cmake_link_script CMakeFiles/cmTryCompileExec.dir/link.txt --verbose=1
+/usr/bin/gcc     -Wno-uninitialized -Wno-unused-parameter -Wall -Wcast-align -Wdisabled-optimization -Wextra -Wformat=2 -Winvalid-pch -Wno-format-nonliteral -Wpointer-arith -Wshadow -Wunused -Wwrite-strings -funit-at-a-time -Wno-strict-overflow  -w  -DH5_FP_TO_ULLONG_RIGHT_MAXIMUM_TEST -Wl,-search_paths_first -Wl,-headerpad_max_install_names   CMakeFiles/cmTryCompileExec.dir/ConversionTests.c.o  -o cmTryCompileExec  
+

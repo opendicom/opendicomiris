@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIOGIPL-4.1.a  CMakeFiles/ITKIOGIPL.dir/itkGiplImageIOFactory.cxx.o CMakeFiles/ITKIOGIPL.dir/itkGiplImageIO.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIOGIPL-4.1.a

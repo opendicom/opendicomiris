@@ -1,0 +1,32 @@
+# Target labels
+ ITKOptimizers
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkConjugateGradientOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkRegularStepGradientDescentOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkLBFGSOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkExhaustiveOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkLevenbergMarquardtOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkCostFunction.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkSingleValuedNonLinearVnlOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkQuaternionRigidTransformGradientDescentOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkSPSAOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkSingleValuedVnlCostFunctionAdaptor.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkMultipleValuedNonLinearVnlOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkPowellOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkVersorRigid3DTransformOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkVersorTransformOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkOnePlusOneEvolutionaryOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkMultipleValuedNonLinearOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkLBFGSBOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkCumulativeGaussianOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkAmoebaOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkCumulativeGaussianCostFunction.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkFRPROptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkGradientDescentOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkSingleValuedNonLinearOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkRegularStepGradientDescentBaseOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkMultipleValuedVnlCostFunctionAdaptor.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkParticleSwarmOptimizerBase.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkParticleSwarmOptimizer.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizers/src/itkInitializationBiasedParticleSwarmOptimizer.cxx

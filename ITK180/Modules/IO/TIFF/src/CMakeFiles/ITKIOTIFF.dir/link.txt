@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIOTIFF-4.1.a  CMakeFiles/ITKIOTIFF.dir/itkTIFFImageIO.cxx.o CMakeFiles/ITKIOTIFF.dir/itkTIFFImageIOFactory.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIOTIFF-4.1.a

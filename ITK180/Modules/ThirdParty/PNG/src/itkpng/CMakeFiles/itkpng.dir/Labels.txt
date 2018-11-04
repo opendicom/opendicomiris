@@ -1,0 +1,18 @@
+# Target labels
+ ITKPNG
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/ThirdParty/PNG/src/itkpng/pngget.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/PNG/src/itkpng/pngrio.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/PNG/src/itkpng/pngwrite.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/PNG/src/itkpng/png.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/PNG/src/itkpng/pngmem.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/PNG/src/itkpng/pngrtran.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/PNG/src/itkpng/pngtrans.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/PNG/src/itkpng/pngwtran.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/PNG/src/itkpng/pngerror.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/PNG/src/itkpng/pngpread.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/PNG/src/itkpng/pngrutil.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/PNG/src/itkpng/pngwutil.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/PNG/src/itkpng/pngread.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/PNG/src/itkpng/pngset.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/PNG/src/itkpng/pngwio.c

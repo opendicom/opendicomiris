@@ -1,0 +1,27 @@
+# Target labels
+ ITKGDCM
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmVersion.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmEvent.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmProgressEvent.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmCommand.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmMD5.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmBase64.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmSHA1.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmDummyValueGenerator.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmCryptographicMessageSyntax.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmASN1.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmObject.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmSubject.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmDirectory.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmTerminal.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmString.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmFilename.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmFilenameGenerator.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmSwapCode.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmSystem.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmTrace.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmException.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmDeflateStream.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmByteSwap.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common/gdcmUnpacker12Bits.cxx

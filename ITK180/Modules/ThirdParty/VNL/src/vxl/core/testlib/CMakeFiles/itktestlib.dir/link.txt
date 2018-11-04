@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../../../../lib/libitktestlib-4.1.a  CMakeFiles/itktestlib.dir/testlib_test.cxx.o CMakeFiles/itktestlib.dir/testlib_main.cxx.o CMakeFiles/itktestlib.dir/testlib_root_dir.cxx.o
+/usr/bin/ranlib ../../../../../../../lib/libitktestlib-4.1.a

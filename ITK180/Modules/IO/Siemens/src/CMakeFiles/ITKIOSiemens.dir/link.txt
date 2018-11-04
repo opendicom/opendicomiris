@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIOSiemens-4.1.a  CMakeFiles/ITKIOSiemens.dir/itkSiemensVisionImageIOFactory.cxx.o CMakeFiles/ITKIOSiemens.dir/itkSiemensVisionImageIO.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIOSiemens-4.1.a

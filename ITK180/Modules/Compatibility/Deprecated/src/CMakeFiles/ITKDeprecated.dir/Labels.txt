@@ -1,0 +1,10 @@
+# Target labels
+ ITKDeprecated
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/Compatibility/Deprecated/src/itkAnalyzeImageIO.cxx
+/Users/antoinerosset/ITK/Modules/Compatibility/Deprecated/src/itkAnalyzeImageIOFactory.cxx
+/Users/antoinerosset/ITK/Modules/Compatibility/Deprecated/src/itkDICOMImageIO2.cxx
+/Users/antoinerosset/ITK/Modules/Compatibility/Deprecated/src/itkDICOMImageIO2Factory.cxx
+/Users/antoinerosset/ITK/Modules/Compatibility/Deprecated/src/itkDicomImageIOFactory.cxx
+/Users/antoinerosset/ITK/Modules/Compatibility/Deprecated/src/itkDICOMSeriesFileNames.cxx
+/Users/antoinerosset/ITK/Modules/Compatibility/Deprecated/src/itkSemaphore.cxx

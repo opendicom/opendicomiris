@@ -1,0 +1,5 @@
+set(ITKQuadEdgeMeshFiltering_LOADED 1)
+set(ITKQuadEdgeMeshFiltering_DEPENDS "ITKQuadEdgeMesh")
+set(ITKQuadEdgeMeshFiltering_LIBRARIES "ITKQuadEdgeMesh")
+set(ITKQuadEdgeMeshFiltering_INCLUDE_DIRS "/Users/antoinerosset/ITK/Modules/Filtering/QuadEdgeMeshFiltering/include")
+set(ITKQuadEdgeMeshFiltering_LIBRARY_DIRS "")

@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../../../lib/libITKniftiio-4.1.a  CMakeFiles/ITKniftiio.dir/nifti1_io.c.o
+/usr/bin/ranlib ../../../../../../lib/libITKniftiio-4.1.a

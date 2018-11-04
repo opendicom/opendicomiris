@@ -1,0 +1,6 @@
+# Target labels
+ ITKExpat
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/ThirdParty/Expat/src/expat/xmlparse.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Expat/src/expat/xmltok.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Expat/src/expat/xmlrole.c

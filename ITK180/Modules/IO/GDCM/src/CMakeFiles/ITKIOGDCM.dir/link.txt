@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIOGDCM-4.1.a  CMakeFiles/ITKIOGDCM.dir/itkGDCMImageIO.cxx.o CMakeFiles/ITKIOGDCM.dir/itkGDCMImageIOFactory.cxx.o CMakeFiles/ITKIOGDCM.dir/itkGDCMSeriesFileNames.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIOGDCM-4.1.a

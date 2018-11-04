@@ -1,0 +1,17 @@
+/**
+ \defgroup ITKImageGrid ITKImageGrid 
+ This module groups image filters whose operations are
+related to manipulations of the underlying image grid. For example, flipping an
+image, permuting axis, padding, cropping, pasting, tiling, resampling,
+shrinking, and changing its origin or spacing or orientation. 
+ \par Dependencies:
+ \li \ref ITKImageFilterBase 
+ \li \ref ITKImageFunction 
+ \dot 
+ graph "ITKImageGrid" { 
+ "ITKImageGrid" -- "ITKImageFilterBase"; 
+ "ITKImageGrid" -- "ITKImageFunction"; 
+ } 
+ \enddot 
+ */
+

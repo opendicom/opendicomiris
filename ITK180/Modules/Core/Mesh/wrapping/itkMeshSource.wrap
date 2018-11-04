@@ -1,0 +1,13 @@
+itk_wrap_include("itkMesh.h")
+# itk_wrap_include("itkQuadEdgeMeshTraits.h")
+# itk_wrap_include("itkQuadEdgeMesh.h")
+
+itk_wrap_class("itk::MeshSource" POINTER)
+  foreach(d ${ITK_WRAP_DIMS})
+#    itk_wrap_template("MD${d}Q" "itk::Mesh< ${ITKT_D},${d},itk::QuadEdgeMeshTraits< ${ITKT_D},${d},${ITKT_B},${ITKT_B},${ITKT_F},${ITKT_F} > >")
+  endforeach(d)
+  itk_wrap_filter_dims(d3 3)
+  if(d3)
+#    itk_wrap_template("QEM${ITKM_D}3" "itk::QuadEdgeMesh< ${ITKT_D},3 >")
+  endif()
+itk_end_wrap_class()

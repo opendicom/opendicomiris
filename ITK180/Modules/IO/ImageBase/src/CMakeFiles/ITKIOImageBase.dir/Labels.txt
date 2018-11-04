@@ -1,0 +1,11 @@
+# Target labels
+ ITKIOImageBase
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/IO/ImageBase/src/itkImageIORegion.cxx
+/Users/antoinerosset/ITK/Modules/IO/ImageBase/src/itkArchetypeSeriesFileNames.cxx
+/Users/antoinerosset/ITK/Modules/IO/ImageBase/src/itkImageIOFactory.cxx
+/Users/antoinerosset/ITK/Modules/IO/ImageBase/src/itkIOCommon.cxx
+/Users/antoinerosset/ITK/Modules/IO/ImageBase/src/itkNumericSeriesFileNames.cxx
+/Users/antoinerosset/ITK/Modules/IO/ImageBase/src/itkImageIOBase.cxx
+/Users/antoinerosset/ITK/Modules/IO/ImageBase/src/itkRegularExpressionSeriesFileNames.cxx
+/Users/antoinerosset/ITK/Modules/IO/ImageBase/src/itkStreamingImageIOBase.cxx

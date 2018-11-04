@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../../lib/libitksys-4.1.a  CMakeFiles/itksys.dir/ProcessUNIX.c.o CMakeFiles/itksys.dir/Base64.c.o CMakeFiles/itksys.dir/MD5.c.o CMakeFiles/itksys.dir/System.c.o CMakeFiles/itksys.dir/Directory.cxx.o CMakeFiles/itksys.dir/DynamicLoader.cxx.o CMakeFiles/itksys.dir/Glob.cxx.o CMakeFiles/itksys.dir/RegularExpression.cxx.o CMakeFiles/itksys.dir/SystemTools.cxx.o CMakeFiles/itksys.dir/CommandLineArguments.cxx.o CMakeFiles/itksys.dir/Registry.cxx.o CMakeFiles/itksys.dir/SystemInformation.cxx.o
+/usr/bin/ranlib ../../../../../lib/libitksys-4.1.a

@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIOCSV-4.1.a  CMakeFiles/ITKIOCSV.dir/itkCSVFileReaderBase.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIOCSV-4.1.a

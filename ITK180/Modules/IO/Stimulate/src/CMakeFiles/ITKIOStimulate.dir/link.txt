@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIOStimulate-4.1.a  CMakeFiles/ITKIOStimulate.dir/itkStimulateImageIO.cxx.o CMakeFiles/ITKIOStimulate.dir/itkStimulateImageIOFactory.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIOStimulate-4.1.a

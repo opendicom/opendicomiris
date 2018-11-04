@@ -1,0 +1,36 @@
+# Target labels
+ ITKMetaIO
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaTypes.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaUtils.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaArrow.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaBlob.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaCommand.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaCommand.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaContour.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaContour.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaDTITube.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaEllipse.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaGroup.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaGaussian.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaImage.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaImageUtils.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaLandmark.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaLine.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaMesh.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaMesh.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaObject.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaOutput.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaOutput.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaScene.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaSurface.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaTube.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaVesselTube.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaTransform.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaTubeGraph.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaForm.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaForm.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaArray.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaArray.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaFEMObject.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/MetaIO/src/MetaIO/metaFEMObject.cxx

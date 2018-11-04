@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKBioCell-4.1.a  CMakeFiles/ITKBioCell.dir/itkBioGenome.cxx.o CMakeFiles/ITKBioCell.dir/itkBioGene.cxx.o CMakeFiles/ITKBioCell.dir/itkBioGeneNetwork.cxx.o CMakeFiles/ITKBioCell.dir/itkBioCellBase.cxx.o CMakeFiles/ITKBioCell.dir/itkBioCellularAggregateBase.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKBioCell-4.1.a

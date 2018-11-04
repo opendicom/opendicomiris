@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKVTK-4.1.a  CMakeFiles/ITKVTK.dir/itkVTKImageExportBase.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKVTK-4.1.a

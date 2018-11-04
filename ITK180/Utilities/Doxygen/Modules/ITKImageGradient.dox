@@ -1,0 +1,16 @@
+/**
+ \defgroup ITKImageGradient ITKImageGradient 
+ This module contains filters that compute differential
+operations in images. In particular, image gradients, gradient magnitude and
+difference of Gaussians. 
+ \par Dependencies:
+ \li \ref ITKImageIntensity 
+ \li \ref ITKSmoothing 
+ \dot 
+ graph "ITKImageGradient" { 
+ "ITKImageGradient" -- "ITKImageIntensity"; 
+ "ITKImageGradient" -- "ITKSmoothing"; 
+ } 
+ \enddot 
+ */
+

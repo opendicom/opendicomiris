@@ -1,0 +1,12 @@
+# Target labels
+ ITKGDCM
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Utilities/gdcmuuid/compare.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Utilities/gdcmuuid/gen_uuid.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Utilities/gdcmuuid/pack.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Utilities/gdcmuuid/parse.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Utilities/gdcmuuid/unpack.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Utilities/gdcmuuid/unparse.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Utilities/gdcmuuid/uuid_time.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Utilities/gdcmuuid/uuid.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Utilities/gdcmuuid/uuidP.h

@@ -1,0 +1,14 @@
+# Target labels
+ ITKZLIB
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/ThirdParty/ZLIB/src/itkzlib/adler32.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/ZLIB/src/itkzlib/compress.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/ZLIB/src/itkzlib/crc32.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/ZLIB/src/itkzlib/deflate.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/ZLIB/src/itkzlib/gzio.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/ZLIB/src/itkzlib/inffast.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/ZLIB/src/itkzlib/inflate.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/ZLIB/src/itkzlib/inftrees.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/ZLIB/src/itkzlib/trees.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/ZLIB/src/itkzlib/uncompr.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/ZLIB/src/itkzlib/zutil.c

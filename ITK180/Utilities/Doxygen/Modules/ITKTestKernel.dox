@@ -1,0 +1,41 @@
+/**
+ \defgroup ITKTestKernel ITKTestKernel 
+ This Module contains helper classes used for the Testing
+infrastructure of ITK. As an application developer you should not normally need
+any of these classes. However, they are essential for the quality control
+system supporting ITK. 
+ \par Dependencies:
+ \li \ref ITKIOBMP 
+ \li \ref ITKIOBioRad 
+ \li \ref ITKIOGDCM 
+ \li \ref ITKIOGIPL 
+ \li \ref ITKIOJPEG 
+ \li \ref ITKIOLSM 
+ \li \ref ITKIOMeta 
+ \li \ref ITKIONIFTI 
+ \li \ref ITKIONRRD 
+ \li \ref ITKIOPNG 
+ \li \ref ITKIOStimulate 
+ \li \ref ITKIOTIFF 
+ \li \ref ITKIOVTK 
+ \li \ref ITKKWSys 
+ \dot 
+ graph "ITKTestKernel" { 
+ "ITKTestKernel" -- "ITKIOBMP"; 
+ "ITKTestKernel" -- "ITKIOBioRad"; 
+ "ITKTestKernel" -- "ITKIOGDCM"; 
+ "ITKTestKernel" -- "ITKIOGIPL"; 
+ "ITKTestKernel" -- "ITKIOJPEG"; 
+ "ITKTestKernel" -- "ITKIOLSM"; 
+ "ITKTestKernel" -- "ITKIOMeta"; 
+ "ITKTestKernel" -- "ITKIONIFTI"; 
+ "ITKTestKernel" -- "ITKIONRRD"; 
+ "ITKTestKernel" -- "ITKIOPNG"; 
+ "ITKTestKernel" -- "ITKIOStimulate"; 
+ "ITKTestKernel" -- "ITKIOTIFF"; 
+ "ITKTestKernel" -- "ITKIOVTK"; 
+ "ITKTestKernel" -- "ITKKWSys"; 
+ } 
+ \enddot 
+ */
+

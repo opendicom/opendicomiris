@@ -1,0 +1,7 @@
+# Target labels
+ ITKIOMeta
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/IO/Meta/src/itkMetaArrayWriter.cxx
+/Users/antoinerosset/ITK/Modules/IO/Meta/src/itkMetaImageIO.cxx
+/Users/antoinerosset/ITK/Modules/IO/Meta/src/itkMetaArrayReader.cxx
+/Users/antoinerosset/ITK/Modules/IO/Meta/src/itkMetaImageIOFactory.cxx

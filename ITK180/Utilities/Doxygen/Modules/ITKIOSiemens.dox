@@ -1,0 +1,15 @@
+/**
+ \defgroup ITKIOSiemens ITKIOSiemens 
+ This module contains a class for reading the SiemensVision
+medical file format. 
+ \par Dependencies:
+ \li \ref ITKIOGE 
+ \li \ref ITKIOIPL 
+ \dot 
+ graph "ITKIOSiemens" { 
+ "ITKIOSiemens" -- "ITKIOGE"; 
+ "ITKIOSiemens" -- "ITKIOIPL"; 
+ } 
+ \enddot 
+ */
+

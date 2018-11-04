@@ -1,0 +1,39 @@
+# Target labels
+ ITKTIFF
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_aux.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_close.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_codec.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_compress.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_color.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_dir.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_dirinfo.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_dirread.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_dirwrite.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_dumpmode.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_error.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_extension.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_fax3.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_flush.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_getimage.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_luv.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_lzw.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_next.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_open.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_packbits.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_pixarlog.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_predict.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_print.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_read.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_strip.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_swab.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_tile.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_thunder.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_version.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_warning.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_write.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_zip.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_jpeg.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_unix.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_fax3sm.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_fax3sm.c.rule

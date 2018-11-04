@@ -1,0 +1,13 @@
+/**
+ \defgroup ITKImageFusion ITKImageFusion 
+ This module contains classes made to visually
+enhance the images, mostly by adding them artificial colors 
+ \par Dependencies:
+ \li \ref ITKBinaryMathematicalMorphology 
+ \dot 
+ graph "ITKImageFusion" { 
+ "ITKImageFusion" -- "ITKBinaryMathematicalMorphology"; 
+ } 
+ \enddot 
+ */
+

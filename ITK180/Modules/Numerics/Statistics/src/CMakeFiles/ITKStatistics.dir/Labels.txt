@@ -1,0 +1,13 @@
+# Target labels
+ ITKStatistics
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/Numerics/Statistics/src/itkDenseFrequencyContainer2.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Statistics/src/itkSparseFrequencyContainer2.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Statistics/src/itkChiSquareDistribution.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Statistics/src/itkGaussianDistribution.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Statistics/src/itkTDistribution.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Statistics/src/itkNormalVariateGenerator.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Statistics/src/itkDecisionRule.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Statistics/src/itkMaximumDecisionRule.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Statistics/src/itkMaximumRatioDecisionRule.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Statistics/src/itkMinimumDecisionRule.cxx

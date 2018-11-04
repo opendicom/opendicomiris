@@ -1,0 +1,23 @@
+/**
+ \defgroup ITKImageFeature ITKImageFeature 
+ This module contains classes that compute image features. In
+particular you will find here: Canny edge detection, Sobel, ZeroCrossings,
+Hough transform for lines and circles, Hessian filters, Vesselness, and
+Fractional anisotropy for tensor images. 
+ \par Dependencies:
+ \li \ref ITKImageGradient 
+ \li \ref ITKImageIntensity 
+ \li \ref ITKImageSource 
+ \li \ref ITKSmoothing 
+ \li \ref ITKSpatialObjects 
+ \dot 
+ graph "ITKImageFeature" { 
+ "ITKImageFeature" -- "ITKImageGradient"; 
+ "ITKImageFeature" -- "ITKImageIntensity"; 
+ "ITKImageFeature" -- "ITKImageSource"; 
+ "ITKImageFeature" -- "ITKSmoothing"; 
+ "ITKImageFeature" -- "ITKSpatialObjects"; 
+ } 
+ \enddot 
+ */
+

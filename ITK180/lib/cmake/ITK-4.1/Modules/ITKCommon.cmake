@@ -1,0 +1,5 @@
+set(ITKCommon_LOADED 1)
+set(ITKCommon_DEPENDS "ITKKWSys;ITKVNLInstantiation")
+set(ITKCommon_LIBRARIES "ITKCommon")
+set(ITKCommon_INCLUDE_DIRS "/Users/antoinerosset/ITK/Modules/Core/Common;/Users/antoinerosset/ITK/Modules/Core/Common/include")
+set(ITKCommon_LIBRARY_DIRS "")

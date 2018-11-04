@@ -1,0 +1,4 @@
+# Target labels
+ ITKIOXML
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/IO/XML/src/itkXMLFile.cxx

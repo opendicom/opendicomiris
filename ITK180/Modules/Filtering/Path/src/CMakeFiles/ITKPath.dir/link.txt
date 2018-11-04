@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKPath-4.1.a  CMakeFiles/ITKPath.dir/itkChainCodePath2D.cxx.o CMakeFiles/ITKPath.dir/itkOrthogonallyCorrected2DParametricPath.cxx.o CMakeFiles/ITKPath.dir/itkParametricPath.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKPath-4.1.a

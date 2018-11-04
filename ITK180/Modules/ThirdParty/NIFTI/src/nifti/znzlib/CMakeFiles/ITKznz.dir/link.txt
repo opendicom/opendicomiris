@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../../../lib/libITKznz-4.1.a  CMakeFiles/ITKznz.dir/znzlib.c.o
+/usr/bin/ranlib ../../../../../../lib/libITKznz-4.1.a

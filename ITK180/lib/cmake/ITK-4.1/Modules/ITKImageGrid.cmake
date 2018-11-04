@@ -1,0 +1,5 @@
+set(ITKImageGrid_LOADED 1)
+set(ITKImageGrid_DEPENDS "ITKImageFilterBase;ITKImageFunction")
+set(ITKImageGrid_LIBRARIES "ITKCommon;ITKStatistics")
+set(ITKImageGrid_INCLUDE_DIRS "/Users/antoinerosset/ITK/Modules/Filtering/ImageGrid/include")
+set(ITKImageGrid_LIBRARY_DIRS "")

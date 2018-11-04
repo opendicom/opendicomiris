@@ -1,0 +1,5 @@
+set(ITKImageSource_LOADED 1)
+set(ITKImageSource_DEPENDS "ITKImageFunction")
+set(ITKImageSource_LIBRARIES "ITKCommon;ITKStatistics")
+set(ITKImageSource_INCLUDE_DIRS "${ITK_INSTALL_PREFIX}/include/ITK-4.1")
+set(ITKImageSource_LIBRARY_DIRS "")

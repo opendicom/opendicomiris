@@ -1,0 +1,12 @@
+/**
+ \defgroup ITKImageSource ITKImageSource 
+ This module groups image sources which generate an image 
+ \par Dependencies:
+ \li \ref ITKImageFunction 
+ \dot 
+ graph "ITKImageSource" { 
+ "ITKImageSource" -- "ITKImageFunction"; 
+ } 
+ \enddot 
+ */
+

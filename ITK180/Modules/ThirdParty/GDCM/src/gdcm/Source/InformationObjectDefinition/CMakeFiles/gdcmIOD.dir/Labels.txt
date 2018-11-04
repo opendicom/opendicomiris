@@ -1,0 +1,20 @@
+# Target labels
+ ITKGDCM
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/InformationObjectDefinition/gdcmModule.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/InformationObjectDefinition/gdcmMacro.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/InformationObjectDefinition/gdcmModules.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/InformationObjectDefinition/gdcmMacros.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/InformationObjectDefinition/gdcmNestedModuleEntries.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/InformationObjectDefinition/gdcmIODEntry.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/InformationObjectDefinition/gdcmTableReader.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/InformationObjectDefinition/gdcmTable.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/InformationObjectDefinition/gdcmSeries.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/InformationObjectDefinition/gdcmDefs.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/InformationObjectDefinition/gdcmDefinedTerms.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/InformationObjectDefinition/gdcmEnumeratedValues.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/InformationObjectDefinition/gdcmStudy.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/InformationObjectDefinition/gdcmPatient.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/InformationObjectDefinition/gdcmType.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/InformationObjectDefinition/gdcmUsage.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/InformationObjectDefinition/gdcmIOD.cxx

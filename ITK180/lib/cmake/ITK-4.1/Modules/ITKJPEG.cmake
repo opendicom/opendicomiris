@@ -1,0 +1,5 @@
+set(ITKJPEG_LOADED 1)
+set(ITKJPEG_DEPENDS "")
+set(ITKJPEG_LIBRARIES "itkjpeg")
+set(ITKJPEG_INCLUDE_DIRS "/Users/antoinerosset/ITK/Modules/ThirdParty/JPEG/src;/Users/antoinerosset/ITK/Modules/ThirdParty/JPEG/src")
+set(ITKJPEG_LIBRARY_DIRS "")

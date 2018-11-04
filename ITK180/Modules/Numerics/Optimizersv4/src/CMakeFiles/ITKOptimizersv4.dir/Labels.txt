@@ -1,0 +1,13 @@
+# Target labels
+ ITKOptimizersv4
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizersv4/src/itkObjectToObjectMetric.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizersv4/src/itkObjectToObjectOptimizerBase.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizersv4/src/itkGradientDescentOptimizerBasev4.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizersv4/src/itkGradientDescentOptimizerBasev4ModifyGradientByLearningRateThreader.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizersv4/src/itkGradientDescentOptimizerBasev4ModifyGradientByScalesThreader.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizersv4/src/itkGradientDescentOptimizerv4.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizersv4/src/itkMultiStartOptimizerv4.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizersv4/src/itkMultiGradientOptimizerv4.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizersv4/src/itkQuasiNewtonOptimizerv4.cxx
+/Users/antoinerosset/ITK/Modules/Numerics/Optimizersv4/src/itkQuasiNewtonOptimizerv4EstimateNewtonStepThreader.cxx

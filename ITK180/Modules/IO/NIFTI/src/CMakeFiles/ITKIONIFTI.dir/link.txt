@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIONIFTI-4.1.a  CMakeFiles/ITKIONIFTI.dir/itkNiftiImageIOFactory.cxx.o CMakeFiles/ITKIONIFTI.dir/itkNiftiImageIO.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIONIFTI-4.1.a

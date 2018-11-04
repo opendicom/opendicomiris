@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIOVTK-4.1.a  CMakeFiles/ITKIOVTK.dir/itkVTKImageIOFactory.cxx.o CMakeFiles/ITKIOVTK.dir/itkVTKImageIO.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIOVTK-4.1.a

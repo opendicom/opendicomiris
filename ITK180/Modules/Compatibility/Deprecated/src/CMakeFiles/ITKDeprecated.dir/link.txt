@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKDeprecated-4.1.a  CMakeFiles/ITKDeprecated.dir/itkAnalyzeImageIO.cxx.o CMakeFiles/ITKDeprecated.dir/itkAnalyzeImageIOFactory.cxx.o CMakeFiles/ITKDeprecated.dir/itkDICOMImageIO2.cxx.o CMakeFiles/ITKDeprecated.dir/itkDICOMImageIO2Factory.cxx.o CMakeFiles/ITKDeprecated.dir/itkDicomImageIOFactory.cxx.o CMakeFiles/ITKDeprecated.dir/itkDICOMSeriesFileNames.cxx.o CMakeFiles/ITKDeprecated.dir/itkSemaphore.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKDeprecated-4.1.a

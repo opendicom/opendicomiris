@@ -1,0 +1,12 @@
+set(ITKIOTransformBase_SRC
+itkTransformFileReader.cxx
+itkTransformFileWriter.cxx
+itkTransformIOBase.cxx
+itkTransformIOFactory.cxx
+itkCompositeTransformIOHelper.cxx
+itkTransformFactoryBase.cxx
+)
+
+add_library(ITKIOTransformBase ${ITKIOTransformBase_SRC})
+target_link_libraries(ITKIOTransformBase ${ITKTransform_LIBRARIES})
+itk_module_target(ITKIOTransformBase)

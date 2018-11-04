@@ -1,0 +1,6 @@
+# Target labels
+ ITKPath
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/Filtering/Path/src/itkChainCodePath2D.cxx
+/Users/antoinerosset/ITK/Modules/Filtering/Path/src/itkOrthogonallyCorrected2DParametricPath.cxx
+/Users/antoinerosset/ITK/Modules/Filtering/Path/src/itkParametricPath.cxx

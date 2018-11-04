@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIOXML-4.1.a  CMakeFiles/ITKIOXML.dir/itkXMLFile.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIOXML-4.1.a

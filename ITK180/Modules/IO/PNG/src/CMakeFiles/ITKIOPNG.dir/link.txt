@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIOPNG-4.1.a  CMakeFiles/ITKIOPNG.dir/itkPNGImageIOFactory.cxx.o CMakeFiles/ITKIOPNG.dir/itkPNGImageIO.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIOPNG-4.1.a

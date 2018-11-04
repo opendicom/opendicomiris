@@ -1,0 +1,8 @@
+# Target labels
+ ITKDICOMParser
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/ThirdParty/DICOMParser/src/DICOMParser/DICOMSource.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/DICOMParser/src/DICOMParser/DICOMBuffer.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/DICOMParser/src/DICOMParser/DICOMFile.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/DICOMParser/src/DICOMParser/DICOMParser.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/DICOMParser/src/DICOMParser/DICOMAppHelper.cxx

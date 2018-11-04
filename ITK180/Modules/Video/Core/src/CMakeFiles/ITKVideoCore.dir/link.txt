@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKVideoCore-4.1.a  CMakeFiles/ITKVideoCore.dir/itkTemporalRegion.cxx.o CMakeFiles/ITKVideoCore.dir/itkTemporalDataObject.cxx.o CMakeFiles/ITKVideoCore.dir/itkTemporalProcessObject.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKVideoCore-4.1.a

@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIOIPL-4.1.a  CMakeFiles/ITKIOIPL.dir/itkIPLCommonImageIO.cxx.o CMakeFiles/ITKIOIPL.dir/itkIPLFileNameList.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIOIPL-4.1.a

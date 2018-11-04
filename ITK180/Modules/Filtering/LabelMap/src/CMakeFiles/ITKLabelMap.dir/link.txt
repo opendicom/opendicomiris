@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKLabelMap-4.1.a  CMakeFiles/ITKLabelMap.dir/itkGeometryUtilities.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKLabelMap-4.1.a

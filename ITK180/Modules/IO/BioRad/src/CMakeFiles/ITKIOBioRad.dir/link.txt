@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIOBioRad-4.1.a  CMakeFiles/ITKIOBioRad.dir/itkBioRadImageIOFactory.cxx.o CMakeFiles/ITKIOBioRad.dir/itkBioRadImageIO.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIOBioRad-4.1.a

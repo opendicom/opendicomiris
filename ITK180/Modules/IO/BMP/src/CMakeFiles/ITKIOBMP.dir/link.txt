@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIOBMP-4.1.a  CMakeFiles/ITKIOBMP.dir/itkBMPImageIO.cxx.o CMakeFiles/ITKIOBMP.dir/itkBMPImageIOFactory.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIOBMP-4.1.a

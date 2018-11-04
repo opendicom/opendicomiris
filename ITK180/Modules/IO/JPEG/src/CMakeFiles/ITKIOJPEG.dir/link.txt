@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIOJPEG-4.1.a  CMakeFiles/ITKIOJPEG.dir/itkJPEGImageIOFactory.cxx.o CMakeFiles/ITKIOJPEG.dir/itkJPEGImageIO.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIOJPEG-4.1.a

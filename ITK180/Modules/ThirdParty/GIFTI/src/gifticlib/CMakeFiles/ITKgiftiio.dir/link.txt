@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../../lib/libITKgiftiio-4.1.a  CMakeFiles/ITKgiftiio.dir/gifti_io.c.o CMakeFiles/ITKgiftiio.dir/gifti_xml.c.o
+/usr/bin/ranlib ../../../../../lib/libITKgiftiio-4.1.a

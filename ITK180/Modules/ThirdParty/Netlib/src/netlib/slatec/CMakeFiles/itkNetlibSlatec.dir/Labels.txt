@@ -1,0 +1,23 @@
+# Target labels
+ ITKNetlib
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/d1mach.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/d9lgmc.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/d9gmit.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/d9lgic.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/d9lgit.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/dbetai.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/dcsevl.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/dgami.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/dgamit.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/dgamlm.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/dgamma.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/dgamr.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/dlbeta.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/dlgams.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/dlngam.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/dlnrel.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/initds.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/xermsg.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/d_int.c
+/Users/antoinerosset/ITK/Modules/ThirdParty/Netlib/src/netlib/slatec/d_mod.c

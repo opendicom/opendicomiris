@@ -1,0 +1,5 @@
+set(ITKMesh_LOADED 1)
+set(ITKMesh_DEPENDS "ITKTransform")
+set(ITKMesh_LIBRARIES "ITKMesh")
+set(ITKMesh_INCLUDE_DIRS "${ITK_INSTALL_PREFIX}/include/ITK-4.1")
+set(ITKMesh_LIBRARY_DIRS "")

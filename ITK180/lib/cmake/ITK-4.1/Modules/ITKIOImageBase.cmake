@@ -1,0 +1,5 @@
+set(ITKIOImageBase_LOADED 1)
+set(ITKIOImageBase_DEPENDS "ITKCommon")
+set(ITKIOImageBase_LIBRARIES "ITKIOImageBase")
+set(ITKIOImageBase_INCLUDE_DIRS "/Users/antoinerosset/ITK/Modules/IO/ImageBase;/Users/antoinerosset/ITK/Modules/IO/ImageBase/include")
+set(ITKIOImageBase_LIBRARY_DIRS "")

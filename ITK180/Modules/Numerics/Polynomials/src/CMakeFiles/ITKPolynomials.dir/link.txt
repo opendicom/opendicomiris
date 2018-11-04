@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKPolynomials-4.1.a  CMakeFiles/ITKPolynomials.dir/itkMultivariateLegendrePolynomial.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKPolynomials-4.1.a

@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIOLSM-4.1.a  CMakeFiles/ITKIOLSM.dir/itkLSMImageIOFactory.cxx.o CMakeFiles/ITKIOLSM.dir/itkLSMImageIO.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIOLSM-4.1.a

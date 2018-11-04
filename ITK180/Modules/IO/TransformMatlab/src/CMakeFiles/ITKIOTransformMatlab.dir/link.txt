@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIOTransformMatlab-4.1.a  CMakeFiles/ITKIOTransformMatlab.dir/itkMatlabTransformIO.cxx.o CMakeFiles/ITKIOTransformMatlab.dir/itkMatlabTransformIOFactory.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIOTransformMatlab-4.1.a

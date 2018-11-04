@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIOMeta-4.1.a  CMakeFiles/ITKIOMeta.dir/itkMetaArrayWriter.cxx.o CMakeFiles/ITKIOMeta.dir/itkMetaImageIO.cxx.o CMakeFiles/ITKIOMeta.dir/itkMetaArrayReader.cxx.o CMakeFiles/ITKIOMeta.dir/itkMetaImageIOFactory.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIOMeta-4.1.a

@@ -1,0 +1,6 @@
+# Target labels
+ ITKSpatialObjects
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/Core/SpatialObjects/src/itkCylinderSpatialObject.cxx
+/Users/antoinerosset/ITK/Modules/Core/SpatialObjects/src/itkSpatialObjectFactoryBase.cxx
+/Users/antoinerosset/ITK/Modules/Core/SpatialObjects/src/itkArrowSpatialObject.cxx

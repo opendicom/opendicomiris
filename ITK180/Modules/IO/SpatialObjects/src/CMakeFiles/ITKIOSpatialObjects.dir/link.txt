@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIOSpatialObjects-4.1.a  CMakeFiles/ITKIOSpatialObjects.dir/itkPolygonGroupSpatialObjectXMLFile.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIOSpatialObjects-4.1.a

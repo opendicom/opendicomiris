@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKSpatialObjects-4.1.a  CMakeFiles/ITKSpatialObjects.dir/itkCylinderSpatialObject.cxx.o CMakeFiles/ITKSpatialObjects.dir/itkSpatialObjectFactoryBase.cxx.o CMakeFiles/ITKSpatialObjects.dir/itkArrowSpatialObject.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKSpatialObjects-4.1.a

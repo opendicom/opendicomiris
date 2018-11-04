@@ -1,0 +1,13 @@
+# Target labels
+ ITKGDCM
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/DataDictionary/gdcmDicts.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/DataDictionary/gdcmDictEntry.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/DataDictionary/gdcmDefaultDicts.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/DataDictionary/gdcmPrivateDefaultDicts.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/DataDictionary/gdcmGlobal.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/DataDictionary/gdcmGroupDict.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/DataDictionary/gdcmDefaultGroupNames.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/DataDictionary/gdcmUIDs.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/DataDictionary/gdcmSOPClassUIDToIOD.cxx
+/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/DataDictionary/gdcmCSAHeaderDefaultDicts.cxx

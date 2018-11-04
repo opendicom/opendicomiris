@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKMesh-4.1.a  CMakeFiles/ITKMesh.dir/itkMeshRegion.cxx.o CMakeFiles/ITKMesh.dir/itkSimplexMeshGeometry.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKMesh-4.1.a

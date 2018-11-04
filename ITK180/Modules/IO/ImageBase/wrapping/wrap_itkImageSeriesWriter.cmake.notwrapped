@@ -1,0 +1,14 @@
+itk_wrap_class("itk::ImageSeriesWriter" POINTER)
+  # Force uchar image IO
+  UNIQUE(image_types "UC;${WRAP_ITK_SCALAR};${WRAP_ITK_RGB}")
+  foreach(d1 ${ITK_WRAP_DIMS})
+    foreach(d2 ${ITK_WRAP_DIMS})
+      if("${d1}" GREATER "${d2}")
+        foreach(t ${image_types})
+          itk_wrap_template("${ITKM_I${t}${d1}}${ITKM_I${t}${d2}}"
+                        "${ITKT_I${t}${d1}},${ITKT_I${t}${d2}}")
+        endforeach(t)
+      endif("${d1}" GREATER "${d2}")
+    endforeach(d2)
+  endforeach(d1)
+itk_end_wrap_class()

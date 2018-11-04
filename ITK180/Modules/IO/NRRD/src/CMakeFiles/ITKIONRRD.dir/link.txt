@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIONRRD-4.1.a  CMakeFiles/ITKIONRRD.dir/itkNrrdImageIOFactory.cxx.o CMakeFiles/ITKIONRRD.dir/itkNrrdImageIO.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIONRRD-4.1.a

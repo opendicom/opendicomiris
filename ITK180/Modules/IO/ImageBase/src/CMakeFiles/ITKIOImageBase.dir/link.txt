@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKIOImageBase-4.1.a  CMakeFiles/ITKIOImageBase.dir/itkImageIORegion.cxx.o CMakeFiles/ITKIOImageBase.dir/itkArchetypeSeriesFileNames.cxx.o CMakeFiles/ITKIOImageBase.dir/itkImageIOFactory.cxx.o CMakeFiles/ITKIOImageBase.dir/itkIOCommon.cxx.o CMakeFiles/ITKIOImageBase.dir/itkNumericSeriesFileNames.cxx.o CMakeFiles/ITKIOImageBase.dir/itkImageIOBase.cxx.o CMakeFiles/ITKIOImageBase.dir/itkRegularExpressionSeriesFileNames.cxx.o CMakeFiles/ITKIOImageBase.dir/itkStreamingImageIOBase.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKIOImageBase-4.1.a

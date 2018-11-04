@@ -1,0 +1,5 @@
+# Target labels
+ ITKIOTIFF
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/IO/TIFF/src/itkTIFFImageIO.cxx
+/Users/antoinerosset/ITK/Modules/IO/TIFF/src/itkTIFFImageIOFactory.cxx

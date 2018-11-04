@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^(itk|tif|fax|port|uv|tconf|t4|mk|itkjpeg|jpeg|mangle|jconfig|jmorecfg).*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/itk_tiff_mangle.h
+
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/mkg3states.c
+tif_config.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_config.h
+tif_fax3.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_fax3.h
+
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_config.h
+itksys/FundamentalType.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/itksys/FundamentalType.h
+
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_fax3.h
+tiff.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tiff.h
+
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tiff.h
+itk_tiff_mangle.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/itk_tiff_mangle.h
+tiffconf.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tiffconf.h
+tif_config.h
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tif_config.h
+
+/Users/antoinerosset/ITK/Modules/ThirdParty/TIFF/src/itktiff/tiffconf.h
+
+Modules/ThirdParty/KWSys/src/itksys/Configure.h
+
+Modules/ThirdParty/KWSys/src/itksys/FundamentalType.h
+itksys/Configure.h
+-
+

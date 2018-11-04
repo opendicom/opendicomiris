@@ -1,0 +1,9 @@
+# Target labels
+ ITKIOTransformBase
+# Source files and their labels
+/Users/antoinerosset/ITK/Modules/IO/TransformBase/src/itkTransformFileReader.cxx
+/Users/antoinerosset/ITK/Modules/IO/TransformBase/src/itkTransformFileWriter.cxx
+/Users/antoinerosset/ITK/Modules/IO/TransformBase/src/itkTransformIOBase.cxx
+/Users/antoinerosset/ITK/Modules/IO/TransformBase/src/itkTransformIOFactory.cxx
+/Users/antoinerosset/ITK/Modules/IO/TransformBase/src/itkCompositeTransformIOHelper.cxx
+/Users/antoinerosset/ITK/Modules/IO/TransformBase/src/itkTransformFactoryBase.cxx

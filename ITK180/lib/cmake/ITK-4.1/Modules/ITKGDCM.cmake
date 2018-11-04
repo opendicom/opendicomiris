@@ -1,0 +1,5 @@
+set(ITKGDCM_LOADED 1)
+set(ITKGDCM_DEPENDS "ITKExpat;ITKOpenJPEG;ITKZLIB")
+set(ITKGDCM_LIBRARIES "gdcmDICT;gdcmMSFF")
+set(ITKGDCM_INCLUDE_DIRS "/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM;/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common;/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/MediaStorageAndFileFormat;/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/DataDictionary;/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/Common;/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/InformationObjectDefinition;/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/MessageExchangeDefinition;/Users/antoinerosset/ITK/Modules/ThirdParty/GDCM/src/gdcm/Source/DataStructureAndEncodingDefinition")
+set(ITKGDCM_LIBRARY_DIRS "")

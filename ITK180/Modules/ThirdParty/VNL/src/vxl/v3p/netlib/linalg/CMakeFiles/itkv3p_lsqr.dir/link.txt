@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../../../../../lib/libitkv3p_lsqr-4.1.a  CMakeFiles/itkv3p_lsqr.dir/lsqrBase.cxx.o
+/usr/bin/ranlib ../../../../../../../../lib/libitkv3p_lsqr-4.1.a

@@ -1,0 +1,2 @@
+/usr/bin/ar cr ../../../../lib/libITKReview-4.1.a  CMakeFiles/ITKReview.dir/itkBruker2DSEQImageIO.cxx.o CMakeFiles/ITKReview.dir/itkBruker2DSEQImageIOFactory.cxx.o CMakeFiles/ITKReview.dir/itkJPEG2000ImageIO.cxx.o CMakeFiles/ITKReview.dir/itkJPEG2000ImageIOFactory.cxx.o CMakeFiles/ITKReview.dir/itkMRCHeaderObject.cxx.o CMakeFiles/ITKReview.dir/itkMRCImageIO.cxx.o CMakeFiles/ITKReview.dir/itkMRCImageIOFactory.cxx.o CMakeFiles/ITKReview.dir/itkVoxBoCUBImageIO.cxx.o CMakeFiles/ITKReview.dir/itkVoxBoCUBImageIOFactory.cxx.o
+/usr/bin/ranlib ../../../../lib/libITKReview-4.1.a
