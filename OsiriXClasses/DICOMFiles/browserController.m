@@ -18282,69 +18282,42 @@ static volatile int numberOfThreadsForJPEG = 0;
 	}
 }
 
-#ifndef OSIRIX_LIGHT
 - (IBAction) generateReport: (id)sender
 {
 	NSIndexSet *index = [databaseOutline selectedRowIndexes];
 	NSManagedObject *item = [databaseOutline itemAtRow:[index firstIndex]];
-	int reportsMode = [[[NSUserDefaults standardUserDefaults] stringForKey:@"REPORTSMODE"] intValue];
-	
-    if ([item isKindOfClass:[DicomSeries class]])
-        item = [item valueForKey:@"study"];
-    
+   if ([item isKindOfClass:[DicomSeries class]]) item = [item valueForKey:@"study"];
+   DicomStudy *studySelected = (DicomStudy*) item;
 	if( item)
 	{
-        if( reportsMode == 0 && [[NSWorkspace sharedWorkspace] fullPathForApplication:@"Microsoft Word"] == nil) // Would absolutePathForAppBundleWithIdentifier be better here? (DDP)
+      int reportsMode = [[[NSUserDefaults standardUserDefaults] stringForKey:@"REPORTSMODE"] intValue];
+      NSString *reportURLString=[item valueForKey: @"reportURL"];
+      
+      if( reportsMode == 3) //plugin
 		{
-			NSRunAlertPanel( NSLocalizedString(@"Report Error", nil), NSLocalizedString(@"Microsoft Word is required to open/generate '.doc' reports. You can change it to TextEdit in the Preferences.", nil), nil, nil, nil);
-			return;
-		}
-		
-		DicomStudy *studySelected = nil;
-		
-		if ([[item valueForKey: @"type"] isEqualToString:@"Study"])
-			studySelected = (DicomStudy*) item;
-		else
-			studySelected = [item valueForKey:@"study"];
-		
-		if( [[item valueForKey: @"reportURL"] hasPrefix: @"http://"] || [[item valueForKey: @"reportURL"] hasPrefix: @"https://"])
-		{
-			[[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString: [item valueForKey: @"reportURL"]]];
-		}
-		else
-		{
-			// *********************************************
-			//	PLUGINS
-			// *********************************************
-			
-			if( reportsMode == 3)
+         //existing url, open it
+         if([reportURLString length]) [[NSWorkspace sharedWorkspace] openURL: [NSURL URLWithString: [item valueForKey: @"reportURL"]]];
+         else
 			{
+            //create with plugin
 				NSBundle *plugin = [[PluginManager reportPlugins] objectForKey: [[NSUserDefaults standardUserDefaults] stringForKey:@"REPORTSPLUGIN"]];
-				
 				if( plugin)
 				{
-//					[checkBonjourUpToDateThreadLock lock];
-					
-                    
-                    
-					@try 
+					@try
 					{
 						NSLog(@"generate report with plugin");
 						PluginFilter* filter = [[plugin principalClass] filter];
                         
-                        [PluginManager startProtectForCrashWithFilter: filter];
+                  [PluginManager startProtectForCrashWithFilter: filter];
 						[filter createReportForStudy: studySelected];
-                        [PluginManager endProtectForCrash];
+                  [PluginManager endProtectForCrash];
                         
 						NSLog(@"end generate report with plugin");
-						//[filter report: studySelected action: @"openReport"];
 					}
 					@catch (NSException * e) 
 					{
                         N2LogExceptionWithStackTrace(e);
 					}
-					
-//					[checkBonjourUpToDateThreadLock unlock];
 				}
 				else
 				{
@@ -18352,122 +18325,115 @@ static volatile int numberOfThreadsForJPEG = 0;
 					return;
 				}
 			}
-			else
-			// *********************************************
-			// REPORTS GENERATED AND HANDLED BY OSIRIX
-			// *********************************************
-			{
-//				[checkBonjourUpToDateThreadLock lock];
-				
-				@try
-				{
-					NSString *localReportFile = [studySelected valueForKey: @"reportURL"];
-					
-					if( ![_database isLocal] && localReportFile)
-					{
-						DicomImage *reportSR = [studySelected reportImage];
-						
-						if( reportSR)
-						{
-							// Not modified on the 'bonjour client side'?
-							if( [[reportSR valueForKey:@"inDatabaseFolder"] boolValue])
-							{
-								// The report was maybe changed on the server -> delete the report file
-								if( localReportFile)
-									[[NSFileManager defaultManager] removeItemAtPath: localReportFile error: nil];
-								
-								// The report was maybe changed on the server -> delete the DICOM SR file
-								if( [reportSR valueForKey: @"completePath"])
-									[[NSFileManager defaultManager] removeItemAtPath: [reportSR valueForKey: @"completePath"] error: nil];
-							}
-							
-							NSString *reportPath = [DicomDatabase extractReportSR: [reportSR completePathResolved] contentDate: [reportSR valueForKey: @"date"]];
-							
-							if( reportPath)
-							{
-								if( [reportPath length] > 8 && ([reportPath hasPrefix: @"http://"] || [reportPath hasPrefix: @"https://"]))
-								{
-									NSLog( @"**** generateReport: We should not be here....");
-								}
-								else // It's a file!
-								{
-									if( localReportFile)
-									{
-										[[NSFileManager defaultManager] removeItemAtPath: localReportFile error: nil];
-										[[NSFileManager defaultManager] moveItemAtPath: reportPath toPath: localReportFile error: nil];
-									}
-								}
-							}
-						}
-					}
-					
-					// Is there a Report URL ? If yes, open it; If no, create a new one
-					if( localReportFile)
-					{
-						if( [[NSFileManager defaultManager] fileExistsAtPath: localReportFile])
-						{
-							if (reportsMode != 3)
-							{
-								[[NSWorkspace sharedWorkspace] openFile: localReportFile withApplication: nil andDeactivate:YES];
-								[NSThread sleepForTimeInterval: 1];
-							}
-						}
-						else
-						{
-							NSLog( @"***** reportURL contains a path, but file doesnt exist.");
-							
-							if( NSRunInformationalAlertPanel( NSLocalizedString(@"Report", nil),
-											 NSLocalizedString(@"Report file is not found... Should I create a new one?", nil),
-											 NSLocalizedString(@"OK",nil),
-											 NSLocalizedString(@"Cancel",nil),
-											 nil) == NSAlertDefaultReturn)
-												localReportFile = nil;
-						}
-					}
-					
-					if( localReportFile == nil)
-					{
-						NSLog( @"New report for: %@", [studySelected valueForKey: @"name"]);
-						
-						if (reportsMode != 3)
-						{
-							Reports	*report = [[Reports alloc] init];
-							if ([[sender class] isEqualTo:[reportTemplatesListPopUpButton class]])
-                                [report setTemplateName:[[sender selectedItem] title]];
-							
-							if (![_database isLocal])
-								[report createNewReport: studySelected destination: [NSString stringWithFormat: @"%@/TEMP.noindex/", [self documentsDirectory]] type:reportsMode];
-							else
-								[report createNewReport: studySelected destination: [NSString stringWithFormat: @"%@/", [self.database reportsDirPath]] type:reportsMode];
-							
-							localReportFile = [studySelected valueForKey: @"reportURL"];
-							
-							[report release];
-						}
-					}
-					
-					if( [[NSFileManager defaultManager] fileExistsAtPath: localReportFile])
-					{
-						NSDictionary *fattrs = [[NSFileManager defaultManager] fileAttributesAtPath:localReportFile traverseLink:YES];
-						NSMutableDictionary *d = [NSMutableDictionary dictionaryWithObjectsAndKeys: studySelected, @"study", [fattrs objectForKey:NSFileModificationDate], @"date", nil];
-						
-						[reportFilesToCheck setObject: d forKey: [localReportFile lastPathComponent]];
-					}
-				}
-				@catch (NSException * e)
-				{
-                    N2LogExceptionWithStackTrace(e);
-				}
-				
-//				[checkBonjourUpToDateThreadLock unlock];
-			}
-		}
-	}
+      }
+      else
+      {
+         //handled by OsiriX
+         @try
+         {
+            NSString *localReportFile = [studySelected valueForKey: @"reportURL"];
+            
+            if( ![_database isLocal] && localReportFile)
+            {
+               DicomImage *reportSR = [studySelected reportImage];
+               
+               if( reportSR)
+               {
+                  // Not modified on the 'bonjour client side'?
+                  if( [[reportSR valueForKey:@"inDatabaseFolder"] boolValue])
+                  {
+                     // The report was maybe changed on the server -> delete the report file
+                     if( localReportFile)
+                        [[NSFileManager defaultManager] removeItemAtPath: localReportFile error: nil];
+                     
+                     // The report was maybe changed on the server -> delete the DICOM SR file
+                     if( [reportSR valueForKey: @"completePath"])
+                        [[NSFileManager defaultManager] removeItemAtPath: [reportSR valueForKey: @"completePath"] error: nil];
+                  }
+                  
+                  NSString *reportPath = [DicomDatabase extractReportSR: [reportSR completePathResolved] contentDate: [reportSR valueForKey: @"date"]];
+                  
+                  if( reportPath)
+                  {
+                     if( [reportPath length] > 8 && ([reportPath hasPrefix: @"http://"] || [reportPath hasPrefix: @"https://"]))
+                     {
+                        NSLog( @"**** generateReport: We should not be here....");
+                     }
+                     else // It's a file!
+                     {
+                        if( localReportFile)
+                        {
+                           [[NSFileManager defaultManager] removeItemAtPath: localReportFile error: nil];
+                           [[NSFileManager defaultManager] moveItemAtPath: reportPath toPath: localReportFile error: nil];
+                        }
+                     }
+                  }
+               }
+            }
+            
+            // Is there a Report URL ? If yes, open it; If no, create a new one
+            if( localReportFile)
+            {
+               if( [[NSFileManager defaultManager] fileExistsAtPath: localReportFile])
+               {
+                  if (reportsMode != 3)
+                  {
+                     [[NSWorkspace sharedWorkspace] openFile: localReportFile withApplication: nil andDeactivate:YES];
+                     [NSThread sleepForTimeInterval: 1];
+                  }
+               }
+               else
+               {
+                  NSLog( @"***** reportURL contains a path, but file doesnt exist.");
+                  
+                  if( NSRunInformationalAlertPanel( NSLocalizedString(@"Report", nil),
+                               NSLocalizedString(@"Report file is not found... Should I create a new one?", nil),
+                               NSLocalizedString(@"OK",nil),
+                               NSLocalizedString(@"Cancel",nil),
+                               nil) == NSAlertDefaultReturn)
+                                 localReportFile = nil;
+               }
+            }
+            
+            if( localReportFile == nil)
+            {
+               NSLog( @"New report for: %@", [studySelected valueForKey: @"name"]);
+               
+               if (reportsMode != 3)
+               {
+                  Reports	*report = [[Reports alloc] init];
+                  if ([[sender class] isEqualTo:[reportTemplatesListPopUpButton class]])
+                             [report setTemplateName:[[sender selectedItem] title]];
+                  
+                  if (![_database isLocal])
+                     [report createNewReport: studySelected destination: [NSString stringWithFormat: @"%@/TEMP.noindex/", [self documentsDirectory]] type:reportsMode];
+                  else
+                     [report createNewReport: studySelected destination: [NSString stringWithFormat: @"%@/", [self.database reportsDirPath]] type:reportsMode];
+                  
+                  localReportFile = [studySelected valueForKey: @"reportURL"];
+                  
+                  [report release];
+               }
+            }
+            
+            if( [[NSFileManager defaultManager] fileExistsAtPath: localReportFile])
+            {
+               NSDictionary *fattrs = [[NSFileManager defaultManager] fileAttributesAtPath:localReportFile traverseLink:YES];
+               NSMutableDictionary *d = [NSMutableDictionary dictionaryWithObjectsAndKeys: studySelected, @"study", [fattrs objectForKey:NSFileModificationDate], @"date", nil];
+               
+               [reportFilesToCheck setObject: d forKey: [localReportFile lastPathComponent]];
+            }
+         }
+         @catch (NSException * e)
+         {
+                 N2LogExceptionWithStackTrace(e);
+         }
+      }//end handled by OsiriX
+	}//end of item exists
 	
-	[self performSelector: @selector(updateReportToolbarIcon:) withObject: nil afterDelay: 0.1];	
-	[[NSNotificationCenter defaultCenter] postNotificationName: OsirixReportModeChangedNotification object: nil userInfo: nil];
+	//[self performSelector: @selector(updateReportToolbarIcon:) withObject: nil afterDelay: 0.1];
+	//[[NSNotificationCenter defaultCenter] postNotificationName: OsirixReportModeChangedNotification object: nil userInfo: nil];
 }
-#endif
 
 - (NSImage*) reportIcon
 {

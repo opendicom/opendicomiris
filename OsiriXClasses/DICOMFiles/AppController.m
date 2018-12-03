@@ -2731,7 +2731,6 @@ static BOOL _hasMacOSXSnowLeopard=NO;
                 
                 
                 
-//				[[NSUserDefaults standardUserDefaults] addSuiteNamed: @"com.rossetantoine.osirix"]; // Backward compatibility
                 [[NSUserDefaults standardUserDefaults] setInteger:200 forKey:@"NSInitialToolTipDelay"];
                 [[NSUserDefaults standardUserDefaults] setBool: NO forKey: @"DontUseUndoQueueForROIs"];
                 [[NSUserDefaults standardUserDefaults] setInteger: 20 forKey: @"UndoQueueSize"];
@@ -2760,14 +2759,8 @@ static BOOL _hasMacOSXSnowLeopard=NO;
 				if( [[NSUserDefaults standardUserDefaults] objectForKey: @"copyHideListenerError"])
 					[[NSUserDefaults standardUserDefaults] setBool: [[NSUserDefaults standardUserDefaults] boolForKey: @"copyHideListenerError"] forKey: @"hideListenerError"];
 				
-				#ifdef MACAPPSTORE
-				[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"MACAPPSTORE"]; // Also modify in DefaultsOsiriX.m
-				[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AUTHENTICATION"];
-				[[NSUserDefaults standardUserDefaults] setObject: NSLocalizedString( @"(~/Library/Application Support/OsiriX App/)", nil) forKey:@"DefaultDatabasePath"];
-				#else
 				[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"MACAPPSTORE"]; // Also modify in DefaultsOsiriX.m
 				[[NSUserDefaults standardUserDefaults] setObject: NSLocalizedString( @"(Current User Documents folder)", nil) forKey:@"DefaultDatabasePath"];
-				#endif
 				
 				#ifdef __LP64__
 				[[NSUserDefaults standardUserDefaults] setBool:YES forKey: @"LP64bit"];
@@ -2775,23 +2768,7 @@ static BOOL _hasMacOSXSnowLeopard=NO;
 				[[NSUserDefaults standardUserDefaults] setBool:NO forKey: @"LP64bit"];
 				#endif
                 
-//                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"allow_qr_name"];
-//                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"allow_qr_id"];
-//                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"allow_qr_accession_number"];
-//                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"allow_qr_birthdate"];
-//                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"allow_qr_description"];
-//                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"allow_qr_referring_physician"];
-//                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"allow_qr_comments"];
-//                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"allow_qr_institution"];
-//                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"allow_qr_status"];
-//                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"allow_qr_study_date"];
-//                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"allow_qr_modality"];
-//                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"allow_qr_blank_query"];
-//                [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"allow_qr_custom_dicom_field"];
-				
-                
-                
-                
+            
                 // if we are loading a database that isn't on the root volume, then we must wait for it to load - if it doesn't become available after a few minutes, then we'll just let osirix switch to the db at ~/Documents as it would do anyway
                 
                 NSString* dataBasePath = nil;
@@ -2874,12 +2851,7 @@ static BOOL _hasMacOSXSnowLeopard=NO;
                     }
                 }
                 
-                
-                
-                
-                
-                
-                pluginManager = [[PluginManager alloc] init];
+            pluginManager = [[PluginManager alloc] init];
                 
 				//Add Endoscopy LUT, WL/WW, shading to existing prefs
 				// Shading Preset
@@ -3137,148 +3109,21 @@ static BOOL _hasMacOSXSnowLeopard=NO;
 	if( [[NSUserDefaults standardUserDefaults] boolForKey: @"SingleProcessMultiThreadedListener"] == NO)
 		NSLog( @"----- %@", NSLocalizedString( @"DICOM Listener is multi-processes mode.", nil));
 	
-	if( [[NSUserDefaults standardUserDefaults] boolForKey: @"hideListenerError"])
-		[[NSUserDefaults standardUserDefaults] setBool: NO forKey: @"checkForUpdatesPlugins"];
 	
     [[NSUserDefaults standardUserDefaults] setBool: YES forKey: @"USEALWAYSTOOLBARPANEL2"];
     [[NSUserDefaults standardUserDefaults] setBool: YES forKey: @"syncPreviewList"];
     [[NSUserDefaults standardUserDefaults] setBool: YES forKey: @"SeriesListVisible"];
-//    [[NSUserDefaults standardUserDefaults] setBool: NO  forKey: @"AUTOHIDEMATRIX"];
-    
-    
-	#ifndef MACAPPSTORE
-	#ifndef OSIRIX_LIGHT
-	if( [[NSUserDefaults standardUserDefaults] boolForKey: @"checkForUpdatesPlugins"])
-		[NSThread detachNewThreadSelector:@selector(checkForUpdates:) toTarget:pluginManager withObject:pluginManager];
-	
-    
-    // If OsiriX crashed before...
-    NSString *OsiriXCrashed = @"/tmp/OsiriXCrashed";
-    
-    if( [[NSFileManager defaultManager] fileExistsAtPath: OsiriXCrashed]) // Activate check for update !
-    {
-        [[NSFileManager defaultManager] removeItemAtPath: OsiriXCrashed error: nil];
-        
-        if( [[NSUserDefaults standardUserDefaults] boolForKey: @"CheckOsiriXUpdates4"] == NO)
-        {
-            if( [[NSUserDefaults standardUserDefaults] boolForKey: @"hideListenerError"] == NO)
-                [NSThread detachNewThreadSelector: @selector(checkForUpdates:) toTarget: self withObject: @"crash"];
-        }
-    }
-    else [NSThread detachNewThreadSelector: @selector(checkForUpdates:) toTarget:self withObject: self];
-    
-	#endif
-	#endif
-    
-    // Remove PluginManager items...
-    #ifdef MACAPPSTORE
-    NSMenu *pluginsMenu = [filtersMenu supermenu];
-    
-    [pluginsMenu removeItemAtIndex: [pluginsMenu numberOfItems]-1];
-    [pluginsMenu removeItemAtIndex: [pluginsMenu numberOfItems]-1];
-    #endif
-	
+
 	if( [[NSUserDefaults standardUserDefaults] boolForKey: @"hideListenerError"]) // Server mode
 		[[[BrowserController currentBrowser] window] orderOut: self];
 
-#ifdef OSIRIX_LIGHT
-	@try
-	{
-		int button = NSRunAlertPanel( NSLocalizedString( @"OsiriX Lite", nil), NSLocalizedString( @"This is the Lite version of OsiriX: many functions are not available. You can download the full version of OsiriX on the Internet.", nil), NSLocalizedString( @"Continue", nil), NSLocalizedString( @"Download", nil), nil);
-	
-      /*JF
-		if (NSCancelButton == button)
-			[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.osirix-viewer.com"]];
-       */
-	}
-	@catch (NSException * e)
-	{
-		N2LogExceptionWithStackTrace(e);
-		exit( 0);
-	}
-	
-#endif
-	
-	
-//	NSString *source = [NSString stringWithContentsOfFile: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/dicom.dic"]];
-//	
-//	NSArray *lines = [source componentsSeparatedByString: @"\n"];
-//	
-//	NSMutableDictionary *nameDictionary = [NSMutableDictionary dictionary], *tagDictionary = [NSMutableDictionary dictionary];
-//	
-//    NSBundle *bundle = [NSBundle bundleForClass:NSClassFromString(@"DCMTagDictionary")];
-//    
-//    tagDictionary = [NSMutableDictionary dictionaryWithContentsOfFile: [bundle pathForResource:@"tagDictionary" ofType:@"plist"]];
-//    nameDictionary = [NSMutableDictionary dictionaryWithContentsOfFile: [bundle pathForResource:@"nameDictionary" ofType:@"plist"]];
-//    
-//	for( NSString *l in lines)
-//	{
-//		if( [l hasPrefix: @"#"] == NO)
-//		{
-//			NSArray *f = [l componentsSeparatedByString: @"\t"];
-//			
-//			if( [f count] == 5)
-//			{
-//				NSString *grel = [[f objectAtIndex: 0] stringByReplacingOccurrencesOfString: @"(" withString:@""];
-//				grel = [grel stringByReplacingOccurrencesOfString: @")" withString:@""];
-//				grel = [grel uppercaseString];
-//				
-//				if( [grel length] >= 9 && [grel characterAtIndex:4] == ',')
-//				{
-//					grel = [grel substringToIndex: 9];
-//					
-//					NSDictionary *d = [NSDictionary dictionaryWithObjectsAndKeys: [f objectAtIndex: 2], @"Description", [f objectAtIndex: 3], @"VM", [f objectAtIndex: 1], @"VR", nil];	//[f objectAtIndex: 4], @"Version", nil];
-//					
-//                    if( [tagDictionary objectForKey: grel])
-//                    {
-////                        NSLog( @"%@", [tagDictionary objectForKey: grel]);
-//                    }
-//                    else
-//                    {
-//                        NSLog( @"%@", d);
-//                        
-//                        [tagDictionary setObject: d forKey: grel];
-//                        [nameDictionary setObject: grel forKey: [f objectAtIndex: 2]];
-//                    }
-//				}
-//			}
-//			else
-//				NSLog( @"%@", f);
-//		}
-//	}
-//	
-//	[tagDictionary writeToFile: @"/tmp/tagDictionary.plist" atomically: YES];
-//	[nameDictionary writeToFile: @"/tmp/nameDictionary.plist" atomically: YES];
-    
-//	warning : patientssex -> patientsex, patientsname -> patientname, ...
-	
-//	<?xml version="1.0" encoding="UTF-8"?>
-//	<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-//	<plist version="1.0">
-//	<dict>
-//	<key>Description</key>
-//	<string>PhilipsFactor</string>
-//	<key>VM</key>
-//	<string>1</string>
-//	<key>VR</key>
-//	<string>DS</string>
-//	</dict>
-//	</plist>
-	
-//	NSBitmapImageRep *rep = [NSBitmapImageRep imageRepWithData: [NSData dataWithContentsOfFile: @"/tmp/test.jp2"]];
-//	
-//	NSUInteger pix;
-//	
-//	[rep getPixel: &pix atX: 2 y: 2];
-//	
-//	NSLog( @"%@", rep);
 
 	[self testMenus];
     
-    #ifndef OSIRIX_LIGHT
+
     if( [[NSBundle bundleForClass:[self class]] pathForAuxiliaryExecutable:@"odt2pdf"] == nil)
         N2LogStackTrace( @"\r****** path2odt2pdf == nil\r*****************************");
-    #endif
+
     
     
     [ROI loadDefaultSettings];
@@ -3318,23 +3163,10 @@ static BOOL _hasMacOSXSnowLeopard=NO;
 #endif
 #endif
     
-    if( [AppController hasMacOSXLion] == NO)
-    {
-        NSRunCriticalAlertPanel( NSLocalizedString( @"MacOS Version", nil), NSLocalizedString( @"OsiriX requires MacOS 10.7.5 or higher. Please update your OS: Apple Menu - Software Update...", nil), NSLocalizedString( @"Quit", nil) , nil, nil);
-        exit( 0);
-    }
-    
+   
     if( [[NSUserDefaults standardUserDefaults] boolForKey: @"SyncPreferencesFromURL"])
         [NSThread detachNewThreadSelector: @selector( addPreferencesFromURL:) toTarget: [OSIGeneralPreferencePanePref class] withObject: [NSURL URLWithString: [[NSUserDefaults standardUserDefaults] stringForKey: @"SyncPreferencesURL"]]];
 
-
-#ifdef NDEBUG
-//JF    [[NSUserDefaults standardUserDefaults] setBool: NO forKey: @"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
-#else
-//JF    [[NSUserDefaults standardUserDefaults] setBool: YES forKey: @"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
-#endif
-
-#ifndef OSIRIX_LIGHT
     if( [[NSUserDefaults standardUserDefaults] boolForKey: @"isQueryControllerVisible"])
     {
         if([QueryController currentQueryController] == nil)
@@ -3342,7 +3174,6 @@ static BOOL _hasMacOSXSnowLeopard=NO;
         
         [[QueryController currentQueryController] showWindow: self];
     }
-#endif
 }
 
 - (void) checkForOsirixMimeType

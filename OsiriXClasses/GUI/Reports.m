@@ -180,7 +180,7 @@
 	
 	switch( type)
 	{
-		case 0:
+		case 0://word
 		{
 			NSString *destinationFile = [NSString stringWithFormat:@"%@%@.%@", path, uniqueFilename, @"doc"];
 			[[NSFileManager defaultManager] removeItemAtPath: destinationFile error: nil];
@@ -189,7 +189,7 @@
         }
 		break;
 		
-		case 1:
+		case 1://rtf
 		{
 			NSString *destinationFile = [NSString stringWithFormat:@"%@%@.%@", path, uniqueFilename, @"rtf"];
 			[[NSFileManager defaultManager] removeItemAtPath: destinationFile error: nil];
@@ -290,7 +290,7 @@
 		}
 		break;
 		
-		case 2:
+		case 2://pages
 		{
 			NSString *destinationFile = [NSString stringWithFormat:@"%@%@.%@", path, uniqueFilename, @"pages"];
 			[[NSFileManager defaultManager] removeItemAtPath: destinationFile error: nil];

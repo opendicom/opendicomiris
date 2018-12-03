@@ -4973,20 +4973,14 @@ NSInteger studyCompare(ViewerController *v1, ViewerController *v2, void *context
 					
 					if( change > 0)
 					{
-						if( [PluginManager isComPACS])
-							change = 1;
-						else if( change < 1)
-							change = 1;
+						if( change < 1) change = 1;
 						
 						inc = _imageRows * _imageColumns * change;
 						curImage += inc;
 					}
 					else
 					{
-						if( [PluginManager isComPACS])
-							change = -1;
-						else if( change > -1)
-							change = -1;
+						if( change > -1) change = -1;
 							
 						inc = _imageRows * _imageColumns * change;
 						curImage += inc;
