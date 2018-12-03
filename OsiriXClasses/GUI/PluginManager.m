@@ -8,7 +8,7 @@
   See http://www.osirix-viewer.com/copyright.html for details.
 
      This software is distributed WITHOUT ANY WARRANTY; without even
-     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+     the implied warrant/Volumes/IN/GitHub/opendicomiris/OsiriXClasses/GUI/PluginManager.my of MERCHANTABILITY or FITNESS FOR A PARTICULAR
      PURPOSE.
 =========================================================================*/
 
@@ -18,7 +18,6 @@
 #import "AppController.h"
 #import "browserController.h"
 #import "BLAuthentication.h"
-#import "PluginManagerController.h"
 #import "Notifications.h"
 #import "NSFileManager+N2.h"
 #import "NSMutableDictionary+N2.h"

@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OsiriXClasses/DICOMFiles/browserController.m"
-            timestampString = "565478217.8257819"
+            timestampString = "565557643.6374919"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "13068"
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OsiriXClasses/DICOMFiles/AppController.m"
-            timestampString = "565478217.82592"
+            timestampString = "565557643.637678"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2669"
-            endingLineNumber = "2669"
+            startingLineNumber = "2659"
+            endingLineNumber = "2659"
             landmarkName = "+initialize"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OsiriXClasses/GUI/PluginManager.m"
-            timestampString = "565478217.8259799"
+            timestampString = "565557643.637732"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "470"
-            endingLineNumber = "470"
+            startingLineNumber = "469"
+            endingLineNumber = "469"
             landmarkName = "-init"
             landmarkType = "7">
          </BreakpointContent>

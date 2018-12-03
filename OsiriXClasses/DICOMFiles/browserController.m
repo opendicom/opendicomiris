@@ -467,7 +467,7 @@ static volatile BOOL waitForRunningProcess = NO;
 @synthesize bonjourBrowser, pathToEncryptedFile, comparativeStudies, distantTimeIntervalStart, distantTimeIntervalEnd;
 @synthesize searchString = _searchString, fetchPredicate = _fetchPredicate, distantSearchType, distantSearchString;
 @synthesize filterPredicate = _filterPredicate, filterPredicateDescription = _filterPredicateDescription;
-@synthesize pluginManagerController, modalityFilter;
+@synthesize modalityFilter;
 
 + (BOOL) tryLock:(id) c during:(NSTimeInterval) sec
 {

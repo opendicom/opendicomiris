@@ -61,6 +61,7 @@
 		4A2A49D4218D3C4700B4D164 /* Flow.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A2A49BE218D3C4700B4D164 /* Flow.plist */; };
 		4A2A49D5218D3C4700B4D164 /* Rainbow2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A2A49BF218D3C4700B4D164 /* Rainbow2.plist */; };
 		4A7E6F6F218A26D400BAF7B9 /* HL7.tif in Resources */ = {isa = PBXBuildFile; fileRef = 4A7E6F6E218A26D300BAF7B9 /* HL7.tif */; };
+		4AE9A9CC21B5B894002D0C3D /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC361A14DFA20067AA07 /* PluginManager.m */; };
 		4F4FAD491A9118B300B2EDFC /* OSIDerivedROI.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F4FAD451A9118B300B2EDFC /* OSIDerivedROI.h */; };
 		4F4FAD4A1A9118B300B2EDFC /* OSIDerivedROI.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FAD461A9118B300B2EDFC /* OSIDerivedROI.m */; };
 		4F4FAD4B1A9118B300B2EDFC /* OSIPETDerivedROI.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F4FAD471A9118B300B2EDFC /* OSIPETDerivedROI.h */; };
@@ -749,9 +750,6 @@
 		847AFEDD1A14DFA40067AA07 /* PluginFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFC331A14DFA20067AA07 /* PluginFilter.h */; };
 		847AFEDE1A14DFA40067AA07 /* PluginFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC341A14DFA20067AA07 /* PluginFilter.m */; };
 		847AFEDF1A14DFA40067AA07 /* PluginManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFC351A14DFA20067AA07 /* PluginManager.h */; };
-		847AFEE01A14DFA40067AA07 /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC361A14DFA20067AA07 /* PluginManager.m */; };
-		847AFEE11A14DFA40067AA07 /* PluginManagerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFC371A14DFA20067AA07 /* PluginManagerController.h */; };
-		847AFEE21A14DFA40067AA07 /* PluginManagerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC381A14DFA20067AA07 /* PluginManagerController.m */; };
 		847AFEE31A14DFA40067AA07 /* pluginSDKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFC391A14DFA20067AA07 /* pluginSDKAdditions.h */; };
 		847AFEE41A14DFA40067AA07 /* pluginSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC3A1A14DFA20067AA07 /* pluginSDKAdditions.m */; };
 		847AFEE51A14DFA40067AA07 /* PMDICOMStoreSCU.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFC3B1A14DFA20067AA07 /* PMDICOMStoreSCU.h */; };
@@ -2583,7 +2581,6 @@
 		CE3F995A0C84724B00CB38F1 /* ITKSegmentation.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3F99100C84724B00CB38F1 /* ITKSegmentation.xib */; };
 		CE3F995B0C84724B00CB38F1 /* Query.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3F99120C84724B00CB38F1 /* Query.xib */; };
 		CE3F995C0C84724B00CB38F1 /* Histogram.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3F99140C84724B00CB38F1 /* Histogram.xib */; };
-		CE3F995D0C84724B00CB38F1 /* PluginManager.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3F99160C84724B00CB38F1 /* PluginManager.xib */; };
 		CE3F995F0C84724B00CB38F1 /* WaitRendering.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3F991A0C84724B00CB38F1 /* WaitRendering.xib */; };
 		CE3F99600C84724B00CB38F1 /* Plot.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3F991C0C84724B00CB38F1 /* Plot.xib */; };
 		CE3F99610C84724B00CB38F1 /* ROIVolume.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3F991E0C84724B00CB38F1 /* ROIVolume.xib */; };
@@ -6518,7 +6515,6 @@
 		20C0D2D920D5DF1B00569F76 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = Binaries/ja.lproj/PaletteBrush.xib; sourceTree = "<group>"; };
 		20C0D2DA20D5DF2400569F76 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = Binaries/ja.lproj/PETCT.xib; sourceTree = "<group>"; };
 		20C0D2DB20D5DF2F00569F76 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = Binaries/ja.lproj/Plot.xib; sourceTree = "<group>"; };
-		20C0D2DC20D5DF3B00569F76 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = Binaries/ja.lproj/PluginManager.xib; sourceTree = "<group>"; };
 		20C0D2DD20D5DF4700569F76 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = Binaries/ja.lproj/PreferencesWindow.xib; sourceTree = "<group>"; };
 		20C0D2DE20D5DF5500569F76 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = Binaries/ja.lproj/Query.xib; sourceTree = "<group>"; };
 		20C0D2DF20D5DF5F00569F76 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = Binaries/ja.lproj/QuicktimeExport.xib; sourceTree = "<group>"; };
@@ -8727,7 +8723,6 @@
 		CE3F99110C84724B00CB38F1 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Binaries/English.lproj/ITKSegmentation.xib; sourceTree = "<group>"; };
 		CE3F99130C84724B00CB38F1 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Binaries/English.lproj/Query.xib; sourceTree = "<group>"; };
 		CE3F99150C84724B00CB38F1 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Binaries/English.lproj/Histogram.xib; sourceTree = "<group>"; };
-		CE3F99170C84724B00CB38F1 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Binaries/English.lproj/PluginManager.xib; sourceTree = "<group>"; };
 		CE3F991B0C84724B00CB38F1 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Binaries/English.lproj/WaitRendering.xib; sourceTree = "<group>"; };
 		CE3F991D0C84724B00CB38F1 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Binaries/English.lproj/Plot.xib; sourceTree = "<group>"; };
 		CE3F991F0C84724B00CB38F1 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Binaries/English.lproj/ROIVolume.xib; sourceTree = "<group>"; };
@@ -12706,7 +12701,6 @@
 				CE3F99260C84724B00CB38F1 /* PaletteBrush.xib */,
 				CE3F98E80C84724B00CB38F1 /* PETCT.xib */,
 				CE3F991C0C84724B00CB38F1 /* Plot.xib */,
-				CE3F99160C84724B00CB38F1 /* PluginManager.xib */,
 				59BDF104117EE61E007F1F2C /* PreferencesWindow.xib */,
 				CE3F99120C84724B00CB38F1 /* Query.xib */,
 				CE3F99320C84724B00CB38F1 /* QuicktimeExport.xib */,
@@ -23192,7 +23186,6 @@
 				CEBD930B14F1ADDB000DA1FE /* vtkWidgetRepresentation.h in Headers */,
 				CEBD930C14F1ADDB000DA1FE /* vtkWidgetSet.h in Headers */,
 				CEBD930D14F1ADDB000DA1FE /* vtkWidgetsInstantiator.h in Headers */,
-				847AFEE11A14DFA40067AA07 /* PluginManagerController.h in Headers */,
 				CEBD930E14F1ADDB000DA1FE /* vtkWin32Header.h in Headers */,
 				CEBD930F14F1ADDB000DA1FE /* vtkWin32OpenGLRenderWindow.h in Headers */,
 				CEBD931014F1ADDB000DA1FE /* vtkWin32OutputWindow.h in Headers */,
@@ -23758,7 +23751,6 @@
 				CE3F995A0C84724B00CB38F1 /* ITKSegmentation.xib in Resources */,
 				CE3F995B0C84724B00CB38F1 /* Query.xib in Resources */,
 				CE3F995C0C84724B00CB38F1 /* Histogram.xib in Resources */,
-				CE3F995D0C84724B00CB38F1 /* PluginManager.xib in Resources */,
 				CE3F995F0C84724B00CB38F1 /* WaitRendering.xib in Resources */,
 				CE3F99600C84724B00CB38F1 /* Plot.xib in Resources */,
 				CE3F99610C84724B00CB38F1 /* ROIVolume.xib in Resources */,
@@ -24307,6 +24299,7 @@
 			files = (
 				AB28B8DA05B79D1800A9906C /* NSFont_OpenGL.m in Sources */,
 				847AFF6B1A14DFA50067AA07 /* WebPortalDatabase.mm in Sources */,
+				4AE9A9CC21B5B894002D0C3D /* PluginManager.m in Sources */,
 				BF8B2A4C09F470F400F1F759 /* dcmqrsrv.mm in Sources */,
 				AB80EBAC0AF1F5B600E7E934 /* AYDicomPrintWindowController.mm in Sources */,
 				AB80EBAE0AF1F5B600E7E934 /* AYNSImageToDicom.m in Sources */,
@@ -25105,7 +25098,6 @@
 				ABE470D90A76412700327466 /* jcmainct.c in Sources */,
 				847AFE751A14DFA40067AA07 /* O2DicomPredicateEditorPopUpButton.m in Sources */,
 				ABE470DA0A76412700327466 /* jcmarker.c in Sources */,
-				847AFEE01A14DFA40067AA07 /* PluginManager.m in Sources */,
 				ABE470DB0A76412700327466 /* jcmaster.c in Sources */,
 				847AFF6F1A14DFA50067AA07 /* WebPortalSession.mm in Sources */,
 				847AFF181A14DFA40067AA07 /* stringNumericCompare.m in Sources */,
@@ -25217,7 +25209,6 @@
 				84D7BBE5154A941A007B5A86 /* NSNotificationCenter+N2.mm in Sources */,
 				CE59440C155E3838007BDF5B /* NSString+SymlinksAndAliases.m in Sources */,
 				711849781590A377006AB447 /* SMTPClient.m in Sources */,
-				847AFEE21A14DFA40067AA07 /* PluginManagerController.m in Sources */,
 				847AFE7D1A14DFA40067AA07 /* QueryController.mm in Sources */,
 				CEA4F07715AEA5FE009584C7 /* OSIPACSOnDemandPreferencePane.m in Sources */,
 				847AFEF31A14DFA40067AA07 /* PSGenerator.m in Sources */,
@@ -25937,15 +25928,6 @@
 				20C0D2D120D5DED200569F76 /* ja */,
 			);
 			name = Histogram.xib;
-			sourceTree = "<group>";
-		};
-		CE3F99160C84724B00CB38F1 /* PluginManager.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE3F99170C84724B00CB38F1 /* English */,
-				20C0D2DC20D5DF3B00569F76 /* ja */,
-			);
-			name = PluginManager.xib;
 			sourceTree = "<group>";
 		};
 		CE3F991A0C84724B00CB38F1 /* WaitRendering.xib */ = {

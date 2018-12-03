@@ -24,7 +24,6 @@
 #import "BrowserController.h"
 #import "DicomFile.h"
 #import "DCMView.h"
-#import "PluginManagerController.h"
 #import <Foundation/NSObjCRuntime.h>
 #include <algorithm>
 
@@ -319,13 +318,7 @@ static const NSMutableArray* pluginPanes = [[NSMutableArray alloc] init];
 	
 	[self synchronizeSizeWithContent];
     
-    
-    // If we need to remove a plugin with a custom pref pane
-    for (NSWindow* window in [NSApp windows])
-    {
-        if ([window.windowController isKindOfClass:[PluginManagerController class]])
-            [window close];
-    }
+   
 }
 
 -(void)windowDidLoad {

@@ -55,7 +55,6 @@
 #import "VRView.h"
 #endif
 #endif
-#import "PluginManagerController.h"
 #import "OSIWindowController.h"
 #import "Notifications.h"
 #import "WaitRendering.h"
@@ -949,15 +948,6 @@ static NSDate *lastWarningDate = nil;
 		
 		[PluginManager setMenus: filtersMenu :roisMenu :othersMenu :dbMenu];
 		
-#ifndef OSIRIX_LIGHT
-		// refresh the plugin manager window (if open)
-		NSArray *winList = [NSApp windows];		
-		for(NSWindow *window in winList)
-		{
-			if( [[window windowController] isKindOfClass:[PluginManagerController class]])
-				[[window windowController] refreshPluginList];
-		}
-#endif
 	}
 }
 

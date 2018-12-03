@@ -25,7 +25,7 @@
 @class LogWindowController,PreviewView;
 @class MyOutlineView,DCMView,DCMPix;
 @class StructuredReportController,BrowserMatrix;
-@class PluginManagerController,WaitRendering, Wait, ActivityWindowController;
+@class WaitRendering, Wait, ActivityWindowController;
 @class WebPortalUser, DCMTKStudyQueryNode;
 
 enum RootTypes{PatientRootType, StudyRootType, RandomRootType};
@@ -209,9 +209,7 @@ extern NSString* O2AlbumDragType;
 	float							rtstructProgressPercent;
 	
 	BOOL							avoidRecursive, openSubSeriesFlag, openReparsedSeriesFlag;
-	
-	IBOutlet PluginManagerController *pluginManagerController;
-	
+		
 	WaitRendering					*waitOpeningWindow;
 	BOOL							waitCompressionAbort;
 	
@@ -292,7 +290,6 @@ extern NSString* O2AlbumDragType;
 @property(nonatomic) int timeIntervalType;
 @property (nonatomic) NSTimeInterval databaseLastModification __deprecated;
 @property(readonly) NSMutableDictionary *databaseIndexDictionary;
-@property(readonly) PluginManagerController *pluginManagerController;
 @property int distantSearchType;
 
 +(void)initializeBrowserControllerClass;
