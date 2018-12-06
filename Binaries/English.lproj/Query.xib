@@ -32,7 +32,6 @@
                 <outlet property="searchBirth" destination="686" id="687"/>
                 <outlet property="searchCustomField" destination="1022" id="1046"/>
                 <outlet property="searchFieldAN" destination="732" id="733"/>
-                <outlet property="searchFieldComments" destination="980" id="983"/>
                 <outlet property="searchFieldID" destination="665" id="669"/>
                 <outlet property="searchFieldName" destination="667" id="668"/>
                 <outlet property="searchFieldRefPhysician" destination="930" id="933"/>
@@ -41,7 +40,6 @@
                 <outlet property="selectedResultSource" destination="719" id="720"/>
                 <outlet property="sendToPopup" destination="736" id="742"/>
                 <outlet property="sourcesTable" destination="691" id="706"/>
-                <outlet property="statusFilterMatrix" destination="Yv0-9O-bNQ" id="Uht-fg-psA"/>
                 <outlet property="toDate" destination="971" id="974"/>
                 <outlet property="window" destination="144" id="147"/>
                 <outlet property="yearOldBirth" destination="997" id="1000"/>
@@ -121,11 +119,11 @@
                             </tabViewItem>
                             <tabViewItem label="Accession Number" identifier="2" id="730">
                                 <view key="view" id="731">
-                                    <rect key="frame" x="10" y="19" width="929" height="30"/>
+                                    <rect key="frame" x="10" y="19" width="908" height="30"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="732">
-                                            <rect key="frame" x="47" y="3" width="806" height="22"/>
+                                            <rect key="frame" x="47" y="3" width="785" height="22"/>
                                             <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" placeholderString="Accession Number" bezelStyle="round" sendsWholeSearchString="YES" maximumRecents="20" recentsAutosaveName="LastQueryPatientAccessionNumber" id="751">
                                                 <font key="font" metaFont="cellTitle"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -277,39 +275,13 @@
                                     </constraints>
                                 </view>
                             </tabViewItem>
-                            <tabViewItem label="Comments" identifier="Item 6" id="978">
-                                <view key="view" id="979">
-                                    <rect key="frame" x="10" y="19" width="929" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="980">
-                                            <rect key="frame" x="47" y="3" width="806" height="22"/>
-                                            <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" placeholderString="Comments" bezelStyle="round" sendsWholeSearchString="YES" maximumRecents="20" recentsAutosaveName="LastQueryPatientComments" id="981">
-                                                <font key="font" metaFont="cellTitle"/>
-                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            </searchFieldCell>
-                                            <connections>
-                                                <action selector="query:" target="-2" id="982"/>
-                                                <binding destination="832" name="enabled" keyPath="values.allow_qr_comments" id="1072"/>
-                                            </connections>
-                                        </searchField>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="980" firstAttribute="top" secondItem="979" secondAttribute="top" constant="5" id="GLh-eI-f2O"/>
-                                        <constraint firstItem="980" firstAttribute="leading" secondItem="979" secondAttribute="leading" constant="47" id="Ymu-VG-mr7"/>
-                                        <constraint firstAttribute="bottom" secondItem="980" secondAttribute="bottom" constant="3" id="mjG-WM-inv"/>
-                                        <constraint firstAttribute="trailing" secondItem="980" secondAttribute="trailing" constant="76" id="zVN-1D-17d"/>
-                                    </constraints>
-                                </view>
-                            </tabViewItem>
                             <tabViewItem label="Institution" identifier="InstitutionName" id="984">
                                 <view key="view" id="985">
-                                    <rect key="frame" x="10" y="19" width="929" height="30"/>
+                                    <rect key="frame" x="10" y="19" width="908" height="30"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="986">
-                                            <rect key="frame" x="47" y="3" width="806" height="22"/>
+                                            <rect key="frame" x="47" y="3" width="785" height="22"/>
                                             <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" placeholderString="Institution Name" bezelStyle="round" sendsWholeSearchString="YES" maximumRecents="20" recentsAutosaveName="LastQueryInstitutionName" id="987">
                                                 <font key="font" metaFont="cellTitle"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -331,11 +303,11 @@
                             </tabViewItem>
                             <tabViewItem label="Custom DICOM field" identifier="" id="1020">
                                 <view key="view" id="1021">
-                                    <rect key="frame" x="10" y="19" width="929" height="30"/>
+                                    <rect key="frame" x="10" y="19" width="908" height="30"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1022">
-                                            <rect key="frame" x="285" y="3" width="591" height="22"/>
+                                            <rect key="frame" x="285" y="3" width="570" height="22"/>
                                             <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" placeholderString="Custom Field" bezelStyle="round" sendsWholeSearchString="YES" maximumRecents="20" recentsAutosaveName="LastCustomField" id="1023">
                                                 <font key="font" metaFont="cellTitle"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -375,64 +347,6 @@
                                         <constraint firstItem="1039" firstAttribute="top" secondItem="1021" secondAttribute="top" constant="5" id="dnJ-bp-b8Q"/>
                                         <constraint firstItem="1039" firstAttribute="leading" secondItem="1021" secondAttribute="leading" constant="48" id="kYe-zs-MRk"/>
                                         <constraint firstAttribute="bottom" secondItem="1039" secondAttribute="bottom" constant="3" id="x0V-oS-CJJ"/>
-                                    </constraints>
-                                </view>
-                            </tabViewItem>
-                            <tabViewItem label="Status" identifier="" id="wkC-34-4da">
-                                <view key="view" id="swM-cm-wXp">
-                                    <rect key="frame" x="10" y="19" width="929" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yv0-9O-bNQ">
-                                            <rect key="frame" x="257" y="6" width="416" height="18"/>
-                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="cellSize" width="80" height="18"/>
-                                            <size key="intercellSpacing" width="4" height="2"/>
-                                            <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" inset="2" id="ln8-pj-dKo">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <cells>
-                                                <column>
-                                                    <buttonCell type="radio" title="Empty" imagePosition="left" alignment="left" state="on" inset="2" id="M0x-W9-9Pj">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                </column>
-                                                <column>
-                                                    <buttonCell type="radio" title="Unread" imagePosition="left" alignment="left" tag="1" inset="2" id="W8y-EC-U1k">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                </column>
-                                                <column>
-                                                    <buttonCell type="radio" title="Reviewed" imagePosition="left" alignment="left" tag="2" inset="2" id="gf0-Wl-OKO">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                </column>
-                                                <column>
-                                                    <buttonCell type="radio" title="Dictated" imagePosition="left" alignment="left" tag="3" inset="2" id="HGm-N3-vvN">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                </column>
-                                                <column>
-                                                    <buttonCell type="radio" title="Validated" imagePosition="left" alignment="left" tag="4" inset="2" id="6EI-T6-COt">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                    </buttonCell>
-                                                </column>
-                                            </cells>
-                                            <connections>
-                                                <binding destination="832" name="enabled" keyPath="values.allow_qr_birthdate" id="Zsy-Po-v6g"/>
-                                            </connections>
-                                        </matrix>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="Yv0-9O-bNQ" secondAttribute="bottom" constant="6" id="uS5-Ho-bTK"/>
-                                        <constraint firstItem="Yv0-9O-bNQ" firstAttribute="top" secondItem="swM-cm-wXp" secondAttribute="top" constant="6" id="y1y-oF-iUQ"/>
-                                        <constraint firstItem="Yv0-9O-bNQ" firstAttribute="centerX" secondItem="swM-cm-wXp" secondAttribute="centerX" id="zG1-NY-2R0"/>
                                     </constraints>
                                 </view>
                             </tabViewItem>
@@ -963,7 +877,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="none" alternatingRowBackgroundColors="YES" emptySelection="NO" headerView="780" id="319" customClass="QueryOutlineView">
-                                                    <rect key="frame" x="0.0" y="0.0" width="1584" height="337"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="1172" height="337"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <size key="intercellSpacing" width="3" height="2"/>
                                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1125,62 +1039,6 @@
                                                             <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="accessionNumber"/>
                                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                         </tableColumn>
-                                                        <tableColumn identifier="comment" editable="NO" width="100" minWidth="100" maxWidth="300" id="897" userLabel="Table Column - Local Comments">
-                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Local Comments">
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                                <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
-                                                            </tableHeaderCell>
-                                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="898">
-                                                                <font key="font" metaFont="system"/>
-                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                            </textFieldCell>
-                                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="comment"/>
-                                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                        </tableColumn>
-                                                        <tableColumn identifier="stateText" editable="NO" width="100" minWidth="100" maxWidth="100" id="899" userLabel="Table Column - Local Status">
-                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Local Status">
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                                <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
-                                                            </tableHeaderCell>
-                                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="900">
-                                                                <font key="font" metaFont="system"/>
-                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                            </textFieldCell>
-                                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="stateText"/>
-                                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                        </tableColumn>
-                                                        <tableColumn identifier="serverComment" editable="NO" width="100" minWidth="100" maxWidth="300" id="1195" userLabel="Table Column - Distant Comments">
-                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Server Comments">
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                                <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
-                                                            </tableHeaderCell>
-                                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="1198">
-                                                                <font key="font" metaFont="system"/>
-                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                            </textFieldCell>
-                                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="serverComment"/>
-                                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                        </tableColumn>
-                                                        <tableColumn identifier="serverStateText" editable="NO" width="100" minWidth="100" maxWidth="100" id="1196" userLabel="Table Column - Distant Status">
-                                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Server Status">
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                                <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
-                                                            </tableHeaderCell>
-                                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="1197">
-                                                                <font key="font" metaFont="system"/>
-                                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                            </textFieldCell>
-                                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="serverStateText"/>
-                                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                        </tableColumn>
                                                         <tableColumn identifier="institutionName" width="65" minWidth="65" maxWidth="300" id="1067">
                                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Institution">
                                                                 <font key="font" metaFont="smallSystem"/>
@@ -1241,7 +1099,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <tableHeaderView key="headerView" id="780">
-                                            <rect key="frame" x="0.0" y="0.0" width="1584" height="25"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1172" height="25"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableHeaderView>
                                     </scrollView>

@@ -17,12 +17,12 @@
 
 @implementation PluginFilter
 
-+ (PluginFilter *)filter
++(PluginFilter *)filter
 {
     return [[[self alloc] init] autorelease];
 }
 
-- (id)init {
+-(id)init{
 	if (self = [super init])
 	{
 		[self initPlugin];
@@ -30,28 +30,29 @@
 	return self;
 }
 
-- (void) willUnload
+-(void)willUnload
 {
     // Subclass this function if needed: Plugin will unload : prepare for dealloc: release memory and kill sub-process
 }
 
-- (void) dealloc
+-(void)dealloc
 {
 	NSLog( @"PluginFilter dealloc");
 	
 	[super dealloc];
 }
 
-- (void) initPlugin
+-(void)initPlugin
 {
 	return;
 }
 
-- (void)setMenus {  // Opportunity for plugins to make Menu changes if necessary
+-(void)setMenus {
+   // Opportunity for plugins to make Menu changes if necessary
 	return;
 }
 
-- (long) prepareFilter:(ViewerController*) vC
+-(long)prepareFilter:(ViewerController*) vC
 {
 	NSLog( @"Prepare Filter");
 	viewerController = vC;
@@ -59,49 +60,45 @@
 	return 0;
 }
 
-- (BOOL) isCertifiedForMedicalImaging
+-(BOOL)isCertifiedForMedicalImaging
 {
     return NO;
 }
 
-- (ViewerController*) duplicateCurrent2DViewerWindow
+-(ViewerController*)duplicateCurrent2DViewerWindow
 {
 	return [viewerController copyViewerWindow];
 }
 
-- (NSArray*) viewerControllersList
+-(NSArray*)viewerControllersList
 {
 	return [ViewerController getDisplayed2DViewers];
 }
 
-- (long) filterImage:(NSString*) menuName
+-(long)filterImage:(NSString*)menuName
 {
 	NSLog( @"Error, you should not be here!: %@", menuName);
     return -1;
 }
 
-- (long) processFiles: (NSMutableArray*) files
+-(long)processFiles:(NSMutableArray*)files
 {
 	
 	return 0;
 }
 
-- (id) report: (NSManagedObject*) study action:(NSString*) action
+-(id)report:(NSManagedObject*)study action:(NSString*)action
 {
 	return 0;
 }
 
 // Following stubs are to be subclassed.  Included here to remove compile-time warning messages.
 
-- (id)reportDateForStudy: (NSManagedObject*)study {
-	return nil;
-}
-
-- (BOOL)deleteReportForStudy: (NSManagedObject*)study {
+-(BOOL)deleteReportForStudy:(NSManagedObject*)study {
 	return NO;
 }
 
-- (BOOL)createReportForStudy: (NSManagedObject*)study {
+-(BOOL)createReportForStudy:(NSManagedObject*)study {
 	return NO;
 }
 

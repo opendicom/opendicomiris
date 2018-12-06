@@ -1,23 +1,7 @@
-/*=========================================================================
-  Program:   OsiriX
-
-  Copyright (c) OsiriX Team
-  All rights reserved.
-  Distributed under GNU - LGPL
-  
-  See http://www.osirix-viewer.com/copyright.html for details.
-
-     This software is distributed WITHOUT ANY WARRANTY; without even
-     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-     PURPOSE.
-=========================================================================*/
-
-
 #import <Cocoa/Cocoa.h>
 
 @class DicomSeries, DicomImage;
 
-/** \brief  Core Data Entity for a Study */
 @interface DicomStudy : NSManagedObject
 {
 	BOOL isHidden;
@@ -27,36 +11,38 @@
     BOOL reentry;
 }
 
+//database outline
+@property(nonatomic, retain) NSString* name;
+@property(nonatomic, retain) NSString* patientID;
+@property(nonatomic, retain) NSDate*   dateOfBirth;
+@property(nonatomic, retain) NSString* studyName;
+@property(nonatomic, retain) NSString* modality;
+@property(nonatomic, retain) NSSet*    series;
+@property(nonatomic, retain) NSNumber* numberOfImages;
+@property(nonatomic, retain) NSDate*   date;
 @property(nonatomic, retain) NSString* accessionNumber;
+@property(nonatomic, retain) NSString* institutionName;
+@property(nonatomic, retain) NSString* referringPhysician;
+@property(nonatomic, retain) NSString* performingPhysician;
+@property(nonatomic, retain) NSString* dictateURL;
+@property(nonatomic, retain) NSString* reportURL;
+@property(nonatomic, retain) NSString* id;
 @property(nonatomic, retain) NSString* comment;
+@property(nonatomic, retain) NSString* patientSex;
+@property(nonatomic, retain) NSNumber* stateText;
+@property(nonatomic, retain) NSDate*   dateAdded;
+//not as column
+@property(nonatomic, retain) NSDate*   dateOpened;
+@property(nonatomic, retain) NSNumber* expanded;
+@property(nonatomic, retain) NSNumber* hasDICOM;
+@property(nonatomic, retain) NSNumber* lockedStudy;
+@property(nonatomic, retain) NSString* patientUID;
+@property(nonatomic, retain) NSString* studyInstanceUID;
+@property(nonatomic, retain) NSData*   windowsState;
+@property(nonatomic, retain) NSSet* albums;
 @property(nonatomic, retain) NSString* comment2;
 @property(nonatomic, retain) NSString* comment3;
 @property(nonatomic, retain) NSString* comment4;
-@property(nonatomic, retain) NSDate* date;
-@property(nonatomic, retain) NSDate* dateAdded;
-@property(nonatomic, retain) NSDate* dateOfBirth;
-@property(nonatomic, retain) NSDate* dateOpened;
-@property(nonatomic, retain) NSString* dictateURL;
-@property(nonatomic, retain) NSNumber* expanded;
-@property(nonatomic, retain) NSNumber* hasDICOM;
-@property(nonatomic, retain) NSString* id;
-@property(nonatomic, retain) NSString* institutionName;
-@property(nonatomic, retain) NSNumber* lockedStudy;
-@property(nonatomic, retain) NSString* modality;
-@property(nonatomic, retain) NSString* name;
-@property(nonatomic, retain) NSNumber* numberOfImages;
-@property(nonatomic, retain) NSString* patientID;
-@property(nonatomic, retain) NSString* patientSex;
-@property(nonatomic, retain) NSString* patientUID;
-@property(nonatomic, retain) NSString* performingPhysician;
-@property(nonatomic, retain) NSString* referringPhysician;
-@property(nonatomic, retain) NSString* reportURL;
-@property(nonatomic, retain) NSNumber* stateText;
-@property(nonatomic, retain) NSString* studyInstanceUID;
-@property(nonatomic, retain) NSString* studyName;
-@property(nonatomic, retain) NSData* windowsState;
-@property(nonatomic, retain) NSSet* albums;
-@property(nonatomic, retain) NSSet* series;
 
 + (NSRecursiveLock*) dbModifyLock;
 + (NSString*) soundex: (NSString*) s;

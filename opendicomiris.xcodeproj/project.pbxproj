@@ -7258,8 +7258,6 @@
 		847AFC341A14DFA20067AA07 /* PluginFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginFilter.m; sourceTree = "<group>"; };
 		847AFC351A14DFA20067AA07 /* PluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginManager.h; sourceTree = "<group>"; };
 		847AFC361A14DFA20067AA07 /* PluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginManager.m; sourceTree = "<group>"; };
-		847AFC371A14DFA20067AA07 /* PluginManagerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginManagerController.h; sourceTree = "<group>"; };
-		847AFC381A14DFA20067AA07 /* PluginManagerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginManagerController.m; sourceTree = "<group>"; };
 		847AFC391A14DFA20067AA07 /* pluginSDKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pluginSDKAdditions.h; sourceTree = "<group>"; };
 		847AFC3A1A14DFA20067AA07 /* pluginSDKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = pluginSDKAdditions.m; sourceTree = "<group>"; };
 		847AFC3B1A14DFA20067AA07 /* PMDICOMStoreSCU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PMDICOMStoreSCU.h; sourceTree = "<group>"; };
@@ -13567,8 +13565,6 @@
 				847AFC341A14DFA20067AA07 /* PluginFilter.m */,
 				847AFC351A14DFA20067AA07 /* PluginManager.h */,
 				847AFC361A14DFA20067AA07 /* PluginManager.m */,
-				847AFC371A14DFA20067AA07 /* PluginManagerController.h */,
-				847AFC381A14DFA20067AA07 /* PluginManagerController.m */,
 				847AFC391A14DFA20067AA07 /* pluginSDKAdditions.h */,
 				847AFC3A1A14DFA20067AA07 /* pluginSDKAdditions.m */,
 				847AFC3B1A14DFA20067AA07 /* PMDICOMStoreSCU.h */,

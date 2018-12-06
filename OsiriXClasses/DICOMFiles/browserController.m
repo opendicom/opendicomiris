@@ -267,9 +267,52 @@ static NSArray*	statesArray = nil;
 
 static NSNumberFormatter* decimalNumberFormatter = NULL;
 static volatile BOOL waitForRunningProcess = NO;
+static NSArray *outlineColumnList=nil;
 
+enum outlineColumns {
+   outlineColumnName=0,
+   outlineColumnPatientID,
+   outlineColumnDateOfBirth,
+   outlineColumnStudyName,
+   outlineColumnModality,
+   outlineColumnSeries,
+   outlineColumnNumberOfImages,
+   outlineColumnDate,
+   outlineColumnAccessionNumber,
+   outlineColumnInstitutionName,
+   outlineColumnReferringPhysician,
+   outlineColumnPerformingPhysician,
+   outlineColumnDictateURL,
+   outlineColumnReportURL,
+   outlineColumnId,
+   outlineColumnComment,
+   outlineColumnPatientSex,
+   outlineColumnStateText,
+   outlineColumnDateAdded
+};
 +(void)initialize
 {
+   outlineColumnList=[ @[
+     @"name",
+     @"patientID",
+     @"dateOfBirth",
+     @"studyName",
+     @"modality",
+     @"series",
+     @"numberOfImages",
+     @"date",
+     @"accessionNumber",
+     @"institutionName",
+     @"referringPhysician",
+     @"performingPhysician",
+     @"dictateURL",
+     @"reportURL",
+     @"id",
+     @"comment",
+     @"patientSex",
+     @"stateText",
+     @"dateAdded"
+   ] retain];
 	decimalNumberFormatter = [[NSNumberFormatter alloc] init];
 	[decimalNumberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
 //	[decimalNumberFormatter setLocale: [NSLocale currentLocale]];
@@ -1493,11 +1536,6 @@ static NSConditionLock *threadLock = nil;
 		[filenamesWithoutPlugins removeObjectsInArray: pluginsArray];
 		
 		[self addFilesAndFolderToDatabase: filenamesWithoutPlugins];
-		
-		if( [pluginsArray count] > 0)
-		{
-			[[AppController sharedAppController] installPlugins: pluginsArray];
-		}
 	}
 }
 
@@ -6283,218 +6321,174 @@ static NSConditionLock *threadLock = nil;
 	if( _database == nil) return 0;
 	
 	int returnVal = 0;
-	
-//	[_database lock];
-	
+		
 	if (!item)
 	{
 		returnVal = [outlineViewArray count];
 	}
 	else
 	{
-        #ifndef OSIRIX_LIGHT
-        if( [item isDistant])
-        {
-            @try
-            {
-                if( [item isKindOfClass: [DCMTKStudyQueryNode class]])
-                {
-                    NSArray *children = [item children];
-                    
-                    if( children.count > 0 && [[children lastObject] isKindOfClass: [DCMTKStudyQueryNode class]] == NO && [[children lastObject] isKindOfClass: [DCMTKSeriesQueryNode class]] == NO)
-                        [item purgeChildren];
-                    
-                    if (![item children])
-                    {
-                        [item queryWithValues:nil];
-                        
-                        if( [item children] == nil) // It failed... put an empty children...
-                            [item setChildren: [NSMutableArray array]];
-                    }
-                }
-                return  (item == nil) ? 0 : [[item children] count];
-            }
-            @catch (NSException * e)
-            {
-                N2LogExceptionWithStackTrace(e);
-            }
-            
-            return 0;
-        }
-		else
-        #endif
-        if ([[item valueForKey:@"type"] isEqualToString:@"Image"]) returnVal = 0;
+      if ([[item valueForKey:@"type"] isEqualToString:@"Image"]) returnVal = 0;
 		else if ([[item valueForKey:@"type"] isEqualToString:@"Series"]) returnVal = [[item valueForKey:@"noFiles"] intValue];
 		//else if ([[item valueForKey:@"type"] isEqualToString:@"Study"]) returnVal = [[item valueForKey:@"series"] count];
 		else if ([[item valueForKey:@"type"] isEqualToString:@"Study"]) returnVal = [[item valueForKey:@"imageSeries"] count];
 	}
-	
-//	[_database unlock];
-	
 	return returnVal;
 }
 
 - (id)intOutlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
 {
-	// *********************************************
-	//	PLUGINS
-	// *********************************************
-	
-	if( [[[NSUserDefaults standardUserDefaults] stringForKey:@"REPORTSMODE"] intValue] == 3 && [[tableColumn identifier] isEqualToString:@"reportURL"])
-	{
-		if ([[item valueForKey:@"type"] isEqualToString:@"Study"])
-		{
-			NSBundle *plugin = [[PluginManager reportPlugins] objectForKey: [[NSUserDefaults standardUserDefaults] stringForKey:@"REPORTSPLUGIN"]];
-			
-			if( plugin)
-			{
-				PluginFilter* filter = [[plugin principalClass] filter];
-                
-                [PluginManager startProtectForCrashWithFilter: filter];
-                
-				id returnValue = [filter reportDateForStudy: item];
-                
-				[PluginManager endProtectForCrash];
-                
-                return returnValue;
-                //return [filter report: item action: @"dateReport"];
-			}
-			return nil;
-		}
-		return nil;
-	}
-	else if( [[tableColumn identifier] isEqualToString:@"reportURL"])
-	{
-		if ([[item valueForKey:@"type"] isEqualToString:@"Study"])
-		{
-			if( [item valueForKey:@"reportURL"])
-			{
-				DicomStudy *study = (DicomStudy*) item;
-				DicomImage *report = [study reportImage];
-				
-				if( [report valueForKey: @"date"])
-					return [report valueForKey: @"date"];
-				else
-					return nil;
-			}
-			else return nil;
-		}
-		else return nil;
-	}
-	
-	if( [[tableColumn identifier] isEqualToString:@"stateText"])
-	{
-		if( [[item valueForKey:@"stateText"] intValue] == 0)
-            return nil;
-		else
-            return [item valueForKey:@"stateText"];
-	}
-	
-	if( [[tableColumn identifier] isEqualToString:@"lockedStudy"])
-	{
-		if ([[item valueForKey:@"type"] isEqualToString:@"Study"] == NO) return nil;
-	}
-	
-	if( [[tableColumn identifier] isEqualToString:@"modality"])
-	{
-        return [item valueForKey:@"modality"];
-	}
-	
-	if( [[tableColumn identifier] isEqualToString:@"name"])
-	{
-		if ([[item valueForKey:@"type"] isEqualToString:@"Study"])
-		{
-			NSString	*name;
-			
-			if( [[NSUserDefaults standardUserDefaults] boolForKey: @"HIDEPATIENTNAME"])
-				name = [NSString stringWithString: NSLocalizedString( @"Name hidden", nil)];
-			else
-				name = [item valueForKey:@"name"];
-			
-			if( [item isDistant])
-                return name;
-            
-            return name; // [NSString stringWithFormat: NSLocalizedString( @"%@ (%d series)", nil), name, [[item valueForKey:@"imageSeries"] count]];
-		}
-	}
-	
-	if ([[item valueForKey:@"type"] isEqualToString:@"Study"] == NO)
-	{
-		if( [[tableColumn identifier] isEqualToString:@"dateOfBirth"])			return @"";
-		if( [[tableColumn identifier] isEqualToString:@"referringPhysician"])	return @"";
-		if( [[tableColumn identifier] isEqualToString:@"performingPhysician"])	return @"";
-		if( [[tableColumn identifier] isEqualToString:@"institutionName"])		return @"";
-		if( [[tableColumn identifier] isEqualToString:@"patientID"])			return @"";
-		if( [[tableColumn identifier] isEqualToString:@"yearOld"])				return @"";
-		if( [[tableColumn identifier] isEqualToString:@"accessionNumber"])		return @"";
-        if( [[tableColumn identifier] isEqualToString:@"noSeries"])             return @"";
-	}
-    
-    if( [[tableColumn identifier] isEqualToString:@"yearOld"])
-    {
-        switch ( [[NSUserDefaults standardUserDefaults] integerForKey: @"yearOldDatabaseDisplay"])
-        {
-            case 0:
-                return [item valueForKey: @"yearOld"];
-                break;
-            
-            case 1:
-                return [item valueForKey: @"yearOldAcquisition"];
-                break;
-            
-            case 2:
-            default:
-            {
-                NSString *yearOld = [item valueForKey: @"yearOld"];
-                NSString *yearOldAcquisition = [item valueForKey: @"yearOldAcquisition"];
-                
-                if( [yearOld isEqualToString: yearOldAcquisition])
-                    return yearOld;
-                else
-                {
-                    if( [yearOld hasSuffix: NSLocalizedString( @" y", @"y = year")] && [yearOldAcquisition hasSuffix: NSLocalizedString( @" y", @"y = year")])
-                        return [NSString stringWithFormat: @"%@/%@%@", [yearOld substringToIndex: yearOld.length-[NSLocalizedString( @" y", @"y = year") length]], [yearOldAcquisition substringToIndex: yearOldAcquisition.length-[NSLocalizedString( @" y", @"y = year") length]], NSLocalizedString( @" y", @"y = year")];
+   if ([[item valueForKey:@"type"] isEqualToString:@"Study"])
+   {
+     DicomStudy *study=item;
+      
+     switch ([outlineColumnList indexOfObject:[tableColumn identifier]]) {
+           
+       case outlineColumnName:
+            return study.name;
+           
+        case outlineColumnPatientID:
+           return study.patientID;
+           
+        case outlineColumnDateOfBirth:
+           return study.dateOfBirth;
+           
+        case outlineColumnStudyName:
+           return study.studyName;
+           
+        case outlineColumnModality:
+           return study.modality;
+           
+        case outlineColumnSeries:
+           if(study.series)
+              return [NSString stringWithFormat: @"%d", (int) [study.series count]];
+           return @"";
+           
+        case outlineColumnNumberOfImages:
+           return  [NSString stringWithFormat:@"%d",[study.numberOfImages intValue]];
+           
+        case outlineColumnDate:
+           return study.date;
+           
+        case outlineColumnAccessionNumber:
+           return study.accessionNumber;
+           
+        case outlineColumnInstitutionName:
+           return study.institutionName;
+           
+        case outlineColumnReferringPhysician:
+           return study.referringPhysician;
+           
+        case outlineColumnPerformingPhysician:
+           return study.performingPhysician;
+           
+        case outlineColumnDictateURL:
+           return study.dictateURL;
+           
+        case outlineColumnReportURL:
+           return nil;
+           
+        case outlineColumnId:
+           return study.id;
+           
+        case outlineColumnComment:
+           return study.comment;
+           
+        case outlineColumnPatientSex:
+           return study.patientSex;
+           
+        case outlineColumnStateText:
+           return study.stateText;
+           
+        case outlineColumnDateAdded:
+           return study.dateAdded;
+           
+         default:
+           if( [[tableColumn identifier] isEqualToString:@"yearOld"])
+           {
+              switch ( [[NSUserDefaults standardUserDefaults] integerForKey: @"yearOldDatabaseDisplay"])
+              {
+                 case 0:
+                    return [item valueForKey: @"yearOld"];
+                    break;
+                    
+                 case 1:
+                    return [item valueForKey: @"yearOldAcquisition"];
+                    break;
+                    
+                 case 2:
+                 default:
+                 {
+                    NSString *yearOld = [item valueForKey: @"yearOld"];
+                    NSString *yearOldAcquisition = [item valueForKey: @"yearOldAcquisition"];
+                    
+                    if( [yearOld isEqualToString: yearOldAcquisition])
+                       return yearOld;
                     else
-                        return [NSString stringWithFormat: @"%@/%@", yearOld, yearOldAcquisition];
-                }
-            }
-            break;
-        }
-        
-    }
-    
-    if( [[tableColumn identifier] isEqualToString:@"noSeries"])
-    {
-        if( [item valueForKey:@"imageSeries"])
-            return [NSString stringWithFormat: @"%d", (int) [[item valueForKey:@"imageSeries"] count]];
-        else
-            return @"";
-    }
-    
-    id value = nil;
-    BOOL accessed = NO;
-    
-    if ([[item valueForKey:@"type"] isEqualToString:@"Series"] && [[tableColumn identifier] isEqualToString:@"studyName"])
-    {
-        if( [item isDistant])
-            value = [item valueForKey:@"seriesDescription"];
-        else
-            value = [item valueForKey:@"seriesDescription"];
-        accessed = YES;
-    }
-    
-    if (!accessed)
-        value = [item valueForKey:[tableColumn identifier]];
-    
-    if ([[item valueForKey:@"type"] isEqualToString:@"Series"])
-    {   // only Series
-        if ([[tableColumn identifier] isEqualToString:@"name"] || [[tableColumn identifier] isEqualToString:@"studyName"] || [[tableColumn identifier] isEqualToString:@"modality"])    // only name & description & modality
-        {
-            if (!value || ([value isKindOfClass:[NSString class]] && [(NSString*)value length] == 0))
-                return NSLocalizedString(@"unknown", nil);
-        }
-    }
-	return value;
+                    {
+                       if( [yearOld hasSuffix: NSLocalizedString( @" y", @"y = year")] && [yearOldAcquisition hasSuffix: NSLocalizedString( @" y", @"y = year")])
+                          return [NSString stringWithFormat: @"%@/%@%@", [yearOld substringToIndex: yearOld.length-[NSLocalizedString( @" y", @"y = year") length]], [yearOldAcquisition substringToIndex: yearOldAcquisition.length-[NSLocalizedString( @" y", @"y = year") length]], NSLocalizedString( @" y", @"y = year")];
+                       else
+                          return [NSString stringWithFormat: @"%@/%@", yearOld, yearOldAcquisition];
+                    }
+                 }
+                    break;
+              }
+           }
+
+           return nil;
+      }
+   }
+   else if ([[item valueForKey:@"type"] isEqualToString:@"Series"])
+   {
+      DicomSeries *series=item;
+      
+      switch ([outlineColumnList indexOfObject:[tableColumn identifier]]) {
+            
+         case outlineColumnName:
+            return series.id;
+            
+         case outlineColumnStudyName:
+            return series.name;
+            
+         case outlineColumnModality:
+            return series.modality;
+            
+         case outlineColumnNumberOfImages:
+            return [NSString stringWithFormat:@"%d",[series.numberOfImages intValue]];
+
+         case outlineColumnDate:
+            return series.date;
+
+         case outlineColumnComment:
+            return series.comment;
+
+         case outlineColumnStateText:
+            if ([series.stateText intValue]==0)
+               return @"";
+            return series.stateText;
+
+         case outlineColumnDateAdded:
+            return series.dateAdded ;
+
+/*
+         case outlineColumnPatientID:
+         case outlineColumnDateOfBirth:
+         case outlineColumnSeries:
+         case outlineColumnAccessionNumber:
+         case outlineColumnInstitutionName:
+         case outlineColumnReferringPhysician:
+         case outlineColumnPerformingPhysician:
+         case outlineColumnDictateURL:
+         case outlineColumnReportURL:
+         case outlineColumnId:
+         case outlineColumnPatientSex:
+ */
+         default:
+            return nil;
+      }
+   }
+	return nil;
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView objectValueForTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
@@ -6502,7 +6496,6 @@ static NSConditionLock *threadLock = nil;
 	if (_database == nil)
         return nil;
 	[item retain];
-//	[_database lock];
 	@try {
 		return [self intOutlineView:outlineView objectValueForTableColumn:tableColumn byItem:item];
 	}
@@ -6511,7 +6504,6 @@ static NSConditionLock *threadLock = nil;
 		N2LogExceptionWithStackTrace(e);
 	}
     @finally {
-//        [_database unlock];
         [item release];
     }
 
@@ -6520,12 +6512,8 @@ static NSConditionLock *threadLock = nil;
 
 - (void) setDatabaseValue:(id) object item:(id) item forKey:(NSString*) key
 {
-    if( [item isDistant])
-        return;
-    
-    DatabaseIsEdited = NO;
+   DatabaseIsEdited = NO;
 	
-//	[_database lock];
 	@try {
         if (![_database isLocal])
             [(RemoteDicomDatabase*)_database object:item setValue:object forKey:key];
@@ -6562,17 +6550,9 @@ static NSConditionLock *threadLock = nil;
     }
     @finally
     {
-//        [_database unlock];
     }
 	
 	[_database save:NULL];
-	
-	#ifndef OSIRIX_LIGHT
-	if( [QueryController currentQueryController])
-		[[QueryController currentQueryController] refresh: self];
-	else if( [QueryController currentAutoQueryController])
-		[[QueryController currentAutoQueryController] refresh: self];
-	#endif
 	
 	[databaseOutline reloadData];
 }
@@ -18981,9 +18961,9 @@ static volatile int numberOfThreadsForJPEG = 0;
 	else
 	{
 		// Is it a plugin menu item?
-		if( [[PluginManager pluginsDict] objectForKey: itemIdent] != nil)
+		if( [[PluginManager pluginBundles] objectForKey: itemIdent] != nil)
 		{
-			NSBundle *bundle = [[PluginManager pluginsDict] objectForKey: itemIdent];
+			NSBundle *bundle = [[PluginManager pluginBundles] objectForKey: itemIdent];
 			NSDictionary *info = [bundle infoDictionary];
 			
 			[toolbarItem setLabel: itemIdent];
@@ -19080,7 +19060,7 @@ static volatile int numberOfThreadsForJPEG = 0;
 			 ToggleDrawerToolbarItemIdentifier,
 			 nil];
 	
-	NSArray*		allPlugins = [[PluginManager pluginsDict] allKeys];
+	NSArray*		allPlugins = [[PluginManager pluginBundles] allKeys];
 	NSMutableSet*	pluginsItems = [NSMutableSet setWithCapacity: [allPlugins count]];
 	
 	for( NSString *plugin in allPlugins)
@@ -19088,7 +19068,7 @@ static volatile int numberOfThreadsForJPEG = 0;
 		if ([plugin isEqualToString: @"(-"])
 			continue;
 		
-		NSBundle		*bundle = [[PluginManager pluginsDict] objectForKey: plugin];
+		NSBundle		*bundle = [[PluginManager pluginBundles] objectForKey: plugin];
 		NSDictionary	*info = [bundle infoDictionary];
 		
 		if( [[info objectForKey: @"pluginType"] isEqualToString: @"Database"] == YES)

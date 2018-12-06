@@ -165,7 +165,6 @@ extern AppController* OsiriX;
 - (void) restartSTORESCP; /**< Restart listener (Q/R SCP) */
 - (void) startSTORESCP:(id) sender; /**< Start listener (Q/R SCP) */
 - (void) startSTORESCPTLS:(id) sender; /**< Start TLS listener (Q/R SCP) */
-- (void) installPlugins: (NSArray*) pluginsArray;
 - (BOOL) isStoreSCPRunning;
 
 #pragma mark-

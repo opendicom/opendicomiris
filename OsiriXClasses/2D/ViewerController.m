@@ -7023,9 +7023,9 @@ static ViewerController *draggedController = nil;
     else
 	{
 		// Is it a plugin menu item?
-		if( [[PluginManager pluginsDict] objectForKey: itemIdent] != nil)
+		if( [[PluginManager pluginBundles] objectForKey: itemIdent] != nil)
 		{
-			NSBundle *bundle = [[PluginManager pluginsDict] objectForKey: itemIdent];
+			NSBundle *bundle = [[PluginManager pluginBundles] objectForKey: itemIdent];
 			NSDictionary *info = [bundle infoDictionary];
 			
 			[toolbarItem setLabel: itemIdent];
@@ -7147,7 +7147,7 @@ static ViewerController *draggedController = nil;
 	
 	if([AppController canDisplay12Bit]) [array addObject: LUT12BitToolbarItemIdentifier];
 	
-	NSArray*		allPlugins = [[PluginManager pluginsDict] allKeys];
+	NSArray*		allPlugins = [[PluginManager pluginBundles] allKeys];
 	NSMutableSet*	pluginsItems = [NSMutableSet setWithCapacity: [allPlugins count]];
 	
 	for( NSString* plugin in allPlugins)
@@ -7155,7 +7155,7 @@ static ViewerController *draggedController = nil;
 		if ([plugin isEqualToString: @"(-"])
 			continue;
 		
-		NSBundle		*bundle = [[PluginManager pluginsDict] objectForKey: plugin];
+		NSBundle		*bundle = [[PluginManager pluginBundles] objectForKey: plugin];
 		NSDictionary	*info = [bundle infoDictionary];
 		NSString		*pluginType = [info objectForKey: @"pluginType"];
         

@@ -872,84 +872,6 @@ static NSDate *lastWarningDate = nil;
 	[[[BrowserController currentBrowser] database] unlock]; // was checkIncomingLock
 }
 
-// Plugins installation
-- (void) installPlugins: (NSArray*) pluginsArray
-{	
-	NSMutableString *pluginNames = [NSMutableString string];
-	NSMutableString *replacingPlugins = [NSMutableString string];
-	
-	NSString *replacing = NSLocalizedString(@" will be replaced by ", @"");
-	NSString *strVersion = NSLocalizedString(@" version ", @"");
-	
-	
-	for(NSString *path in pluginsArray)
-	{
-		[pluginNames appendFormat:@"%@, ", [[path lastPathComponent] stringByDeletingPathExtension]];
-		
-		NSString *pluginBundleName = [[path lastPathComponent] stringByDeletingPathExtension];
-		
-		NSURL *bundleURL = [NSURL fileURLWithPath: [PluginManager pathResolved:path]];
-		CFDictionaryRef bundleInfoDict = CFBundleCopyInfoDictionaryInDirectory((CFURLRef)bundleURL);
-		
-		CFStringRef versionString = nil;
-		if(bundleInfoDict != NULL)
-        {
-			versionString = CFDictionaryGetValue(bundleInfoDict, CFSTR("CFBundleVersion"));
-		
-            if( versionString == nil)
-                versionString = CFDictionaryGetValue(bundleInfoDict, CFSTR("CFBundleShortVersionString"));
-        }
-        
-		NSString *pluginBundleVersion = nil;
-		if(versionString != NULL)
-			pluginBundleVersion = (NSString*)versionString;
-		else
-			pluginBundleVersion = @"";		
-		
-		for(NSDictionary *plug in [PluginManager pluginsList])
-		{
-			if([pluginBundleName isEqualToString: [plug objectForKey:@"name"]])
-			{
-				[replacingPlugins appendString: [plug objectForKey:@"name"]];
-				[replacingPlugins appendString: strVersion];
-				[replacingPlugins appendString: [plug objectForKey:@"version"]];
-				[replacingPlugins appendString: replacing];
-				[replacingPlugins appendString: pluginBundleName];
-				[replacingPlugins appendString: strVersion];
-				[replacingPlugins appendString: pluginBundleVersion];
-				[replacingPlugins appendString: @".\n\n"];
-			}
-		}
-		
-		if( bundleInfoDict)
-			CFRelease( bundleInfoDict);
-	}
-	
-	pluginNames = [NSMutableString stringWithString: [pluginNames substringToIndex:[pluginNames length]-2]];
-	if([replacingPlugins length]) replacingPlugins = [NSMutableString stringWithString:[replacingPlugins substringToIndex:[replacingPlugins length]-2]];
-	
-	NSString *msg;
-	NSString *areYouSure = NSLocalizedString(@"Are you sure you want to install", @"");
-	
-	if( [pluginsArray count] == 1)
-		msg = [NSString stringWithFormat:NSLocalizedString(@"%@ the plugin named : %@ ?", @""), areYouSure, pluginNames];
-	else
-		msg = [NSString stringWithFormat:NSLocalizedString(@"%@ the following plugins : %@ ?", @""), areYouSure, pluginNames];
-	
-	if( [replacingPlugins length])
-		msg = [NSString stringWithFormat:@"%@\n\n%@", msg, replacingPlugins];
-	
-	NSInteger res = NSRunAlertPanel(NSLocalizedString(@"Plugins Installation", @""), @"%@", NSLocalizedString(@"OK", @""), NSLocalizedString(@"Cancel", @""), nil, msg);
-	
-	if( res)
-	{
-		for( NSString *path in pluginsArray)
-            [PluginManager installPluginFromPath: path];
-		
-		[PluginManager setMenus: filtersMenu :roisMenu :othersMenu :dbMenu];
-		
-	}
-}
 
 - (NSString *)computerName
 {
@@ -3459,7 +3381,8 @@ static BOOL _hasMacOSXSnowLeopard=NO;
 	#endif
 	#endif
 	
-	[PluginManager setMenus: filtersMenu :roisMenu :othersMenu :dbMenu];
+   //passes IBOutlets to be filled to PluginManager
+	[PluginManager setMenus:filtersMenu :roisMenu :othersMenu :dbMenu];
     
 	appController = self;
 	[self initDCMTK];
@@ -3479,30 +3402,6 @@ static BOOL _hasMacOSXSnowLeopard=NO;
 		if(XMLRPCServer == nil) XMLRPCServer = [[XMLRPCInterface alloc] init];
 	}
 	#endif
-	
-//	#ifndef OSIRIX_LIGHT
-//	#ifndef MACAPPSTORE
-//	if( [[NSUserDefaults standardUserDefaults] boolForKey: @"displayGrowlNotification"])
-//	{
-//        // If Growl crashed before...
-//        NSString *GrowlCrashed = @"/tmp/OsiriXGrowlCrashed";
-//        
-//        if( [[NSFileManager defaultManager] fileExistsAtPath: GrowlCrashed])
-//        {
-//            [[NSUserDefaults standardUserDefaults] setBool: NO forKey: @"displayGrowlNotification"];
-//            [[NSFileManager defaultManager] removeItemAtPath: GrowlCrashed error: nil];
-//        }
-//        else 
-//        {
-//            [GrowlCrashed writeToFile: GrowlCrashed atomically: YES encoding: NSUTF8StringEncoding error: nil];
-//            
-//            [GrowlApplicationBridge setGrowlDelegate: self];
-//            
-//            [[NSFileManager defaultManager] removeItemAtPath: GrowlCrashed error: nil];
-//        }
-//	}
-//	#endif
-//	#endif
 	
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver: self

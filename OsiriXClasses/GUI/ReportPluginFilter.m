@@ -23,8 +23,5 @@
 - (BOOL)deleteReportForStudy:(id)study{
 	return NO;
 }
-- (NSDate *)reportDateForStudy:(id)study{
-	return nil;
-}
 
 @end
