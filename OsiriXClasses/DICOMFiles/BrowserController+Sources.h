@@ -12,7 +12,7 @@
  PURPOSE.
  =========================================================================*/
 
-#import "browserController.h"
+#import "BrowserController.h"
 
 @class DataNodeIdentifier, DicomDatabase;
 

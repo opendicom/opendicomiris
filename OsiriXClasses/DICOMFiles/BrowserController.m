@@ -36,7 +36,7 @@
 #import "AppController.h"
 #import "dicomData.h"
 #import "BrowserController.h"
-#import "viewerController.h"
+#import "ViewerController.h"
 #import "PluginFilter.h"
 #import "ReportPluginFilter.h"
 #import "dicomFile.h"

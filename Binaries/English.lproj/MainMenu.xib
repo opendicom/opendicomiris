@@ -2645,17 +2645,6 @@ CA
                                                                         <rect key="frame" x="0.0" y="0.0" width="386" height="402"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
-                                                                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" preferredMaxLayoutWidth="366" translatesAutoresizingMaskIntoConstraints="NO" id="14751">
-                                                                                <rect key="frame" x="8" y="205" width="370" height="21"/>
-                                                                                <textFieldCell key="cell" controlSize="mini" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Multiline Label" id="14752">
-                                                                                    <font key="font" metaFont="system" size="20"/>
-                                                                                    <color key="textColor" name="disabledControlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                                                </textFieldCell>
-                                                                                <connections>
-                                                                                    <binding destination="898" name="value" keyPath="self.distantStudyMessage" id="14753"/>
-                                                                                </connections>
-                                                                            </textField>
                                                                             <scrollView misplaced="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12410">
                                                                                 <rect key="frame" x="2" y="31" width="384" height="371"/>
                                                                                 <clipView key="contentView" id="mpo-d1-Wrk">
@@ -2766,13 +2755,9 @@ CA
                                                                         </subviews>
                                                                         <constraints>
                                                                             <constraint firstAttribute="trailing" secondItem="12410" secondAttribute="trailing" id="17F-7p-RR3"/>
-                                                                            <constraint firstAttribute="centerY" secondItem="14751" secondAttribute="centerY" id="Mfs-ed-zxO"/>
                                                                             <constraint firstItem="12410" firstAttribute="top" secondItem="14635" secondAttribute="top" id="if4-Ba-s97"/>
                                                                             <constraint firstItem="12410" firstAttribute="leading" secondItem="14635" secondAttribute="leading" constant="2" id="k2h-KT-yl5"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="14751" secondAttribute="trailing" constant="10" id="nEU-Ji-S03"/>
                                                                             <constraint firstAttribute="bottom" secondItem="12410" secondAttribute="bottom" id="oqm-eG-DKf"/>
-                                                                            <constraint firstItem="14751" firstAttribute="centerX" secondItem="14635" secondAttribute="centerX" id="rxD-4n-ZZr"/>
-                                                                            <constraint firstItem="14751" firstAttribute="leading" secondItem="14635" secondAttribute="leading" constant="10" id="tF0-Ig-GKw"/>
                                                                         </constraints>
                                                                     </customView>
                                                                 </subviews>

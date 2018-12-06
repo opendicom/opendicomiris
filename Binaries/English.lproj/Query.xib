@@ -56,8 +56,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="928" height="672"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <customView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1170" customClass="SFAuthorizationView">
-                        <rect key="frame" x="749" y="611" width="179" height="60"/>
+                    <customView hidden="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1170" customClass="SFAuthorizationView">
+                        <rect key="frame" x="870" y="622" width="51" height="41"/>
                     </customView>
                     <tabView controlSize="mini" translatesAutoresizingMaskIntoConstraints="NO" id="657">
                         <rect key="frame" x="0.0" y="612" width="928" height="62"/>
@@ -376,16 +376,325 @@
                                 <rect key="frame" x="0.0" y="0.0" width="954" height="165"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <box boxType="secondary" borderType="bezel" title="Title" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="549">
-                                        <rect key="frame" x="823" y="0.0" width="114" height="167"/>
+                                    <box boxType="secondary" borderType="bezel" title="Title" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="717">
+                                        <rect key="frame" x="17" y="0.0" width="449" height="167"/>
+                                        <view key="contentView" id="dQt-D1-XnD">
+                                            <rect key="frame" x="3" y="3" width="443" height="161"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="641">
+                                                    <rect key="frame" x="6" y="140" width="69" height="17"/>
+                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="DICOM Nodes:" id="753">
+                                                        <font key="font" metaFont="miniSystem"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <scrollView misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="0.0" verticalLineScroll="19" verticalPageScroll="0.0" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="690">
+                                                    <rect key="frame" x="6" y="6" width="361" height="139"/>
+                                                    <clipView key="contentView" drawsBackground="NO" id="Gmi-iM-SZh">
+                                                        <rect key="frame" x="1" y="0.0" width="359" height="127"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" multipleSelection="NO" emptySelection="NO" autosaveName="srcsTable" headerView="VCg-wO-Khi" id="691" customClass="sourcesTableView">
+                                                                <rect key="frame" x="0.0" y="0.0" width="392" height="102"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <size key="intercellSpacing" width="3" height="2"/>
+                                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                                                <tableColumns>
+                                                                    <tableColumn identifier="activated" editable="NO" width="20" minWidth="20" maxWidth="20" id="693">
+                                                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center">
+                                                                            <font key="font" metaFont="smallSystem"/>
+                                                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        </tableHeaderCell>
+                                                                        <buttonCell key="dataCell" type="check" bezelStyle="regularSquare" imagePosition="only" alignment="center" controlSize="small" inset="2" id="707">
+                                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                            <font key="font" metaFont="cellTitle"/>
+                                                                            <connections>
+                                                                                <binding destination="696" name="value" keyPath="selection.activated" id="708"/>
+                                                                            </connections>
+                                                                        </buttonCell>
+                                                                        <connections>
+                                                                            <binding destination="696" name="value" keyPath="arrangedObjects.activated" id="698"/>
+                                                                        </connections>
+                                                                    </tableColumn>
+                                                                    <tableColumn identifier="name" editable="NO" width="60" minWidth="60" maxWidth="200" id="692">
+                                                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Name">
+                                                                            <font key="font" metaFont="smallSystem"/>
+                                                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        </tableHeaderCell>
+                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="775">
+                                                                            <font key="font" metaFont="cellTitle"/>
+                                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                        </textFieldCell>
+                                                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                                        <connections>
+                                                                            <binding destination="696" name="value" keyPath="arrangedObjects.name" id="699"/>
+                                                                        </connections>
+                                                                    </tableColumn>
+                                                                    <tableColumn identifier="AETitle" editable="NO" width="140" minWidth="140" maxWidth="140" id="709">
+                                                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="AETitle">
+                                                                            <font key="font" metaFont="smallSystem"/>
+                                                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
+                                                                        </tableHeaderCell>
+                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="777">
+                                                                            <font key="font" metaFont="cellTitle"/>
+                                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                        </textFieldCell>
+                                                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                                        <connections>
+                                                                            <binding destination="696" name="value" keyPath="arrangedObjects.AETitle" id="713">
+                                                                                <dictionary key="options">
+                                                                                    <integer key="NSConditionallySetsEditable" value="1"/>
+                                                                                </dictionary>
+                                                                            </binding>
+                                                                        </connections>
+                                                                    </tableColumn>
+                                                                    <tableColumn identifier="AddressAndPort" editable="NO" width="160" minWidth="160" maxWidth="200" id="701">
+                                                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Address">
+                                                                            <font key="font" metaFont="smallSystem"/>
+                                                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                                                        </tableHeaderCell>
+                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="776">
+                                                                            <font key="font" metaFont="cellTitle"/>
+                                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                        </textFieldCell>
+                                                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                                                        <connections>
+                                                                            <binding destination="696" name="value" keyPath="arrangedObjects.AddressAndPort" id="702"/>
+                                                                        </connections>
+                                                                    </tableColumn>
+                                                                </tableColumns>
+                                                                <connections>
+                                                                    <binding destination="696" name="content" keyPath="arrangedObjects" id="697"/>
+                                                                    <outlet property="dataSource" destination="696" id="715"/>
+                                                                    <outlet property="delegate" destination="696" id="716"/>
+                                                                </connections>
+                                                            </tableView>
+                                                        </subviews>
+                                                        <nil key="backgroundColor"/>
+                                                    </clipView>
+                                                    <scroller key="horizontalScroller" verticalHuggingPriority="750" controlSize="small" horizontal="YES" id="782">
+                                                        <rect key="frame" x="1" y="127" width="359" height="11"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </scroller>
+                                                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" controlSize="small" horizontal="NO" id="781">
+                                                        <rect key="frame" x="89" y="17" width="11" height="72"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </scroller>
+                                                    <tableHeaderView key="headerView" id="VCg-wO-Khi">
+                                                        <rect key="frame" x="0.0" y="0.0" width="392" height="25"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </tableHeaderView>
+                                                </scrollView>
+                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="727">
+                                                    <rect key="frame" x="226" y="144" width="143" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="zqz-kX-Y2v"/>
+                                                    </constraints>
+                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Drag sources into priority order" id="754">
+                                                        <font key="font" metaFont="miniSystem"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="690" firstAttribute="leading" secondItem="717" secondAttribute="leading" constant="6" id="3m2-pS-Ytw"/>
+                                            <constraint firstItem="690" firstAttribute="centerX" secondItem="717" secondAttribute="centerX" id="CYc-hj-xVc"/>
+                                            <constraint firstAttribute="bottom" secondItem="690" secondAttribute="bottom" constant="5" id="HHV-zO-28d"/>
+                                            <constraint firstItem="641" firstAttribute="top" secondItem="717" secondAttribute="top" constant="5" id="OV2-iK-ozn"/>
+                                            <constraint firstAttribute="trailing" secondItem="727" secondAttribute="trailing" constant="7" id="QQ0-o2-iyZ"/>
+                                            <constraint firstItem="690" firstAttribute="top" secondItem="717" secondAttribute="top" constant="17" id="Xfc-hk-s9v"/>
+                                            <constraint firstItem="641" firstAttribute="leading" secondItem="717" secondAttribute="leading" constant="8" id="dQt-hS-t87"/>
+                                            <constraint firstItem="641" firstAttribute="top" secondItem="727" secondAttribute="top" id="fjT-XT-ZnC"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="sUc-8I-IEA"/>
+                                            <constraint firstItem="727" firstAttribute="centerY" secondItem="641" secondAttribute="centerY" id="swn-No-89s"/>
+                                        </constraints>
+                                    </box>
+                                    <box misplaced="YES" boxType="secondary" borderType="bezel" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="551">
+                                        <rect key="frame" x="399" y="0.0" width="342" height="167"/>
+                                        <view key="contentView" id="byw-pg-bdt">
+                                            <rect key="frame" x="3" y="3" width="336" height="161"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <matrix verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="515">
+                                                    <rect key="frame" x="5" y="1" width="344" height="158"/>
+                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                    <size key="cellSize" width="112" height="18"/>
+                                                    <size key="intercellSpacing" width="4" height="2"/>
+                                                    <buttonCell key="prototype" type="radio" title="Last 3 hours" imagePosition="left" alignment="left" controlSize="small" tag="103" inset="2" id="1099">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                    </buttonCell>
+                                                    <cells>
+                                                        <column>
+                                                            <buttonCell type="radio" title="Any date" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" state="on" inset="2" id="603">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Today AM" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="10" inset="2" id="605">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Today PM" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="11" inset="2" id="607">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Today" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="1" inset="2" id="609">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Yesterday" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="2" inset="2" id="611">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Before Yesterday" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="9" inset="2" id="817">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Last 2 days" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="7" inset="2" id="1085">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Last 7 days" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="3" inset="2" id="1095">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                        </column>
+                                                        <column>
+                                                            <buttonCell type="radio" title="Last month" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="4" inset="2" id="604">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Last 3 months" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="8" inset="2" id="606">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="On:" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="6" inset="2" id="608">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Between:" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="5" inset="2" id="610">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Radio" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" enabled="NO" tag="-1" transparent="YES" inset="2" id="612">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Today PM" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" enabled="NO" tag="-4" transparent="YES" inset="2" id="816">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Radio" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" enabled="NO" tag="-3" transparent="YES" inset="2" id="1084">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Radio" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" enabled="NO" tag="-2" transparent="YES" inset="2" id="1096">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                        </column>
+                                                        <column>
+                                                            <buttonCell type="radio" title="Last 30 min" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="230" inset="2" id="1008">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Last 1 hour" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="101" inset="2" id="1013">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Last 2 hours" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="102" inset="2" id="1007">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Last 3 hours" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="103" inset="2" id="1014">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Last 6 hours" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="106" inset="2" id="1010">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Last 8 hours" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="108" inset="2" id="1011">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Last 12 hours" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="112" inset="2" id="1083">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                            <buttonCell type="radio" title="Last 24 hours" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="124" inset="2" id="1097">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="smallSystem"/>
+                                                            </buttonCell>
+                                                        </column>
+                                                    </cells>
+                                                    <connections>
+                                                        <action selector="setDateQuery:" target="-2" id="635"/>
+                                                        <binding destination="832" name="enabled" keyPath="values.allow_qr_study_date" id="1070"/>
+                                                    </connections>
+                                                </matrix>
+                                                <datePicker verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="969">
+                                                    <rect key="frame" x="121" y="55" width="104" height="27"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="101" id="VLO-b4-EXk"/>
+                                                    </constraints>
+                                                    <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="970">
+                                                        <font key="font" metaFont="system"/>
+                                                        <date key="date" timeIntervalSinceReferenceDate="-595929600">
+                                                            <!--1982-02-12 16:00:00 +0000-->
+                                                        </date>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    </datePickerCell>
+                                                </datePicker>
+                                                <datePicker verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="971">
+                                                    <rect key="frame" x="121" y="24" width="104" height="27"/>
+                                                    <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="972">
+                                                        <font key="font" metaFont="system"/>
+                                                        <date key="date" timeIntervalSinceReferenceDate="-595929600">
+                                                            <!--1982-02-12 16:00:00 +0000-->
+                                                        </date>
+                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    </datePickerCell>
+                                                </datePicker>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="343" id="69T-Nf-UxD"/>
+                                            <constraint firstAttribute="trailing" secondItem="515" secondAttribute="trailing" constant="-3" id="9cJ-YZ-eRo"/>
+                                            <constraint firstItem="969" firstAttribute="leading" secondItem="971" secondAttribute="leading" id="Dgj-MI-Ysg"/>
+                                            <constraint firstItem="969" firstAttribute="top" secondItem="551" secondAttribute="top" constant="84" id="ETr-KF-DtP"/>
+                                            <constraint firstItem="515" firstAttribute="leading" secondItem="551" secondAttribute="leading" constant="5" id="Jcb-ZC-q7O"/>
+                                            <constraint firstItem="971" firstAttribute="trailing" secondItem="969" secondAttribute="trailing" id="MAm-MB-fJj"/>
+                                            <constraint firstItem="971" firstAttribute="top" secondItem="969" secondAttribute="bottom" constant="8" symbolic="YES" id="ORB-tu-lee"/>
+                                            <constraint firstAttribute="centerX" secondItem="971" secondAttribute="centerX" id="TTd-L9-SBs"/>
+                                            <constraint firstItem="515" firstAttribute="top" secondItem="551" secondAttribute="top" constant="3" id="X3M-1C-DST"/>
+                                            <constraint firstAttribute="centerX" secondItem="969" secondAttribute="centerX" id="aa2-qQ-IkF"/>
+                                        </constraints>
+                                    </box>
+                                    <box misplaced="YES" boxType="secondary" borderType="bezel" title="Title" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="549">
+                                        <rect key="frame" x="756" y="0.0" width="114" height="167"/>
                                         <view key="contentView" id="E10-Ij-DQG">
                                             <rect key="frame" x="3" y="3" width="108" height="161"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <matrix verticalHuggingPriority="750" mode="highlight" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="528">
-                                                    <rect key="frame" x="5" y="8" width="112" height="149"/>
+                                                <matrix verticalHuggingPriority="750" misplaced="YES" mode="highlight" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="528">
+                                                    <rect key="frame" x="-4" y="0.0" width="112" height="149"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                    <size key="cellSize" width="54" height="14"/>
+                                                    <size key="cellSize" width="48" height="14"/>
                                                     <size key="intercellSpacing" width="4" height="1"/>
                                                     <buttonCell key="prototype" type="radio" title="Radio" imagePosition="left" alignment="left" controlSize="small" inset="2" id="763">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -488,315 +797,6 @@
                                             <constraint firstAttribute="trailing" secondItem="528" secondAttribute="trailing" constant="-9" id="XO3-NK-cFw"/>
                                             <constraint firstItem="528" firstAttribute="top" secondItem="549" secondAttribute="top" constant="5" id="l2f-wr-iox"/>
                                             <constraint firstAttribute="width" constant="108" id="o2J-N2-H60"/>
-                                        </constraints>
-                                    </box>
-                                    <box boxType="secondary" borderType="bezel" title="Title" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="717">
-                                        <rect key="frame" x="17" y="0.0" width="380" height="167"/>
-                                        <view key="contentView" id="dQt-D1-XnD">
-                                            <rect key="frame" x="3" y="3" width="374" height="161"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <subviews>
-                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="641">
-                                                    <rect key="frame" x="6" y="140" width="69" height="17"/>
-                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="DICOM Nodes:" id="753">
-                                                        <font key="font" metaFont="miniSystem"/>
-                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                </textField>
-                                                <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="0.0" verticalLineScroll="19" verticalPageScroll="0.0" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="690">
-                                                    <rect key="frame" x="6" y="6" width="362" height="139"/>
-                                                    <clipView key="contentView" drawsBackground="NO" id="Gmi-iM-SZh">
-                                                        <rect key="frame" x="1" y="0.0" width="360" height="127"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                        <subviews>
-                                                            <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" alternatingRowBackgroundColors="YES" multipleSelection="NO" emptySelection="NO" autosaveName="srcsTable" headerView="VCg-wO-Khi" id="691" customClass="sourcesTableView">
-                                                                <rect key="frame" x="0.0" y="0.0" width="392" height="102"/>
-                                                                <autoresizingMask key="autoresizingMask"/>
-                                                                <size key="intercellSpacing" width="3" height="2"/>
-                                                                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                                                                <tableColumns>
-                                                                    <tableColumn identifier="activated" editable="NO" width="20" minWidth="20" maxWidth="20" id="693">
-                                                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="center">
-                                                                            <font key="font" metaFont="smallSystem"/>
-                                                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                                            <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        </tableHeaderCell>
-                                                                        <buttonCell key="dataCell" type="check" bezelStyle="regularSquare" imagePosition="only" alignment="center" controlSize="small" inset="2" id="707">
-                                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                            <font key="font" metaFont="cellTitle"/>
-                                                                            <connections>
-                                                                                <binding destination="696" name="value" keyPath="selection.activated" id="708"/>
-                                                                            </connections>
-                                                                        </buttonCell>
-                                                                        <connections>
-                                                                            <binding destination="696" name="value" keyPath="arrangedObjects.activated" id="698"/>
-                                                                        </connections>
-                                                                    </tableColumn>
-                                                                    <tableColumn identifier="name" editable="NO" width="60" minWidth="60" maxWidth="200" id="692">
-                                                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Name">
-                                                                            <font key="font" metaFont="smallSystem"/>
-                                                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                                            <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        </tableHeaderCell>
-                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="775">
-                                                                            <font key="font" metaFont="cellTitle"/>
-                                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                        </textFieldCell>
-                                                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                                        <connections>
-                                                                            <binding destination="696" name="value" keyPath="arrangedObjects.name" id="699"/>
-                                                                        </connections>
-                                                                    </tableColumn>
-                                                                    <tableColumn identifier="AETitle" editable="NO" width="140" minWidth="140" maxWidth="140" id="709">
-                                                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="AETitle">
-                                                                            <font key="font" metaFont="smallSystem"/>
-                                                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                                            <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        </tableHeaderCell>
-                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="777">
-                                                                            <font key="font" metaFont="cellTitle"/>
-                                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                        </textFieldCell>
-                                                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                                        <connections>
-                                                                            <binding destination="696" name="value" keyPath="arrangedObjects.AETitle" id="713">
-                                                                                <dictionary key="options">
-                                                                                    <integer key="NSConditionallySetsEditable" value="1"/>
-                                                                                </dictionary>
-                                                                            </binding>
-                                                                        </connections>
-                                                                    </tableColumn>
-                                                                    <tableColumn identifier="AddressAndPort" editable="NO" width="160" minWidth="160" maxWidth="200" id="701">
-                                                                        <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="Address">
-                                                                            <font key="font" metaFont="smallSystem"/>
-                                                                            <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                                                            <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
-                                                                        </tableHeaderCell>
-                                                                        <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="776">
-                                                                            <font key="font" metaFont="cellTitle"/>
-                                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                        </textFieldCell>
-                                                                        <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                                                                        <connections>
-                                                                            <binding destination="696" name="value" keyPath="arrangedObjects.AddressAndPort" id="702"/>
-                                                                        </connections>
-                                                                    </tableColumn>
-                                                                </tableColumns>
-                                                                <connections>
-                                                                    <binding destination="696" name="content" keyPath="arrangedObjects" id="697"/>
-                                                                    <outlet property="dataSource" destination="696" id="715"/>
-                                                                    <outlet property="delegate" destination="696" id="716"/>
-                                                                </connections>
-                                                            </tableView>
-                                                        </subviews>
-                                                        <nil key="backgroundColor"/>
-                                                    </clipView>
-                                                    <scroller key="horizontalScroller" verticalHuggingPriority="750" controlSize="small" horizontal="YES" id="782">
-                                                        <rect key="frame" x="1" y="127" width="360" height="11"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
-                                                    </scroller>
-                                                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" controlSize="small" horizontal="NO" id="781">
-                                                        <rect key="frame" x="89" y="17" width="11" height="72"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
-                                                    </scroller>
-                                                    <tableHeaderView key="headerView" id="VCg-wO-Khi">
-                                                        <rect key="frame" x="0.0" y="0.0" width="392" height="25"/>
-                                                        <autoresizingMask key="autoresizingMask"/>
-                                                    </tableHeaderView>
-                                                </scrollView>
-                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="727">
-                                                    <rect key="frame" x="150" y="140" width="219" height="17"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="17" id="zqz-kX-Y2v"/>
-                                                    </constraints>
-                                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Drag sources into the priority order for retrieving" id="754">
-                                                        <font key="font" metaFont="miniSystem"/>
-                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                    </textFieldCell>
-                                                </textField>
-                                            </subviews>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstItem="690" firstAttribute="leading" secondItem="717" secondAttribute="leading" constant="6" id="3m2-pS-Ytw"/>
-                                            <constraint firstItem="690" firstAttribute="centerX" secondItem="717" secondAttribute="centerX" id="CYc-hj-xVc"/>
-                                            <constraint firstAttribute="bottom" secondItem="690" secondAttribute="bottom" constant="5" id="HHV-zO-28d"/>
-                                            <constraint firstItem="641" firstAttribute="top" secondItem="717" secondAttribute="top" constant="5" id="OV2-iK-ozn"/>
-                                            <constraint firstAttribute="trailing" secondItem="727" secondAttribute="trailing" constant="7" id="QQ0-o2-iyZ"/>
-                                            <constraint firstItem="690" firstAttribute="top" secondItem="717" secondAttribute="top" constant="17" id="Xfc-hk-s9v"/>
-                                            <constraint firstItem="641" firstAttribute="leading" secondItem="717" secondAttribute="leading" constant="8" id="dQt-hS-t87"/>
-                                            <constraint firstItem="641" firstAttribute="top" secondItem="727" secondAttribute="top" id="fjT-XT-ZnC"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="sUc-8I-IEA"/>
-                                            <constraint firstItem="727" firstAttribute="centerY" secondItem="641" secondAttribute="centerY" id="swn-No-89s"/>
-                                        </constraints>
-                                    </box>
-                                    <box boxType="secondary" borderType="bezel" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="551">
-                                        <rect key="frame" x="399" y="0.0" width="421" height="167"/>
-                                        <view key="contentView" id="byw-pg-bdt">
-                                            <rect key="frame" x="3" y="3" width="415" height="161"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <subviews>
-                                                <matrix verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="515">
-                                                    <rect key="frame" x="5" y="1" width="413" height="158"/>
-                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                    <size key="cellSize" width="135" height="18"/>
-                                                    <size key="intercellSpacing" width="4" height="2"/>
-                                                    <buttonCell key="prototype" type="radio" title="Last 3 hours" imagePosition="left" alignment="left" controlSize="small" tag="103" inset="2" id="1099">
-                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                        <font key="font" metaFont="smallSystem"/>
-                                                    </buttonCell>
-                                                    <cells>
-                                                        <column>
-                                                            <buttonCell type="radio" title="Any date" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" state="on" inset="2" id="603">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Today AM" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="10" inset="2" id="605">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Today PM" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="11" inset="2" id="607">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Today" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="1" inset="2" id="609">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Yesterday" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="2" inset="2" id="611">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Day Before Yesterday" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="9" inset="2" id="817">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Last 2 days" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="7" inset="2" id="1085">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Last 7 days" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="3" inset="2" id="1095">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                        </column>
-                                                        <column>
-                                                            <buttonCell type="radio" title="Last month" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="4" inset="2" id="604">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Last 3 months" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="8" inset="2" id="606">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="On:" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="6" inset="2" id="608">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Between:" bezelStyle="regularSquare" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="5" inset="2" id="610">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Radio" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" enabled="NO" tag="-1" transparent="YES" inset="2" id="612">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Today PM" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" enabled="NO" tag="-4" transparent="YES" inset="2" id="816">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Radio" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" enabled="NO" tag="-3" transparent="YES" inset="2" id="1084">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Radio" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" enabled="NO" tag="-2" transparent="YES" inset="2" id="1096">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                        </column>
-                                                        <column>
-                                                            <buttonCell type="radio" title="Last 30 min" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="230" inset="2" id="1008">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Last 1 hour" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="101" inset="2" id="1013">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Last 2 hours" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="102" inset="2" id="1007">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Last 3 hours" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="103" inset="2" id="1014">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Last 6 hours" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="106" inset="2" id="1010">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Last 8 hours" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="108" inset="2" id="1011">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Last 12 hours" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="112" inset="2" id="1083">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                            <buttonCell type="radio" title="Last 24 hours" imagePosition="left" alignment="left" controlSize="small" scrollable="YES" lineBreakMode="clipping" tag="124" inset="2" id="1097">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="smallSystem"/>
-                                                            </buttonCell>
-                                                        </column>
-                                                    </cells>
-                                                    <connections>
-                                                        <action selector="setDateQuery:" target="-2" id="635"/>
-                                                        <binding destination="832" name="enabled" keyPath="values.allow_qr_study_date" id="1070"/>
-                                                    </connections>
-                                                </matrix>
-                                                <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="969">
-                                                    <rect key="frame" x="157" y="55" width="104" height="27"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="101" id="VLO-b4-EXk"/>
-                                                    </constraints>
-                                                    <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="970">
-                                                        <font key="font" metaFont="system"/>
-                                                        <date key="date" timeIntervalSinceReferenceDate="-595929600">
-                                                            <!--1982-02-12 16:00:00 +0000-->
-                                                        </date>
-                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                    </datePickerCell>
-                                                </datePicker>
-                                                <datePicker verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="971">
-                                                    <rect key="frame" x="157" y="24" width="104" height="27"/>
-                                                    <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="972">
-                                                        <font key="font" metaFont="system"/>
-                                                        <date key="date" timeIntervalSinceReferenceDate="-595929600">
-                                                            <!--1982-02-12 16:00:00 +0000-->
-                                                        </date>
-                                                        <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                    </datePickerCell>
-                                                </datePicker>
-                                            </subviews>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="343" id="69T-Nf-UxD"/>
-                                            <constraint firstAttribute="trailing" secondItem="515" secondAttribute="trailing" constant="-3" id="9cJ-YZ-eRo"/>
-                                            <constraint firstItem="969" firstAttribute="leading" secondItem="971" secondAttribute="leading" id="Dgj-MI-Ysg"/>
-                                            <constraint firstItem="969" firstAttribute="top" secondItem="551" secondAttribute="top" constant="84" id="ETr-KF-DtP"/>
-                                            <constraint firstItem="515" firstAttribute="leading" secondItem="551" secondAttribute="leading" constant="5" id="Jcb-ZC-q7O"/>
-                                            <constraint firstItem="971" firstAttribute="trailing" secondItem="969" secondAttribute="trailing" id="MAm-MB-fJj"/>
-                                            <constraint firstItem="971" firstAttribute="top" secondItem="969" secondAttribute="bottom" constant="8" symbolic="YES" id="ORB-tu-lee"/>
-                                            <constraint firstAttribute="centerX" secondItem="971" secondAttribute="centerX" id="TTd-L9-SBs"/>
-                                            <constraint firstItem="515" firstAttribute="top" secondItem="551" secondAttribute="top" constant="3" id="X3M-1C-DST"/>
-                                            <constraint firstAttribute="centerX" secondItem="969" secondAttribute="centerX" id="aa2-qQ-IkF"/>
                                         </constraints>
                                     </box>
                                 </subviews>
@@ -930,7 +930,7 @@
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
-                                                            <textFieldCell key="dataCell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" alignment="center" title="1/4/76" id="773">
+                                                            <textFieldCell key="dataCell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" alignment="center" title="1976-01-04" id="773">
                                                                 <dateFormatter key="formatter" dateStyle="short" id="647"/>
                                                                 <font key="font" metaFont="system"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -987,7 +987,7 @@
                                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                             </tableHeaderCell>
-                                                            <textFieldCell key="dataCell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" alignment="center" title="1/4/76" id="767">
+                                                            <textFieldCell key="dataCell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" alignment="center" title="1976-01-04" id="767">
                                                                 <dateFormatter key="formatter" dateStyle="short" id="509"/>
                                                                 <font key="font" metaFont="system"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>

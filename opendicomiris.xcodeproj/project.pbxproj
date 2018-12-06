@@ -533,8 +533,8 @@
 		847AFDF21A14DFA40067AA07 /* BrowserController+Sources+Copy.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB461A14DFA00067AA07 /* BrowserController+Sources+Copy.m */; };
 		847AFDF31A14DFA40067AA07 /* BrowserController+Sources.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFB471A14DFA00067AA07 /* BrowserController+Sources.h */; };
 		847AFDF41A14DFA40067AA07 /* BrowserController+Sources.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB481A14DFA00067AA07 /* BrowserController+Sources.m */; };
-		847AFDF51A14DFA40067AA07 /* browserController.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFB491A14DFA00067AA07 /* browserController.h */; };
-		847AFDF61A14DFA40067AA07 /* browserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB4A1A14DFA00067AA07 /* browserController.m */; };
+		847AFDF51A14DFA40067AA07 /* BrowserController.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFB491A14DFA00067AA07 /* BrowserController.h */; };
+		847AFDF61A14DFA40067AA07 /* BrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB4A1A14DFA00067AA07 /* BrowserController.m */; };
 		847AFDF71A14DFA40067AA07 /* BrowserControllerDCMTKCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFB4B1A14DFA00067AA07 /* BrowserControllerDCMTKCategory.h */; };
 		847AFDF81A14DFA40067AA07 /* BrowserControllerDCMTKCategory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB4C1A14DFA00067AA07 /* BrowserControllerDCMTKCategory.mm */; };
 		847AFDF91A14DFA40067AA07 /* BrowserMatrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFB4D1A14DFA00067AA07 /* BrowserMatrix.h */; };
@@ -575,8 +575,8 @@
 		847AFE1E1A14DFA40067AA07 /* DicomDirParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB721A14DFA00067AA07 /* DicomDirParser.m */; };
 		847AFE1F1A14DFA40067AA07 /* DICOMExport.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFB731A14DFA00067AA07 /* DICOMExport.h */; };
 		847AFE201A14DFA40067AA07 /* DICOMExport.mm in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB741A14DFA00067AA07 /* DICOMExport.mm */; };
-		847AFE211A14DFA40067AA07 /* dicomFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFB751A14DFA00067AA07 /* dicomFile.h */; };
-		847AFE221A14DFA40067AA07 /* dicomFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB761A14DFA00067AA07 /* dicomFile.m */; };
+		847AFE211A14DFA40067AA07 /* DicomFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFB751A14DFA00067AA07 /* DicomFile.h */; };
+		847AFE221A14DFA40067AA07 /* DicomFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB761A14DFA00067AA07 /* DicomFile.m */; };
 		847AFE231A14DFA40067AA07 /* DicomFileDCMTKCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFB771A14DFA00067AA07 /* DicomFileDCMTKCategory.h */; };
 		847AFE241A14DFA40067AA07 /* DicomFileDCMTKCategory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB781A14DFA00067AA07 /* DicomFileDCMTKCategory.mm */; };
 		847AFE251A14DFA40067AA07 /* DicomImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFB791A14DFA00067AA07 /* DicomImage.h */; };
@@ -906,7 +906,7 @@
 		84A205A51A15175A0005BD7D /* DCMPix.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFA271A14DF9E0067AA07 /* DCMPix.m */; };
 		84A205A61A1517780005BD7D /* DefaultsOsiriX.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFBF91A14DFA10067AA07 /* DefaultsOsiriX.m */; };
 		84A205A71A15177F0005BD7D /* NSUserDefaults+OsiriX.mm in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC291A14DFA20067AA07 /* NSUserDefaults+OsiriX.mm */; };
-		84A205A81A15179F0005BD7D /* dicomFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB761A14DFA00067AA07 /* dicomFile.m */; };
+		84A205A81A15179F0005BD7D /* DicomFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB761A14DFA00067AA07 /* DicomFile.m */; };
 		84A205A91A1517A30005BD7D /* DicomFileDCMTKCategory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB781A14DFA00067AA07 /* DicomFileDCMTKCategory.mm */; };
 		84A205AA1A1517D50005BD7D /* altivecFunctions.c in Sources */ = {isa = PBXBuildFile; fileRef = 847AFA221A14DF9E0067AA07 /* altivecFunctions.c */; };
 		84A205AD1A151EE10005BD7D /* libkdu_v73R.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A205AC1A151EE10005BD7D /* libkdu_v73R.a */; };
@@ -7038,8 +7038,8 @@
 		847AFB461A14DFA00067AA07 /* BrowserController+Sources+Copy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BrowserController+Sources+Copy.m"; sourceTree = "<group>"; };
 		847AFB471A14DFA00067AA07 /* BrowserController+Sources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BrowserController+Sources.h"; sourceTree = "<group>"; };
 		847AFB481A14DFA00067AA07 /* BrowserController+Sources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BrowserController+Sources.m"; sourceTree = "<group>"; };
-		847AFB491A14DFA00067AA07 /* browserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = browserController.h; sourceTree = "<group>"; };
-		847AFB4A1A14DFA00067AA07 /* browserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = browserController.m; sourceTree = "<group>"; };
+		847AFB491A14DFA00067AA07 /* BrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserController.h; sourceTree = "<group>"; };
+		847AFB4A1A14DFA00067AA07 /* BrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserController.m; sourceTree = "<group>"; };
 		847AFB4B1A14DFA00067AA07 /* BrowserControllerDCMTKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserControllerDCMTKCategory.h; sourceTree = "<group>"; };
 		847AFB4C1A14DFA00067AA07 /* BrowserControllerDCMTKCategory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BrowserControllerDCMTKCategory.mm; sourceTree = "<group>"; };
 		847AFB4D1A14DFA00067AA07 /* BrowserMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserMatrix.h; sourceTree = "<group>"; };
@@ -7081,8 +7081,8 @@
 		847AFB721A14DFA00067AA07 /* DicomDirParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DicomDirParser.m; sourceTree = "<group>"; };
 		847AFB731A14DFA00067AA07 /* DICOMExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DICOMExport.h; sourceTree = "<group>"; };
 		847AFB741A14DFA00067AA07 /* DICOMExport.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DICOMExport.mm; sourceTree = "<group>"; };
-		847AFB751A14DFA00067AA07 /* dicomFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dicomFile.h; sourceTree = "<group>"; };
-		847AFB761A14DFA00067AA07 /* dicomFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dicomFile.m; sourceTree = "<group>"; };
+		847AFB751A14DFA00067AA07 /* DicomFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DicomFile.h; sourceTree = "<group>"; };
+		847AFB761A14DFA00067AA07 /* DicomFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DicomFile.m; sourceTree = "<group>"; };
 		847AFB771A14DFA00067AA07 /* DicomFileDCMTKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DicomFileDCMTKCategory.h; sourceTree = "<group>"; };
 		847AFB781A14DFA00067AA07 /* DicomFileDCMTKCategory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DicomFileDCMTKCategory.mm; sourceTree = "<group>"; };
 		847AFB791A14DFA00067AA07 /* DicomImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DicomImage.h; sourceTree = "<group>"; };
@@ -13331,8 +13331,8 @@
 				847AFB461A14DFA00067AA07 /* BrowserController+Sources+Copy.m */,
 				847AFB471A14DFA00067AA07 /* BrowserController+Sources.h */,
 				847AFB481A14DFA00067AA07 /* BrowserController+Sources.m */,
-				847AFB491A14DFA00067AA07 /* browserController.h */,
-				847AFB4A1A14DFA00067AA07 /* browserController.m */,
+				847AFB491A14DFA00067AA07 /* BrowserController.h */,
+				847AFB4A1A14DFA00067AA07 /* BrowserController.m */,
 				847AFB4B1A14DFA00067AA07 /* BrowserControllerDCMTKCategory.h */,
 				847AFB4C1A14DFA00067AA07 /* BrowserControllerDCMTKCategory.mm */,
 				847AFB4D1A14DFA00067AA07 /* BrowserMatrix.h */,
@@ -13374,8 +13374,8 @@
 				847AFB721A14DFA00067AA07 /* DicomDirParser.m */,
 				847AFB731A14DFA00067AA07 /* DICOMExport.h */,
 				847AFB741A14DFA00067AA07 /* DICOMExport.mm */,
-				847AFB751A14DFA00067AA07 /* dicomFile.h */,
-				847AFB761A14DFA00067AA07 /* dicomFile.m */,
+				847AFB751A14DFA00067AA07 /* DicomFile.h */,
+				847AFB761A14DFA00067AA07 /* DicomFile.m */,
 				847AFB771A14DFA00067AA07 /* DicomFileDCMTKCategory.h */,
 				847AFB781A14DFA00067AA07 /* DicomFileDCMTKCategory.mm */,
 				847AFB791A14DFA00067AA07 /* DicomImage.h */,
@@ -19654,7 +19654,7 @@
 				AB10FAB311293378009EB238 /* N2Alignment.h in Headers */,
 				AB10FAB511293378009EB238 /* N2Resizer.h in Headers */,
 				AB10FAB711293378009EB238 /* N2Shell.h in Headers */,
-				847AFDF51A14DFA40067AA07 /* browserController.h in Headers */,
+				847AFDF51A14DFA40067AA07 /* BrowserController.h in Headers */,
 				AB10FAB911293378009EB238 /* N2UserDefaults.h in Headers */,
 				AB10FB1F1129338A009EB238 /* N2ButtonCell.h in Headers */,
 				AB10FB211129338A009EB238 /* N2Button.h in Headers */,
@@ -20294,7 +20294,7 @@
 				CEBD888614F1ADD9000DA1FE /* metaEvent.h in Headers */,
 				CEBD888714F1ADD9000DA1FE /* metaFEMObject.h in Headers */,
 				CEBD888814F1ADDA000DA1FE /* metaForm.h in Headers */,
-				847AFE211A14DFA40067AA07 /* dicomFile.h in Headers */,
+				847AFE211A14DFA40067AA07 /* DicomFile.h in Headers */,
 				CEBD888914F1ADDA000DA1FE /* metaGaussian.h in Headers */,
 				CEBD888A14F1ADDA000DA1FE /* metaGroup.h in Headers */,
 				CEBD888B14F1ADDA000DA1FE /* metaImage.h in Headers */,
@@ -24351,7 +24351,7 @@
 				AB10FB281129338A009EB238 /* N2ColorWell.mm in Sources */,
 				AB10FB2A1129338A009EB238 /* N2PopUpButton.mm in Sources */,
 				AB10FB2C1129338A009EB238 /* N2Exceptions.mm in Sources */,
-				847AFDF61A14DFA40067AA07 /* browserController.m in Sources */,
+				847AFDF61A14DFA40067AA07 /* BrowserController.m in Sources */,
 				AB10FB361129338A009EB238 /* N2View.mm in Sources */,
 				847AFD141A14DFA30067AA07 /* WindowLayoutManager.m in Sources */,
 				AB10FB381129338A009EB238 /* N2Panel.mm in Sources */,
@@ -25162,7 +25162,7 @@
 				847AFD701A14DFA30067AA07 /* OrthogonalMPRPETCTView.m in Sources */,
 				847AFEEF1A14DFA40067AA07 /* PreviewView.m in Sources */,
 				ABE471050A76412700327466 /* jfdctfst.c in Sources */,
-				847AFE221A14DFA40067AA07 /* dicomFile.m in Sources */,
+				847AFE221A14DFA40067AA07 /* DicomFile.m in Sources */,
 				ABE471060A76412700327466 /* jfdctint.c in Sources */,
 				847AFE0E1A14DFA40067AA07 /* DicomCompressor.mm in Sources */,
 				ABE471070A76412700327466 /* jidctflt.c in Sources */,
@@ -25398,7 +25398,7 @@
 				AB7251680ADE77E600A212A0 /* djdecext.cc in Sources */,
 				AB7251690ADE77E800A212A0 /* djdeclol.cc in Sources */,
 				AB72516A0ADE77E800A212A0 /* djenclol.cc in Sources */,
-				84A205A81A15179F0005BD7D /* dicomFile.m in Sources */,
+				84A205A81A15179F0005BD7D /* DicomFile.m in Sources */,
 				AB72516B0ADE77E900A212A0 /* djencext.cc in Sources */,
 				AB72516C0ADE77E900A212A0 /* djencbas.cc in Sources */,
 				AB72516D0ADE77E900A212A0 /* djeijg8.cc in Sources */,

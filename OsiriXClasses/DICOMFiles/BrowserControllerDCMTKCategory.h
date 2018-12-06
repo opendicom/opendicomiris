@@ -13,7 +13,7 @@
 =========================================================================*/
 
 #import <Cocoa/Cocoa.h>
-#import "browserController.h"
+#import "BrowserController.h"
 
 /** \brief  Category for DCMTK calls from BrowserController */
 
