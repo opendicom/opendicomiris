@@ -1,45 +1,5 @@
-/*=========================================================================
-  Program:   OsiriX
-
-  Copyright (c) OsiriX Team
-  All rights reserved.
-  Distributed under GNU - LGPL
-  
-  See http://www.osirix-viewer.com/copyright.html for details.
-
-     This software is distributed WITHOUT ANY WARRANTY; without even
-     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-     PURPOSE.
-=========================================================================*/
-
-// This will be added to the main inded page of the Doxygen documentation
-/** \mainpage OsiriX index page
-*  <img src= "../../../osirix/Binaries/Icons/SmallLogo.tif">
-* \section Intro OsiriX DICOM workstation
-*  Osirix is a free open source DICOM workstation with full 64 bit support.
-*
-*  We extend out thanks to other in the open source community.
-*
-*  VTK, ITK, and DCMTK open source projects are extensively used in OsiriX.
-*
-*  The OsiriX team.
-*/
-
-#ifdef OSIRIX_VIEWER
-#ifndef OSIRIX_LIGHT
-#ifndef MACAPPSTORE
-#import <Growl/Growl.h>
-#endif
-#endif
-#endif
-
 #import <AppKit/AppKit.h>
 #import "XMLRPCMethods.h"
-
-//@class ThreadPoolServer;
-//@class ThreadPerConnectionServer;
-
-//#import "IChatTheatreDelegate.h"
 
 @class PreferenceController;
 @class BrowserController;
@@ -53,7 +13,7 @@ enum
 	compression_none = 1,
 	compression_JPEG = 2,
 	compression_JPEG2000 = 3,
-    compression_JPEGLS = 4
+   compression_JPEGLS = 4
 };
 
 enum
@@ -87,53 +47,58 @@ extern "C"
 *
 */
 
-//#if defined(OSIRIX_VIEWER) && !defined(OSIRIX_LIGHT) && !defined(MACAPPSTORE)
-//#else
-//@protocol GrowlApplicationBridgeDelegate
-//@end
-//#endif
-
 @class AppController, ToolbarPanelController, ThumbnailsListPanel, BonjourPublisher;
 
 extern AppController* OsiriX;
 
-@interface AppController : NSObject	<NSNetServiceBrowserDelegate, NSNetServiceDelegate, NSSoundDelegate, NSMenuDelegate> // GrowlApplicationBridgeDelegate
+@interface AppController : NSObject	<NSNetServiceBrowserDelegate, NSNetServiceDelegate, NSSoundDelegate, NSMenuDelegate>
 {
-	IBOutlet BrowserController		*browserController;
+	IBOutlet BrowserController *browserController;
 
-    IBOutlet NSMenu					*filtersMenu;
-	IBOutlet NSMenu					*roisMenu;
-	IBOutlet NSMenu					*othersMenu;
-	IBOutlet NSMenu					*dbMenu;
+   IBOutlet NSMenu				*filtersMenu;
+	IBOutlet NSMenu				*roisMenu;
+	IBOutlet NSMenu				*othersMenu;
+	IBOutlet NSMenu				*dbMenu;
 	IBOutlet NSWindow				*dbWindow;
-	IBOutlet NSMenu					*windowsTilingMenuRows, *windowsTilingMenuColumns;
-    IBOutlet NSMenu                 *recentStudiesMenu;
+   IBOutlet NSMenu				*windowsTilingMenuRows;
+   IBOutlet NSMenu            *windowsTilingMenuColumns;
+   IBOutlet NSMenu            *recentStudiesMenu;
 	
 	NSDictionary					*previousDefaults;
 	
-	BOOL							showRestartNeeded;
+	BOOL							   showRestartNeeded;
 		
-    SplashScreen					*splashController;
+   SplashScreen					*splashController;
 	
-    volatile BOOL					quitting;
-	BOOL							verboseUpdateCheck;
+   volatile BOOL					quitting;
+	BOOL							   verboseUpdateCheck;
 	NSNetService					*BonjourDICOMService;
 	
 	NSTimer							*updateTimer;
-	XMLRPCInterface					*XMLRPCServer;
+	XMLRPCInterface				*XMLRPCServer;
 	
-	BOOL							checkAllWindowsAreVisibleIsOff, isSessionInactive;
+   BOOL							   checkAllWindowsAreVisibleIsOff;
+   BOOL                       isSessionInactive;
 	
-	int								lastColumns, lastRows, lastCount;
+   int								lastColumns;
+   int                        lastRows;
+   int                        lastCount;
     
-    BonjourPublisher* _bonjourPublisher;   
+   BonjourPublisher*          _bonjourPublisher;
 }
 
-@property BOOL checkAllWindowsAreVisibleIsOff, isSessionInactive;
-@property (readonly) NSMenu *filtersMenu, *recentStudiesMenu, *windowsTilingMenuRows, *windowsTilingMenuColumns;
+@property BOOL checkAllWindowsAreVisibleIsOff;
+@property BOOL isSessionInactive;
+@property (readonly) NSMenu *filtersMenu;
+@property (readonly) NSMenu *recentStudiesMenu;
+@property (readonly) NSMenu *windowsTilingMenuRows;
+@property (readonly) NSMenu *windowsTilingMenuColumns;
 @property(readonly) NSNetService* dicomBonjourPublisher;
 @property (readonly) XMLRPCInterface *XMLRPCServer;
 @property(readonly) BonjourPublisher* bonjourPublisher;
+
+//singleton
++ (AppController*) sharedAppController;
 
 + (BOOL) isFDACleared;
 + (BOOL) willExecutePlugin;
@@ -144,19 +109,14 @@ extern AppController* OsiriX;
 +(NSString*)UID;
 
 #pragma mark-
-#pragma mark initialization of the main event loop singleton
+#pragma mark initialization of the main event loop
 
 + (void) createNoIndexDirectoryIfNecessary:(NSString*) path __deprecated;
-+ (AppController*) sharedAppController; /**< Return the shared AppController instance */
 + (void) resizeWindowWithAnimation:(NSWindow*) window newSize: (NSRect) newWindowFrame;
 + (void) pause __deprecated;
 + (ThumbnailsListPanel*)thumbnailsListPanelForScreen:(NSScreen*)screen;
 + (NSString*)printStackTrace:(NSException*)e __deprecated; // use -[NSException printStackTrace] form NSException+N2
 + (BOOL) isKDUEngineAvailable;
-
-#pragma mark-
-#pragma mark HTML Templates
-+ (void)checkForHTMLTemplates __deprecated;
 
 
 #pragma mark-
@@ -173,9 +133,6 @@ extern AppController* OsiriX;
 - (IBAction) about:(id)sender; /**< Display the about window */
 - (IBAction) showPreferencePanel:(id)sender; /**< Show Preferences window */
 #ifndef OSIRIX_LIGHT
-#ifndef MACAPPSTORE
-- (IBAction) checkForUpdates:(id) sender;  /**< Check for update */
-#endif
 - (IBAction) autoQueryRefresh:(id)sender;
 #endif
 //===============WINDOW========================

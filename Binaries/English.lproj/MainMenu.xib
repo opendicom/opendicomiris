@@ -32,12 +32,6 @@
                                     <action selector="showPreferencePanel:" target="694" id="696"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Check for Updates" id="1327">
-                                <connections>
-                                    <action selector="checkForUpdates:" target="694" id="1328"/>
-                                    <binding destination="12279" name="hidden" keyPath="values.MACAPPSTORE" id="14231"/>
-                                </connections>
-                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="143">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>

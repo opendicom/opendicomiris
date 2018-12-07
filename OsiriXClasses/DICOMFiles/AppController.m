@@ -3696,14 +3696,6 @@ static BOOL _hasMacOSXSnowLeopard=NO;
 	return wait;
 }
 
-#ifndef OSIRIX_LIGHT
-#ifndef MACAPPSTORE
-- (IBAction) checkForUpdates: (id) sender
-{
-}
-#endif
-#endif
-
 - (void) URL: (NSURL*) sender resourceDidFailLoadingWithReason: (NSString*) reason
 {
 	if (verboseUpdateCheck)
@@ -4911,11 +4903,6 @@ static BOOL _hasMacOSXSnowLeopard=NO;
 
 //———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
-#pragma mark-
-#pragma mark HTML Templates
-+ (void)checkForHTMLTemplates { // __deprecated
-	[[[BrowserController currentBrowser] database] checkForHtmlTemplates];
-}
 
 #pragma mark-
 #pragma mark 12 Bit Display support.
