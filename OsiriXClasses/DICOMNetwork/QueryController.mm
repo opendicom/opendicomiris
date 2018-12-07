@@ -3268,8 +3268,6 @@ extern "C"
 			
 			if( [selectedItems count] == 1) desc = [NSString stringWithFormat: NSLocalizedString( @"Will auto-retrieve %d study", nil), [selectedItems count]];
 			else desc = [NSString stringWithFormat: NSLocalizedString( @"Will auto-retrieve %d studies", nil), [selectedItems count]];
-			
-			[[AppController sharedAppController] growlTitle: NSLocalizedString( @"Q&R Auto-Retrieve", nil) description: desc name: @"autoquery"];
 		}
 	}
 	@catch (NSException * e) 
@@ -3305,21 +3303,11 @@ extern "C"
         
         if( [self queryWithDisplayingErrors: NO instance: instance index: index] == 0)
             [self displayAndRetrieveQueryResults: instance];
-        else
-        {
-            [[AppController sharedAppController] growlTitle: NSLocalizedString( @"Q&R Auto-Retrieve", nil) description: @"Failed..." name: @"autoquery"];
-            NSLog( @"****** Q&R autoQueryThread failed...");
-        }
     }
     else
     {
         if( [self queryWithDisplayingErrors: NO] == 0)
             [self displayAndRetrieveQueryResults: nil];
-        else
-        {
-            [[AppController sharedAppController] growlTitle: NSLocalizedString( @"Q&R Auto-Retrieve", nil) description: @"Failed..." name: @"autoquery"];
-            NSLog( @"****** Q&R autoQueryThread failed...");
-        }
 	}
     
 	[pool release];
@@ -3351,9 +3339,7 @@ extern "C"
                             {
                                 if( i == currentAutoQR)
                                     [self saveSettings];
-                                
-                                [[AppController sharedAppController] growlTitle: NSLocalizedString( @"Q&R Auto-Query", nil) description: NSLocalizedString( @"Refreshing...", nil) name: @"autoquery"];
-                                
+                               
                                 NSThread *t = [[[NSThread alloc] initWithTarget:self selector: @selector(autoQueryThread: ) object: [NSDictionary dictionaryWithObjectsAndKeys: [[QRInstance mutableCopy] autorelease], @"instance", [NSNumber numberWithInt: i], @"index", nil]] autorelease];
                                 
                                 if( [[QRInstance objectForKey: @"instanceName"] length] && autoQRInstances.count > 1)
@@ -3385,9 +3371,7 @@ extern "C"
                 if( --autoQueryRemainingSecs[ currentAutoQR] <= 0)
                 {
                     if( [autoQueryLock tryLock])
-                    {
-                        [[AppController sharedAppController] growlTitle: NSLocalizedString( @"Q&R Auto-Query", nil) description: NSLocalizedString( @"Refreshing...", nil) name: @"autoquery"];
-                        
+                    {                        
                         [self saveSettings];
                         
                         NSThread *t = [[[NSThread alloc] initWithTarget:self selector: @selector(autoQueryThread: ) object: nil] autorelease];

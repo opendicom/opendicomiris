@@ -2503,19 +2503,17 @@ static NSString *releaseNetworkVariablesSync = @"releaseNetworkVariablesSync";
 		{
 			NSString *response = [NSString stringWithFormat: @"%@  /  %@:%d\r\r%@\r%@", _calledAET, _hostname, _port, [e name], [e description]];
 			
-            if (_abortAssociation == NO)
-            {
-                if( showErrorMessage == YES)
-                    [DCMTKQueryNode performSelectorOnMainThread:@selector(errorMessage:) withObject:[NSArray arrayWithObjects: NSLocalizedString(@"Query Failed (1)", nil), response, NSLocalizedString(@"Continue", nil), nil] waitUntilDone:NO];
-                else
-                    [[AppController sharedAppController] growlTitle: NSLocalizedString(@"Query Failed (1)", nil) description: response name: @"autoquery"];
+         if (_abortAssociation == NO)
+         {
+            if( showErrorMessage == YES)
+               [DCMTKQueryNode performSelectorOnMainThread:@selector(errorMessage:) withObject:[NSArray arrayWithObjects: NSLocalizedString(@"Query Failed (1)", nil), response, NSLocalizedString(@"Continue", nil), nil] waitUntilDone:NO];
 			}
             
-            NSLog(@"---- DCMTKQueryNode failed: %@", e);
+         NSLog(@"---- DCMTKQueryNode failed: %@", e);
             
 			succeed = NO;
             
-            [NSThread sleepForTimeInterval: 0.05];
+         [NSThread sleepForTimeInterval: 0.05];
 		}
         @finally {
             [wait end];
@@ -2681,9 +2679,6 @@ static NSString *releaseNetworkVariablesSync = @"releaseNetworkVariablesSync";
 			
 			if( showErrorMessage == YES && _abortAssociation == NO)
 				[DCMTKQueryNode performSelectorOnMainThread:@selector(errorMessage:) withObject:[NSArray arrayWithObjects: NSLocalizedString(@"Query Failed (2)", nil), response, NSLocalizedString(@"Continue", nil), nil] waitUntilDone:NO];
-			else
-				[[AppController sharedAppController] growlTitle: NSLocalizedString(@"Query Failed (2)", nil) description: response name: @"autoquery"];
-				
 		}
 				
         if (_verbose)

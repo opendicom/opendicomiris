@@ -237,10 +237,6 @@ extern AppController* OsiriX;
 - (NSMenu*) clutMenu;
 - (NSMenu*) workspaceMenu;
 
-#pragma mark-
-#pragma mark growl
-- (void) growlTitle:(NSString*) title description:(NSString*) description name:(NSString*) name;
-//- (NSDictionary *) registrationDictionaryForGrowl;
 
 //#pragma mark-
 //#pragma mark display setters and getters

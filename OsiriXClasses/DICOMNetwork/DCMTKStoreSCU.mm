@@ -1082,8 +1082,6 @@ static OFCondition cstore(T_ASC_Association * assoc, const OFString& fname)
 	
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
-	[[AppController sharedAppController] growlTitle: NSLocalizedString( @"DICOM Send", nil) description: [NSString stringWithFormat: NSLocalizedString(@"Sending %@...\rTo: %@ - %@", nil), N2LocalizedSingularPluralCount( _filesToSend.count, NSLocalizedString(@"file", nil), NSLocalizedString(@"files", nil)), _calledAET, _hostname] name:@"send"];
-	
 //	NSString *tempFolder = [NSString stringWithFormat:@"/tmp/DICOMSend_%@-%@", _callingAET, [[NSDate date] description]];
 	NSMutableArray *paths = [[NSMutableArray alloc] init];
 	
@@ -1838,13 +1836,11 @@ static OFCondition cstore(T_ASC_Association * assoc, const OFString& fname)
 			_numberErrors = _numberOfFiles - _numberSent;
 			
 			[userInfo setObject:[NSNumber numberWithInt:_numberErrors] forKey:@"ErrorCount"];
-			
-			[[AppController sharedAppController] growlTitle: NSLocalizedString( @"DICOM Send", nil) description: [NSString stringWithFormat: NSLocalizedString(@"Errors ! %@ of %@ generated errors.", nil), N2LocalizedDecimal( _numberErrors) , N2LocalizedSingularPluralCount( _numberOfFiles, NSLocalizedString(@"file", nil), NSLocalizedString(@"files", nil))]  name:@"send"];
+         
+         NSLog( @"DCMTKStoreSCU: _numberSent: %d / _numberOfFiles : %d", _numberSent, _numberOfFiles);
             
-            NSLog( @"DCMTKStoreSCU: _numberSent: %d / _numberOfFiles : %d", _numberSent, _numberOfFiles);
-            
-            if( localException == nil)
-                localException = [[NSException exceptionWithName:@"DICOM Network Failure (STORE-SCU)" reason:@"Unsuccessful Store Encountered, see Applications/Utilities/Console.app for more detailed informations." userInfo:nil] retain];
+         if( localException == nil)
+            localException = [[NSException exceptionWithName:@"DICOM Network Failure (STORE-SCU)" reason:@"Unsuccessful Store Encountered, see Applications/Utilities/Console.app for more detailed informations." userInfo:nil] retain];
 		}
 		else
 			[userInfo setObject:@"Complete" forKey:@"Message"];

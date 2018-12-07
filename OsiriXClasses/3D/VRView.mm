@@ -5079,7 +5079,6 @@ public:
 		NSLog( @"360 degree rotation - 100 images - END");
 		NSLog( @"360 degree rotation - Result in [s]: %f", -[now timeIntervalSinceNow]);
 		
-		[[AppController sharedAppController] growlTitle: NSLocalizedString( @"Performance Test", nil) description: [NSString stringWithFormat: NSLocalizedString(@"360 degree rotation - 100 images\rResult in [s] : %f", nil), -[now timeIntervalSinceNow]] name:@"result"];
 	}
 	else if( c == 27 && currentTool == t3DCut)
 	{
@@ -6241,8 +6240,6 @@ public:
         {
             if( 0.9 * [VTKView VRAMSizeForDisplayID: [[[[NSScreen mainScreen] deviceDescription] objectForKey: @"NSScreenNumber"] intValue]] < dst8.rowBytes * dst8.height)
             {
-                [[AppController sharedAppController] growlTitle: NSLocalizedString( @"Warning!", nil) description: NSLocalizedString( @"3D Dataset volume is larger than the amount of graphic board VRAM: GPU Rendering could be slower than CPU Rendering.", nil)  name: @"result"];
-                
                 if( [[NSUserDefaults standardUserDefaults] boolForKey: @"hideVRAMAlert"] == NO)
                 {
                     NSAlert* alert = [[NSAlert new] autorelease];

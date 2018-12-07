@@ -19,7 +19,7 @@
 #import "XMLController.h"
 #import "XMLControllerDCMTKCategory.h"
 #import "WaitRendering.h"
-#import "dicomFile.h"
+#import "DicomFile.h"
 #import "DicomFileDCMTKCategory.h"
 #import "BrowserController.h"
 #import "ViewerController.h"

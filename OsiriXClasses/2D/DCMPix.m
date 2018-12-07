@@ -45,7 +45,7 @@
 #import <DCMView.h>
 
 #import "ThickSlabController.h"
-#import "dicomFile.h"
+#import "DicomFile.h"
 #import "PluginFileFormatDecoder.h"
 #include "tiffio.h"
 #ifndef OSIRIX_LIGHT

@@ -2912,13 +2912,6 @@ static BOOL _hasMacOSXSnowLeopard=NO;
 }
 
 #pragma mark-
-#pragma mark growl
-
-- (void) growlTitle:(NSString*) title description:(NSString*) description name:(NSString*) name
-{
-}
-
-#pragma mark-
 
 - (void) killDICOMListenerWait: (BOOL) wait
 {

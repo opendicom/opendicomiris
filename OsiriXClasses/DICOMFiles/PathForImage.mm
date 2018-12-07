@@ -15,7 +15,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PathForImage.h"
-#import "browserController.h"
+#import "BrowserController.h"
 
 
 const char *pathToJPEG(const char *sopInstanceUID){

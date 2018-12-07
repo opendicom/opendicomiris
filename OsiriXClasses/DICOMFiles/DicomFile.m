@@ -18,7 +18,7 @@
 #import "MutableArrayCategory.h"
 #import "SRAnnotation.h"
 #import "SRAnnotation.h"
-#import "dicomFile.h"
+#import "DicomFile.h"
 #import "Papyrus3.h"
 #import "ViewerController.h"
 #import "PluginFileFormatDecoder.h"

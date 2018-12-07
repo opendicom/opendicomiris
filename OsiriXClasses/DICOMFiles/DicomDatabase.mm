@@ -2488,9 +2488,6 @@ static BOOL protectionAgainstReentry = NO;
 	@try
     {
         thread.progress = -1;
-
-		NSString* growlString = nil;
-		NSString* growlStringNewStudy = nil;
 		
 		@try
 		{
@@ -2519,16 +2516,7 @@ static BOOL protectionAgainstReentry = NO;
 			} @finally {
 				[pool release];
 			}
-				
-			if (postNotifications)
-            {
-				if ([addedImageObjects count] > 0 && generatedByOsiriX == NO)
-                {
-					growlString = [NSString stringWithFormat:NSLocalizedString(@"Patient: %@\r%@ to the database", nil), [[addedImageObjects objectAtIndex:0] valueForKeyPath:@"series.study.name"], N2LocalizedSingularPluralCount(addedImageObjects.count, NSLocalizedString(@"image added", nil), NSLocalizedString(@"images added", nil))];
-					growlStringNewStudy = [NSString stringWithFormat:NSLocalizedString(@"%@\r%@", nil), [[addedImageObjects objectAtIndex:0] valueForKeyPath:@"series.study.name"], [[addedImageObjects objectAtIndex:0] valueForKeyPath:@"series.study.studyName"]];
-				}
-			}
-            if (self.isLocal && returnArray && [[NSUserDefaults standardUserDefaults] boolForKey: @"AUTOROUTINGACTIVATED"] && [self allowAutoroutingWithPostNotifications:postNotifications rereadExistingItems:rereadExistingItems])
+         if (self.isLocal && returnArray && [[NSUserDefaults standardUserDefaults] boolForKey: @"AUTOROUTINGACTIVATED"] && [self allowAutoroutingWithPostNotifications:postNotifications rereadExistingItems:rereadExistingItems])
                 [self alertToApplyRoutingRules:nil toImages:addedImageObjects];
 		}
 		@catch( NSException *ne)
@@ -2537,14 +2525,6 @@ static BOOL protectionAgainstReentry = NO;
 		}
         
         self.timeOfLastModification = [NSDate timeIntervalSinceReferenceDate];
-        if (postNotifications)
-        {
-            if (growlString)
-                [self performSelectorOnMainThread:@selector(_growlImagesAdded:) withObject:growlString waitUntilDone:NO];
-            
-            if (newStudy && growlStringNewStudy)
-                [self performSelectorOnMainThread:@selector(_growlNewStudy:) withObject:growlStringNewStudy waitUntilDone:NO];
-        }
 	}
     @catch (NSException* e)
     {
@@ -2799,15 +2779,6 @@ static BOOL protectionAgainstReentry = NO;
                 [[NSWorkspace sharedWorkspace] unmountAndEjectDeviceAtPath: [filesInput objectAtIndex:0]];
         }
     }
-}
-
-
--(void)_growlImagesAdded:(NSString*)message {
-	[AppController.sharedAppController growlTitle:NSLocalizedString(@"Incoming Files", nil) description:message name:@"newfiles"];
-}
-
--(void)_growlNewStudy:(NSString*)message {
-	[AppController.sharedAppController growlTitle:NSLocalizedString(@"New Study", nil) description:message name:@"newstudy"];
 }
 
 -(BOOL) hasFilesToImport
@@ -3392,7 +3363,6 @@ static BOOL protectionAgainstReentry = NO;
     {
 		if ([self isFileSystemFreeSizeLimitReached]) {
 			[NSFileManager.defaultManager removeItemAtPath:[self incomingDirPath] error:nil]; // Kill the incoming directory
-			[[AppController sharedAppController] growlTitle:NSLocalizedString(@"Warning", nil) description: NSLocalizedString(@"The database volume is full! Incoming files are ignored.", nil) name:@"newfiles"];
 		}
 		
 		@try {
