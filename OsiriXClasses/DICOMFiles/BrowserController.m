@@ -12013,8 +12013,12 @@ static BOOL withReset = NO;
 				
 				if( notEnoughMemory)
 				{
-					if( NSRunCriticalAlertPanel( NSLocalizedString(@"32-bit", nil),  NSLocalizedString(@"Cannot load this series.\r\rUpgrade to OsiriX 64-bit or OsiriX MD to solve this issue.", nil), NSLocalizedString(@"OK",nil), NSLocalizedString(@"OsiriX 64-bit", nil), nil) == NSAlertAlternateReturn)
-					[[AppController sharedAppController] osirix64bit: self];
+					NSRunCriticalAlertPanel(NSLocalizedString(@"32-bit", nil),
+                                       NSLocalizedString(@"Cannot load this series", nil),
+                                       NSLocalizedString(@"OK",nil),
+                                       NSLocalizedString(@"OK", nil),
+                                       nil
+                                       );
 				}
 				
 				free( memBlockTestPtr);
@@ -13357,7 +13361,6 @@ static NSArray*	openSubSeriesArray = nil;
 		if( firstTimeNotEnoughMemory)
 		{
 			firstTimeNotEnoughMemory = NO;
-			[[AppController sharedAppController] osirix64bit: nil];
 		}
 		
 		[leftIcon setImage: [NSImage imageNamed: @"error"]];

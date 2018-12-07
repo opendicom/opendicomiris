@@ -3883,11 +3883,9 @@ Gw
                                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="axesIndependently" image="error" id="14506"/>
                                 </imageView>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="14503">
-                                    <rect key="frame" x="60" y="48" width="335" height="34"/>
-                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="14508">
+                                    <rect key="frame" x="60" y="65" width="335" height="17"/>
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="This version of OsiriX cannot open large series" id="14508">
                                         <font key="font" metaFont="systemBold"/>
-                                        <string key="title">This version of OsiriX cannot open large series, 
-update to OsiriX 64-bit:</string>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
@@ -3895,17 +3893,6 @@ update to OsiriX 64-bit:</string>
                                         <binding destination="12279" name="hidden" keyPath="values.LP64bit" id="14528"/>
                                     </connections>
                                 </textField>
-                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="14502">
-                                    <rect key="frame" x="130.5" y="13" width="195" height="23"/>
-                                    <buttonCell key="cell" type="roundTextured" title="Update Now to OsiriX 64-bit !" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="14509">
-                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                        <font key="font" metaFont="system"/>
-                                    </buttonCell>
-                                    <connections>
-                                        <action selector="osirix64bit:" target="694" id="14634"/>
-                                        <binding destination="12279" name="hidden" keyPath="values.LP64bit" id="14545"/>
-                                    </connections>
-                                </button>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" preferredMaxLayoutWidth="330" translatesAutoresizingMaskIntoConstraints="NO" id="14501">
                                     <rect key="frame" x="60" y="85" width="335" height="17"/>
                                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="OK !" id="14510">
@@ -3917,12 +3904,10 @@ update to OsiriX 64-bit:</string>
                             </subviews>
                         </view>
                         <constraints>
-                            <constraint firstItem="14502" firstAttribute="top" secondItem="14503" secondAttribute="bottom" constant="12" id="6SJ-R8-Juk"/>
                             <constraint firstItem="14503" firstAttribute="leading" secondItem="14504" secondAttribute="trailing" constant="19" id="DT6-89-drz"/>
                             <constraint firstItem="14505" firstAttribute="top" secondItem="14501" secondAttribute="top" id="Fzz-sZ-Fah"/>
                             <constraint firstItem="14501" firstAttribute="leading" secondItem="14503" secondAttribute="leading" id="GXP-oo-CwO"/>
                             <constraint firstItem="14503" firstAttribute="top" secondItem="14501" secondAttribute="bottom" constant="3" id="OUB-5H-AsV"/>
-                            <constraint firstAttribute="bottom" secondItem="14502" secondAttribute="bottom" constant="13" id="RhP-9o-zFh"/>
                             <constraint firstItem="14501" firstAttribute="top" secondItem="14504" secondAttribute="top" id="cXw-Nj-oZd"/>
                             <constraint firstItem="14503" firstAttribute="centerX" secondItem="14472" secondAttribute="centerX" id="dab-pP-RBs"/>
                             <constraint firstItem="14501" firstAttribute="trailing" secondItem="14503" secondAttribute="trailing" id="eM1-vt-PRE"/>
@@ -3930,7 +3915,6 @@ update to OsiriX 64-bit:</string>
                             <constraint firstItem="14505" firstAttribute="leading" secondItem="14503" secondAttribute="trailing" constant="21" id="o2q-TN-6bw"/>
                             <constraint firstItem="14503" firstAttribute="centerX" secondItem="14501" secondAttribute="centerX" id="tYR-7r-qgR"/>
                             <constraint firstItem="14504" firstAttribute="top" secondItem="14472" secondAttribute="top" constant="6" id="wfq-rq-MFE"/>
-                            <constraint firstItem="14503" firstAttribute="centerX" secondItem="14502" secondAttribute="centerX" id="x2j-be-2gi"/>
                         </constraints>
                         <connections>
                             <binding destination="12279" name="hidden" keyPath="values.LP64bit" id="14542"/>

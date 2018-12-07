@@ -2505,22 +2505,16 @@ static volatile int numberOfThreadsForRelisce = 0;
     
     if( [self setOrientation: n] == NO)
     {
-        if( NSRunCriticalAlertPanel(NSLocalizedString(@"Memory Error", nil), NSLocalizedString(@"Cannot execute this reslicing.\r\r%@", nil), NSLocalizedString(@"OK", nil), NSLocalizedString(@"OsiriX MD", nil), nil, NSLocalizedString( @"Upgrade to OsiriX MD to solve this issue.", nil)) == NSAlertAlternateReturn)
-            [[AppController sharedAppController] osirix64bit: self];
+        NSRunCriticalAlertPanel(
+                                NSLocalizedString(@"Memory Error", nil),
+                                NSLocalizedString(@"Cannot execute this reslicing.\r\r%@", nil),
+                                NSLocalizedString(@"OK", nil),
+                                NSLocalizedString(@"OK", nil),
+                                nil,
+                                NSLocalizedString( @"OK", nil)
+                                );
     }
 }
-
-//- (void)setOrientationToolFrom2DMPR:(id)sender
-//{
-//	WaitRendering *wait = [[WaitRendering alloc] init: NSLocalizedString(@"Processing...", nil)];
-//	[wait showWindow:self];
-//	[orientationMatrix selectCellWithTag:[[sender selectedCell] tag]];
-//	[self setOrientationTool:orientationMatrix];
-//	[self checkEverythingLoaded];
-//	[self performSelector:@selector(MPR2DViewer:) withObject:self afterDelay:0.05];
-//	[wait close];
-//	[wait autorelease];
-//}
 
 - (void) contextualDictionaryPath:(NSString *)newContextualDictionaryPath
 {
@@ -9828,8 +9822,14 @@ static int avoidReentryRefreshDatabase = 0;
 	[self endWaitWindow: waitWindow];
 	if(!isResampled)
 	{
-		if( NSRunAlertPanel(NSLocalizedString(@"Memory Error", nil), NSLocalizedString(@"Cannot complete the resampling\r\r%@", nil), NSLocalizedString(@"OK", nil), NSLocalizedString(@"OsiriX MD", nil), nil, NSLocalizedString( @"Upgrade to OsiriX MD to solve this issue.", nil)) == NSAlertAlternateReturn)
-			[[AppController sharedAppController] osirix64bit: self];
+		NSRunAlertPanel(
+                      NSLocalizedString(@"Memory Error", nil),
+                      NSLocalizedString(@"Cannot complete the resampling\r\r%@", nil),
+                      NSLocalizedString(@"OK", nil),
+                      NSLocalizedString(@"OK", nil),
+                      nil,
+                      NSLocalizedString( @"OK.", nil)
+                      );
 	}
 }
 

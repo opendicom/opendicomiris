@@ -477,9 +477,12 @@ static NSString*	CLUTEditorsViewToolbarItemIdentifier = @"CLUTEditors";
             char	*testPtr = (char*) malloc( [firstObject pwidth] * [firstObject pheight] * [pix count] * sizeofshort);
             if( testPtr == nil)
             {
-                if( NSRunAlertPanel( NSLocalizedString(@"32-bit",nil), NSLocalizedString( @"Cannot use the 3D engine.\r\rUpgrade to OsiriX 64-bit or OsiriX MD to solve this issue.",nil), NSLocalizedString(@"OK", nil), NSLocalizedString(@"OsiriX 64-bit", nil), nil) == NSAlertAlternateReturn)
-                    [[AppController sharedAppController] osirix64bit: self];
-                
+                NSRunAlertPanel(NSLocalizedString(@"32-bit",nil),
+                                NSLocalizedString( @"Cannot use the 3D engine",nil),
+                                NSLocalizedString(@"OK", nil),
+                                NSLocalizedString(@"OK", nil),
+                                nil
+                                );
                 return nil;
             }
             else free( testPtr);
@@ -604,8 +607,12 @@ static NSString*	CLUTEditorsViewToolbarItemIdentifier = @"CLUTEditors";
         err = [view setPixSource:pixList[0] :(float*) [volumeData[0] bytes]];
         if( err != 0)
         {
-            if( NSRunAlertPanel( NSLocalizedString(@"32-bit",nil), NSLocalizedString( @"Cannot use the 3D engine.\r\rUpgrade to OsiriX 64-bit or OsiriX MD to solve this issue.",nil), NSLocalizedString(@"OK", nil), NSLocalizedString(@"OsiriX 64-bit", nil), nil) == NSAlertAlternateReturn)
-                [[AppController sharedAppController] osirix64bit: self];
+            NSRunAlertPanel(NSLocalizedString(@"32-bit",nil),
+                            NSLocalizedString( @"Cannot use the 3D engine",nil),
+                            NSLocalizedString(@"OK", nil),
+                            NSLocalizedString(@"OK", nil),
+                            nil
+                            );
             [self autorelease];
             return nil;
         }

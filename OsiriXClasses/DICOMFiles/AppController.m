@@ -905,21 +905,6 @@ static NSDate *lastWarningDate = nil;
 //———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #pragma mark-
 
--(IBAction) osirix64bit:(id)sender
-{
-	/*JF
-    if( sender)
-		[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.osirix-viewer.com/OsiriX-64bit.html"]];
-	else
-	{
-		NSArray* urls = [NSArray arrayWithObject: [NSURL URLWithString:@"http://www.osirix-viewer.com/OsiriX-64bit.html"]];
-
-        [[NSWorkspace sharedWorkspace] openURLs:urls withAppBundleIdentifier: nil options: NSWorkspaceLaunchWithoutActivation additionalEventParamDescriptor: nil launchIdentifiers: nil];
-	}
-    */
-}
-#pragma mark-
-
 - (void) waitForPID: (NSNumber*) pidNumber
 {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];

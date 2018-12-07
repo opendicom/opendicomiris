@@ -189,8 +189,6 @@ extern AppController* OsiriX;
 - (IBAction) closeAllViewers: (id) sender;  /**< Close All Viewers */
 - (void) checkAllWindowsAreVisible:(id) sender;
 - (void) checkAllWindowsAreVisible:(id) sender makeKey: (BOOL) makeKey;
-//- (IBAction)toggleActivityWindow:(id)sender;
-- (IBAction) osirix64bit: (id) sender;
 //---------------------------------------------
 
 - (IBAction) killAllStoreSCU:(id) sender;
