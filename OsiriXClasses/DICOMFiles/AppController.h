@@ -192,11 +192,6 @@ extern AppController* OsiriX;
 - (NSMenu*) clutMenu;
 - (NSMenu*) workspaceMenu;
 
-
-//#pragma mark-
-//#pragma mark display setters and getters
-//- (IBAction) saveLayout: (id)sender;
-
 #pragma mark-
 #pragma mark 12 Bit Display support.
 + (BOOL)canDisplay12Bit;
@@ -209,15 +204,7 @@ extern AppController* OsiriX;
 #pragma mark -
 -(WebPortal*)defaultWebPortal;
 
-#ifndef OSIRIX_LIGHT
 -(NSString*)weasisBasePath;
-#endif
-
--(void)setReceivingIcon;
--(void)unsetReceivingIcon;
--(void)setBadgeLabel:(NSString*)label;
-
-- (void)playGrabSound;
 
 @end
 

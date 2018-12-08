@@ -35,7 +35,6 @@ enum
 + (NSString*) getIPAddress: (NSString*) address;
 + (id)sharedNetServiceDelegate;
 - (void) setPublisher: (NSNetService*) p;
-- (void)update;
 - (NSArray *)dicomServices;
 - (int)portForNetService:(NSNetService *)netService;
 

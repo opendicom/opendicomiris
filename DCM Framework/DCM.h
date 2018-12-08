@@ -28,8 +28,7 @@
 
 #import "DCMLimitedObject.h"
 
-#import "DCMNetServiceDelegate.h"
-#import "DCMEncapsulatedPDF.h"
+//#import "DCMEncapsulatedPDF.h"
 
 
 

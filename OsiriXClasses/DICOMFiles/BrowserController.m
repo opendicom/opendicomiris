@@ -13524,7 +13524,7 @@ static NSArray*	openSubSeriesArray = nil;
 {
 	//displayEmptyDatabase = YES;
 	
-	[AppController initialize];
+	//[AppController initialize];
 	
 	for( int i = 0 ; i < [[NSScreen screens] count] ; i++)
 	{

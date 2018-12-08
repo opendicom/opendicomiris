@@ -1,0 +1,23 @@
+dependencies: \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/dcmjpls/djdecode.cc \
+  /Volumes/IN/GitHub/opendicomiris/Decompres_Prefix.pch \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/config/osconfig.h \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/config/cfunix.h \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/dcmjpls/djdecode.h \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/ofstd/oftypes.h \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/dcmjpls/djlsutil.h \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/ofstd/ofcond.h \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/ofstd/ofstring.h \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/ofstd/ofcast.h \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/ofstd/ofstdinc.h \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/ofstd/ofstream.h \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/dcmdata/dccodec.h \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/dcmdata/dctypes.h \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/dcmdata/dcerror.h \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/dcmdata/dcxfer.h \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/dcmdata/dcvr.h \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/ofstd/ofglobal.h \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/ofstd/ofthread.h \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/ofstd/oflist.h \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/dcmjpls/djcparam.h \
+  /Volumes/IN/GitHub/opendicomiris/Binaries/dcmtk-source/dcmjpls/djcodecd.h

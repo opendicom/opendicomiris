@@ -52,25 +52,13 @@ static DCMNetServiceDelegate *_netServiceDelegate = nil;
                                                                      options: NSKeyValueObservingOptionNew
                                                                      context: NULL];
         
-		[self update];
 	}
 	return self;
 }
 
-- (void)update
-{
-	if( [[NSUserDefaults standardUserDefaults] boolForKey:@"searchDICOMBonjour"])
-	{
-		NSLog(@"searchDICOMBonjour - searchForServicesOfType : _dicom._tcp");
-		[_dicomNetBrowser searchForServicesOfType:@"_dicom._tcp." inDomain:@""];
-	}
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if( [keyPath isEqualToString:@"values.searchDICOMBonjour"])
-        [self update];
-}
+//JF- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+//{
+//}
 
 - (void)dealloc
 {

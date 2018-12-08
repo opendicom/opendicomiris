@@ -623,7 +623,7 @@ NSInteger studyCompare(ViewerController *v1, ViewerController *v2, void *context
     
 	NOINTERPOLATION = [[NSUserDefaults standardUserDefaults] boolForKey:@"NOINTERPOLATION"];
 	FULL32BITPIPELINE = [[NSUserDefaults standardUserDefaults] boolForKey:@"FULL32BITPIPELINE"];
-    MAXNUMBEROF32BITVIEWERS = [[NSUserDefaults standardUserDefaults] integerForKey: @"MAXNUMBEROF32BITVIEWERS"];
+   MAXNUMBEROF32BITVIEWERS = [[NSUserDefaults standardUserDefaults] integerForKey: @"MAXNUMBEROF32BITVIEWERS"];
 	OVERFLOWLINES = [[NSUserDefaults standardUserDefaults] boolForKey:@"OVERFLOWLINES"];
     
 	SOFTWAREINTERPOLATION = [[NSUserDefaults standardUserDefaults] boolForKey:@"SOFTWAREINTERPOLATION"];
@@ -633,31 +633,6 @@ NSInteger studyCompare(ViewerController *v1, ViewerController *v2, void *context
 	IndependentCRWLWW = [[NSUserDefaults standardUserDefaults] boolForKey:@"IndependentCRWLWW"];
 	CLUTBARS = [[NSUserDefaults standardUserDefaults] integerForKey: @"CLUTBARS"];
 	
-//	int previousANNOTATIONS = ANNOTATIONS;
-//	ANNOTATIONS = [[NSUserDefaults standardUserDefaults] integerForKey: @"ANNOTATIONS"];
-//	
-//	BOOL reload = NO;
-//	
-//	if( previousANNOTATIONS != ANNOTATIONS)
-//	{
-//		for( ViewerController *v in [ViewerController getDisplayed2DViewers])
-//		{
-//			[v refresh];
-//			
-//			NSArray	*relatedViewers = [[AppController sharedAppController] FindRelatedViewers: [v pixList]];
-//			for( NSWindowController *r in relatedViewers)
-//				[[r window] display];
-//		}
-//		
-//		if( reload) [[BrowserController currentBrowser] refreshMatrix: self];		// This will refresh the DCMView of the BrowserController
-//	}
-//	else
-//	{
-//		for( ViewerController *v in [ViewerController getDisplayed2DViewers])
-//		{
-//			[[[v window] contentView] setNeedsDisplay: YES];
-//		}
-//	}
 }
 
 +(void) setCLUTBARS:(int) c ANNOTATIONS:(int) a
@@ -12903,7 +12878,7 @@ static int hasYosemite = -1;
 
 - (id)initWithFrame:(NSRect)frame
 {
-	[AppController initialize];
+	//[AppController initialize];
 	
 	[DCMView setDefaults];
 	

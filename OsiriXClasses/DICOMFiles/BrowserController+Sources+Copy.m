@@ -17,7 +17,7 @@
 #import "DicomFile.h"
 #import "DicomDatabase.h"
 #import "DataNodeIdentifier.h"
-#import "DCMNetServiceDelegate.h"
+//#import "DCMNetServiceDelegate.h"
 #import "MutableArrayCategory.h"
 #import "ThreadsManager.h"
 #import "RemoteDicomDatabase.h"
@@ -281,6 +281,7 @@
             thread.name = NSLocalizedString(@"Sending images...", nil);
             [[ThreadsManager defaultManager] addThreadAndStart:thread];
             return YES;
+           /*JF
         } else if ([destination isKindOfClass:[DicomNodeIdentifier class]]) { // local OsiriX to remote DICOM
             NSArray* r = [DCMNetServiceDelegate DICOMServersListSendOnly:YES QROnly:NO];
             for (int i = 0; i < r.count; ++i)
@@ -289,6 +290,7 @@
             [self selectServer:dicomImages];
             return YES;
             // [_database storeScuImages:dicomImages toDestinationAETitle:(NSString*)aet address:(NSString*)address port:(NSInteger)port transferSyntax:(int)exsTransferSyntax];
+            */
 		}
 	}
     else

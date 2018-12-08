@@ -247,7 +247,7 @@ static NSMutableArray			*fusionPlugins = nil;
     [dbMenu removeAllItems];
 	
    //filling the IBOutlets of AppController
-	for (NSBundle *bundle in pluginBundles)
+	for (NSBundle *bundle in [pluginBundles allValues])
 	{
       NSDictionary *infoDictionary=[bundle infoDictionary];
 		NSString	*pluginName = infoDictionary[@"CFBundleExecutable"];

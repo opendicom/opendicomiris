@@ -2806,8 +2806,7 @@ static BOOL protectionAgainstReentry = NO;
 	NSMutableArray* compressedPathArray = [NSMutableArray array];
 	NSThread* thread = [NSThread currentThread];
 	NSUInteger addedFilesCount = 0;
-	BOOL activityFeedbackShown = NO;
-    
+   
 	[NSFileManager.defaultManager confirmNoIndexDirectoryAtPath:self.decompressionDirPath];
 	
     N2DirectoryEnumerator *enumer = [NSFileManager.defaultManager enumeratorAtPath:self.incomingDirPath limitTo:-1];
@@ -2888,10 +2887,8 @@ static BOOL protectionAgainstReentry = NO;
 			BOOL isAlias = NO;
 			srcPath = [NSFileManager.defaultManager destinationOfAliasOrSymlinkAtPath:srcPath resolved:&isAlias];
 			
-            if( filesArray.count && !activityFeedbackShown && showGUI.boolValue) {
+            if( filesArray.count && showGUI.boolValue) {
 				[ThreadsManager.defaultManager addThreadAndStart:thread];
-                [OsiriX setReceivingIcon];
-                activityFeedbackShown = YES;
             }
             
 			// Is it a real file? Is it writable (transfer done)?
@@ -3160,8 +3157,6 @@ static BOOL protectionAgainstReentry = NO;
     @finally
     {
 		[_importFilesFromIncomingDirLock unlock];
-        if (activityFeedbackShown)
-            [OsiriX unsetReceivingIcon];
 	}
     
     if (enumer.nextObject) // there is more data
@@ -3326,14 +3321,6 @@ static BOOL protectionAgainstReentry = NO;
             thread.progress = -1;
 		}
         DicomDatabase* theDatabase = self.isMainDatabase? self : self.mainDatabase;
-		if (theDatabase == DicomDatabase.activeLocalDatabase)
-        {
-            NSString *newBadge = (importCount? [[NSNumber numberWithInteger:importCount] stringValue] : nil);
-            
-            if( [newBadge isEqualToString: [[NSApp dockTile] badgeLabel]] == NO)
-                [AppController.sharedAppController performSelectorOnMainThread:@selector(setBadgeLabel:) withObject: newBadge waitUntilDone:NO];
-        }
-		
 	}
     @catch (NSException* e)
     {

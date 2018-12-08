@@ -1,17 +1,3 @@
-/*=========================================================================
-  Program:   OsiriX
-
-  Copyright (c) OsiriX Team
-  All rights reserved.
-  Distributed under GNU - LGPL
-  
-  See http://www.osirix-viewer.com/copyright.html for details.
-
-     This software is distributed WITHOUT ANY WARRANTY; without even
-     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-     PURPOSE.
-=========================================================================*/
-
 //diskutil erasevolume HFS+ "ramdisk" `hdiutil attach -nomount ram://1165430`
 
 #import "SystemConfiguration/SCDynamicStoreCopySpecific.h"
@@ -47,13 +33,14 @@
 #import "NSFileManager+N2.h"
 #import <objc/runtime.h>
 #import "NSPanel+N2.h"
+
 #ifndef OSIRIX_LIGHT
-#import "BonjourPublisher.h"
-#ifndef MACAPPSTORE
-#import "Reports.h"
-#import <ILCrashReporter/ILCrashReporter.h>
-#import "VRView.h"
-#endif
+   #import "BonjourPublisher.h"
+   #ifndef MACAPPSTORE
+      #import "Reports.h"
+      #import <ILCrashReporter/ILCrashReporter.h>
+      #import "VRView.h"
+   #endif
 #endif
 #import "OSIWindowController.h"
 #import "Notifications.h"
@@ -85,14 +72,16 @@
 #include <stdlib.h>
 	 
 #define BUILTIN_DCMTK YES
-
 #define MAXSCREENS 10
 
-//ToolbarPanelController *toolbarPanel[ MAXSCREENS] = {nil, nil, nil, nil, nil, nil, nil, nil, nil, nil};
-ThumbnailsListPanel *thumbnailsListPanel[ MAXSCREENS] = {nil, nil, nil, nil, nil, nil, nil, nil, nil, nil};
-
-static NSMenu *mainMenuCLUTMenu = nil, *mainMenuWLWWMenu = nil, *mainMenuConvMenu = nil, *mainOpacityMenu = nil;
-static NSDictionary *previousWLWWKeys = nil, *previousCLUTKeys = nil, *previousConvKeys = nil, *previousOpacityKeys = nil;
+static NSMenu *mainMenuCLUTMenu = nil;
+static NSMenu *mainMenuWLWWMenu = nil;
+static NSMenu *mainMenuConvMenu = nil;
+static NSMenu *mainOpacityMenu = nil;
+static NSDictionary *previousWLWWKeys = nil;
+static NSDictionary *previousCLUTKeys = nil;
+static NSDictionary *previousConvKeys = nil;
+static NSDictionary *previousOpacityKeys = nil;
 static BOOL checkForPreferencesUpdate = YES;
 static PluginManager *pluginManager = nil;
 static unsigned char *LUT12toRGB = nil;
@@ -100,21 +89,30 @@ static BOOL canDisplay12Bit = NO;
 static NSInvocation *fill12BitBufferInvocation = nil;
 static NSString *appStartingDate = nil;
 
-BOOL					NEEDTOREBUILD = NO;
-BOOL					COMPLETEREBUILD = NO;
-BOOL					USETOOLBARPANEL = NO;
-short					Altivec = 1, Use_kdu_IfAvailable = 1;
-AppController			*appController = nil;
-DCMTKQueryRetrieveSCP   *dcmtkQRSCP = nil, *dcmtkQRSCPTLS = nil;
-NSRecursiveLock			*PapyrusLock = nil, *STORESCP = nil, *STORESCPTLS = nil;			// Papyrus is NOT thread-safe
-NSMutableArray			*accumulateAnimationsArray = nil, *recentStudies = nil;
+
+AppController*          appController = nil;
+AppController*          OsiriX = nil;
+
+ThumbnailsListPanel *thumbnailsListPanel[ MAXSCREENS] = {nil, nil, nil, nil, nil, nil, nil, nil, nil, nil};
+
+BOOL					      NEEDTOREBUILD = NO;
+BOOL					      COMPLETEREBUILD = NO;
+BOOL					      USETOOLBARPANEL = NO;
+short					      Altivec = 1;
+short                   Use_kdu_IfAvailable = 1;
+DCMTKQueryRetrieveSCP   *dcmtkQRSCP = nil;
+DCMTKQueryRetrieveSCP   *dcmtkQRSCPTLS = nil;
+// Papyrus is NOT thread-safe
+NSRecursiveLock			*PapyrusLock = nil;
+NSRecursiveLock         *STORESCP = nil;
+NSRecursiveLock         *STORESCPTLS = nil;
+NSMutableArray			   *accumulateAnimationsArray = nil;
+NSMutableArray          *recentStudies = nil;
 NSMutableDictionary     *recentStudiesAlbums = nil;
-BOOL					accumulateAnimations = NO;
+BOOL					      accumulateAnimations = NO;
 
-AppController* OsiriX = nil;
-
-extern int delayedTileWindows;
-extern NSString* getMacAddress(void);
+extern int              delayedTileWindows;
+extern NSString*        getMacAddress(void);
 
 enum	{kSuccess = 0,
         kCouldNotFindRequestedProcess = -1, 
@@ -634,6 +632,373 @@ static NSDate *lastWarningDate = nil;
 @synthesize checkAllWindowsAreVisibleIsOff, filtersMenu, windowsTilingMenuRows, recentStudiesMenu, windowsTilingMenuColumns, isSessionInactive, dicomBonjourPublisher = BonjourDICOMService, XMLRPCServer;
 @synthesize bonjourPublisher = _bonjourPublisher;
 
+
+
+
+static BOOL initialized = NO;
+static BOOL _hasMacOSXLion=NO;
+static BOOL _hasMacOSXSnowLeopard=NO;
++(BOOL) hasMacOSXLion { return _hasMacOSXLion;}
++(BOOL) hasMacOSXSnowLeopard { return _hasMacOSXSnowLeopard;}
+
++ (void) initialize
+{
+   NSOperatingSystemVersion osv=[[NSProcessInfo processInfo]  operatingSystemVersion];
+   NSLog(@"[AppController initialize] macos %d.%d.%d",osv.majorVersion,osv.minorVersion,osv.patchVersion);
+   int osxaabbc=(osv.majorVersion*1000)+(osv.minorVersion*10)+osv.patchVersion;
+   _hasMacOSXLion=(osxaabbc > 10074);
+   _hasMacOSXSnowLeopard=(osxaabbc > 10059);
+   
+   @try
+   {
+      if ( self == [AppController class] && initialized == NO)
+      {
+         if( [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundlePackageType"] isEqualToString: @"APPL"])
+         {
+            [NSThread detachNewThreadSelector: @selector(DNSResolve:) toTarget: self withObject: nil];
+            
+            initialized = YES;
+            
+            long   i;
+            
+            srandom(time(NULL));
+            
+            
+            int processors;
+            int mib[2] = {CTL_HW, HW_NCPU};
+            size_t dataLen = sizeof(int); // 'num' is an 'int'
+            int result = sysctl(mib, 2, &processors, &dataLen, NULL, 0);
+            if (result == -1)
+               processors = 1;
+            
+            NSString *bits = @"32-bit";
+            if( sizeof( long) == 8)
+               bits = @"64-bit";
+            
+            NSLog(@"*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*");
+            NSLog(@"Number of processors: %d / %d", processors, (int) [[NSProcessInfo processInfo] processorCount]);
+            NSLog(@"Number of screens: %d", (int) [[NSScreen screens] count]);
+            NSLog(@"Main screen backingScaleFactor: %f", (float) [[NSScreen mainScreen] backingScaleFactor]);
+            NSLog(@"Version: %@", [[[NSBundle mainBundle] infoDictionary] objectForKey: @"CFBundleShortVersionString"]);
+            NSLog(@"architecture: %@", bits);
+            NSArray *components = [[[NSBundle mainBundle] pathForResource: @"Localizable" ofType: @"strings"] pathComponents];
+            if( components.count > 3)
+               NSLog(@"Localization: %@", [components objectAtIndex: components.count -2]);
+#ifdef NDEBUG
+#else
+            NSLog( @"**** DEBUG MODE ****");
+#endif
+            
+            // ** REGISTER DEFAULTS DICTIONARY
+            
+            [[NSUserDefaults standardUserDefaults] registerDefaults: [DefaultsOsiriX getDefaults]];
+            
+            
+            if( [BrowserController _currentModifierFlags] & NSCommandKeyMask && [BrowserController _currentModifierFlags] & NSAlternateKeyMask)
+            {
+               NSInteger result = NSRunInformationalAlertPanel( NSLocalizedString(@"Reset Preferences", nil), NSLocalizedString(@"Are you sure you want to reset ALL preferences of OsiriX? All the preferences will be reseted to their default values.", nil), NSLocalizedString(@"Cancel",nil), NSLocalizedString(@"OK",nil),  nil);
+               
+               if( result == NSAlertAlternateReturn)
+               {
+                  for( NSString *k in [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys])
+                     [[NSUserDefaults standardUserDefaults] removeObjectForKey: k];
+                  
+                  [[NSUserDefaults standardUserDefaults] synchronize];
+               }
+            }
+            
+            
+            
+            [[NSUserDefaults standardUserDefaults] setInteger:200 forKey:@"NSInitialToolTipDelay"];
+            [[NSUserDefaults standardUserDefaults] setBool: NO forKey: @"DontUseUndoQueueForROIs"];
+            [[NSUserDefaults standardUserDefaults] setInteger: 20 forKey: @"UndoQueueSize"];
+            
+            // AutoClean evolution: old defaults AUTOCLEANINGSPACEPRODUCED and AUTOCLEANINGSPACEOPENED are merged into AutocleanSpaceMode
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"AutocleanSpaceMode"] == nil) {
+               BOOL cleanOldest = [[[NSUserDefaults standardUserDefaults] objectForKey:@"AUTOCLEANINGSPACEPRODUCED"] boolValue];
+               BOOL cleanOldestUnopened = [[[NSUserDefaults standardUserDefaults] objectForKey:@"AUTOCLEANINGSPACEOPENED"] boolValue];
+               if (!cleanOldest && !cleanOldestUnopened) {
+                  [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AUTOCLEANINGSPACE"];
+                  [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"AutocleanSpaceMode"];
+               } else if (cleanOldestUnopened) {
+                  [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"AutocleanSpaceMode"];
+               } else
+                  [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"AutocleanSpaceMode"];
+            }
+            
+            [[NSUserDefaults standardUserDefaults] setInteger: [[NSUserDefaults standardUserDefaults] integerForKey: @"DEFAULT_DATABASELOCATION"] forKey: @"DATABASELOCATION"];
+            [[NSUserDefaults standardUserDefaults] setObject: [[NSUserDefaults standardUserDefaults] stringForKey: @"DEFAULT_DATABASELOCATIONURL"] forKey: @"DATABASELOCATIONURL"];
+            
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"OSIEnvironmentActivated"];
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"is12bitPluginAvailable"];
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ROITEXTNAMEONLY"];
+            
+            if( [[NSUserDefaults standardUserDefaults] objectForKey: @"copyHideListenerError"])
+               [[NSUserDefaults standardUserDefaults] setBool: [[NSUserDefaults standardUserDefaults] boolForKey: @"copyHideListenerError"] forKey: @"hideListenerError"];
+            
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"MACAPPSTORE"]; // Also modify in DefaultsOsiriX.m
+            [[NSUserDefaults standardUserDefaults] setObject: NSLocalizedString( @"(Current User Documents folder)", nil) forKey:@"DefaultDatabasePath"];
+            
+#ifdef __LP64__
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey: @"LP64bit"];
+#else
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey: @"LP64bit"];
+#endif
+            
+            
+            // if we are loading a database that isn't on the root volume, then we must wait for it to load - if it doesn't become available after a few minutes, then we'll just let osirix switch to the db at ~/Documents as it would do anyway
+            
+            NSString* dataBasePath = nil;
+            @try {
+               dataBasePath = [DicomDatabase baseDirPathForMode: [[NSUserDefaults standardUserDefaults] integerForKey:@"DATABASELOCATION"] path:[[NSUserDefaults standardUserDefaults] stringForKey: @"DATABASELOCATIONURL"]];
+            }
+            @catch (NSException *e) {
+               N2LogException( e);
+            }
+            
+            if ([dataBasePath hasPrefix:@"/Volumes/"] || dataBasePath == nil) {
+               NSString* volumePath = [[[dataBasePath componentsSeparatedByString:@"/"] subarrayWithRange:NSMakeRange(0,3)] componentsJoinedByString:@"/"];
+               if (![[NSFileManager defaultManager] fileExistsAtPath:volumePath]) {
+                  NSPanel* dialog = [NSPanel alertWithTitle:@"OsiriX Data"
+                                                    message:[NSString stringWithFormat:NSLocalizedString(@"OsiriX is configured to use the database located at %@. This volume is currently not available, most likely because it hasn't yet been mounted by the system, or because it is not plugged in or is turned off, or because you don't have write permissions for this location. OsiriX will wait for a few minutes, then give up and switch to a database in the current user's home directory.", nil), [[NSUserDefaults standardUserDefaults] stringForKey: @"DATABASELOCATIONURL"]]
+                                              defaultButton:@"Quit"
+                                            alternateButton:@"Continue"
+                                                       icon:nil];
+                  NSModalSession session = [NSApp beginModalSessionForWindow:dialog];
+                  
+                  NSTimeInterval endTime = [NSDate timeIntervalSinceReferenceDate]+10*60; // if ignored, the dialog stays up for 10 minutes
+                  for (;;) {
+                     NSInteger r = [NSApp runModalSession:session];
+                     if (r == NSAlertDefaultReturn) // default button says Quit
+                        exit(0);
+                     else if (r == NSAlertAlternateReturn) // alternate button says Continue
+                        break;
+                     if ([[NSFileManager defaultManager] fileExistsAtPath:volumePath]) // the volume has become available, we can close the dialog
+                        break;
+                     if ([NSDate timeIntervalSinceReferenceDate] > endTime) { // time's out, we close the dialog
+                        NSLog(@"Warning: after waiting for 10 minutes, OsiriX is switching to the default database location because %@ is still not available", volumePath);
+                        break;
+                     }
+                  }
+                  
+                  [NSApp endModalSession:session];
+                  [dialog orderOut:self];
+                  
+                  @try {
+                     dataBasePath = [DicomDatabase baseDirPathForMode: [[NSUserDefaults standardUserDefaults] integerForKey:@"DATABASELOCATION"] path:[[NSUserDefaults standardUserDefaults] stringForKey: @"DATABASELOCATIONURL"]];
+                  }
+                  @catch (NSException *e) {
+                     [[NSUserDefaults standardUserDefaults] setInteger: 0 forKey: @"DATABASELOCATION"];
+                     [[NSUserDefaults standardUserDefaults] setInteger: 0 forKey: @"DEFAULT_DATABASELOCATION"];
+                  }
+               }
+            }
+            
+            // now, sometimes databases point to other volumes for data storage through the DBFOLDER_LOCATION file, so if it's the case verify that that volume is mounted, too
+            dataBasePath = [DicomDatabase baseDirPathForPath:dataBasePath]; // we know this is the ".../OsiriX Data" path
+            // TODO: sometimes people use an alias... and if it's an alias, we should check that it points to an available volume..... should.
+            NSString* dataBaseDataPath = [NSString stringWithContentsOfFile:[dataBasePath stringByAppendingPathComponent:@"DBFOLDER_LOCATION"] encoding:NSUTF8StringEncoding error:NULL];
+            if ([dataBaseDataPath hasPrefix:@"/Volumes/"]) {
+               NSString* volumePath = [[[dataBaseDataPath componentsSeparatedByString:@"/"] subarrayWithRange:NSMakeRange(0,3)] componentsJoinedByString:@"/"];
+               if (![[NSFileManager defaultManager] fileExistsAtPath:volumePath]) {
+                  NSPanel* dialog = [NSPanel alertWithTitle:@"OsiriX Data"
+                                                    message:[NSString stringWithFormat:NSLocalizedString(@"OsiriX is configured to use the database with data located at %@. This volume is currently not available, most likely because it hasn't yet been mounted by the system, or because it is not plugged in or is turned off, or because you don't have write permissions for this location. OsiriX will wait for a few minutes, then give up and ignore this highly dangerous situation.", nil), dataBaseDataPath]
+                                              defaultButton:@"Quit"
+                                            alternateButton:@"Continue"
+                                                       icon:nil];
+                  NSModalSession session = [NSApp beginModalSessionForWindow:dialog];
+                  
+                  NSTimeInterval endTime = [NSDate timeIntervalSinceReferenceDate]+10*60; // if ignored, the dialog stays up for 10 minutes
+                  for (;;) {
+                     NSInteger r = [NSApp runModalSession:session];
+                     if (r == NSAlertDefaultReturn) // default button says Quit
+                        exit(0);
+                     else if (r == NSAlertAlternateReturn) // alternate button says Continue
+                        break;
+                     if ([[NSFileManager defaultManager] fileExistsAtPath:volumePath]) // the volume has become available, we can close the dialog
+                        break;
+                     if ([NSDate timeIntervalSinceReferenceDate] > endTime) { // time's out, we close the dialog
+                        NSLog(@"Warning: after waiting for 10 minutes, OsiriX is switching to the default database location because %@ is still not available", volumePath);
+                        break;
+                     }
+                  }
+                  
+                  [NSApp endModalSession:session];
+                  [dialog orderOut:self];
+               }
+            }
+            
+            pluginManager = [[PluginManager alloc] init];
+            
+            //Add Endoscopy LUT, WL/WW, shading to existing prefs
+            // Shading Preset
+            NSMutableArray *shadingArray = [[[[NSUserDefaults standardUserDefaults] objectForKey:@"shadingsPresets"] mutableCopy] autorelease];
+            NSDictionary *shading;
+            BOOL exists = NO;
+            
+            exists = NO;
+            for (shading in shadingArray)
+            {
+               if ([[shading objectForKey:@"name"] isEqualToString:@"Endoscopy"])
+                  exists = YES;
+            }
+            
+            if (exists == NO)
+            {
+               shading = [NSMutableDictionary dictionary];
+               [shading setValue: @"Endoscopy" forKey: @"name"];
+               [shading setValue: @"0.12" forKey: @"ambient"];
+               [shading setValue: @"0.64" forKey: @"diffuse"];
+               [shading setValue: @"0.73" forKey: @"specular"];
+               [shading setValue: @"50" forKey: @"specularPower"];
+               [shadingArray addObject:shading];
+            }
+            
+            exists = NO;
+            for (shading in shadingArray)
+            {
+               if ([[shading objectForKey:@"name"] isEqualToString:@"Glossy Bone"])
+                  exists = YES;
+            }
+            
+            if (exists == NO)
+            {
+               shading = [NSMutableDictionary dictionary];
+               [shading setValue: @"Glossy Bone" forKey: @"name"];
+               [shading setValue: @"0.15" forKey: @"ambient"];
+               [shading setValue: @"0.24" forKey: @"diffuse"];
+               [shading setValue: @"1.17" forKey: @"specular"];
+               [shading setValue: @"6.98" forKey: @"specularPower"];
+               [shadingArray addObject:shading];
+            }
+            
+            exists = NO;
+            for (shading in shadingArray)
+            {
+               if ([[shading objectForKey:@"name"] isEqualToString:@"Glossy Vascular"])
+                  exists = YES;
+            }
+            
+            if (exists == NO)
+            {
+               shading = [NSMutableDictionary dictionary];
+               [shading setValue: @"Glossy Vascular" forKey: @"name"];
+               [shading setValue: @"0.15" forKey: @"ambient"];
+               [shading setValue: @"0.28" forKey: @"diffuse"];
+               [shading setValue: @"1.42" forKey: @"specular"];
+               [shading setValue: @"50" forKey: @"specularPower"];
+               [shadingArray addObject:shading];
+            }
+            
+            [[NSUserDefaults standardUserDefaults] setObject:shadingArray forKey:@"shadingsPresets"];
+            
+            // Endoscopy LUT
+            NSMutableDictionary *cluts = [[[[NSUserDefaults standardUserDefaults] objectForKey:@"CLUT"] mutableCopy] autorelease];
+            // fix bad CLUT in previous versions
+            NSDictionary *clut = [cluts objectForKey:@"Endoscopy"];
+            if (!clut || [[[clut objectForKey:@"Red"] objectAtIndex:0] intValue] != 240)
+            {
+               NSMutableDictionary *aCLUTFilter = [NSMutableDictionary dictionary];
+               NSMutableArray      *rArray = [NSMutableArray array];
+               NSMutableArray      *gArray = [NSMutableArray array];
+               NSMutableArray      *bArray = [NSMutableArray array];
+               for( i = 0; i < 256; i++)  {
+                  [bArray addObject: [NSNumber numberWithLong:(195 - (i * 0.26))]];
+                  [gArray addObject: [NSNumber numberWithLong:(187 - (i *0.26))]];
+                  [rArray addObject: [NSNumber numberWithLong:(240 + (i * 0.02))]];
+               }
+               [aCLUTFilter setObject:rArray forKey:@"Red"];
+               [aCLUTFilter setObject:gArray forKey:@"Green"];
+               [aCLUTFilter setObject:bArray forKey:@"Blue"];
+               
+               // Points & Colors
+               NSMutableArray *colors = [NSMutableArray array], *points = [NSMutableArray array];
+               [points addObject:[NSNumber numberWithLong: 0]];
+               [points addObject:[NSNumber numberWithLong: 255]];
+               
+               [colors addObject:[NSArray arrayWithObjects: [NSNumber numberWithFloat: 1], [NSNumber numberWithFloat: 1], [NSNumber numberWithFloat: 1], nil]];
+               [colors addObject:[NSArray arrayWithObjects: [NSNumber numberWithFloat: 0], [NSNumber numberWithFloat: 0], [NSNumber numberWithFloat: 0], nil]];
+               
+               
+               [aCLUTFilter setObject:colors forKey:@"Colors"];
+               [aCLUTFilter setObject:points forKey:@"Points"];
+               
+               [cluts setObject:aCLUTFilter forKey:@"Endoscopy"];
+               [[NSUserDefaults standardUserDefaults] setObject:cluts forKey:@"CLUT"];
+            }
+            
+            //ww/wl
+            NSMutableDictionary *wlwwValues = [[[[NSUserDefaults standardUserDefaults] objectForKey:@"WLWW3"] mutableCopy] autorelease];
+            NSDictionary *wwwl = [wlwwValues objectForKey:@"VR - Endoscopy"];
+            if (!wwwl)
+            {
+               [wlwwValues setObject:[NSArray arrayWithObjects:[NSNumber numberWithFloat:-300], [NSNumber numberWithFloat:700], nil] forKey:@"VR - Endoscopy"];
+               [[NSUserDefaults standardUserDefaults] setObject:wlwwValues forKey:@"WLWW3"];
+            }
+            
+            
+            // CREATE A TEMPORATY FILE DURING STARTUP
+            
+            NSString* path = [[DicomDatabase defaultBaseDirPath] stringByAppendingPathComponent:@"Loading"];
+            
+            if(  ![[NSUserDefaults standardUserDefaults] boolForKey: @"hideListenerError"]
+               && [[NSFileManager defaultManager] fileExistsAtPath: path]
+               ) NSLog(@"OsiriX crashed during last startup (there is a file showing it at: %@",path);
+            
+            [path writeToFile:path atomically:NO encoding: NSUTF8StringEncoding error: nil];
+            
+            Use_kdu_IfAvailable = [[NSUserDefaults standardUserDefaults] boolForKey:@"UseKDUForJPEG2000"];
+            
+            [Reports checkForWordTemplates];
+            [Reports checkForPagesTemplate];
+            [DCMPixelDataAttribute setUse_kdu_IfAvailable: Use_kdu_IfAvailable];
+            
+         }
+      }
+   }
+   @catch( NSException *ne)
+   {
+      NSLog(@"+initialize exception: %@", [ne description]);
+   }
+   
+}
+
+- (id)init
+{
+   @try
+   {
+      self = [super init];
+//      OsiriX = appController = self;
+      
+#ifndef OSIRIX_LIGHT
+      [DICOMTLS eraseKeys];
+#endif
+      [[NSFileManager defaultManager] removeItemAtPath:[[NSFileManager defaultManager] tmpDirPath] error:NULL];
+      
+      if ([[NSFileManager defaultManager] fileExistsAtPath:[[[[NSFileManager defaultManager] findSystemFolderOfType:kApplicationSupportFolderType forDomain:kLocalDomain] stringByAppendingPathComponent:[[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleNameKey]] stringByAppendingPathComponent:@"DLog.enable"]])
+         [N2Debug setActive:YES];
+      
+      //  NSLog(@"%@ -> %d", [[[[NSFileManager defaultManager] findSystemFolderOfType:kApplicationSupportFolderType forDomain:kLocalDomain] stringByAppendingPathComponent:[[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleNameKey]] stringByAppendingPathComponent:@"DLog.enable"], [N2Debug isActive]);
+      
+      PapyrusLock = [[NSRecursiveLock alloc] init];
+      STORESCP = [[NSRecursiveLock alloc] init];
+      STORESCPTLS = [[NSRecursiveLock alloc] init];
+      
+      [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(getUrl:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
+      
+      [VRView testGraphicBoard];
+   }
+   @catch (NSException * e)
+   {
+      NSRunCriticalAlertPanel(NSLocalizedString(@"Error", nil), @"%@", NSLocalizedString(@"OK", nil), nil, nil, e.reason);
+      
+      N2LogExceptionWithStackTrace(e);
+   }
+   
+   return self;
+}
+
+#pragma mark -
 
 + (void) createNoIndexDirectoryIfNecessary:(NSString*) path { // __deprecated
 	[[NSFileManager defaultManager] confirmNoIndexDirectoryAtPath:path];
@@ -1786,76 +2151,6 @@ static NSDate *lastWarningDate = nil;
 	}
 }
 
-- (void) startDICOMBonjour:(NSTimer*) t
-{
-	NSLog( @"startDICOMBonjour");
-
-	BonjourDICOMService = [[NSNetService alloc] initWithDomain:@"" type:@"_dicom._tcp." name: [[NSUserDefaults standardUserDefaults] stringForKey: @"AETITLE"] port:[[[NSUserDefaults standardUserDefaults] stringForKey: @"AEPORT"] intValue]];
-	
-	NSString* description = [NSUserDefaults bonjourSharingName];
-	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-	
-	if( description && [description length] > 0)
-		[dict setValue: description forKey: @"serverDescription"];
-	
-	[dict setValue: [[NSUserDefaults standardUserDefaults] stringForKey: @"AETITLE"] forKey: @"AETitle"]; 
-	[dict setValue:[AppController UID] forKey: @"UID"]; 
-	
-	if( [[NSUserDefaults standardUserDefaults] boolForKey: @"activateCGETSCP"])
-		[dict setValue: @"YES" forKey: @"CGET"]; // TXTRECORD doesnt support NSNumber
-	else
-		[dict setValue: @"NO" forKey: @"CGET"];  // TXTRECORD doesnt support NSNumber
-	
-	if( [[NSUserDefaults standardUserDefaults] boolForKey: @"httpWebServer"] && [[NSUserDefaults standardUserDefaults] boolForKey: @"wadoServer"])
-	{
-		int port = [NSUserDefaults webPortalPortNumber];
-		[dict setValue: @"YES" forKey: @"WADO"]; // TXTRECORD doesnt support NSNumber
-		[dict setValue: [NSString stringWithFormat:@"%d", port] forKey: @"WADOPort"];
-		[dict setValue: @"/wado" forKey: @"WADOURL"];
-		
-		if( [[NSUserDefaults standardUserDefaults] boolForKey: @"encryptedWebServer"])
-			[dict setValue: @"https" forKey: @"WADOProtocol"];
-		else
-			[dict setValue: @"http" forKey: @"WADOProtocol"];
-	}
-	
-	switch( [[NSUserDefaults standardUserDefaults] integerForKey: @"preferredSyntaxForIncoming"])
-	{
-		case 0:
-			[dict setValue: @"LittleEndianImplicit" forKey: @"preferredSyntax"];
-		break;
-		case 21:
-			[dict setValue: @"JPEGProcess14SV1TransferSyntax" forKey: @"preferredSyntax"];
-		break;
-		case 26:
-			[dict setValue: @"JPEG2000LosslessOnly" forKey: @"preferredSyntax"];
-		break;
-		case 27:
-			[dict setValue: @"JPEG2000" forKey: @"preferredSyntax"];
-		break;
-		case 22:
-			[dict setValue: @"RLELossless" forKey: @"preferredSyntax"];
-		break;
-        case 23:
-			[dict setValue: @"JPEGLSLossless" forKey: @"preferredSyntax"];
-            break;
-        case 24:
-			[dict setValue: @"JPEGLSLossy" forKey: @"preferredSyntax"];
-            break;
-		default:
-			[dict setValue: @"LittleEndianExplicit" forKey: @"preferredSyntax"];
-		break;
-	}
-	
-	[BonjourDICOMService setTXTRecordData: [NSNetService dataFromTXTRecordDictionary: dict]];
-		
-	[BonjourDICOMService setDelegate: self];
-	[BonjourDICOMService publish];
-	
-	[[DCMNetServiceDelegate sharedNetServiceDelegate] setPublisher: BonjourDICOMService];
-}
-
-
 #pragma mark-
 
 -(void) restartSTORESCP
@@ -1944,12 +2239,6 @@ static NSDate *lastWarningDate = nil;
 	[BonjourDICOMService stop];
 	[BonjourDICOMService release];
 	BonjourDICOMService = nil;
-	
-	if ([[NSUserDefaults standardUserDefaults] boolForKey:@"publishDICOMBonjour"])
-	{
-		//Start DICOM Bonjour 
-		[NSTimer scheduledTimerWithTimeInterval: 5 target: self selector: @selector(startDICOMBonjour:) userInfo: nil repeats: NO];
-	}
 }
 
 -(void) displayError: (NSString*) err
@@ -2517,385 +2806,6 @@ static BOOL firstCall = YES;
 	[NSApp terminate: sender];
 }
 
-- (id)init
-{
-    @try
-    {
-        self = [super init];
-        OsiriX = appController = self;
-        
-#ifndef OSIRIX_LIGHT
-        [DICOMTLS eraseKeys];
-#endif
-        [[NSFileManager defaultManager] removeItemAtPath:[[NSFileManager defaultManager] tmpDirPath] error:NULL];
-        
-        if ([[NSFileManager defaultManager] fileExistsAtPath:[[[[NSFileManager defaultManager] findSystemFolderOfType:kApplicationSupportFolderType forDomain:kLocalDomain] stringByAppendingPathComponent:[[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleNameKey]] stringByAppendingPathComponent:@"DLog.enable"]])
-            [N2Debug setActive:YES];
-        
-    //  NSLog(@"%@ -> %d", [[[[NSFileManager defaultManager] findSystemFolderOfType:kApplicationSupportFolderType forDomain:kLocalDomain] stringByAppendingPathComponent:[[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleNameKey]] stringByAppendingPathComponent:@"DLog.enable"], [N2Debug isActive]);
-        
-        PapyrusLock = [[NSRecursiveLock alloc] init];
-        STORESCP = [[NSRecursiveLock alloc] init];
-        STORESCPTLS = [[NSRecursiveLock alloc] init];
-        
-        [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(getUrl:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
-        
-        #ifndef OSIRIX_LIGHT
-        [VRView testGraphicBoard];
-        #endif
-    }
-    @catch (NSException * e)
-    {
-        NSRunCriticalAlertPanel(NSLocalizedString(@"Error", nil), @"%@", NSLocalizedString(@"OK", nil), nil, nil, e.reason);
-        
-        N2LogExceptionWithStackTrace(e);
-    }
-        
-	return self;
-}
-
-
-static BOOL initialized = NO;
-static BOOL _hasMacOSXLion=NO;
-static BOOL _hasMacOSXSnowLeopard=NO;
-+(BOOL) hasMacOSXLion { return _hasMacOSXLion;}
-+(BOOL) hasMacOSXSnowLeopard { return _hasMacOSXSnowLeopard;}
-
-+ (void) initialize
-{
-   NSOperatingSystemVersion osv=[[NSProcessInfo processInfo]  operatingSystemVersion];
-   NSLog(@"macos %d.%d.%d",osv.majorVersion,osv.minorVersion,osv.patchVersion);
-   int osxaabbc=(osv.majorVersion*1000)+(osv.minorVersion*10)+osv.patchVersion;
-   _hasMacOSXLion=(osxaabbc > 10074);
-   _hasMacOSXSnowLeopard=(osxaabbc > 10059);
-   
-	@try
-	{
-		if ( self == [AppController class] && initialized == NO)
-		{
-			if( [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundlePackageType"] isEqualToString: @"APPL"])
-			{
-				 [NSThread detachNewThreadSelector: @selector(DNSResolve:) toTarget: self withObject: nil];
-							
-				 initialized = YES;
-				
-				 long	i;
-				
-				 srandom(time(NULL));
-				
-            
-             int processors;
-             int mib[2] = {CTL_HW, HW_NCPU};
-             size_t dataLen = sizeof(int); // 'num' is an 'int'
-             int result = sysctl(mib, 2, &processors, &dataLen, NULL, 0);
-             if (result == -1)
-                 processors = 1;
-            
-             NSString *bits = @"32-bit";
-             if( sizeof( long) == 8)
-                 bits = @"64-bit";
-            
-             NSLog(@"*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*");
-				 NSLog(@"Number of processors: %d / %d", processors, (int) [[NSProcessInfo processInfo] processorCount]);
-                NSLog(@"Number of screens: %d", (int) [[NSScreen screens] count]);
-				 NSLog(@"Main screen backingScaleFactor: %f", (float) [[NSScreen mainScreen] backingScaleFactor]);
-                NSLog(@"Version: %@ - %@ - %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey], [[[NSBundle mainBundle] infoDictionary] objectForKey: @"CFBundleShortVersionString"], bits);
-                NSArray *components = [[[NSBundle mainBundle] pathForResource: @"Localizable" ofType: @"strings"] pathComponents];
-                if( components.count > 3)
-                    NSLog(@"Localization: %@", [components objectAtIndex: components.count -2]);
-				#ifdef NDEBUG
-				#else
-				NSLog( @"**** DEBUG MODE ****");
-				#endif
-				
-				// ** REGISTER DEFAULTS DICTIONARY
-                
-				[[NSUserDefaults standardUserDefaults] registerDefaults: [DefaultsOsiriX getDefaults]];
-                
-                
-                if( [BrowserController _currentModifierFlags] & NSCommandKeyMask && [BrowserController _currentModifierFlags] & NSAlternateKeyMask)
-                {
-                    NSInteger result = NSRunInformationalAlertPanel( NSLocalizedString(@"Reset Preferences", nil), NSLocalizedString(@"Are you sure you want to reset ALL preferences of OsiriX? All the preferences will be reseted to their default values.", nil), NSLocalizedString(@"Cancel",nil), NSLocalizedString(@"OK",nil),  nil);
-                    
-                    if( result == NSAlertAlternateReturn)
-                    {
-                        for( NSString *k in [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys])
-                            [[NSUserDefaults standardUserDefaults] removeObjectForKey: k];
-                        
-                        [[NSUserDefaults standardUserDefaults] synchronize];
-                    }
-                }
-                
-                
-                
-                [[NSUserDefaults standardUserDefaults] setInteger:200 forKey:@"NSInitialToolTipDelay"];
-                [[NSUserDefaults standardUserDefaults] setBool: NO forKey: @"DontUseUndoQueueForROIs"];
-                [[NSUserDefaults standardUserDefaults] setInteger: 20 forKey: @"UndoQueueSize"];
-                
-                // AutoClean evolution: old defaults AUTOCLEANINGSPACEPRODUCED and AUTOCLEANINGSPACEOPENED are merged into AutocleanSpaceMode
-                if ([[NSUserDefaults standardUserDefaults] objectForKey:@"AutocleanSpaceMode"] == nil) {
-                    BOOL cleanOldest = [[[NSUserDefaults standardUserDefaults] objectForKey:@"AUTOCLEANINGSPACEPRODUCED"] boolValue];
-                    BOOL cleanOldestUnopened = [[[NSUserDefaults standardUserDefaults] objectForKey:@"AUTOCLEANINGSPACEOPENED"] boolValue];
-                    if (!cleanOldest && !cleanOldestUnopened) {
-                        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AUTOCLEANINGSPACE"];
-                        [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"AutocleanSpaceMode"];
-                    } else if (cleanOldestUnopened) {
-                        [[NSUserDefaults standardUserDefaults] setInteger:1 forKey:@"AutocleanSpaceMode"];
-                    } else 
-                        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:@"AutocleanSpaceMode"];
-                }
-                
-				[[NSUserDefaults standardUserDefaults] setInteger: [[NSUserDefaults standardUserDefaults] integerForKey: @"DEFAULT_DATABASELOCATION"] forKey: @"DATABASELOCATION"];
-				[[NSUserDefaults standardUserDefaults] setObject: [[NSUserDefaults standardUserDefaults] stringForKey: @"DEFAULT_DATABASELOCATIONURL"] forKey: @"DATABASELOCATIONURL"];
-				
-                [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"OSIEnvironmentActivated"];
-				[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"is12bitPluginAvailable"];
-//				[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"DONTCOPYWLWWSETTINGS"];
-				[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ROITEXTNAMEONLY"];
-				
-				if( [[NSUserDefaults standardUserDefaults] objectForKey: @"copyHideListenerError"])
-					[[NSUserDefaults standardUserDefaults] setBool: [[NSUserDefaults standardUserDefaults] boolForKey: @"copyHideListenerError"] forKey: @"hideListenerError"];
-				
-				[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"MACAPPSTORE"]; // Also modify in DefaultsOsiriX.m
-				[[NSUserDefaults standardUserDefaults] setObject: NSLocalizedString( @"(Current User Documents folder)", nil) forKey:@"DefaultDatabasePath"];
-				
-				#ifdef __LP64__
-				[[NSUserDefaults standardUserDefaults] setBool:YES forKey: @"LP64bit"];
-				#else
-				[[NSUserDefaults standardUserDefaults] setBool:NO forKey: @"LP64bit"];
-				#endif
-                
-            
-                // if we are loading a database that isn't on the root volume, then we must wait for it to load - if it doesn't become available after a few minutes, then we'll just let osirix switch to the db at ~/Documents as it would do anyway
-                
-                NSString* dataBasePath = nil;
-                @try {
-                    dataBasePath = [DicomDatabase baseDirPathForMode: [[NSUserDefaults standardUserDefaults] integerForKey:@"DATABASELOCATION"] path:[[NSUserDefaults standardUserDefaults] stringForKey: @"DATABASELOCATIONURL"]];
-                }
-                @catch (NSException *e) {
-                    N2LogException( e);
-                }
-                
-                if ([dataBasePath hasPrefix:@"/Volumes/"] || dataBasePath == nil) {
-                    NSString* volumePath = [[[dataBasePath componentsSeparatedByString:@"/"] subarrayWithRange:NSMakeRange(0,3)] componentsJoinedByString:@"/"];
-                    if (![[NSFileManager defaultManager] fileExistsAtPath:volumePath]) {
-                        NSPanel* dialog = [NSPanel alertWithTitle:@"OsiriX Data"
-                                                          message:[NSString stringWithFormat:NSLocalizedString(@"OsiriX is configured to use the database located at %@. This volume is currently not available, most likely because it hasn't yet been mounted by the system, or because it is not plugged in or is turned off, or because you don't have write permissions for this location. OsiriX will wait for a few minutes, then give up and switch to a database in the current user's home directory.", nil), [[NSUserDefaults standardUserDefaults] stringForKey: @"DATABASELOCATIONURL"]]
-                                                    defaultButton:@"Quit"
-                                                  alternateButton:@"Continue"
-                                                             icon:nil];
-                        NSModalSession session = [NSApp beginModalSessionForWindow:dialog];
-                        
-                        NSTimeInterval endTime = [NSDate timeIntervalSinceReferenceDate]+10*60; // if ignored, the dialog stays up for 10 minutes
-                        for (;;) {
-                            NSInteger r = [NSApp runModalSession:session];
-                            if (r == NSAlertDefaultReturn) // default button says Quit
-                                exit(0);
-                            else if (r == NSAlertAlternateReturn) // alternate button says Continue
-                                break;
-                            if ([[NSFileManager defaultManager] fileExistsAtPath:volumePath]) // the volume has become available, we can close the dialog
-                                break;
-                            if ([NSDate timeIntervalSinceReferenceDate] > endTime) { // time's out, we close the dialog
-                                NSLog(@"Warning: after waiting for 10 minutes, OsiriX is switching to the default database location because %@ is still not available", volumePath);
-                                break;
-                            }
-                        }
-                        
-                        [NSApp endModalSession:session];
-                        [dialog orderOut:self];
-                        
-                        @try {
-                            dataBasePath = [DicomDatabase baseDirPathForMode: [[NSUserDefaults standardUserDefaults] integerForKey:@"DATABASELOCATION"] path:[[NSUserDefaults standardUserDefaults] stringForKey: @"DATABASELOCATIONURL"]];
-                        }
-                        @catch (NSException *e) {
-                            [[NSUserDefaults standardUserDefaults] setInteger: 0 forKey: @"DATABASELOCATION"];
-                            [[NSUserDefaults standardUserDefaults] setInteger: 0 forKey: @"DEFAULT_DATABASELOCATION"];
-                        }
-                    }
-                }
-                
-                // now, sometimes databases point to other volumes for data storage through the DBFOLDER_LOCATION file, so if it's the case verify that that volume is mounted, too
-                dataBasePath = [DicomDatabase baseDirPathForPath:dataBasePath]; // we know this is the ".../OsiriX Data" path
-                // TODO: sometimes people use an alias... and if it's an alias, we should check that it points to an available volume..... should.
-                NSString* dataBaseDataPath = [NSString stringWithContentsOfFile:[dataBasePath stringByAppendingPathComponent:@"DBFOLDER_LOCATION"] encoding:NSUTF8StringEncoding error:NULL];
-                if ([dataBaseDataPath hasPrefix:@"/Volumes/"]) {
-                    NSString* volumePath = [[[dataBaseDataPath componentsSeparatedByString:@"/"] subarrayWithRange:NSMakeRange(0,3)] componentsJoinedByString:@"/"];
-                    if (![[NSFileManager defaultManager] fileExistsAtPath:volumePath]) {
-                        NSPanel* dialog = [NSPanel alertWithTitle:@"OsiriX Data"
-                                                          message:[NSString stringWithFormat:NSLocalizedString(@"OsiriX is configured to use the database with data located at %@. This volume is currently not available, most likely because it hasn't yet been mounted by the system, or because it is not plugged in or is turned off, or because you don't have write permissions for this location. OsiriX will wait for a few minutes, then give up and ignore this highly dangerous situation.", nil), dataBaseDataPath]
-                                                    defaultButton:@"Quit"
-                                                  alternateButton:@"Continue"
-                                                             icon:nil];
-                        NSModalSession session = [NSApp beginModalSessionForWindow:dialog];
-                        
-                        NSTimeInterval endTime = [NSDate timeIntervalSinceReferenceDate]+10*60; // if ignored, the dialog stays up for 10 minutes
-                        for (;;) {
-                            NSInteger r = [NSApp runModalSession:session];
-                            if (r == NSAlertDefaultReturn) // default button says Quit
-                                exit(0);
-                            else if (r == NSAlertAlternateReturn) // alternate button says Continue
-                                break;
-                            if ([[NSFileManager defaultManager] fileExistsAtPath:volumePath]) // the volume has become available, we can close the dialog
-                                break;
-                            if ([NSDate timeIntervalSinceReferenceDate] > endTime) { // time's out, we close the dialog
-                                NSLog(@"Warning: after waiting for 10 minutes, OsiriX is switching to the default database location because %@ is still not available", volumePath);
-                                break;
-                            }
-                        }
-                        
-                        [NSApp endModalSession:session];
-                        [dialog orderOut:self];
-                    }
-                }
-                
-            pluginManager = [[PluginManager alloc] init];
-                
-				//Add Endoscopy LUT, WL/WW, shading to existing prefs
-				// Shading Preset
-				NSMutableArray *shadingArray = [[[[NSUserDefaults standardUserDefaults] objectForKey:@"shadingsPresets"] mutableCopy] autorelease];
-				NSDictionary *shading;
-				BOOL exists = NO;
-				
-				exists = NO;
-				for (shading in shadingArray)
-				{
-					if ([[shading objectForKey:@"name"] isEqualToString:@"Endoscopy"])
-						exists = YES;					
-				}
-				
-				if (exists == NO)
-				{
-					shading = [NSMutableDictionary dictionary];
-					[shading setValue: @"Endoscopy" forKey: @"name"];
-					[shading setValue: @"0.12" forKey: @"ambient"];
-					[shading setValue: @"0.64" forKey: @"diffuse"];
-					[shading setValue: @"0.73" forKey: @"specular"];
-					[shading setValue: @"50" forKey: @"specularPower"];
-					[shadingArray addObject:shading];
-				}
-				
-				exists = NO;
-				for (shading in shadingArray)
-				{
-					if ([[shading objectForKey:@"name"] isEqualToString:@"Glossy Bone"])
-						exists = YES;					
-				}
-				
-				if (exists == NO)
-				{
-					shading = [NSMutableDictionary dictionary];
-					[shading setValue: @"Glossy Bone" forKey: @"name"];
-					[shading setValue: @"0.15" forKey: @"ambient"];
-					[shading setValue: @"0.24" forKey: @"diffuse"];
-					[shading setValue: @"1.17" forKey: @"specular"];
-					[shading setValue: @"6.98" forKey: @"specularPower"];
-					[shadingArray addObject:shading];
-				}
-				
-				exists = NO;
-				for (shading in shadingArray)
-				{
-					if ([[shading objectForKey:@"name"] isEqualToString:@"Glossy Vascular"])
-						exists = YES;					
-				}
-				
-				if (exists == NO)
-				{
-					shading = [NSMutableDictionary dictionary];
-					[shading setValue: @"Glossy Vascular" forKey: @"name"];
-					[shading setValue: @"0.15" forKey: @"ambient"];
-					[shading setValue: @"0.28" forKey: @"diffuse"];
-					[shading setValue: @"1.42" forKey: @"specular"];
-					[shading setValue: @"50" forKey: @"specularPower"];
-					[shadingArray addObject:shading];
-				}
-				
-				[[NSUserDefaults standardUserDefaults] setObject:shadingArray forKey:@"shadingsPresets"];
-				
-				// Endoscopy LUT
-				NSMutableDictionary *cluts = [[[[NSUserDefaults standardUserDefaults] objectForKey:@"CLUT"] mutableCopy] autorelease];
-				// fix bad CLUT in previous versions
-				NSDictionary *clut = [cluts objectForKey:@"Endoscopy"];
-				if (!clut || [[[clut objectForKey:@"Red"] objectAtIndex:0] intValue] != 240)
-				{
-						NSMutableDictionary *aCLUTFilter = [NSMutableDictionary dictionary];
-						NSMutableArray		*rArray = [NSMutableArray array];
-						NSMutableArray		*gArray = [NSMutableArray array];
-						NSMutableArray		*bArray = [NSMutableArray array];
-						for( i = 0; i < 256; i++)  {
-							[bArray addObject: [NSNumber numberWithLong:(195 - (i * 0.26))]];
-							[gArray addObject: [NSNumber numberWithLong:(187 - (i *0.26))]];
-							[rArray addObject: [NSNumber numberWithLong:(240 + (i * 0.02))]];
-						}
-					[aCLUTFilter setObject:rArray forKey:@"Red"];
-					[aCLUTFilter setObject:gArray forKey:@"Green"];
-					[aCLUTFilter setObject:bArray forKey:@"Blue"];
-			
-					// Points & Colors
-					NSMutableArray *colors = [NSMutableArray array], *points = [NSMutableArray array];
-					[points addObject:[NSNumber numberWithLong: 0]];
-					[points addObject:[NSNumber numberWithLong: 255]];
-			
-					[colors addObject:[NSArray arrayWithObjects: [NSNumber numberWithFloat: 1], [NSNumber numberWithFloat: 1], [NSNumber numberWithFloat: 1], nil]];
-					[colors addObject:[NSArray arrayWithObjects: [NSNumber numberWithFloat: 0], [NSNumber numberWithFloat: 0], [NSNumber numberWithFloat: 0], nil]];
-
-			
-					[aCLUTFilter setObject:colors forKey:@"Colors"];
-					[aCLUTFilter setObject:points forKey:@"Points"];
-						
-					[cluts setObject:aCLUTFilter forKey:@"Endoscopy"];
-					[[NSUserDefaults standardUserDefaults] setObject:cluts forKey:@"CLUT"];
-				}
-				
-				//ww/wl
-				NSMutableDictionary *wlwwValues = [[[[NSUserDefaults standardUserDefaults] objectForKey:@"WLWW3"] mutableCopy] autorelease];
-				NSDictionary *wwwl = [wlwwValues objectForKey:@"VR - Endoscopy"];
-				if (!wwwl)
-                {
-					[wlwwValues setObject:[NSArray arrayWithObjects:[NSNumber numberWithFloat:-300], [NSNumber numberWithFloat:700], nil] forKey:@"VR - Endoscopy"];
-					[[NSUserDefaults standardUserDefaults] setObject:wlwwValues forKey:@"WLWW3"];
-				}
-				
-                
-				// CREATE A TEMPORATY FILE DURING STARTUP
-				
-				NSString* path = [[DicomDatabase defaultBaseDirPath] stringByAppendingPathComponent:@"Loading"];
-                
-                if( [[NSUserDefaults standardUserDefaults] boolForKey: @"hideListenerError"] == NO)
-                {
-                    if( [[NSFileManager defaultManager] fileExistsAtPath: path])
-                    {
-                        int result = NSRunInformationalAlertPanel(NSLocalizedString(@"OsiriX crashed during last startup", nil), NSLocalizedString(@"Previous crash is maybe related to a corrupt database or corrupted images.\r\rShould I run OsiriX in Protected Mode (recommended) (no images displayed)? To allow you to delete the crashing/corrupted images/studies.\r\rOr Should I rebuild the local database? All albums, comments and status will be lost.", nil), NSLocalizedString(@"Continue normally",nil), NSLocalizedString(@"Protected Mode",nil), NSLocalizedString(@"Rebuild Database",nil));
-                        
-                        if( result == NSAlertOtherReturn)
-                        {
-                            NEEDTOREBUILD = YES;
-                            COMPLETEREBUILD = YES;
-                        }
-                        if( result == NSAlertAlternateReturn) [DCMPix setRunOsiriXInProtectedMode: YES];
-                    }
-                }
-                
-                [path writeToFile:path atomically:NO encoding: NSUTF8StringEncoding error: nil];
-				
-				Use_kdu_IfAvailable = [[NSUserDefaults standardUserDefaults] boolForKey:@"UseKDUForJPEG2000"];
-				
-				#ifndef OSIRIX_LIGHT
-                [Reports checkForWordTemplates];
-				[Reports checkForPagesTemplate];
-				[DCMPixelDataAttribute setUse_kdu_IfAvailable: Use_kdu_IfAvailable];
-				#endif
-				
-			}
-		}
-	}
-	@catch( NSException *ne)
-	{
-		NSLog(@"+initialize exception: %@", [ne description]);
-	}
-	
-}
-
 #pragma mark-
 
 - (void) killDICOMListenerWait: (BOOL) wait
@@ -3274,62 +3184,27 @@ static BOOL _hasMacOSXSnowLeopard=NO;
 
 - (void) applicationWillFinishLaunching: (NSNotification *) aNotification
 {
-    [AppController cleanOsiriXSubProcesses];
+   NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+   
+   [AppController cleanOsiriXSubProcesses];
     
-    if( [NSDate timeIntervalSinceReferenceDate] - [[NSUserDefaults standardUserDefaults] doubleForKey: @"lastDate32bitPipelineCheck"] > 60L*60L*24L) // 1 days
-	{
-		[[NSUserDefaults standardUserDefaults] setDouble: [NSDate timeIntervalSinceReferenceDate] forKey: @"lastDate32bitPipelineCheck"];
-		[self verifyHardwareInterpolation];
-	}
-    
-	BOOL dialog = NO;
-    
-	if( [[NSFileManager defaultManager] fileExistsAtPath: @"/tmp/"] == NO)
-		[[NSFileManager defaultManager] createDirectoryAtPath: @"/tmp/" attributes: nil];
+   [self verifyHardwareInterpolation];
+
+   
+	if( ![[NSFileManager defaultManager] fileExistsAtPath: @"/tmp/"])
+      [[NSFileManager defaultManager] createDirectoryAtPath:@"/tmp/" withIntermediateDirectories:NO attributes:nil error:nil];
 	
-    
-    NSMutableArray *dbArray = [[[[NSUserDefaults standardUserDefaults] arrayForKey: @"localDatabasePaths"] deepMutableCopy] autorelease];
-    NSMutableArray *toBeRemoved = [NSMutableArray array];
-    for( NSMutableDictionary *d in dbArray)
-	{
-		if( [[d valueForKey:@"Path"] hasPrefix: @"/tmp/"] || [[d valueForKey:@"Path"] hasPrefix: @"/private/tmp/"] || [[d valueForKey:@"Path"] hasPrefix: @"/private/var/tmp/"])
-			[toBeRemoved addObject: d];
-	}
-    if( toBeRemoved.count)
-    {
-        [dbArray removeObjectsInArray: toBeRemoved];
-        [[NSUserDefaults standardUserDefaults] setObject: dbArray forKey: @"localDatabasePaths"];
-    }
-    
-	if( [[NSUserDefaults standardUserDefaults] valueForKey: @"timeZone"])
-	{
-		if( [[NSUserDefaults standardUserDefaults] integerForKey: @"timeZone"] != [[NSTimeZone localTimeZone] secondsFromGMT])
-		{
-		//	NSLog( @"***** Time zone has changed: this modification can affect study dates, study times and birth dates!");
-		//	[NSTimeZone setDefaultTimeZone: [NSTimeZone timeZoneForSecondsFromGMT: [[NSUserDefaults standardUserDefaults] integerForKey: @"timeZone"]]];
-		}
-	}
-	else [[NSUserDefaults standardUserDefaults] setInteger: [[NSTimeZone localTimeZone] secondsFromGMT] forKey: @"timeZone"];
+    if ([[d valueForKey:@"COPYDATABASEMODE"] intValue] == 1) // tag 1 "if on CD", disappeared after new CD/DVD import system
+        [d setInteger:2 forKey:@"COPYDATABASEMODE"];
 	
-    if ([[[NSUserDefaults standardUserDefaults] valueForKey:@"COPYDATABASEMODE"] intValue] == 1) // tag 1 "if on CD", disappeared after new CD/DVD import system
-        [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"COPYDATABASEMODE"];
-        
-//	NSLog(@"%s", __PRETTY_FUNCTION__, nil);
 	
-	if( dialog == NO)
-	{
-		
-	}
-	
-	#ifndef OSIRIX_LIGHT
-	#ifndef MACAPPSTORE
-    if( [[NSUserDefaults standardUserDefaults] boolForKey: @"hideListenerError"] == NO)
+    if( [d boolForKey: @"hideListenerError"] == NO)
     {
         @try
         {
             ILCrashReporter *reporter = [ILCrashReporter defaultReporter];
             
-            NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+           
             
             if( [d valueForKey: @"crashReporterSMTPServer"]) {
                 reporter.SMTPServer = [d valueForKey: @"crashReporterSMTPServer"];
@@ -3343,44 +3218,42 @@ static BOOL _hasMacOSXSnowLeopard=NO;
             if( [d valueForKey: @"crashReporterFromAddress"])
                 reporter.fromAddress = [d valueForKey: @"crashReporterFromAddress"];
             
-            NSString *reportAddr = @"crash@osirix-viewer.com";
+            NSString *reportAddr = @"jacquesfauquex@gmail.com";
             if( [d valueForKey: @"crashReporterToAddress"])
                 reportAddr = [d valueForKey: @"crashReporterToAddress"];
             
             reporter.automaticReport = [d boolForKey: @"crashReporterAutomaticReport"];
             
-            [reporter launchReporterForCompany: @"OsiriX Developers" reportAddr: reportAddr];
+            [reporter launchReporterForCompany: @"opendicom" reportAddr: reportAddr];
         }
         @catch (NSException *e)
         {
             NSLog( @"**** Exception ILCrashReporter: %@", e);
         }
     }
-	#endif
-	#endif
 	
    //passes IBOutlets to be filled to PluginManager
 	[PluginManager setMenus:filtersMenu :roisMenu :othersMenu :dbMenu];
     
 	appController = self;
+   
+   
+#pragma mark dcmtk with watchdog...
 	[self initDCMTK];
 	[self restartSTORESCP];
-	
 	[NSTimer scheduledTimerWithTimeInterval: 2 target: self selector: @selector(checkForRestartStoreSCPOrder:) userInfo: nil repeats: YES];
 	
 	[DicomDatabase initializeDicomDatabaseClass];
 	[BrowserController initializeBrowserControllerClass];
-	#ifndef OSIRIX_LIGHT
 	[WebPortal initializeWebPortalClass];
-    _bonjourPublisher = [[BonjourPublisher alloc] init];
-	#endif
-	
-	#ifndef OSIRIX_LIGHT
-	if( [[NSUserDefaults standardUserDefaults] boolForKey:@"httpXMLRPCServer"]) {
+   //JF bonjour no
+   //_bonjourPublisher = [[BonjourPublisher alloc] init];
+
+	if( [d boolForKey:@"httpXMLRPCServer"]) {
 		if(XMLRPCServer == nil) XMLRPCServer = [[XMLRPCInterface alloc] init];
 	}
-	#endif
 	
+#pragma mark notifications
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver: self
            selector: @selector(UpdateWLWWMenu:)
@@ -3399,127 +3272,77 @@ static BOOL _hasMacOSXSnowLeopard=NO;
                name: OsirixUpdateOpacityMenuNotification
              object: nil];
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName: OsirixUpdateOpacityMenuNotification object: NSLocalizedString(@"Linear Table", nil) userInfo: nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName: OsirixUpdateCLUTMenuNotification object: NSLocalizedString(@"No CLUT", nil) userInfo: nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName: OsirixUpdateWLWWMenuNotification object: NSLocalizedString(@"Other", nil) userInfo: nil];
-	[[NSNotificationCenter defaultCenter] postNotificationName: OsirixUpdateConvolutionMenuNotification object:NSLocalizedString( @"No Filter", nil) userInfo: nil];
+	[nc postNotificationName: OsirixUpdateOpacityMenuNotification
+                     object: NSLocalizedString(@"Linear Table", nil)
+                   userInfo: nil];
+	[nc postNotificationName: OsirixUpdateCLUTMenuNotification
+                     object: NSLocalizedString(@"No CLUT", nil)
+                   userInfo: nil];
+	[nc postNotificationName: OsirixUpdateWLWWMenuNotification
+                     object: NSLocalizedString(@"Other", nil)
+                   userInfo: nil];
+	[nc postNotificationName: OsirixUpdateConvolutionMenuNotification
+                     object:NSLocalizedString( @"No Filter", nil)
+                   userInfo: nil];
 	
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidChangeScreenParameters:) name:NSApplicationDidChangeScreenParametersNotification object:NSApp];
+    [nc addObserver:self selector:@selector(applicationDidChangeScreenParameters:)
+               name:NSApplicationDidChangeScreenParametersNotification
+             object:NSApp];
     
     [AppController resetThumbnailsList];
 	
-//	if( USETOOLBARPANEL) [[toolbarPanel window] makeKeyAndOrderFront:self];
-	
-// Increment the startup counter.
-	
-	long startCount = [[NSUserDefaults standardUserDefaults] integerForKey: @"STARTCOUNT"];
-	[[NSUserDefaults standardUserDefaults] setInteger: startCount+1 forKey: @"STARTCOUNT"];
-	
-	if (startCount == 0) // Replaces FIRSTTIME.
-	{
-		switch( NSRunInformationalAlertPanel( NSLocalizedString(@"OsiriX Updates", nil), NSLocalizedString( @"Would you like to activate automatic checking for updates?", nil), NSLocalizedString( @"Yes", nil), NSLocalizedString( @"No", nil), nil))
-		{
-			case 0:
-				[[NSUserDefaults standardUserDefaults] setObject: @"NO" forKey: @"CheckOsiriXUpdates4"];
-			break;
-		}
-	}
-	else
-	{
-		if (![[NSUserDefaults standardUserDefaults] boolForKey: @"SURVEYDONE5"])
-		{
-//			if ([[NSUserDefaults standardUserDefaults] integerForKey: @"STARTCOUNT2"] > 20)
-//			{
-//				switch( NSRunInformationalAlertPanel(@"OsiriX", @"Thank you for using OsiriX!\rDo you agree to answer a small survey to improve OsiriX?", @"Yes, sure!", @"Maybe next time", nil))
-//				{
-//					case 1:
-//					{
-//						Survey		*survey = [[Survey alloc] initWithWindowNibName:@"Survey"];
-//						[[survey window] center];
-//						[survey showWindow:self];
-//					}
-//						break;
-//				}
-//			}
-			
-//			if( [[NSCalendarDate dateWithYear:2009 month:10 day:14 hour:12 minute:0 second:0 timeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]] timeIntervalSinceNow] > 0 &&
-//				[[NSCalendarDate dateWithYear:2009 month:9 day:1 hour:12 minute:0 second:0 timeZone:[NSTimeZone timeZoneWithAbbreviation:@"EST"]] timeIntervalSinceNow] < 0)
-//			{
-//				Survey *survey = [[Survey alloc] initWithWindowNibName:@"Survey"];
-//				[[survey window] center];
-//				[survey showWindow: self];
-//			}
-		}
-		else
-		{
-//			[self about:self];
-//			//fade out Splash window automatically 
-//			[NSTimer scheduledTimerWithTimeInterval:2.0 target:splashController selector:@selector(windowShouldClose:) userInfo:nil repeats:0]; 
-		}
-	}
 	
 		
 	//Checks for Bonjour enabled dicom servers. Most likely other copies of OsiriX
-	[DCMNetServiceDelegate sharedNetServiceDelegate];
+	//JF [DCMNetServiceDelegate sharedNetServiceDelegate];
 	
-	previousDefaults = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] retain];
+	previousDefaults = [[d dictionaryRepresentation] retain];
 	showRestartNeeded = YES;
 		
-	[[NSNotificationCenter defaultCenter]	addObserver: self
-											   selector: @selector(preferencesUpdated:)
-												   name: NSUserDefaultsDidChangeNotification
-												 object: nil];
+	[nc addObserver: self
+          selector: @selector(preferencesUpdated:)
+              name: NSUserDefaultsDidChangeNotification
+            object: nil];
 	
-	[[NSUserDefaults standardUserDefaults] setBool:YES forKey: @"SAMESTUDY"];
+	[d setBool:YES forKey: @"SAMESTUDY"];
 		
-	[[NSUserDefaults standardUserDefaults] setBool: [AppController hasMacOSXSnowLeopard] forKey: @"hasMacOSXSnowLeopard"];
+	[d setBool: [AppController hasMacOSXSnowLeopard] forKey: @"hasMacOSXSnowLeopard"];
 	
-    [[NSUserDefaults standardUserDefaults] setBool: YES forKey: @"UseKDUForJPEG2000"];
-    [[NSUserDefaults standardUserDefaults] setBool: YES forKey: @"useDCMTKForJP2K"];
+   [d setBool: YES forKey: @"UseKDUForJPEG2000"];
+   [d setBool: YES forKey: @"useDCMTKForJP2K"];
     
-    if( [[[NSUserDefaults standardUserDefaults] objectForKey:@"HOTKEYS"] count] < SetKeyImageAction) {
-        NSMutableDictionary *d = [[[[NSUserDefaults standardUserDefaults] objectForKey:@"HOTKEYS"] mutableCopy] autorelease];
+   if( [[d objectForKey:@"HOTKEYS"] count] < SetKeyImageAction) {
+        NSMutableDictionary *hk = [[[[NSUserDefaults standardUserDefaults] objectForKey:@"HOTKEYS"] mutableCopy] autorelease];
         
         BOOL f = NO;
-        for( NSString *key in d) {
-            if( [[d objectForKey: key] integerValue] == FullScreenAction)
+        for( NSString *key in hk) {
+            if( [[hk objectForKey: key] integerValue] == FullScreenAction)
                 f = YES;
             
-            if( [[d objectForKey: key] integerValue] == Sync3DAction)
+            if( [[hk objectForKey: key] integerValue] == Sync3DAction)
                 f = YES;
             
-            if( [[d objectForKey: key] integerValue] == SetKeyImageAction)
+            if( [[hk objectForKey: key] integerValue] == SetKeyImageAction)
                 f = YES;
         }
         
         if( f == NO) {
-            [d setObject: @(FullScreenAction) forKey: @"dbl-click"];
-            [d setObject: @(Sync3DAction) forKey: @"dbl-click + alt"];
-            [d setObject: @(SetKeyImageAction) forKey: @"dbl-click + cmd"];
+            [hk setObject: @(FullScreenAction) forKey: @"dbl-click"];
+            [hk setObject: @(Sync3DAction) forKey: @"dbl-click + alt"];
+            [hk setObject: @(SetKeyImageAction) forKey: @"dbl-click + cmd"];
             
-            [[NSUserDefaults standardUserDefaults] setObject: d forKey: @"HOTKEYS"];
+            [d setObject: hk forKey: @"HOTKEYS"];
         }
     }
-   [[NSUserDefaults standardUserDefaults] setBool: NO forKey: @"EncryptCD"];
-   [[NSUserDefaults standardUserDefaults] setBool: NO forKey: @"encryptForExport"];
+   [d setBool: NO forKey: @"EncryptCD"];
+   [d setBool: NO forKey: @"encryptForExport"];
 	
 	[self initTilingWindows];
     
-    //if ([NSUserDefaults.standardUserDefaults boolForKey:@"DoNotEmptyIncomingDir"]) // move temp & decompress to incoming
-    {
-        NSString* inc = [[DicomDatabase activeLocalDatabase] incomingDirPath];
-        for (NSString* path in [NSArray arrayWithObjects: [[DicomDatabase activeLocalDatabase] tempDirPath], [[DicomDatabase activeLocalDatabase] decompressionDirPath], nil])
-            for (NSString* f in [[NSFileManager defaultManager] enumeratorAtPath:path filesOnly:NO recursive:NO])
-                [[NSFileManager defaultManager] moveItemAtPath:[path stringByAppendingPathComponent:f] toPath:[inc stringByAppendingPathComponent:f] error:NULL];
-    }
-    
-    
-	
-//	[self checkForOsirixMimeType];
-	
-// 	*(long*)0 = 0xDEADBEEF;	// Test for ILCrashReporter
-	
-//	[html2pdf pdfFromURL: @"http://zimbra.latour.ch"];
+   NSString* inc = [[DicomDatabase activeLocalDatabase] incomingDirPath];
+   for (NSString* path in [NSArray arrayWithObjects: [[DicomDatabase activeLocalDatabase] tempDirPath], [[DicomDatabase activeLocalDatabase] decompressionDirPath], nil])
+         for (NSString* f in [[NSFileManager defaultManager] enumeratorAtPath:path filesOnly:NO recursive:NO])
+             [[NSFileManager defaultManager] moveItemAtPath:[path stringByAppendingPathComponent:f] toPath:[inc stringByAppendingPathComponent:f] error:NULL];
 
 	if( [AppController isKDUEngineAvailable])
 		NSLog( @"/*\\ /*\\ KDU Engine AVAILABLE /*\\ /*\\");
@@ -5012,26 +4835,6 @@ static NSMutableDictionary* _receivingDict = nil;
 		
 		[self performSelectorOnMainThread:@selector(_receivingIconUpdate) withObject:nil waitUntilDone:NO];
 	}
-}
-
--(void)setReceivingIcon {
-	[self _receivingIconSet:YES];
-}
-
--(void)unsetReceivingIcon {
-	[self _receivingIconSet:NO];
-}
-
--(void)setBadgeLabel:(NSString*)label {
-	[[NSApp dockTile] setBadgeLabel:label];
-	[[NSApp dockTile] display];
-}
-
--(void)playGrabSound {
-    NSString* path = @"/System/Library/Components/CoreAudio.component/Contents/SharedSupport/SystemSounds/system/Grab.aif";
-    NSSound* sound = [[NSSound alloc] initWithContentsOfFile:path byReference:NO];
-    sound.delegate = self;
-    [sound play];
 }
 
 - (void)sound:(NSSound*)sound didFinishPlaying:(BOOL)finishedPlaying {

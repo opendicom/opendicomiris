@@ -32,7 +32,7 @@
 #import "ThreadsManager.h"
 #import "NSDictionary+N2.h"
 #import "NSFileManager+N2.h"
-#import "DCMNetServiceDelegate.h"
+//#import "DCMNetServiceDelegate.h"
 #import "AppController.h"
 #import <netinet/in.h>
 #import <arpa/inet.h>
@@ -496,8 +496,6 @@ static void* const SearchDicomNodesContext = @"SearchDicomNodesContext";
         [self performSelectorOnMainThread:@selector(_observeValueForKeyPathOfObjectChangeContext:) withObject:[NSArray arrayWithObjects: keyPath, object, change, [NSValue valueWithPointer:context], nil] waitUntilDone:NO modes:[NSArray arrayWithObject:NSDefaultRunLoopMode]];
         return;
     }
-    
-//    NSKeyValueChange changeKind = [[change valueForKey:NSKeyValueChangeKindKey] unsignedIntegerValue];
 	
     dontListenToSourcesChanges = YES;
     
@@ -542,7 +540,7 @@ static void* const SearchDicomNodesContext = @"SearchDicomNodesContext";
                 }
             }
         }
-        
+/*JF*/
         if (context == RemoteBrowserSourcesContext)
         {
             NSHost* currentHost = [DefaultsOsiriX currentHost];
@@ -589,7 +587,7 @@ static void* const SearchDicomNodesContext = @"SearchDicomNodesContext";
                 }];
             }
         }
-        
+        //JF*/
         if (context == DicomBrowserSourcesContext)
         {
             NSArray* a = [[NSUserDefaults standardUserDefaults] objectForKey:@"SERVERS"];
@@ -619,29 +617,20 @@ static void* const SearchDicomNodesContext = @"SearchDicomNodesContext";
             // add new items
             for (NSString* aak in aa)
             {
-//                [NSThread performBlockInBackground:^{
-//                    // we're now in a background thread
-//                    NSString* aet = nil;
-//                    if ([[self class] host:[DicomNodeIdentifier location:aak toHost:NULL port:NULL aet:&aet] isEqualToHost:currentHost] && [aet isEqualToString:[[NSUserDefaults standardUserDefaults] stringForKey:@"AETITLE"]]) // don't list self
-//                        return;
-//                    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                        // we're now back in the main thread
-                        DataNodeIdentifier* dni;
-                        NSUInteger i = [[_browser.sources.content valueForKey:@"location"] indexOfObject:aak];
-                        if (i == NSNotFound)
-                        {
-                            NSDictionary *k = [aa objectForKey:aak];
-                            dni = [DicomNodeIdentifier dicomNodeIdentifierWithLocation: [k objectForKey:@"Address"] port:[[k objectForKey:@"Port"] intValue] aetitle:[k objectForKey:@"AETitle"] description:[k objectForKey:@"Description"] dictionary:[aa objectForKey:aak]];
-                            dni.entered = YES;
-                            [_browser.sources addObject:dni];
-                        } else {
-                            dni = [_browser.sources.content objectAtIndex:i];
-                            dni.entered = YES;
-                            dni.dictionary = [aa objectForKey:aak];
-                            dni.description = [dni.dictionary objectForKey:@"Description"];
-                        }
-//                    }];
-//                }];
+               DataNodeIdentifier* dni;
+               NSUInteger i = [[_browser.sources.content valueForKey:@"location"] indexOfObject:aak];
+               if (i == NSNotFound)
+               {
+                   NSDictionary *k = [aa objectForKey:aak];
+                   dni = [DicomNodeIdentifier dicomNodeIdentifierWithLocation: [k objectForKey:@"Address"] port:[[k objectForKey:@"Port"] intValue] aetitle:[k objectForKey:@"AETitle"] description:[k objectForKey:@"Description"] dictionary:[aa objectForKey:aak]];
+                   dni.entered = YES;
+                   [_browser.sources addObject:dni];
+               } else {
+                   dni = [_browser.sources.content objectAtIndex:i];
+                   dni.entered = YES;
+                   dni.dictionary = [aa objectForKey:aak];
+                   dni.description = [dni.dictionary objectForKey:@"Description"];
+               }
             }
         }
         
@@ -706,7 +695,7 @@ static void* const SearchDicomNodesContext = @"SearchDicomNodesContext";
     else
         [_browser selectSourceForDatabase: _browser.database];
 }
-
+/*JF
 -(void)netServiceDidResolveAddress:(NSNetService*)service
 {
     @try
@@ -932,7 +921,7 @@ static void* const SearchDicomNodesContext = @"SearchDicomNodesContext";
         [_bonjourServices removeObject: bsk];
     }
 }
-
+*/
 -(void)_analyzeVolumeAtPath:(NSString*)path
 {
 	for (DataNodeIdentifier* ibs in _browser.sources.arrangedObjects)
@@ -989,46 +978,6 @@ static void* const SearchDicomNodesContext = @"SearchDicomNodesContext";
         }
     }
 	
-/*	OSStatus err;
-	kern_return_t kr;
-	
-	FSRef ref;
-	err = FSPathMakeRef((const UInt8*)[path fileSystemRepresentation], &ref, nil);
-	if (err != noErr) return;
-	FSCatalogInfo catInfo;
-	err = FSGetCatalogInfo(&ref, kFSCatInfoVolume, &catInfo, nil, nil, nil);
-	if (err != noErr) return;
-	
-	GetVolParmsInfoBuffer gvpib;
-	HParamBlockRec hpbr;
-	hpbr.ioParam.ioNamePtr = NULL;
-	hpbr.ioParam.ioVRefNum = catInfo.volume;
-	hpbr.ioParam.ioBuffer = (Ptr)&gvpib;
-	hpbr.ioParam.ioReqCount = sizeof(gvpib);
-	err = PBHGetVolParmsSync(&hpbr);
-	if (err != noErr) return;
-	
-	NSString* bsdName = [NSString stringWithCString:(char*)gvpib.vMDeviceID];
-	NSLog(@"we are mounting %@ ||| %@", path, bsdName);
-	
-	CFDictionaryRef matchingDict = IOBSDNameMatching(kIOMasterPortDefault, 0, (const char*)gvpib.vMDeviceID);
-	io_iterator_t ioIterator = nil;
-	kr = IOServiceGetMatchingServices(kIOMasterPortDefault, matchingDict, &ioIterator);
-	if (kr != kIOReturnSuccess) return;
-	
-	io_service_t ioService;
-	while (ioService = IOIteratorNext(ioIterator)) {
-		CFTypeRef data = IORegistryEntrySearchCFProperty(ioService, kIOServicePlane, CFSTR("BSD Name"), kCFAllocatorDefault, kIORegistryIterateRecursively);
-		NSLog(@"\t%@", data);
-		io_name_t ioName;
-		IORegistryEntryGetName(ioService, ioName);
-		NSLog(@"\t\t%s", ioName);
-		
-		CFRelease(data);
-		IOObjectRelease(ioService);
-	}
-	
-	IOObjectRelease(ioIterator);*/
 }
 
 -(void)_observeVolumeNotification:(NSNotification*)notification

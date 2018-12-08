@@ -24,10 +24,6 @@
 int main(int argc, const char *argv[])
 {
     Papy3Init();
-	
-	#ifndef OSIRIX_LIGHT
     FVTIFFInitialize();
-	#endif
-	
     return NSApplicationMain(argc, argv);
 }

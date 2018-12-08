@@ -12,7 +12,7 @@
  PURPOSE.
  =========================================================================*/
 
-#import <DCMPix.h>
+#import "DCMPix.h"
 #import "DicomImage.h"
 #import "DicomSeries.h"
 #import "DicomStudy.h"

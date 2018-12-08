@@ -26,8 +26,6 @@
 
 - (IBAction)captureAndSetKeyImage:(id)sender
 {
-    [[AppController sharedAppController] playGrabSound];
-    
     DicomStudy* study = [self currentStudy];
     
     // export the reconstruction as a new DICOM file

@@ -12,6 +12,7 @@
  PURPOSE.
  =========================================================================*/
 
+#import "DCMNetServiceDelegate.h"
 #import "WebPortalConnection+Data.h"
 #import "WebPortal+Email+Log.h"
 #import "WebPortalResponse.h"

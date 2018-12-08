@@ -32,7 +32,7 @@
  */
 
 #include <Cocoa/Cocoa.h>
-#include"OsiriX/DCMNetServiceDelegate.h"
+//#include"OsiriX/DCMNetServiceDelegate.h"
 #import "SendController.h"
 #import "browserController.h"
 #import "OsiriX/DCMObject.h"
