@@ -34,14 +34,9 @@
 #import <objc/runtime.h>
 #import "NSPanel+N2.h"
 
-#ifndef OSIRIX_LIGHT
-   #import "BonjourPublisher.h"
-   #ifndef MACAPPSTORE
-      #import "Reports.h"
-      #import <ILCrashReporter/ILCrashReporter.h>
-      #import "VRView.h"
-   #endif
-#endif
+#import "Reports.h"
+#import <ILCrashReporter/ILCrashReporter.h>
+#import "VRView.h"
 #import "OSIWindowController.h"
 #import "Notifications.h"
 #import "WaitRendering.h"

@@ -603,8 +603,6 @@
 		847AFE3F1A14DFA40067AA07 /* XMLControllerDCMTKCategory.mm in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB931A14DFA10067AA07 /* XMLControllerDCMTKCategory.mm */; };
 		847AFE401A14DFA40067AA07 /* BonjourBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFB951A14DFA10067AA07 /* BonjourBrowser.h */; };
 		847AFE411A14DFA40067AA07 /* BonjourBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB961A14DFA10067AA07 /* BonjourBrowser.m */; };
-		847AFE421A14DFA40067AA07 /* BonjourPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFB971A14DFA10067AA07 /* BonjourPublisher.h */; };
-		847AFE431A14DFA40067AA07 /* BonjourPublisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB981A14DFA10067AA07 /* BonjourPublisher.m */; };
 		847AFE441A14DFA40067AA07 /* ContextCleaner.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFB991A14DFA10067AA07 /* ContextCleaner.h */; };
 		847AFE451A14DFA40067AA07 /* DataNodeIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFB9A1A14DFA10067AA07 /* DataNodeIdentifier.h */; };
 		847AFE461A14DFA40067AA07 /* DataNodeIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB9B1A14DFA10067AA07 /* DataNodeIdentifier.m */; };
@@ -7110,8 +7108,6 @@
 		847AFB931A14DFA10067AA07 /* XMLControllerDCMTKCategory.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = XMLControllerDCMTKCategory.mm; sourceTree = "<group>"; };
 		847AFB951A14DFA10067AA07 /* BonjourBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonjourBrowser.h; sourceTree = "<group>"; };
 		847AFB961A14DFA10067AA07 /* BonjourBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonjourBrowser.m; sourceTree = "<group>"; };
-		847AFB971A14DFA10067AA07 /* BonjourPublisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BonjourPublisher.h; sourceTree = "<group>"; };
-		847AFB981A14DFA10067AA07 /* BonjourPublisher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BonjourPublisher.m; sourceTree = "<group>"; };
 		847AFB991A14DFA10067AA07 /* ContextCleaner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContextCleaner.h; sourceTree = "<group>"; };
 		847AFB9A1A14DFA10067AA07 /* DataNodeIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataNodeIdentifier.h; sourceTree = "<group>"; };
 		847AFB9B1A14DFA10067AA07 /* DataNodeIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataNodeIdentifier.m; sourceTree = "<group>"; };
@@ -13410,8 +13406,6 @@
 			children = (
 				847AFB951A14DFA10067AA07 /* BonjourBrowser.h */,
 				847AFB961A14DFA10067AA07 /* BonjourBrowser.m */,
-				847AFB971A14DFA10067AA07 /* BonjourPublisher.h */,
-				847AFB981A14DFA10067AA07 /* BonjourPublisher.m */,
 				847AFB991A14DFA10067AA07 /* ContextCleaner.h */,
 				847AFB9A1A14DFA10067AA07 /* DataNodeIdentifier.h */,
 				847AFB9B1A14DFA10067AA07 /* DataNodeIdentifier.m */,
@@ -19405,7 +19399,6 @@
 				BFBF40E009B6828D00545F5E /* extneg.h in Headers */,
 				BFBF40E209B6828D00545F5E /* lst.h in Headers */,
 				BFBF414009B6828D00545F5E /* dcmqrcbf.h in Headers */,
-				847AFE421A14DFA40067AA07 /* BonjourPublisher.h in Headers */,
 				BFBF414209B6828D00545F5E /* dcmqrcbg.h in Headers */,
 				847AFDB31A14DFA40067AA07 /* CPRClusterView.h in Headers */,
 				BFBF414409B6828D00545F5E /* dcmqrcbm.h in Headers */,
@@ -24833,7 +24826,6 @@
 				BF3F21A709CB8755002736A5 /* dimoimg.cc in Sources */,
 				BF3F21A309CB8752002736A5 /* dimo2img.cc in Sources */,
 				BF3F21A109CB8749002736A5 /* dimo1img.cc in Sources */,
-				847AFE431A14DFA40067AA07 /* BonjourPublisher.m in Sources */,
 				BF3F219F09CB8748002736A5 /* diluptab.cc in Sources */,
 				BF3F219C09CB8745002736A5 /* diinpx.cc in Sources */,
 				BF3F219A09CB8745002736A5 /* diimage.cc in Sources */,

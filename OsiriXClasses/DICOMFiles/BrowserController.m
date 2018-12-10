@@ -65,7 +65,7 @@
 #import "Reports.h"
 #import "LogManager.h"
 #import "DCMTKStoreSCU.h"
-#import "BonjourPublisher.h"
+//#import "BonjourPublisher.h"
 #import "BonjourBrowser.h"
 #import "WindowLayoutManager.h"
 #import "QTExportHTMLSummary.h"

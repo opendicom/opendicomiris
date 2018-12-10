@@ -27,7 +27,7 @@
 #import "NSThread+N2.h"
 #import "N2Operators.h"
 #import "ThreadModalForWindowController.h"
-#import "BonjourPublisher.h"
+//#import "BonjourPublisher.h"
 #import "DicomFile.h"
 #import "ThreadsManager.h"
 #import "NSDictionary+N2.h"

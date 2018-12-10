@@ -129,14 +129,14 @@ static DCMNetServiceDelegate *_netServiceDelegate = nil;
 	NSLog(@"Stopped DICOM bonjour search");
 	[_dicomServices removeAllObjects];
 }
-
+/*JF
 - (void)netServiceBrowserWillSearch:(NSNetServiceBrowser *)aNetServiceBrowser{
 	NSLog(@"Start bonjour DICOM search");
 	if (_dicomServices)
 		[_dicomServices release];
 	_dicomServices = [[NSMutableArray array] retain];
 }
-
+*/
 //NetService delegate
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict
 {

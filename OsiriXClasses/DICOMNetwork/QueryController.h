@@ -46,44 +46,44 @@ enum
 /** \brief Window Controller for Q/R */
 @interface QueryController : NSWindowController <NSWindowDelegate, NSOutlineViewDelegate>
 {
-    IBOutlet    QueryOutlineView			*outlineView;
-	IBOutlet	NSProgressIndicator			*progressIndicator;
+   IBOutlet QueryOutlineView			*outlineView;
+	IBOutlet	NSProgressIndicator		*progressIndicator;
 	IBOutlet	NSSearchField				*searchFieldName, *searchFieldRefPhysician, *searchFieldID, *searchFieldAN, *searchFieldStudyDescription, *searchFieldComments, *searchInstitutionName, *searchCustomField;
 	
-    IBOutlet    NSPopUpButton               *dicomFieldsMenu;
-                NSArray                     *DICOMFieldsArray;
+   IBOutlet NSPopUpButton           *dicomFieldsMenu;
+   NSArray                          *DICOMFieldsArray;
     
-				NSMutableArray				*sourcesArray;
+	NSMutableArray				         *sourcesArray;
 	IBOutlet	sourcesTableView			*sourcesTable;
 	IBOutlet	NSTextField					*selectedResultSource;
 	IBOutlet	NSTextField					*numberOfStudies;
 	IBOutlet	NSPopUpButton				*presetsPopup;
 	
-	IBOutlet	NSWindow					*presetWindow;
+	IBOutlet	NSWindow					   *presetWindow;
 	IBOutlet	NSTextField					*presetName;
 	
-	IBOutlet	NSMatrix					*birthdateFilterMatrix;
-	IBOutlet	NSMatrix					*dateFilterMatrix;
-	IBOutlet	NSMatrix					*modalityFilterMatrix;
-    IBOutlet    NSMatrix                    *statusFilterMatrix;
+	IBOutlet	NSMatrix					   *birthdateFilterMatrix;
+	IBOutlet	NSMatrix					   *dateFilterMatrix;
+	IBOutlet	NSMatrix					   *modalityFilterMatrix;
+   IBOutlet NSMatrix                *statusFilterMatrix;
 	IBOutlet	NSTabView					*PatientModeMatrix;
 	IBOutlet	NSDatePicker				*fromDate, *toDate, *searchBirth;
 	IBOutlet	NSTextField					*yearOldBirth;
-    IBOutlet	NSPopUpButton				*sendToPopup;
+   IBOutlet	NSPopUpButton				*sendToPopup;
     
-    IBOutlet NSView*                        refreshGroup;
+   IBOutlet NSView                  *refreshGroup;
 	
 	int										autoQueryRemainingSecs[ MAXINSTANCE];
 	IBOutlet NSTextField					*autoQueryCounter;
 	
-	BOOL									DatabaseIsEdited;
+	BOOL									   DatabaseIsEdited;
 	IBOutlet NSWindow						*autoRetrieveWindow;
 	
-	NSMutableString							*pressedKeys;
-    NSMutableArray							*resultArray;
-    NSMutableArray							*queryFilters;
+	NSMutableString					   *pressedKeys;
+    NSMutableArray					   *resultArray;
+    NSMutableArray						*queryFilters;
 	
-	NSString								*currentQueryKey, *queryArrayPrefs;
+	NSString								   *currentQueryKey, *queryArrayPrefs;
 	int										checkAndViewTry;
 	
 	NSImage									*Realised3, *Realised2;
@@ -92,31 +92,31 @@ enum
 	
 	QueryArrayController					*queryManager;
 	
-	BOOL									autoQuery, queryButtonPressed, performingCFind, avoidQueryControllerDeallocReentry;
+	BOOL									   autoQuery, queryButtonPressed, performingCFind, avoidQueryControllerDeallocReentry;
 	
 	NSInteger								autoRefreshQueryResults;
-	NSRecursiveLock							*autoQueryLock;
+	NSRecursiveLock						*autoQueryLock;
 	
 	NSInteger								numberOfRunningRetrieve;
     
-    NSTimeInterval                          lastTemporaryCFindResultUpdate;
-    NSMutableArray                          *temporaryCFindResultArray;
-    BOOL                                    firstServerRealtimeResults;
+   NSTimeInterval                   lastTemporaryCFindResultUpdate;
+   NSMutableArray                   *temporaryCFindResultArray;
+   BOOL                             firstServerRealtimeResults;
     
-    NSMutableArray                          *downloadedStudies;
+   NSMutableArray                   *downloadedStudies;
     
-    NSString                                *customDICOMField;
+   NSString                         *customDICOMField;
     
-    NSMutableArray                          *autoQRInstances;
-    int                                     currentAutoQR;
-    IBOutlet NSWindow                       *addAutoQRInstanceWindow;
-    IBOutlet NSTextField                    *autoQRInstanceName;
-    IBOutlet NSSegmentedControl             *autoQRNavigationControl;
+   NSMutableArray                   *autoQRInstances;
+   int                              currentAutoQR;
+   IBOutlet NSWindow                *addAutoQRInstanceWindow;
+   IBOutlet NSTextField             *autoQRInstanceName;
+   IBOutlet NSSegmentedControl      *autoQRNavigationControl;
     
-    IBOutlet SFAuthorizationView            *authView;
-    IBOutlet NSButton                       *authButton;
+   IBOutlet SFAuthorizationView     *authView;
+   IBOutlet NSButton                *authButton;
     
-    NSMutableSet                            *performingQueryThreads;
+   NSMutableSet                     *performingQueryThreads;
 }
 
 @property (readonly) NSRecursiveLock *autoQueryLock;
@@ -187,4 +187,5 @@ enum
 - (void) autoQueryTimerFunction:(NSTimer*) t;
 - (void) executeRefresh: (id) sender;
 - (void)view:(NSView*)view recursiveBindEnableToObject:(id)obj withKeyPath:(NSString*)keyPath;
+- (void)sortDescriptors:(NSMutableArray*)sortArray;//added in order to be executed on main thread
 @end

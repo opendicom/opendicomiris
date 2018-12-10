@@ -1872,7 +1872,8 @@ subOpCallback(void * /*subOpCallbackData*/ ,
 	
 	@try
 	{
-		OFCondition cond = [self cfind:assoc dataset:dataset];
+      OFCondition cond = [self findSCU:assoc dataset:dataset];
+		//JF OFCondition cond = [self cfind:assoc dataset:dataset];
 		globalCondition = cond;
 	}
     @catch (NSException* e) {
@@ -2025,14 +2026,14 @@ static NSString *releaseNetworkVariablesSync = @"releaseNetworkVariablesSync";
 			_networkTransferSyntax = EXS_LittleEndianExplicit;
 		
 		WaitRendering *wait = nil;
-		
+/*JF
 		if( [NSThread isMainThread] == YES)// && [[NSUserDefaults standardUserDefaults] boolForKey: @"dontUseThreadForAssociationAndCFind"] == NO)
 		{
 			wait = [[WaitRendering alloc] init: [NSString stringWithFormat: NSLocalizedString(@"Connecting to %@...", nil), _hostname]];
 			[wait setCancel: YES];
 			[wait start];
 		}
-
+*/
 //		DcmTLSTransportLayer *tLayer = NULL;
 		NSString *uniqueStringID = [NSString stringWithFormat:@"%d.%d.%d", getpid(), inc++, (int) random()];
 		
@@ -2719,28 +2720,8 @@ static NSString *releaseNetworkVariablesSync = @"releaseNetworkVariablesSync";
 }
 
 - (OFCondition) cfind:(T_ASC_Association *)assoc dataset:(DcmDataset *)dataset
-    /*
-     * This function will process the given file as often as is specified by opt_repeatCount.
-     * "Process" in this case means "read file, send C-FIND-RQ, receive C-FIND-RSP messages".
-     *
-     * Parameters:
-     *   assoc - [in] The association (network connection to another DICOM application).
-     *   fname - [in] Name of the file which shall be processed (contains search mask information).
-     */
 {
-    OFCondition cond = EC_Normal;
-
-    /* opt_repeatCount specifies how many times a certain file shall be processed */
-    //int n = (int)_repeatCount;
-	int n = 1;
-    /* as long as no error occured and the counter does not equal 0 */
-    while (cond == EC_Normal && n--) {
-        /* process file (read file, send C-FIND-RQ, receive C-FIND-RSP messages) */
-        cond = [self findSCU:assoc dataset:dataset];
-    }
-
-    /* return result value */
-    return cond;
+    return [self findSCU:assoc dataset:dataset];
 }
 
 - (OFCondition) cmove:(T_ASC_Association *)assoc network:(T_ASC_Network *)net dataset:(DcmDataset *)dataset

@@ -2058,35 +2058,31 @@ extern "C"
 	return nil;
 }
 
-//- (void)outlineView:(NSOutlineView *) o setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn byItem:(id)item
-//{
-//	NSArray *array;
-//	
-//	@try
-//	{
-////		if( [[tableColumn identifier] isEqualToString: @"comment"] || [[tableColumn identifier] isEqualToString: @"stateText"])
-////		{
-////			if( [item isMemberOfClass:[DCMTKStudyQueryNode class]] == YES)
-////				array = [self localStudy: item context: nil];
-////			else
-////				array = [self localSeries: item context: nil];
-////			
-////			if( [array count] > 0)
-////			{
-////				[[BrowserController currentBrowser] setDatabaseValue: object item: [array objectAtIndex: 0] forKey: [tableColumn identifier]];
-////			}
-////			else NSRunCriticalAlertPanel( NSLocalizedString(@"Study not available", nil), NSLocalizedString(@"The study is not available in the local Database, you cannot modify or set the comments/status fields.", nil), NSLocalizedString(@"OK", nil), nil, nil) ;
-////		}
-//	}
-//	@catch (NSException * e)
-//	{
-//		N2LogExceptionWithStackTrace(e);
-//	}
-//	
-//	DatabaseIsEdited = NO;
-//	[outlineView reloadData];
-//}
-
+//can be invoked on main thread
+-(void)sortDescriptors:(NSMutableArray*)sortArray
+{
+   [sortArray removeAllObjects];
+   
+   NSArray *s = [outlineView sortDescriptors];
+   if( [s count])
+   {
+      if( [[[s objectAtIndex: 0] key] isEqualToString:@"date"])
+      {
+         [sortArray addObject: [s objectAtIndex: 0]];
+         
+         [sortArray addObject: [[[NSSortDescriptor alloc] initWithKey:@"time" ascending: [[s objectAtIndex: 0] ascending]] autorelease]];
+         
+         if( [s count] > 1)
+         {
+            NSMutableArray *lastObjects = [NSMutableArray arrayWithArray: s];
+            [lastObjects removeObjectAtIndex: 0];
+            [sortArray addObjectsFromArray: lastObjects];
+         }
+      }
+      [sortArray addObjectsFromArray:s];
+   }
+}
+//cannot be invoked on main thread, the next can
 - (NSArray*) sortArray
 {
 	NSArray *s = [outlineView sortDescriptors];
@@ -2117,6 +2113,7 @@ extern "C"
 {
 	id item = [outlineView itemAtRow: [outlineView selectedRow]];
 	
+   
 	[resultArray sortUsingDescriptors: [self sortArray]];
 	[outlineView reloadData];
 	
@@ -2281,14 +2278,27 @@ extern "C"
                         }
                     }
                 }
-                
-                if( [temporaryCFindResultArray count])
-                    [temporaryCFindResultArray sortUsingDescriptors: [self sortArray]];
-                
+               //temporaryCFindResultArray is a mutableArray
+
+               
                 if( [NSThread isMainThread])
-                    [self refreshList: temporaryCFindResultArray];
+                {
+                   if( [temporaryCFindResultArray count]>1)
+                   {
+                      [temporaryCFindResultArray sortUsingDescriptors: [self sortArray]];
+                   }
+                   [self refreshList: temporaryCFindResultArray];
+                }
                 else
-                    [self performSelectorOnMainThread:@selector(refreshList:) withObject: temporaryCFindResultArray waitUntilDone: NO];
+                {
+                   if( [temporaryCFindResultArray count]>1)
+                   {
+                      NSMutableArray *sortDescriptors=[NSMutableArray array];
+                      [self performSelectorOnMainThread:@selector(sortDescriptors:) withObject:sortDescriptors waitUntilDone: YES];
+                      [temporaryCFindResultArray sortUsingDescriptors:sortDescriptors];
+                   }
+                  [self performSelectorOnMainThread:@selector(refreshList:) withObject: temporaryCFindResultArray waitUntilDone: NO];
+                }
             }
             
             lastTemporaryCFindResultUpdate = [[NSDate date] timeIntervalSinceReferenceDate];
