@@ -1367,12 +1367,7 @@ OFCondition DcmQueryRetrieveSCP::negotiateAssociation(T_ASC_Association * assoc)
             }
           }
         }
-//		else
-//			printf("not a storage: %s\r", pc.abstractSyntax);
       } /* for */
-	  
-	  // NSLog( @"****************************");WARNING NO NSLOG !!! fork() !!!!!
-	  
     } /* else */
 
     /*
@@ -1386,62 +1381,6 @@ OFCondition DcmQueryRetrieveSCP::negotiateAssociation(T_ASC_Association * assoc)
       refuseAssociation(&assoc, CTN_NoReason);
       return ASC_SHUTDOWNAPPLICATION;
     }
-
-    /*
-     * Refuse any "Storage" presentation contexts to non-writable
-     * storage areas.
-     
-    if (!config_->writableStorageArea(calledAETitle))
-    {
-      refuseAnyStorageContexts(assoc);
-    }
-	*/
-	
-	
-    /*
-     * Enforce RSNA'93 Demonstration Requirements about only
-     * accepting a context for MOVE if a context for FIND is also present.
-   
-
-    for (i=0; i<(int)DIM_OF(queryRetrievePairs); i++) {
-        movepid = ASC_findAcceptedPresentationContextID(assoc,
-        queryRetrievePairs[i].moveSyntax);
-        if (movepid != 0) {
-        findpid = ASC_findAcceptedPresentationContextID(assoc,
-            queryRetrievePairs[i].findSyntax);
-        if (findpid == 0) {
-        if (options_.requireFindForMove_) {
-            // refuse the move 
-            ASC_refusePresentationContext(assoc->params,
-                movepid, ASC_P_USERREJECTION);
-            } else {
-            DcmQueryRetrieveOptions::errmsg("WARNING: Move PresCtx but no Find (accepting for now)");
-        }
-        }
-        }
-    }
-	  */
-	  
-    /*
-     * Enforce an Ad-Hoc rule to limit storage access.
-     * If the storage area is "writable" and some other association has
-     * already negotiated a "Storage" class presentation context,
-     * then refuse any "storage" presentation contexts.
-    
-
-    if (options_.refuseMultipleStorageAssociations_)
-    {
-        if (config_->writableStorageArea(calledAETitle))
-        {
-          if (processtable_.haveProcessWithWriteAccess(calledAETitle))
-          {
-            refuseAnyStorageContexts(assoc);
-          }
-        }
-    }
-	 */
-	 
-	 
     return cond;
 }
 
@@ -1456,26 +1395,7 @@ OFCondition DcmQueryRetrieveSCP::waitForAssociation(T_ASC_Network * theNet)
     char                buf[BUFSIZ];
     int timeout;
     OFBool go_cleanup = OFFalse;
-	
-	Boolean singleProcess = options_.singleProcess_;
-	
-//    if( secureConnection_)
-//        singleProcess = YES;
-    
-    if (singleProcess) timeout = 30000;
-    else
-    {
-//      if (processtable_.countChildProcesses() > 0)
-//      {
-//        timeout = 5;
-//      }
-//	  else
-//	  {
-//        timeout = 30000;
-//      }
-		
-	  timeout = 30000;
-    }
+    timeout = 30000;
 
     if (ASC_associationWaiting(theNet, timeout))
     {
@@ -1574,31 +1494,6 @@ OFCondition DcmQueryRetrieveSCP::waitForAssociation(T_ASC_Network * theNet)
             go_cleanup = OFTrue;
 		}
 	}
-	
-	/* Does peer AE have access to required service ?? */
-	/*
-    if (! go_cleanup)
-    {
-        
-        if (! config_->peerInAETitle(assoc->params->DULparams.calledAPTitle,
-        assoc->params->DULparams.callingAPTitle,
-        assoc->params->DULparams.callingPresentationAddress))
-        {
-            cond = refuseAssociation(&assoc, CTN_BadAEService);
-            go_cleanup = OFTrue;
-        }
-    }
-	*/
-	
-    if (! go_cleanup)
-    {
-        // too many concurrent associations ??
-//        if (processtable_.countChildProcesses() >= OFstatic_cast(size_t, options_.maxAssociations_))
-//        {
-//            cond = refuseAssociation(&assoc, CTN_TooManyAssociations);
-//            go_cleanup = OFTrue;
-//        }
-    }
 
     if (! go_cleanup)
     {
@@ -1632,158 +1527,130 @@ OFCondition DcmQueryRetrieveSCP::waitForAssociation(T_ASC_Network * theNet)
 				if (options_.debug_)
 					ASC_dumpParameters(assoc->params, COUT);
 			}
-			
-//			if (singleProcess)
-//			{
-//				@try
-//				{
-//					@try
-//					{
-//						/* don't spawn a sub-process to handle the association */
-//						cond = handleAssociation(assoc, options_.correctUIDPadding_);
-//						assoc = nil;
-//					}
-//					@catch( NSException *e)
-//					{
-//                        N2LogExceptionWithStackTrace(e);
-//					}
-//				}
-//				@catch( NSException *e)
-//				{
-//                    N2LogExceptionWithStackTrace(e);
-//				}
-//				
-//				NSString *str = getErrorMessage();
-//				
-//				if( str)
-//					[[AppController sharedAppController] performSelectorOnMainThread: @selector(displayListenerError:) withObject: str waitUntilDone: NO];
-//			}
-//            // TEST FOR MULTI-THREAD
-//            else
-            
-            if( cond != ASC_SHUTDOWNAPPLICATION)
-            {
-                if (singleProcess) // But multi-threaded
-                {
-                    while( numberOfActiveAssociations > [[NSUserDefaults standardUserDefaults] integerForKey: @"maximumNumberOfConcurrentDICOMAssociations"])
-                        [NSThread sleepForTimeInterval: 0.1];
+         
+         if( cond != ASC_SHUTDOWNAPPLICATION)
+         {
+             if (options_.singleProcess_) // But multi-threaded
+             {
+                 while( numberOfActiveAssociations > [[NSUserDefaults standardUserDefaults] integerForKey: @"maximumNumberOfConcurrentDICOMAssociations"])
+                     [NSThread sleepForTimeInterval: 0.1];
+                
+                 @try
+                 {
+                     NSThread *t = [[[NSThread alloc] initWithTarget: [ContextCleaner class] selector:@selector(handleAssociation:) object: [NSDictionary dictionaryWithObjectsAndKeys: [NSValue valueWithPointer: assoc], @"assoc", [NSValue valueWithPointer: this], @"DcmQueryRetrieveSCP", nil]] autorelease];
+                     t.name = NSLocalizedString( @"DICOM Services...", nil);
+                     if( assoc && assoc->params && assoc->params->DULparams.callingPresentationAddress)
+                         t.status = [NSString stringWithFormat: NSLocalizedString( @"%s", nil), assoc->params->DULparams.callingPresentationAddress];
+                    
+                     t.supportsCancel = YES;
+                     [[ThreadsManager defaultManager] addThreadAndStart: t];
+                    
+                     assoc = nil;
+                 }
+                 @catch( NSException *e)
+                 {
+                     N2LogExceptionWithStackTrace(e);
+                 }
+             }
+ #ifdef HAVE_FORK
+             else
+             {
+                 NSPersistentStoreCoordinator *dbStoreCoordinator = [[[DicomDatabase defaultDatabase] managedObjectContext] persistentStoreCoordinator];
+                
+                 staticContext = [[NSManagedObjectContext alloc] init];
+                 staticContext.undoManager = nil;
+                
+                 [[DicomDatabase defaultDatabase] save]; // We have to save the sql file: the forked process "sees" only the file, not the store or the context.
+                
+                 [dbStoreCoordinator lock];
+                
+                 NSManagedObjectModel *model = [dbStoreCoordinator managedObjectModel];
+                
+                 staticContext.persistentStoreCoordinator = [[[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: model] autorelease];
+                 [staticContext.persistentStoreCoordinator addPersistentStoreWithType: NSSQLiteStoreType configuration: nil URL: [NSURL fileURLWithPath: [[DicomDatabase defaultDatabase] sqlFilePath]] options: nil error: nil];
+                
+                 @try
+                 {
+                     // To update the AETitle list : required for C-MOVE SCP
+                     [DCMNetServiceDelegate DICOMServersList];
+                    
+                     /* spawn a sub-process to handle the association */
+                     pid = (int)(fork());
+                     if (pid < 0)
+                     {
+                         printf("pid < 0. Cannot spawn new process\n");
+                         DcmQueryRetrieveOptions::errmsg("Cannot create association sub-process: %s", strerror(errno));
+                         cond = refuseAssociation(&assoc, CTN_CannotFork);
+                         go_cleanup = OFTrue;
+                     }
+                     else if (pid > 0)
+                     {
+                         [NSThread detachNewThreadSelector: @selector(waitUnlockFileWithPID:) toTarget: [ContextCleaner class] withObject: [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithInt: pid], @"pid", [NSValue valueWithPointer:assoc], @"assoc", dbStoreCoordinator, @"dbStoreCoordinator", nil]];
                         
-                    @try
-                    {
-                        NSThread *t = [[[NSThread alloc] initWithTarget: [ContextCleaner class] selector:@selector(handleAssociation:) object: [NSDictionary dictionaryWithObjectsAndKeys: [NSValue valueWithPointer: assoc], @"assoc", [NSValue valueWithPointer: this], @"DcmQueryRetrieveSCP", nil]] autorelease];
-                        t.name = NSLocalizedString( @"DICOM Services...", nil);
-                        if( assoc && assoc->params && assoc->params->DULparams.callingPresentationAddress)
-                            t.status = [NSString stringWithFormat: NSLocalizedString( @"%s", nil), assoc->params->DULparams.callingPresentationAddress];
+                         [dbStoreCoordinator unlock];
                         
-                        t.supportsCancel = YES;
-                        [[ThreadsManager defaultManager] addThreadAndStart: t];
+                         // Display a thread in the ThreadsManager for this pid
+                         NSThread *t = [[[NSThread alloc] initWithTarget: [AppController sharedAppController] selector:@selector(waitForPID:) object: [NSNumber numberWithInt: pid]] autorelease];
+                         t.name = NSLocalizedString( @"DICOM Services...", nil);
+                         if( assoc && assoc->params && assoc->params->DULparams.callingPresentationAddress)
+                             t.status = [NSString stringWithFormat: NSLocalizedString( @"%s", nil), assoc->params->DULparams.callingPresentationAddress];
+                         [[ThreadsManager defaultManager] addThreadAndStart: t];
+                     }
+                     else
+                     {
+                         forkedProcess = YES;
                         
-                        assoc = nil;
-                    }
-                    @catch( NSException *e)
-                    {
-                        N2LogExceptionWithStackTrace(e);
-                    }
-                }
-    #ifdef HAVE_FORK
-                else
-                {
-                    NSPersistentStoreCoordinator *dbStoreCoordinator = [[[DicomDatabase defaultDatabase] managedObjectContext] persistentStoreCoordinator];
-                    
-                    staticContext = [[NSManagedObjectContext alloc] init];
-                    staticContext.undoManager = nil;
-                    
-                    [[DicomDatabase defaultDatabase] save]; // We have to save the sql file: the forked process "sees" only the file, not the store or the context.
-                    
-                    [dbStoreCoordinator lock];
-                    
-                    NSManagedObjectModel *model = [dbStoreCoordinator managedObjectModel];
-                    
-                    staticContext.persistentStoreCoordinator = [[[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: model] autorelease];
-                    [staticContext.persistentStoreCoordinator addPersistentStoreWithType: NSSQLiteStoreType configuration: nil URL: [NSURL fileURLWithPath: [[DicomDatabase defaultDatabase] sqlFilePath]] options: nil error: nil];
-                    
-                    @try
-                    {
-                        // To update the AETitle list : required for C-MOVE SCP
-                        [DCMNetServiceDelegate DICOMServersList];
+                         lockFile();
                         
-                        /* spawn a sub-process to handle the association */
-                        pid = (int)(fork());
-                        if (pid < 0)
-                        {
-                            printf("pid < 0. Cannot spawn new process\n");
-                            DcmQueryRetrieveOptions::errmsg("Cannot create association sub-process: %s", strerror(errno));
-                            cond = refuseAssociation(&assoc, CTN_CannotFork);
-                            go_cleanup = OFTrue;
-                        }
-                        else if (pid > 0)
-                        {
-                            [NSThread detachNewThreadSelector: @selector(waitUnlockFileWithPID:) toTarget: [ContextCleaner class] withObject: [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithInt: pid], @"pid", [NSValue valueWithPointer:assoc], @"assoc", dbStoreCoordinator, @"dbStoreCoordinator", nil]];
-                            
-                            [dbStoreCoordinator unlock];
-                            
-                            // Display a thread in the ThreadsManager for this pid
-                            NSThread *t = [[[NSThread alloc] initWithTarget: [AppController sharedAppController] selector:@selector(waitForPID:) object: [NSNumber numberWithInt: pid]] autorelease];
-                            t.name = NSLocalizedString( @"DICOM Services...", nil);
-                            if( assoc && assoc->params && assoc->params->DULparams.callingPresentationAddress)
-                                t.status = [NSString stringWithFormat: NSLocalizedString( @"%s", nil), assoc->params->DULparams.callingPresentationAddress];
-                            [[ThreadsManager defaultManager] addThreadAndStart: t];
-                        }
-                        else
-                        {
-                            forkedProcess = YES;
-                            
-                            lockFile();
-                            
-                            // We are not interested to see crash report for the child process.
-                            // It can safely and silently crash (can occur with network broken pipe)
-                            
-                            signal(SIGINT , silent_exit_on_sig);
-                            signal(SIGABRT , silent_exit_on_sig);
-                            signal(SIGILL , silent_exit_on_sig);
-                            signal(SIGFPE , silent_exit_on_sig);
-                            signal(SIGSEGV, silent_exit_on_sig);
-                            signal(SIGTERM , silent_exit_on_sig);
-                            signal(SIGBUS , silent_exit_on_sig);
-                            
-                            // Child
-                            @try
-                            {
-                                try
-                                {
-                                    /* child process, handle the association */
-                                    cond = handleAssociation(assoc, options_.correctUIDPadding_);
-                                }
-                                catch(...)
-                                {
-                                    printf( "***** C++ exception in %s\r", __PRETTY_FUNCTION__);
-                                }
-                            }
-                            @catch (NSException * e)
-                            {
-                                N2LogExceptionWithStackTrace(e);
-                            }
-                            
-                            unlockFile();
-                            
-                            char dir[ 1024];
-                            sprintf( dir, "%s-%d", "/tmp/process_state", getpid());
-                            unlink( dir);
-                            
-                            /* the child process is done so exit */
-                            _Exit(3);	//to avoid spin_lock
-                        }
-                    }
-                    @catch( NSException *e)
-                    {
-                        N2LogExceptionWithStackTrace(e);
-                    }
-                    
-                    [staticContext release];
-                    staticContext = nil;
-                }
-            }
-            #endif
+                         // We are not interested to see crash report for the child process.
+                         // It can safely and silently crash (can occur with network broken pipe)
+                        
+                         signal(SIGINT , silent_exit_on_sig);
+                         signal(SIGABRT , silent_exit_on_sig);
+                         signal(SIGILL , silent_exit_on_sig);
+                         signal(SIGFPE , silent_exit_on_sig);
+                         signal(SIGSEGV, silent_exit_on_sig);
+                         signal(SIGTERM , silent_exit_on_sig);
+                         signal(SIGBUS , silent_exit_on_sig);
+                        
+                         // Child
+                         @try
+                         {
+                             try
+                             {
+                                 /* child process, handle the association */
+                                 cond = handleAssociation(assoc, options_.correctUIDPadding_);
+                             }
+                             catch(...)
+                             {
+                                 printf( "***** C++ exception in %s\r", __PRETTY_FUNCTION__);
+                             }
+                         }
+                         @catch (NSException * e)
+                         {
+                             N2LogExceptionWithStackTrace(e);
+                         }
+                        
+                         unlockFile();
+                        
+                         char dir[ 1024];
+                         sprintf( dir, "%s-%d", "/tmp/process_state", getpid());
+                         unlink( dir);
+                        
+                         /* the child process is done so exit */
+                         _Exit(3);	//to avoid spin_lock
+                     }
+                 }
+                 @catch( NSException *e)
+                 {
+                     N2LogExceptionWithStackTrace(e);
+                 }
+                
+                 [staticContext release];
+                 staticContext = nil;
+             }
+         }
+         #endif
 		}
 		@catch (NSException * e)
 		{

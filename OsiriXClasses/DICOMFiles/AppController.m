@@ -638,16 +638,19 @@ static BOOL _hasMacOSXSnowLeopard=NO;
 
 + (void) initialize
 {
-   NSOperatingSystemVersion osv=[[NSProcessInfo processInfo]  operatingSystemVersion];
-   NSLog(@"[AppController initialize] macos %d.%d.%d",osv.majorVersion,osv.minorVersion,osv.patchVersion);
-   int osxaabbc=(osv.majorVersion*1000)+(osv.minorVersion*10)+osv.patchVersion;
-   _hasMacOSXLion=(osxaabbc > 10074);
-   _hasMacOSXSnowLeopard=(osxaabbc > 10059);
-   
    @try
    {
-      if ( self == [AppController class] && initialized == NO)
+      //https://stackoverflow.com/questions/14110396/initialize-called-more-than-once
+
+      if (initialized) NSLog(@"AppController already initialized. Nothing to do.");
+      else
       {
+         NSOperatingSystemVersion osv=[[NSProcessInfo processInfo]  operatingSystemVersion];
+         NSLog(@"[AppController initialize] macos %d.%d.%d",osv.majorVersion,osv.minorVersion,osv.patchVersion);
+         int osxaabbc=(osv.majorVersion*1000)+(osv.minorVersion*10)+osv.patchVersion;
+         _hasMacOSXLion=(osxaabbc > 10074);
+         _hasMacOSXSnowLeopard=(osxaabbc > 10059);
+
          if( [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundlePackageType"] isEqualToString: @"APPL"])
          {
             [NSThread detachNewThreadSelector: @selector(DNSResolve:) toTarget: self withObject: nil];
@@ -955,7 +958,6 @@ static BOOL _hasMacOSXSnowLeopard=NO;
    {
       NSLog(@"+initialize exception: %@", [ne description]);
    }
-   
 }
 
 - (id)init
