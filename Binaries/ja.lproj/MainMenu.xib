@@ -148,18 +148,30 @@
                             <menuItem title="Report" id="12353">
                                 <menu key="submenu" title="Report" id="12354">
                                     <items>
-                                        <menuItem title="Open report" keyEquivalent="O" id="12355">
+                                        <menuItem title="Open report editor" keyEquivalent="O" id="12355">
                                             <connections>
                                                 <action selector="generateReport:" target="898" id="12363"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Delete report" keyEquivalent="D" id="12356">
+                                        <menuItem title="Sign report" id="eTL-yW-dA7">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES"/>
+                                            <connections>
+                                                <action selector="signReport:" target="-1" id="iZG-1s-L3e"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Authenticate report" id="0kv-qe-U0T">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES"/>
+                                            <connections>
+                                                <action selector="authenticateReport:" target="-1" id="NFr-8h-dPh"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Delete report editor" keyEquivalent="D" id="12356">
                                             <connections>
                                                 <action selector="deleteReport:" target="898" id="12365"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="14612"/>
-                                        <menuItem title="Convert to PDF..." id="14610">
+                                        <menuItem title="Convert to PDF" id="14610">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="convertReportToPDF:" target="898" id="14613"/>
@@ -168,7 +180,13 @@
                                         <menuItem title="Convert to DICOM PDF" id="14611">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="convertReportToDICOMSR:" target="898" id="14614"/>
+                                                <action selector="convertReportToDICOMPDF:" target="-1" id="kSf-lj-Rcc"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Convert to DICOM CDA" id="oUI-ZO-b8J">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="convertReportToDICOMCDA:" target="-1" id="w8b-hC-Rxo"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -300,11 +318,7 @@
                                     <action selector="delItem:" target="898" id="13535"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Meta-Data..." id="14838">
-                                <connections>
-                                    <action selector="viewXML:" target="898" id="14840"/>
-                                </connections>
-                            </menuItem>
+                            <menuItem title="Meta-Data..." id="14838"/>
                             <menuItem isSeparatorItem="YES" id="12530">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>

@@ -149,18 +149,30 @@
                             <menuItem title="Report" id="12353">
                                 <menu key="submenu" title="Report" id="12354">
                                     <items>
-                                        <menuItem title="Open report" keyEquivalent="O" id="12355">
+                                        <menuItem title="Open report editor" keyEquivalent="O" id="12355">
                                             <connections>
                                                 <action selector="generateReport:" target="898" id="12363"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Delete report" keyEquivalent="D" id="12356">
+                                        <menuItem title="Sign Report" id="RYc-gZ-bVC">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="signReport:" target="-1" id="2gI-OO-p6X"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Authenticate Report" id="DmK-AT-KCs">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="authenticateReport:" target="-1" id="8Fy-Io-eO0"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Delete report editor" keyEquivalent="D" id="12356">
                                             <connections>
                                                 <action selector="deleteReport:" target="898" id="12365"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="14612"/>
-                                        <menuItem title="Convert to PDF..." id="14610">
+                                        <menuItem title="Convert to PDF" id="14610">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="convertReportToPDF:" target="898" id="14613"/>
@@ -169,7 +181,13 @@
                                         <menuItem title="Convert to DICOM PDF" id="14611">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="convertReportToDICOMSR:" target="898" id="14614"/>
+                                                <action selector="convertReportToDICOMPDF:" target="-1" id="5Lw-Bz-ddH"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Convert to DICOM CDA" id="Cil-z3-hte">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="convertReportToDICOMCDA:" target="-1" id="CPE-zr-hnp"/>
                                             </connections>
                                         </menuItem>
                                     </items>

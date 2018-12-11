@@ -117,7 +117,12 @@ static NSMutableArray			*fusionPlugins = nil;
             {
                if (  [[name pathExtension] isEqualToString:@"plugin"]
                    ||[[name pathExtension] isEqualToString:@"osirixplugin"]
-                     ) [pathsOfPluginsToLoad addObject:[defaultManager destinationOfAliasOrSymlinkAtPath:[path stringByAppendingPathComponent: name]]];
+                     )
+               {
+                  NSString* bundlePath=[defaultManager destinationOfAliasOrSymlinkAtPath:[path stringByAppendingPathComponent: name]];
+                  NSLog(@"%@ -> %@",name,bundlePath);
+                  [pathsOfPluginsToLoad addObject:bundlePath];
+               }
                
 #pragma mark TODO requirements...
                /*

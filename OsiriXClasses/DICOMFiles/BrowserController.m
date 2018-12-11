@@ -13842,9 +13842,13 @@ static NSArray*	openSubSeriesArray = nil;
     
     if (isWritable) { // TODO: allow report access, read-only
         [menu addItem: [NSMenuItem separatorItem]];
-        [menu addItemWithTitle: NSLocalizedString(@"Create/Open Report", nil) action: @selector(generateReport:) keyEquivalent:@""];
-        [menu addItemWithTitle: NSLocalizedString(@"Convert Report to PDF...", nil) action: @selector(convertReportToPDF:) keyEquivalent:@""];
-        [menu addItemWithTitle: NSLocalizedString(@"Convert Report to DICOM PDF", nil) action: @selector(convertReportToDICOMSR:) keyEquivalent:@""];
+        [menu addItemWithTitle: NSLocalizedString(@"Create/Open Report Editor", nil) action: @selector(generateReport:) keyEquivalent:@""];
+        [menu addItemWithTitle: NSLocalizedString(@"Delete Report Editor", nil) action: @selector(deleteReport:) keyEquivalent:@""];
+        [menu addItemWithTitle: NSLocalizedString(@"Sign Report", nil) action: @selector(signReport:) keyEquivalent:@""];
+        [menu addItemWithTitle: NSLocalizedString(@"Authenticate Report", nil) action: @selector(authenticateReport:) keyEquivalent:@""];
+        [menu addItemWithTitle: NSLocalizedString(@"Convert Report to PDF", nil) action: @selector(convertReportToPDF:) keyEquivalent:@""];
+        [menu addItemWithTitle: NSLocalizedString(@"Convert Report to DICOM PDF", nil) action: @selector(convertReportToDICOMPDF:) keyEquivalent:@""];
+        [menu addItemWithTitle: NSLocalizedString(@"Convert Report to DICOM CDA", nil) action: @selector(convertReportToDICOMCDA:) keyEquivalent:@""];
 	}
     
     if (isWritable) {
@@ -14614,10 +14618,13 @@ static NSArray*	openSubSeriesArray = nil;
 			[menuItem action] == @selector(compressSelectedFiles:) || 
 			[menuItem action] == @selector(decompressSelectedFiles:) || 
 			[menuItem action] == @selector(generateReport:) || 
-			[menuItem action] == @selector(deleteReport:) || 
-            [menuItem action] == @selector(convertReportToPDF:) ||
-            [menuItem action] == @selector(convertReportToDICOMSR:) ||
-			[menuItem action] == @selector(delItem:) || 
+         [menuItem action] == @selector(signReport:) ||
+         [menuItem action] == @selector(authenticateReport:) ||
+			[menuItem action] == @selector(deleteReport:) ||
+         [menuItem action] == @selector(convertReportToPDF:) ||
+         [menuItem action] == @selector(convertReportToDICOMPDF:) ||
+         [menuItem action] == @selector(convertReportToDICOMCDA:) ||
+			[menuItem action] == @selector(delItem:) ||
 			[menuItem action] == @selector(querySelectedStudy:) || 
 			[menuItem action] == @selector(burnDICOM:) || 
 			[menuItem action] == @selector(anonymizeDICOM:) || 
@@ -14644,8 +14651,11 @@ static NSArray*	openSubSeriesArray = nil;
            [menuItem action] == @selector(decompressSelectedFiles:) ||
            [menuItem action] == @selector(generateReport:) ||
            [menuItem action] == @selector(deleteReport:) ||
+           [menuItem action] == @selector(signReport:) ||
+           [menuItem action] == @selector(authenticateReport:) ||
            [menuItem action] == @selector(convertReportToPDF:) ||
-           [menuItem action] == @selector(convertReportToDICOMSR:) ||
+           [menuItem action] == @selector(convertReportToDICOMPDF:) ||
+           [menuItem action] == @selector(convertReportToDICOMCDA:) ||
            [menuItem action] == @selector(delItem:) ||
            [menuItem action] == @selector(regenerateAutoComments:) ||
            [menuItem action] == @selector(copyToDBFolder:) ||
@@ -14677,7 +14687,13 @@ static NSArray*	openSubSeriesArray = nil;
             return NO;
     }
     
-    if( [menuItem action] == @selector(convertReportToPDF:) || [menuItem action] == @selector(convertReportToDICOMSR:))
+    if(
+          [menuItem action] == @selector(convertReportToPDF:)
+       || [menuItem action] == @selector(convertReportToDICOMPDF:)
+       || [menuItem action] == @selector(convertReportToDICOMCDA:)
+       || [menuItem action] == @selector(signReport:)
+       || [menuItem action] == @selector(authenticateReport:)
+       )
     {
         id item = [databaseOutline itemAtRow: [[databaseOutline selectedRowIndexes] firstIndex]];
         
@@ -18046,27 +18062,6 @@ static volatile int numberOfThreadsForJPEG = 0;
 #pragma mark -
 #pragma mark Report functions
 
-//- (IBAction)srReports: (id)sende
-//{
-//	NSIndexSet			*index = [databaseOutline selectedRowIndexes];
-//	NSManagedObject		*item = [databaseOutline itemAtRow:[index firstIndex]];
-//
-//	NSManagedObject *studySelected;
-//	
-//	if (item)
-//	{
-//		if ([[[item valueForKey: @"type"] isEqualToString:@"Study"])
-//			studySelected = item;
-//		else
-//			studySelected = [item valueForKey:@"study"];
-//		
-//		if (structuredReportController)
-//			[structuredReportController release];
-//		
-//		structuredReportController = [[StructuredReportController alloc] initWithStudy:studySelected];
-//	}
-//}
-
 - (void) checkReportsDICOMSRConsistency // __deprecated
 {
 	[_database checkReportsConsistencyWithDICOMSR];
@@ -18104,10 +18099,54 @@ static volatile int numberOfThreadsForJPEG = 0;
 	}
 }
 
-- (IBAction) convertReportToDICOMSR: (id)sender
+- (IBAction) convertReportToDICOMCDA: (id)sender
 {
-//    [checkBonjourUpToDateThreadLock lock]; // TODO: merge
-    
+   NSLog(@"convertReportToDICOMCDA");
+   NSMutableArray *studies = [NSMutableArray array];
+   
+   for( NSManagedObject *o in [self databaseSelection])
+   {
+      DicomStudy *study = nil;
+      
+      if( [[o valueForKey:@"type"] isEqualToString:@"Series"])
+         study = [o valueForKey:@"study"];
+      else
+         study = (DicomStudy*) o;
+      
+      if( [studies containsObject: study] == NO)
+         [studies addObject: study];
+   }
+   
+   NSMutableArray *newDICOMPDFReports = [NSMutableArray array];
+   for( DicomStudy *study in studies)
+   {
+      @try
+      {
+         NSString *filename = [self getNewFileDatabasePath: @"dcm"];
+         
+         [study saveReportAsDicomAtPath: filename];
+         
+         [newDICOMPDFReports addObject: filename];
+      }
+      @catch (NSException * e)
+      {
+         NSLog( @"***** exception in %s: %@", __PRETTY_FUNCTION__, e);
+         [AppController printStackTrace: e];
+      }
+      
+      [_database addFilesAtPaths: newDICOMPDFReports
+               postNotifications: YES
+                       dicomOnly: YES
+             rereadExistingItems: YES
+               generatedByOsiriX: YES];
+   }
+   
+   [self performSelector: @selector(updateReportToolbarIcon:) withObject: nil afterDelay: 0.1];
+}
+
+- (IBAction) convertReportToDICOMPDF: (id)sender
+{
+   NSLog(@"convertReportToDICOMPDF");
     NSMutableArray *studies = [NSMutableArray array];
     
     for( NSManagedObject *o in [self databaseSelection])
@@ -18147,13 +18186,13 @@ static volatile int numberOfThreadsForJPEG = 0;
                  generatedByOsiriX: YES];
     }
     
-//    [checkBonjourUpToDateThreadLock unlock]; // TODO: merge
     [self performSelector: @selector(updateReportToolbarIcon:) withObject: nil afterDelay: 0.1];
 }
 
 
 - (IBAction) convertReportToPDF: (id)sender
 {
+   NSLog(@"convertReportToPDF");
 	NSIndexSet *index = [databaseOutline selectedRowIndexes];
 	NSManagedObject *item = [databaseOutline itemAtRow:[index firstIndex]];
 	
@@ -18223,11 +18262,9 @@ static volatile int numberOfThreadsForJPEG = 0;
 					{
 						PluginFilter* filter = [[plugin principalClass] filter];
                         
-                        [PluginManager startProtectForCrashWithFilter: filter];
+                  [PluginManager startProtectForCrashWithFilter: filter];
 						[filter deleteReportForStudy: studySelected];
-                        [PluginManager endProtectForCrash];
-                        
-						//[filter report: studySelected action: @"deleteReport"];
+                  [PluginManager endProtectForCrash];
 					}
 					else
 					{
@@ -18264,6 +18301,16 @@ static volatile int numberOfThreadsForJPEG = 0;
 	}
 }
 
+- (IBAction) signReport: (id)sender
+{
+   NSLog(@"signReport");
+}
+
+- (IBAction) authenticateReport: (id)sender
+{
+   NSLog(@"authenticateReport");
+}
+
 - (IBAction) generateReport: (id)sender
 {
 	NSIndexSet *index = [databaseOutline selectedRowIndexes];
@@ -18287,7 +18334,7 @@ static volatile int numberOfThreadsForJPEG = 0;
 				{
 					@try
 					{
-						NSLog(@"generate report with plugin");
+                  NSLog(@"[BrowserController generateReport]");
 						PluginFilter* filter = [[plugin principalClass] filter];
                         
                   [PluginManager startProtectForCrashWithFilter: filter];
@@ -19500,11 +19547,12 @@ static volatile int numberOfThreadsForJPEG = 0;
         if( containsDistantStudy == YES && [toolbarItem action] == @selector(querySelectedStudy:))
             return YES;
         
-		if(	[toolbarItem action] == @selector(rebuildThumbnails:) ||
+		if(
+         [toolbarItem action] == @selector(rebuildThumbnails:) ||
 			[toolbarItem action] == @selector(searchForCurrentPatient:) || 
 			[toolbarItem action] == @selector(viewerDICOM:) || 
-		    [toolbarItem action] == @selector(viewerSubSeriesDICOM:) || 
-            [toolbarItem action] == @selector(viewerReparsedSeries:) ||
+         [toolbarItem action] == @selector(viewerSubSeriesDICOM:) ||
+         [toolbarItem action] == @selector(viewerReparsedSeries:) ||
 			[toolbarItem action] == @selector(MovieViewerDICOM:) || 
 			[toolbarItem action] == @selector(viewerDICOMMergeSelection:) || 
 			[toolbarItem action] == @selector(revealInFinder:) || 
@@ -19513,24 +19561,27 @@ static volatile int numberOfThreadsForJPEG = 0;
 			[toolbarItem action] == @selector(exportJPEG:) || 
 			[toolbarItem action] == @selector(exportTIFF:) || 
 			[toolbarItem action] == @selector(exportDICOMFile:) ||
-            [toolbarItem action] == @selector(exportROIAndKeyImagesAsDICOMSeries:) ||
+         [toolbarItem action] == @selector(exportROIAndKeyImagesAsDICOMSeries:) ||
 			[toolbarItem action] == @selector(sendMail:) || 
 			[toolbarItem action] == @selector(addStudiesToUser:) || 
 			[toolbarItem action] == @selector(sendEmailNotification:) || 
 			[toolbarItem action] == @selector(compressSelectedFiles:) || 
 			[toolbarItem action] == @selector(decompressSelectedFiles:) || 
 			[toolbarItem action] == @selector(generateReport:) || 
-			[toolbarItem action] == @selector(deleteReport:) || 
-            [toolbarItem action] == @selector(convertReportToPDF:) ||
-            [toolbarItem action] == @selector(convertReportToDICOMSR:) ||
-			[toolbarItem action] == @selector(delItem:) || 
+         [toolbarItem action] == @selector(signReport:) ||
+         [toolbarItem action] == @selector(authenticateReport:) ||
+			[toolbarItem action] == @selector(deleteReport:) ||
+         [toolbarItem action] == @selector(convertReportToPDF:) ||
+         [toolbarItem action] == @selector(convertReportToDICOMPDF:) ||
+         [toolbarItem action] == @selector(convertReportToDICOMCDA:) ||
+			[toolbarItem action] == @selector(delItem:) ||
 			[toolbarItem action] == @selector(querySelectedStudy:) || 
 			[toolbarItem action] == @selector(burnDICOM:) || 
 			[toolbarItem action] == @selector(viewXML:) || 
 			[toolbarItem action] == @selector(anonymizeDICOM:) || 
 			[toolbarItem action] == @selector(applyRoutingRule:) ||
-            [toolbarItem action] == @selector(viewerSubSeriesDICOM:) ||
-            [toolbarItem action] == @selector(viewerReparsedSeries:)
+         [toolbarItem action] == @selector(viewerSubSeriesDICOM:) ||
+         [toolbarItem action] == @selector(viewerReparsedSeries:)
 			)
 		return NO;
 	}

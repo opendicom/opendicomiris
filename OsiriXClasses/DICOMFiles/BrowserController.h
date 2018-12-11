@@ -192,9 +192,9 @@ extern NSString* O2AlbumDragType;
 	NSMutableString					*pressedKeys;
 	
 	IBOutlet NSView					*reportTemplatesView;
-	IBOutlet NSImageView			*reportTemplatesImageView;
+	IBOutlet NSImageView			   *reportTemplatesImageView;
 	IBOutlet NSPopUpButton			*reportTemplatesListPopUpButton;
-	int								reportToolbarItemType;
+	int								   reportToolbarItemType;
 	
 	IBOutlet NSWindow				*addStudiesToUserWindow;
 	IBOutlet NSWindow				*notificationEmailWindow;
@@ -534,9 +534,13 @@ extern NSString* O2AlbumDragType;
 - (NSString *)createFilterDescription;
 - (void) willChangeContext;
 
-- (IBAction) deleteReport: (id) sender;
+- (IBAction) generateReport: (id) sender;
+- (IBAction) signReport: (id) sender;
+- (IBAction) authenticateReport: (id) sender;
 - (IBAction) convertReportToPDF: (id)sender;
-- (IBAction) convertReportToDICOMSR: (id)sender;
+- (IBAction) convertReportToDICOMPDF: (id)sender;
+- (IBAction) convertReportToDICOMCDA: (id)sender;
+- (IBAction) deleteReport: (id) sender;
 
 - (IBAction) rebuildThumbnails:(id) sender;
 - (IBAction)selectNoAlbums:(id)sender;
@@ -548,7 +552,7 @@ extern NSString* O2AlbumDragType;
 - (void) refreshMatrix:(id) sender;
 - (void)updateReportToolbarIcon:(NSNotification *)note;
 
-#ifndef OSIRIX_LIGHT
+
 - (IBAction) paste: (id)sender;
 - (IBAction) pasteImageForSourceFile: (NSString*) sourceFile;
 - (void) decompressDICOMJPEG: (NSArray*) array __deprecated;
@@ -557,7 +561,6 @@ extern NSString* O2AlbumDragType;
 - (IBAction) compressSelectedFiles:(id) sender;
 - (IBAction) decompressSelectedFiles:(id) sender;
 - (void) importReport:(NSString*) path UID: (NSString*) uid;
-- (IBAction) generateReport: (id) sender;
 - (IBAction)importRawData:(id)sender;
 - (void) pdfPreview:(id)sender;
 - (void) burnDICOM:(id) sender;
@@ -568,7 +571,7 @@ extern NSString* O2AlbumDragType;
 - (void) refreshComparativeStudies: (NSArray*) newStudies;
 + (NSArray*) comparativeServers;
 - (IBAction) viewXML:(id) sender;
-#endif
+
 
 - (void) retrieveComparativeStudy: (DCMTKStudyQueryNode*) study select: (BOOL) select open: (BOOL) open;
 - (void) retrieveComparativeStudy: (DCMTKStudyQueryNode*) study select: (BOOL) select open: (BOOL) open showGUI: (BOOL) showGUI viewer: (ViewerController*) viewer;

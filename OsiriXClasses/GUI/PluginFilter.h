@@ -21,15 +21,6 @@
 /** This function is the entry point of Pre-Process plugins */
 -(long)processFiles: (NSMutableArray*) files;
 
-/** This function is the entry point of Report plugins 
-* action = @"dateReport"	-> return NSDate date of creation or modification of the report, nil if no report available
-* action = @"deleteReport"	-> return nil, delete the report
-* action = @"openReport"   -> return nil, open and display the report, create a new one if no report available 
-*/
--(id)report:(NSManagedObject*) study action:(NSString*) action;
-
-
-
 /** This function is called at the OsiriX startup, if you need to do some memory allocation, etc. */
 -(void)initPlugin;
 
@@ -57,6 +48,10 @@
 -(BOOL)deleteReportForStudy: (NSManagedObject*)study;
 /** Stub is to be subclassed by report filters */
 -(BOOL)createReportForStudy: (NSManagedObject*)study;
+/** Stub is to be subclassed by report filters */
+-(BOOL)signReportForStudy: (NSManagedObject*)study;
+/** Stub is to be subclassed by report filters */
+-(BOOL)authenticateReportForStudy: (NSManagedObject*)study;
 
 /** PRIVATE FUNCTIONS - DON'T SUBCLASS OR MODIFY */
 -(long)prepareFilter:(ViewerController*) vC;

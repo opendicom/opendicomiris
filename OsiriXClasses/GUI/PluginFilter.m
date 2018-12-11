@@ -83,12 +83,6 @@
 
 -(long)processFiles:(NSMutableArray*)files
 {
-	
-	return 0;
-}
-
--(id)report:(NSManagedObject*)study action:(NSString*)action
-{
 	return 0;
 }
 
@@ -100,6 +94,14 @@
 
 -(BOOL)createReportForStudy:(NSManagedObject*)study {
 	return NO;
+}
+
+-(BOOL)signReportForStudy:(NSManagedObject*)study {
+   return NO;
+}
+
+-(BOOL)authenticateReportForStudy:(NSManagedObject*)study {
+   return NO;
 }
 
 @end

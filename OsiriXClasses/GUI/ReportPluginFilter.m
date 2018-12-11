@@ -23,5 +23,11 @@
 - (BOOL)deleteReportForStudy:(id)study{
 	return NO;
 }
+- (BOOL)signReportForStudy:(id)study{
+      return NO;
+}
+- (BOOL)authenticateReportForStudy:(id)study{
+      return NO;
+}
 
 @end
