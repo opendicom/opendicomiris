@@ -30,7 +30,7 @@
 #import "DCMPix.h"
 #import "VRController.h"
 #import "BrowserController.h"
-#import "BonjourBrowser.h"
+//#import "BonjourBrowser.h"
 #import "DicomFileDCMTKCategory.h"
 #import "DICOMToNSString.h"
 #import "XMLControllerDCMTKCategory.h"

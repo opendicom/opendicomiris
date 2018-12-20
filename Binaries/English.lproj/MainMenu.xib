@@ -18,8 +18,8 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu title="MainMenu" systemMenu="main" id="29" userLabel="MainMenu">
             <items>
-                <menuItem title="OsiriX" id="56">
-                    <menu key="submenu" title="OsiriX" systemMenu="apple" id="57">
+                <menuItem title="opendicomiris" id="56">
+                    <menu key="submenu" title="opendicomiris" systemMenu="apple" id="57">
                         <items>
                             <menuItem title="About OsiriX" id="58">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -149,45 +149,14 @@
                             <menuItem title="Report" id="12353">
                                 <menu key="submenu" title="Report" id="12354">
                                     <items>
-                                        <menuItem title="Open report editor" keyEquivalent="O" id="12355">
+                                        <menuItem title="Save Report" keyEquivalent="s" id="12355">
                                             <connections>
                                                 <action selector="generateReport:" target="898" id="12363"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Sign Report" id="RYc-gZ-bVC">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="signReport:" target="-1" id="2gI-OO-p6X"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Authenticate Report" id="DmK-AT-KCs">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="authenticateReport:" target="-1" id="8Fy-Io-eO0"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Delete report editor" keyEquivalent="D" id="12356">
+                                        <menuItem title="Delete Report Editor" keyEquivalent="D" id="12356">
                                             <connections>
                                                 <action selector="deleteReport:" target="898" id="12365"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="14612"/>
-                                        <menuItem title="Convert to PDF" id="14610">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="convertReportToPDF:" target="898" id="14613"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Convert to DICOM PDF" id="14611">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="convertReportToDICOMPDF:" target="-1" id="5Lw-Bz-ddH"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Convert to DICOM CDA" id="Cil-z3-hte">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="convertReportToDICOMCDA:" target="-1" id="CPE-zr-hnp"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -239,16 +208,6 @@
                                         <menuItem title="Export to DICOM Network Node" keyEquivalent="S" id="12980">
                                             <connections>
                                                 <action selector="export2PACS:" target="-1" id="12981"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Export to Movie" keyEquivalent="s" id="11544">
-                                            <connections>
-                                                <action selector="exportQuicktime:" target="-1" id="11555"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Export to JPEG" keyEquivalent="E" id="11545">
-                                            <connections>
-                                                <action selector="exportJPEG:" target="-1" id="11557"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Export to Raw" id="11546">
@@ -338,50 +297,6 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="847">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
-                            <menuItem title="Rebuild Entire Database..." id="1112">
-                                <connections>
-                                    <action selector="ReBuildDatabaseSheet:" target="898" id="12510"/>
-                                    <binding destination="898" name="enabled" keyPath="database.isReadOnly" id="14405">
-                                        <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                        </dictionary>
-                                    </binding>
-                                    <binding destination="898" name="enabled2" keyPath="database.rebuildAllowed" previousBinding="14405" id="14409">
-                                        <dictionary key="options">
-                                            <integer key="NSMultipleValuesPlaceholder" value="-1"/>
-                                            <integer key="NSNoSelectionPlaceholder" value="-1"/>
-                                            <integer key="NSNotApplicablePlaceholder" value="-1"/>
-                                            <integer key="NSNullPlaceholder" value="-1"/>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Rebuild SQL Index File..." id="13527">
-                                <connections>
-                                    <action selector="rebuildSQLFile:" target="-1" id="13529"/>
-                                    <binding destination="898" name="enabled" keyPath="database.isReadOnly" id="14414">
-                                        <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                        </dictionary>
-                                    </binding>
-                                    <binding destination="898" name="enabled2" keyPath="database.rebuildAllowed" previousBinding="14414" id="14417">
-                                        <dictionary key="options">
-                                            <integer key="NSMultipleValuesPlaceholder" value="-1"/>
-                                            <integer key="NSNoSelectionPlaceholder" value="-1"/>
-                                            <integer key="NSNotApplicablePlaceholder" value="-1"/>
-                                            <integer key="NSNullPlaceholder" value="-1"/>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Rebuild Selected Thumbnails" id="12643">
-                                <connections>
-                                    <action selector="rebuildThumbnails:" target="898" id="12644"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="12650">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
                             <menuItem title="Close Window" keyEquivalent="w" id="841">
@@ -1867,17 +1782,17 @@ CA
                 <menuItem title="Plugins" id="1701">
                     <menu key="submenu" title="Plugins" id="1703">
                         <items>
-                            <menuItem title="Image Filters" id="1704">
-                                <menu key="submenu" title="Image Filters" id="1705"/>
-                            </menuItem>
-                            <menuItem title="ROI Tools" id="1708">
-                                <menu key="submenu" title="ROI Tools" id="1709"/>
-                            </menuItem>
-                            <menuItem title="Others" id="1711">
-                                <menu key="submenu" title="Others" id="1710"/>
+                            <menuItem title="Report" id="0Q6-G3-2XS">
+                                <menu key="submenu" title="Report" id="NUa-z9-LY1"/>
                             </menuItem>
                             <menuItem title="Database" id="11712">
                                 <menu key="submenu" title="Database" id="11713"/>
+                            </menuItem>
+                            <menuItem title="Image Filter" id="1704">
+                                <menu key="submenu" title="Image Filter" id="1705"/>
+                            </menuItem>
+                            <menuItem title="ROI Tool" id="1708">
+                                <menu key="submenu" title="ROI Tool" id="1709"/>
                             </menuItem>
                         </items>
                     </menu>
@@ -1965,12 +1880,12 @@ CA
         <customObject id="694" userLabel="AppController" customClass="AppController">
             <connections>
                 <outlet property="browserController" destination="898" id="1906"/>
-                <outlet property="dbMenu" destination="11713" id="11825"/>
+                <outlet property="databaseMenu" destination="11713" id="lE9-b5-MaQ"/>
                 <outlet property="dbWindow" destination="885" id="12350"/>
-                <outlet property="filtersMenu" destination="1705" id="11822"/>
-                <outlet property="othersMenu" destination="1710" id="11824"/>
+                <outlet property="imageFilterMenu" destination="1705" id="Nth-mp-GPd"/>
                 <outlet property="recentStudiesMenu" destination="a5x-qR-mZL" id="501-X4-zlN"/>
-                <outlet property="roisMenu" destination="1709" id="11823"/>
+                <outlet property="reportMenu" destination="NUa-z9-LY1" id="5NY-GO-42j"/>
+                <outlet property="roiToolMenu" destination="1709" id="Xvc-Oa-nrc"/>
                 <outlet property="windowsTilingMenuColumns" destination="14018" id="14037"/>
                 <outlet property="windowsTilingMenuRows" destination="14015" id="14036"/>
             </connections>
@@ -2853,7 +2768,6 @@ CA
                 <outlet property="albumTable" destination="1465" id="1572"/>
                 <outlet property="animationCheck" destination="1294" id="1305"/>
                 <outlet property="animationSlider" destination="1293" id="1304"/>
-                <outlet property="bannerSplit" destination="14624" id="14625"/>
                 <outlet property="bonjourPasswordWindow" destination="11804" id="11815"/>
                 <outlet property="bonjourSourcesBox" destination="11698" id="14241"/>
                 <outlet property="comparativeScrollView" destination="14720" id="8Jh-A5-YVN"/>

@@ -102,34 +102,8 @@
 	
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver: self forKeyPath: @"values.eraseEntireDBAtStartup"];
     [[NSUserDefaultsController sharedUserDefaultsController] removeObserver: self forKeyPath: @"values.dbFontSize"];
-    
-	[DICOMFieldsArray release];
 	
 	[super dealloc];
-}
-
-- (void) buildPluginsMenu
-{
-	int numberOfReportPlugins = 0;
-	for( NSString *k in [[PluginManager reportPlugins] allKeys])
-	{
-		[reportsMode addItemWithTitle: k];
-		[[reportsMode lastItem] setIndentationLevel:1];
-		numberOfReportPlugins++;
-	}
-	
-	if( numberOfReportPlugins <= 0)
-	{
-		[reportsMode removeItemAtIndex:[reportsMode indexOfItem:[reportsMode lastItem]]];
-		[reportsMode removeItemAtIndex:[reportsMode indexOfItem:[reportsMode lastItem]]];
-	}
-	else
-	{
-		if(numberOfReportPlugins == 1)
-			[[reportsMode itemAtIndex:4] setTitle:@"Plugin"];
-		[reportsMode setAutoenablesItems:NO];
-		[[reportsMode itemAtIndex:4] setEnabled:NO];
-	}
 }
 
 -(void) willUnselect
@@ -181,52 +155,15 @@
 
 - (void) mainViewDidLoad
 {
-
-
-//	[[scrollView verticalScroller] setFloatValue: 0]; 
-////	[[scrollView verticalScroller] setFloatValue:0.0 knobProportion:0.0]; //// now with bindings
-//	[scrollView setVerticalScroller: [scrollView verticalScroller]];
-	
-//	[[scrollView contentView] scrollToPoint: NSMakePoint(600,600)];
-	
 	NSUserDefaults	*defaults = [NSUserDefaults standardUserDefaults];
-	
-	//setup GUI
-////	[copyDatabaseOnOffButton setState:[defaults boolForKey:@"COPYDATABASE"]]; //// now with bindings
-	
-//	[displayAllStudies setState:[defaults boolForKey:@"KeepStudiesOfSamePatientTogether"]];
-	
-	long locationValue = [defaults integerForKey:@"DEFAULT_DATABASELOCATION"];
+
+   long locationValue = [defaults integerForKey:@"DEFAULT_DATABASELOCATION"];
 	
 	[locationMatrix selectCellWithTag:locationValue];
 	[locationPathField setURL: [NSURL fileURLWithPath: [defaults stringForKey:@"DEFAULT_DATABASELOCATIONURL"]]];
 	
-//	[copyDatabaseModeMatrix setEnabled:[defaults boolForKey:@"COPYDATABASE"]];
-////	[copyDatabaseModeMatrix selectCellWithTag:[defaults integerForKey:@"COPYDATABASEMODE"]];
-//	[localizerOnOffButton setState:[defaults boolForKey:@"NOLOCALIZER"]]; 
-//	[multipleScreensMatrix selectCellWithTag:[defaults integerForKey:@"MULTIPLESCREENSDATABASE"]];
 	[seriesOrderMatrix selectCellWithTag:[defaults integerForKey:@"SERIESORDER"]];
-	
-	
-	// COMMENTS
-	self.currentCommentsAutoFill = 0;
-    
-    if( [[[NSUserDefaults standardUserDefaults] stringForKey: @"commentFieldForAutoFill"] isEqualToString: @"comment"]) self.currentCommentsField = 1;
-    if( [[[NSUserDefaults standardUserDefaults] stringForKey: @"commentFieldForAutoFill"] isEqualToString: @"comment2"]) self.currentCommentsField = 2;
-    if( [[[NSUserDefaults standardUserDefaults] stringForKey: @"commentFieldForAutoFill"] isEqualToString: @"comment3"]) self.currentCommentsField = 3;
-    if( [[[NSUserDefaults standardUserDefaults] stringForKey: @"commentFieldForAutoFill"] isEqualToString: @"comment4"]) self.currentCommentsField = 4;
-	
-	// REPORTS
-	[self buildPluginsMenu];
-	if([[defaults stringForKey:@"REPORTSMODE"] intValue] == 3)
-	{
-		[reportsMode selectItemWithTitle:[defaults stringForKey:@"REPORTSPLUGIN"]];
-	}
-	else
-	{
-		[reportsMode selectItemWithTag:[[defaults stringForKey:@"REPORTSMODE"] intValue]];
-	}
-	
+		
 	// DATABASE AUTO-CLEANING
 	
 	[older setState:[defaults boolForKey:@"AUTOCLEANINGDATE"]];
@@ -238,168 +175,17 @@
 	[commentsDeleteText setStringValue: [defaults stringForKey:@"AUTOCLEANINGCOMMENTSTEXT"]];
 	[commentsDeleteMatrix selectCellWithTag:[[defaults stringForKey:@"AUTOCLEANINGDONTCONTAIN"] intValue]];
 	[olderThanProduced selectItemWithTag:[[defaults stringForKey:@"AUTOCLEANINGDATEPRODUCEDDAYS"] intValue]];
-	[olderThanOpened selectItemWithTag:[[defaults stringForKey:@"AUTOCLEANINGDATEOPENEDDAYS"] intValue]];
-	
-//	[freeSpace setState:[defaults boolForKey:@"AUTOCLEANINGSPACE"]];
-//	[[freeSpaceType cellWithTag:0] setState:[defaults boolForKey:@"AUTOCLEANINGSPACEPRODUCED"]];
-//	[[freeSpaceType cellWithTag:1] setState:[defaults boolForKey:@"AUTOCLEANINGSPACEOPENED"]];
-//	[freeSpaceSize selectItemWithTag:[[defaults stringForKey:@"AUTOCLEANINGSPACESIZE"] intValue]];
-    
+	[olderThanOpened selectItemWithTag:[[defaults stringForKey:@"AUTOCLEANINGDATEOPENEDDAYS"] intValue]];    
     
     self.newUsePatientBirthDateForUID = [[NSUserDefaults standardUserDefaults] boolForKey: @"UsePatientBirthDateForUID"];
     self.newUsePatientNameForUID = [[NSUserDefaults standardUserDefaults] boolForKey: @"UsePatientNameForUID"];
     self.newUsePatientIDForUID = [[NSUserDefaults standardUserDefaults] boolForKey: @"UsePatientIDForUID"];
 }
 
-- (void)didSelect
-{
-	DICOMFieldsArray = [[[[[self mainView] window] windowController] prepareDICOMFieldsArrays] retain];
-	
-	NSMenu *DICOMFieldsMenu = [dicomFieldsMenu menu];
-	[DICOMFieldsMenu setAutoenablesItems:NO];
-	[dicomFieldsMenu removeAllItems];
-	
-	NSMenuItem *item;
-	item = [[[NSMenuItem alloc] init] autorelease];
-	[item setTitle:NSLocalizedString( @"DICOM Fields", nil)];
-	[item setEnabled:NO];
-	[DICOMFieldsMenu addItem:item];
-	int i;
-	for (i=0; i<[DICOMFieldsArray count]; i++)
-	{
-		item = [[[NSMenuItem alloc] init] autorelease];
-		[item setTitle:[[DICOMFieldsArray objectAtIndex:i] title]];
-		[item setRepresentedObject:[DICOMFieldsArray objectAtIndex:i]];
-		[DICOMFieldsMenu addItem:item];
-	}
-	[dicomFieldsMenu setMenu:DICOMFieldsMenu];
-}
-
-- (IBAction) setReportMode:(id) sender
-{
-	// report mode int value
-	// 0 : Microsoft Word
-	// 1 : TextEdit
-	// 2 : Pages
-	// 3 : Plugin
-	// 4 : DICOM SR
-	// 5 : OO
-	
-	NSUserDefaults	*defaults = [NSUserDefaults standardUserDefaults];
-	
-	int indexOfPluginsLabel = [reportsMode indexOfItemWithTitle:@"Plugins"];
-	int indexOfPluginLabel = [reportsMode indexOfItemWithTitle:@"Plugin"];
-	int indexOfLabel = (indexOfPluginsLabel>indexOfPluginLabel)?indexOfPluginsLabel:indexOfPluginLabel;
-	
-	indexOfLabel = (indexOfLabel<=0)? 10000 : indexOfLabel ;
-	
-	if([reportsMode indexOfSelectedItem] >= indexOfLabel) // in this case it is a plugin
-	{
-		[defaults setInteger:3 forKey:@"REPORTSMODE"];
-		[defaults setObject:[[reportsMode selectedItem] title] forKey:@"REPORTSPLUGIN"];
-	}
-	else
-	{
-		[defaults setInteger:[[reportsMode selectedItem] tag] forKey:@"REPORTSMODE"];
-	}
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"reportModeChanged" object:nil];
-}
-
-// - (IBAction) setDisplayAllStudiesAlbum:(id) sender
-// {
-//	[[NSUserDefaults standardUserDefaults] setBool:[sender state] forKey:@"KeepStudiesOfSamePatientTogether"];
-// }
 
 - (IBAction)regenerateAutoComments:(id) sender
 {
 	[[BrowserController currentBrowser] regenerateAutoComments: nil]; // nil == all studies
-}
-
-- (void) setCurrentCommentsField:(int) v
-{
-    currentCommentsField = v;
-    
-    if( currentCommentsField == 1) [[NSUserDefaults standardUserDefaults] setObject:@"comment" forKey:@"commentFieldForAutoFill"];
-    if( currentCommentsField == 2) [[NSUserDefaults standardUserDefaults] setObject:@"comment2" forKey:@"commentFieldForAutoFill"];
-    if( currentCommentsField == 3) [[NSUserDefaults standardUserDefaults] setObject:@"comment3" forKey:@"commentFieldForAutoFill"];
-    if( currentCommentsField == 4) [[NSUserDefaults standardUserDefaults] setObject:@"comment4" forKey:@"commentFieldForAutoFill"];
-}
-
-- (void) setCurrentCommentsAutoFill:(int) v
-{
-    currentCommentsAutoFill = v;
-    
-    NSString *group, *element;
-    if( currentCommentsAutoFill > 0)
-    {
-        group = [NSString stringWithFormat: @"COMMENTSGROUP%d", currentCommentsAutoFill+1];
-        element = [NSString stringWithFormat: @"COMMENTSELEMENT%d", currentCommentsAutoFill+1];
-    }
-    else
-    {
-        group = [NSString stringWithFormat: @"COMMENTSGROUP"];
-        element = [NSString stringWithFormat: @"COMMENTSELEMENT"];
-    }
-    
-    if( [[[NSUserDefaults standardUserDefaults] stringForKey:group] intValue] > 0)
-    {
-        [commentsGroup setStringValue:[NSString stringWithFormat:@"0x%04X", [[[NSUserDefaults standardUserDefaults] stringForKey:group] intValue]]];
-        [commentsElement setStringValue:[NSString stringWithFormat:@"0x%04X", [[[NSUserDefaults standardUserDefaults] stringForKey:element] intValue]]];
-    }
-    else
-    {
-        [commentsGroup setStringValue: @""];
-        [commentsElement setStringValue: @""];
-    }
-}
-
-- (IBAction) setAutoComments:(id) sender
-{
-	// COMMENTS
-
-    NSString *group, *element;
-    if( currentCommentsAutoFill > 0)
-    {
-        group = [NSString stringWithFormat: @"COMMENTSGROUP%d", currentCommentsAutoFill+1];
-        element = [NSString stringWithFormat: @"COMMENTSELEMENT%d", currentCommentsAutoFill+1];
-    }
-    else
-    {
-        group = [NSString stringWithFormat: @"COMMENTSGROUP"];
-        element = [NSString stringWithFormat: @"COMMENTSELEMENT"];
-    }
-    
-	unsigned val;
-	NSScanner *hexscanner;
-	
-	val = 0;
-	hexscanner = [NSScanner scannerWithString: [commentsGroup stringValue]];
-	[hexscanner scanHexInt: &val];
-    
-    if( val > 0)
-    {
-        [[NSUserDefaults standardUserDefaults] setInteger: val forKey: group];
-        
-        val = 0;
-        hexscanner = [NSScanner scannerWithString: [commentsElement stringValue]];
-        [hexscanner scanHexInt: &val];
-        [[NSUserDefaults standardUserDefaults] setInteger: val forKey: element];
-    }
-    else
-    {
-        [[NSUserDefaults standardUserDefaults] setObject: nil forKey: element];
-        [[NSUserDefaults standardUserDefaults] setObject: nil forKey: group];
-    }
-    
-    self.currentCommentsAutoFill = currentCommentsAutoFill;
-}
-
-- (IBAction) setDICOMFieldMenu: (id) sender;
-{
-	[commentsGroup setStringValue: [[[sender selectedItem] title] substringWithRange: NSMakeRange( 1, 6)]];
-	[commentsElement setStringValue: [[[sender selectedItem] title] substringWithRange: NSMakeRange( 8, 6)]];
-	
-	[self setAutoComments: sender];
 }
 
 - (IBAction) databaseCleaning:(id)sender
@@ -423,17 +209,7 @@
 	
 	[defaults setInteger:[[olderThanProduced selectedItem] tag] forKey:@"AUTOCLEANINGDATEPRODUCEDDAYS"];
 	[defaults setInteger:[[olderThanOpened selectedItem] tag] forKey:@"AUTOCLEANINGDATEOPENEDDAYS"];
-
-
-//	[defaults setBool:[freeSpace state] forKey:@"AUTOCLEANINGSPACE"];
-//	[defaults setBool:[[freeSpaceType cellWithTag:0] state] forKey:@"AUTOCLEANINGSPACEPRODUCED"];
-//	[defaults setBool:[[freeSpaceType cellWithTag:1] state] forKey:@"AUTOCLEANINGSPACEOPENED"];
-//	[defaults setInteger:[[freeSpaceSize selectedItem] tag] forKey:@"AUTOCLEANINGSPACESIZE"];
 }
-
-//- (IBAction)setMultipleScreens:(id)sender{
-//	[[NSUserDefaults standardUserDefaults] setInteger:[(NSMatrix *)[sender selectedCell] tag] forKey:@"MULTIPLESCREENSDATABASE"];
-//}
 
 - (IBAction)setSeriesOrder:(id)sender{
 	[[NSUserDefaults standardUserDefaults] setInteger:[(NSMatrix *)[sender selectedCell] tag] forKey:@"SERIESORDER"];

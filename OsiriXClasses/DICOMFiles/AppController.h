@@ -24,7 +24,7 @@ enum
 	ask = 3
 };
 
-@class PluginFilter;
+@class Plugin;
 
 #ifdef __cplusplus
 extern "C"
@@ -55,10 +55,13 @@ extern AppController* OsiriX;
 {
 	IBOutlet BrowserController *browserController;
 
-   IBOutlet NSMenu				*filtersMenu;
-	IBOutlet NSMenu				*roisMenu;
-	IBOutlet NSMenu				*othersMenu;
-	IBOutlet NSMenu				*dbMenu;
+   IBOutlet NSMenu            *databaseMenu;
+   IBOutlet NSMenu            *reportMenu;
+   IBOutlet NSMenu				*imageFilterMenu;
+	IBOutlet NSMenu				*roiToolMenu;
+   IBOutlet NSMenu            *fusionFilterMenu;
+
+   
 	IBOutlet NSWindow				*dbWindow;
    IBOutlet NSMenu				*windowsTilingMenuRows;
    IBOutlet NSMenu            *windowsTilingMenuColumns;
@@ -89,7 +92,6 @@ extern AppController* OsiriX;
 
 @property BOOL checkAllWindowsAreVisibleIsOff;
 @property BOOL isSessionInactive;
-@property (readonly) NSMenu *filtersMenu;
 @property (readonly) NSMenu *recentStudiesMenu;
 @property (readonly) NSMenu *windowsTilingMenuRows;
 @property (readonly) NSMenu *windowsTilingMenuColumns;
@@ -100,9 +102,6 @@ extern AppController* OsiriX;
 //singleton
 + (AppController*) sharedAppController;
 
-+ (BOOL) isFDACleared;
-+ (BOOL) willExecutePlugin;
-+ (BOOL) willExecutePlugin:(id) filter;
 + (BOOL) hasMacOSXLion;
 + (BOOL) hasMacOSXSnowLeopard;
 
@@ -131,10 +130,9 @@ extern AppController* OsiriX;
 #pragma mark static menu items
 //===============OSIRIX========================
 - (IBAction) about:(id)sender; /**< Display the about window */
+- (IBAction) aboutPlugins:(id)sender;
 - (IBAction) showPreferencePanel:(id)sender; /**< Show Preferences window */
-#ifndef OSIRIX_LIGHT
 - (IBAction) autoQueryRefresh:(id)sender;
-#endif
 //===============WINDOW========================
 - (IBAction) setFixedTilingRows: (id) sender;
 - (IBAction) setFixedTilingColumns: (id) sender;

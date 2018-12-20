@@ -372,7 +372,7 @@ enum
 @property(readonly) NSMatrix *previewMatrix;
 @property(readonly) NSScrollView *previewMatrixScrollView;
 
-/** Return the 'dragged' window, the destination window is contained in the 'viewerController' object of the 'PluginFilter' object */
+/** Return the 'dragged' window, the destination window is contained in the 'viewerController' object of the 'Plugin' object */
 @property(nonatomic, retain) ViewerController *blendedWindow;
 
 @property(retain) NSNumber* flagListPODComparatives;
@@ -415,7 +415,7 @@ enum
 */
 - (void) replaceSeriesWith:(NSMutableArray*)newPixList :(NSMutableArray*)newDcmList :(NSData*) newData;
 
-/** Return the 'dragged' window, the destination window is contained in the 'viewerController' object of the 'PluginFilter' object */
+/** Return the 'dragged' window, the destination window is contained in the 'viewerController' object of the 'Plugin' object */
 - (ViewerController*) blendedWindow;
 
 /**  Display a Wait window with the message
@@ -858,7 +858,6 @@ enum
 - (void) clear8bitRepresentations;
 - (void) ApplyConvString:(NSString*) str;
 - (void)checkView:(NSView *)aView :(BOOL) OnOff;
-- (void)executeFilterFromString:(NSString*) name;
 - (IBAction) applyConvolutionOnSource:(id) sender;
 - (float) factorPET2SUV;
 - (IBAction) flipDataSeries: (id) sender;

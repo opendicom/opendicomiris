@@ -424,12 +424,7 @@ static void* const SearchDicomNodesContext = @"SearchDicomNodesContext";
         }
         else
         {
-            int mode = [[NSUserDefaults standardUserDefaults] integerForKey: @"MOUNT"];
-#ifdef OSIRIX_LIGHT
-            mode = 0; //display the source
-#endif
-            
-            if( mode != 2)
+           if( [[NSUserDefaults standardUserDefaults] integerForKey: @"MOUNT"] != 2)
             {
                 for (NSString* path in [[NSWorkspace sharedWorkspace] mountedRemovableMedia])
                     [self _analyzeVolumeAtPath:path];

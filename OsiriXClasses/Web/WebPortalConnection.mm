@@ -293,9 +293,9 @@ NSString* const SessionDicomCStorePortKey = @"DicomCStorePort"; // NSNumber (int
     || [path isEqualToString: @"/testdbalive"])
 		return NO;
     
-    for (id key in [PluginManager plugins])
+    for (id key in [PluginManager pluginSingletons])
     {
-        id plugin = [[PluginManager plugins] objectForKey:key];
+        id plugin = [[PluginManager pluginSingletons] objectForKey:key];
         
         if ([plugin respondsToSelector:@selector(isPasswordProtected:forConnection:)])
         {
@@ -477,9 +477,9 @@ NSString* const SessionDicomCStorePortKey = @"DicomCStorePort"; // NSNumber (int
             if( pluginWithHTTPResponses == nil)
             {
                 pluginWithHTTPResponses = [[NSMutableArray alloc] init];
-                for( id key in [PluginManager plugins])
+                for( id key in [PluginManager pluginSingletons])
                 {
-                    id plugin = [[PluginManager plugins] objectForKey:key];
+                    id plugin = [[PluginManager pluginSingletons] objectForKey:key];
                     
                     if( [plugin respondsToSelector:@selector(httpResponseForPath:forConnection:)])
                         [pluginWithHTTPResponses addObject: plugin];
@@ -1093,9 +1093,9 @@ NSString* const SessionDicomCStorePortKey = @"DicomCStorePort"; // NSNumber (int
             
             if( [[NSUserDefaults standardUserDefaults] boolForKey: @"AllowPluginAuthenticationForWebPortal"]) // Authentication through a plugin? For example, add an LDAP plugin...
             {
-                for (id key in [PluginManager plugins])
+                for (id key in [PluginManager pluginSingletons])
                 {
-                    id plugin = [[PluginManager plugins] objectForKey:key];
+                    id plugin = [[PluginManager pluginSingletons] objectForKey:key];
                     
                     if ([plugin respondsToSelector:@selector(authenticateConnection: parameters:)])
                     {

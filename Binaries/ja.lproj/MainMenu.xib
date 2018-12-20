@@ -17,16 +17,16 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu title="MainMenu" systemMenu="main" id="29" userLabel="MainMenu">
             <items>
-                <menuItem title="OsiriX" id="56">
-                    <menu key="submenu" title="OsiriX" systemMenu="apple" id="57">
+                <menuItem title="opendicomiris" id="56">
+                    <menu key="submenu" title="opendicomiris" systemMenu="apple" id="57">
                         <items>
-                            <menuItem title="About OsiriX" id="58">
+                            <menuItem title="Acerca de opendicomiris" id="58">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="about:" target="694" id="1115"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="環境設定..." keyEquivalent="," id="695">
+                            <menuItem title="Preferencias..." keyEquivalent="," id="695">
                                 <connections>
                                     <action selector="showPreferencePanel:" target="694" id="696"/>
                                 </connections>
@@ -34,18 +34,18 @@
                             <menuItem isSeparatorItem="YES" id="143">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Hide OsiriX" keyEquivalent="h" id="134">
+                            <menuItem title="Esconder opendicomiris" keyEquivalent="h" id="134">
                                 <connections>
                                     <action selector="hide:" target="-2" id="152"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Hide Others" keyEquivalent="h" id="145">
+                            <menuItem title="Esconder otros" keyEquivalent="h" id="145">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="hideOtherApplications:" target="-2" id="146"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Show All" id="150">
+                            <menuItem title="Mostrar todo" id="150">
                                 <connections>
                                     <action selector="unhideAllApplications:" target="-2" id="153"/>
                                 </connections>
@@ -53,7 +53,7 @@
                             <menuItem isSeparatorItem="YES" id="149">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Quit OsiriX" keyEquivalent="q" id="136">
+                            <menuItem title="Salir de opendicomiris" keyEquivalent="q" id="136">
                                 <connections>
                                     <action selector="terminate:" target="694" id="1722"/>
                                 </connections>
@@ -61,21 +61,21 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="ファイル" id="848">
-                    <menu key="submenu" title="ファイル" id="849">
+                <menuItem title="Archivos" id="848">
+                    <menu key="submenu" title="Archivos" id="849">
                         <items>
-                            <menuItem title="Show Database Window" keyEquivalent="d" id="854">
+                            <menuItem title="Mostrar base de datos" keyEquivalent="d" id="854">
                                 <connections>
                                     <action selector="showDatabase:" target="898" id="1030"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Toggle Albums &amp; Sources drawer" id="14591">
+                            <menuItem title="Mostrar/esconder albumes, fuentes y operaciones" id="14591">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="drawerToggle:" target="898" id="14592"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Toggle History drawer" id="14744">
+                            <menuItem title="Mostrar/esconder antecedentes" id="14744">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="comparativeToggle:" target="898" id="14746"/>
@@ -84,12 +84,12 @@
                             <menuItem isSeparatorItem="YES" id="12984">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="New Database Folder..." tag="1" id="12982">
+                            <menuItem title="Nueva carpeta de base de datos..." tag="1" id="12982">
                                 <connections>
                                     <action selector="createDatabaseFolder:" target="898" id="12987"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Open Database Folder..." tag="2" id="1725">
+                            <menuItem title="Abrir carpeta de base de datos..." tag="2" id="1725">
                                 <connections>
                                     <action selector="createDatabaseFolder:" target="898" id="12988"/>
                                 </connections>
@@ -97,43 +97,43 @@
                             <menuItem isSeparatorItem="YES" id="14603">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Albums" id="14593">
+                            <menuItem title="Albumes" id="14593">
                                 <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Albums" id="14594">
+                                <menu key="submenu" title="Albumes" id="14594">
                                     <items>
-                                        <menuItem title="Add an album..." id="14602">
+                                        <menuItem title="Agregar un albúm..." id="14602">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="addAlbum:" target="898" id="14604"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Add a smart album..." id="14601">
+                                        <menuItem title="Agregar un albúm dinámico..." id="14601">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="addSmartAlbum:" target="898" id="14605"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Delete selected album" id="14600">
+                                        <menuItem title="Borrar albúm seleccionado" id="14600">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="deleteAlbum:" target="898" id="14606"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="14596"/>
-                                        <menuItem title="Save albums..." id="14599">
+                                        <menuItem title="Guardar albumes..." id="14599">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="saveAlbums:" target="898" id="14607"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Import albums..." id="14598">
+                                        <menuItem title="Importar albumes..." id="14598">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="addAlbums:" target="898" id="14608"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="14595"/>
-                                        <menuItem title="Create default albums..." id="14597">
+                                        <menuItem title="Crear albumes por defecto..." id="14597">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="defaultAlbums:" target="898" id="14609"/>
@@ -145,48 +145,17 @@
                             <menuItem isSeparatorItem="YES" id="1728">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Report" id="12353">
-                                <menu key="submenu" title="Report" id="12354">
+                            <menuItem title="Informes" id="12353">
+                                <menu key="submenu" title="Informes" id="12354">
                                     <items>
-                                        <menuItem title="Open report editor" keyEquivalent="O" id="12355">
+                                        <menuItem title="Finalizar" keyEquivalent="s" id="12355">
                                             <connections>
                                                 <action selector="generateReport:" target="898" id="12363"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Sign report" id="eTL-yW-dA7">
-                                            <modifierMask key="keyEquivalentModifierMask" option="YES"/>
-                                            <connections>
-                                                <action selector="signReport:" target="-1" id="iZG-1s-L3e"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Authenticate report" id="0kv-qe-U0T">
-                                            <modifierMask key="keyEquivalentModifierMask" option="YES"/>
-                                            <connections>
-                                                <action selector="authenticateReport:" target="-1" id="NFr-8h-dPh"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Delete report editor" keyEquivalent="D" id="12356">
+                                        <menuItem title="Borrar editor" keyEquivalent="D" id="12356">
                                             <connections>
                                                 <action selector="deleteReport:" target="898" id="12365"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="14612"/>
-                                        <menuItem title="Convert to PDF" id="14610">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="convertReportToPDF:" target="898" id="14613"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Convert to DICOM PDF" id="14611">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="convertReportToDICOMPDF:" target="-1" id="kSf-lj-Rcc"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Convert to DICOM CDA" id="oUI-ZO-b8J">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="convertReportToDICOMCDA:" target="-1" id="w8b-hC-Rxo"/>
                                             </connections>
                                         </menuItem>
                                     </items>
@@ -195,10 +164,10 @@
                             <menuItem isSeparatorItem="YES" id="12352">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Import" id="11466">
-                                <menu key="submenu" title="Import" id="11467">
+                            <menuItem title="Importar" id="11466">
+                                <menu key="submenu" title="Importar" id="11467">
                                     <items>
-                                        <menuItem title="Import Files..." keyEquivalent="o" id="11468">
+                                        <menuItem title="Archivos..." keyEquivalent="o" id="11468">
                                             <connections>
                                                 <action selector="selectFilesAndFoldersToAdd:" target="898" id="11717"/>
                                                 <binding destination="898" name="enabled" keyPath="database.isReadOnly" id="14428">
@@ -208,7 +177,7 @@
                                                 </binding>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Import Image from URL..." id="11470">
+                                        <menuItem title="Imagen desde URL..." id="11470">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="addURLToDatabase:" target="898" id="11471"/>
@@ -219,7 +188,7 @@
                                                 </binding>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Import Raw Data..." id="11465">
+                                        <menuItem title="Datos originales..." id="11465">
                                             <connections>
                                                 <action selector="importRawData:" target="898" id="11472"/>
                                                 <binding destination="898" name="enabled" keyPath="database.isReadOnly" id="14439">
@@ -232,51 +201,41 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Export" id="11542">
-                                <menu key="submenu" title="Export" id="11543">
+                            <menuItem title="Exportar" id="11542">
+                                <menu key="submenu" title="Exportar" id="11543">
                                     <items>
-                                        <menuItem title="Export to DICOM Network Node" keyEquivalent="S" id="12980">
+                                        <menuItem title="Copiar a nodo DICOM" keyEquivalent="S" id="12980">
                                             <connections>
                                                 <action selector="export2PACS:" target="-1" id="12981"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Export to Movie" keyEquivalent="s" id="11544">
-                                            <connections>
-                                                <action selector="exportQuicktime:" target="-1" id="11555"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Export to JPEG" keyEquivalent="E" id="11545">
-                                            <connections>
-                                                <action selector="exportJPEG:" target="-1" id="11557"/>
-                                            </connections>
-                                        </menuItem>
-                                        <menuItem title="Export to Raw" id="11546">
+                                        <menuItem title="Datos originales" id="11546">
                                             <connections>
                                                 <action selector="exportRAW:" target="-1" id="11554"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Export to TIFF" keyEquivalent="e" id="11547">
+                                        <menuItem title="TIFF" keyEquivalent="e" id="11547">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
                                                 <action selector="exportTIFF:" target="-1" id="11558"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Export to DICOM file(s)" keyEquivalent="e" id="11548">
+                                        <menuItem title="Archivos DICOM" keyEquivalent="e" id="11548">
                                             <connections>
                                                 <action selector="exportDICOMFile:" target="-1" id="11559"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Export to Email" id="11549">
+                                        <menuItem title="Correo electrónico" id="11549">
                                             <connections>
                                                 <action selector="sendMail:" target="-1" id="11552"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Export to iPhoto" id="11550">
+                                        <menuItem title="iPhoto" id="11550">
                                             <connections>
                                                 <action selector="export2iPhoto:" target="-1" id="11553"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Export Displayed Database List as..." id="13772">
+                                        <menuItem title="Lista de base de datos como..." id="13772">
                                             <connections>
                                                 <action selector="saveDBListAs:" target="-1" id="13773"/>
                                             </connections>
@@ -287,33 +246,33 @@
                             <menuItem isSeparatorItem="YES" id="12351">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Burn..." id="1470">
+                            <menuItem title="Grabar..." id="1470">
                                 <connections>
                                     <action selector="burnDICOM:" target="898" id="1471"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Anonymize..." id="1723">
+                            <menuItem title="Anonymizar..." id="1723">
                                 <connections>
                                     <action selector="anonymizeDICOM:" target="898" id="1724"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Copy Linked Files to Database Folder" id="12648">
+                            <menuItem title="Copiar archivos enlazados a la carpeta de base de datos" id="12648">
                                 <connections>
                                     <action selector="copyToDBFolder:" target="898" id="13567"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Search" keyEquivalent="f" id="11171">
+                            <menuItem title="Buscar" keyEquivalent="f" id="11171">
                                 <modifierMask key="keyEquivalentModifierMask" control="YES" command="YES"/>
                                 <connections>
                                     <action selector="searchField:" target="-1" id="13774"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Merge Selected Studies" id="13044">
+                            <menuItem title="Fusionar estudios seleccionados" id="13044">
                                 <connections>
                                     <action selector="mergeStudies:" target="898" id="13534"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Delete Selected Exam" id="13533">
+                            <menuItem title="Borrar estudios seleccionados" id="13533">
                                 <connections>
                                     <action selector="delItem:" target="898" id="13535"/>
                                 </connections>
@@ -322,12 +281,12 @@
                             <menuItem isSeparatorItem="YES" id="12530">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Compress selected DICOM files" id="13565">
+                            <menuItem title="Comprimir archivos DICOM seleccionados" id="13565">
                                 <connections>
                                     <action selector="compressSelectedFiles:" target="898" id="13566"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Decompress selected DICOM files" id="12649">
+                            <menuItem title="Descomprimir archivos DICOM seleccionados" id="12649">
                                 <connections>
                                     <action selector="decompressSelectedFiles:" target="898" id="12652"/>
                                 </connections>
@@ -335,51 +294,7 @@
                             <menuItem isSeparatorItem="YES" id="847">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Rebuild Entire Database..." id="1112">
-                                <connections>
-                                    <action selector="ReBuildDatabaseSheet:" target="898" id="12510"/>
-                                    <binding destination="898" name="enabled" keyPath="database.isReadOnly" id="14405">
-                                        <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                        </dictionary>
-                                    </binding>
-                                    <binding destination="898" name="enabled2" keyPath="database.rebuildAllowed" previousBinding="14405" id="14409">
-                                        <dictionary key="options">
-                                            <integer key="NSMultipleValuesPlaceholder" value="-1"/>
-                                            <integer key="NSNoSelectionPlaceholder" value="-1"/>
-                                            <integer key="NSNotApplicablePlaceholder" value="-1"/>
-                                            <integer key="NSNullPlaceholder" value="-1"/>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Rebuild SQL Index File..." id="13527">
-                                <connections>
-                                    <action selector="rebuildSQLFile:" target="-1" id="13529"/>
-                                    <binding destination="898" name="enabled" keyPath="database.isReadOnly" id="14414">
-                                        <dictionary key="options">
-                                            <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                        </dictionary>
-                                    </binding>
-                                    <binding destination="898" name="enabled2" keyPath="database.rebuildAllowed" previousBinding="14414" id="14417">
-                                        <dictionary key="options">
-                                            <integer key="NSMultipleValuesPlaceholder" value="-1"/>
-                                            <integer key="NSNoSelectionPlaceholder" value="-1"/>
-                                            <integer key="NSNotApplicablePlaceholder" value="-1"/>
-                                            <integer key="NSNullPlaceholder" value="-1"/>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Rebuild Selected Thumbnails" id="12643">
-                                <connections>
-                                    <action selector="rebuildThumbnails:" target="898" id="12644"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem isSeparatorItem="YES" id="12650">
-                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                            </menuItem>
-                            <menuItem title="Close Window" keyEquivalent="w" id="841">
+                            <menuItem title="Cerrar Ventana" keyEquivalent="w" id="841">
                                 <connections>
                                     <action selector="performClose:" target="-1" id="1028"/>
                                 </connections>
@@ -387,17 +302,17 @@
                             <menuItem isSeparatorItem="YES" id="1546">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Page Setup..." keyEquivalent="P" id="1551">
+                            <menuItem title="Configuración de página..." keyEquivalent="P" id="1551">
                                 <connections>
                                     <action selector="runPageLayout:" target="-1" id="1571"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Print..." keyEquivalent="p" id="1550">
+                            <menuItem title="Imprimir..." keyEquivalent="p" id="1550">
                                 <connections>
                                     <action selector="print:" target="-1" id="1552"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="DICOM Print..." keyEquivalent="p" id="12762">
+                            <menuItem title="Imprimir DICOM..." keyEquivalent="p" id="12762">
                                 <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="printDICOM:" target="-1" id="12764"/>
@@ -406,9 +321,9 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="ネットワーク" id="13787">
+                <menuItem title="Red" id="13787">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="ネットワーク" id="13788">
+                    <menu key="submenu" title="Red" id="13788">
                         <items>
                             <menuItem title="Export to DICOM Network Node" keyEquivalent="S" id="13801">
                                 <connections>
@@ -478,8 +393,8 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="編集" id="163">
-                    <menu key="submenu" title="編集" id="169">
+                <menuItem title="Edit" id="163">
+                    <menu key="submenu" title="Edit" id="169">
                         <items>
                             <menuItem title="Undo" keyEquivalent="z" id="11528">
                                 <connections>
@@ -517,8 +432,8 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="フォーマット" id="1474">
-                    <menu key="submenu" title="フォーマット" id="1489">
+                <menuItem title="Format" id="1474">
+                    <menu key="submenu" title="Format" id="1489">
                         <items>
                             <menuItem title="Customize Toolbar..." id="11219">
                                 <connections>
@@ -580,8 +495,8 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="2D ビューア" id="13064">
-                    <menu key="submenu" title="2D ビューア" id="13065">
+                <menuItem title="2D" id="13064">
+                    <menu key="submenu" title="2D" id="13065">
                         <items>
                             <menuItem title="Next Series" tag="1" keyEquivalent="" id="13189">
                                 <connections>
@@ -1377,8 +1292,8 @@
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="3D ビューア" id="1283">
-                    <menu key="submenu" title="3D ビューア" id="1281">
+                <menuItem title="3D" id="1283">
+                    <menu key="submenu" title="3D" id="1281">
                         <items>
                             <menuItem title="3D MPR" image="MPR" tag="10" id="13753">
                                 <connections>
@@ -1862,24 +1777,43 @@ CA
                 <menuItem title="Plugins" id="1701">
                     <menu key="submenu" title="Plugins" id="1703">
                         <items>
-                            <menuItem title="Image Filters" id="1704">
-                                <menu key="submenu" title="Image Filters" id="1705"/>
+                            <menuItem title="Informe" id="CIB-DY-wrL">
+                                <menu key="submenu" title="Informe" id="wbv-iM-Urf"/>
                             </menuItem>
-                            <menuItem title="ROI Tools" id="1708">
-                                <menu key="submenu" title="ROI Tools" id="1709"/>
+                            <menuItem title="Base de Datos" id="11712">
+                                <menu key="submenu" title="Base de Datos" id="11713"/>
                             </menuItem>
-                            <menuItem title="Others" id="1711">
-                                <menu key="submenu" title="Others" id="1710"/>
+                            <menuItem title="Filtro de Imágenes" id="AYG-mC-YZ1">
+                                <menu key="submenu" title="Filtro de Imágenes" id="KnM-5j-k4I"/>
                             </menuItem>
-                            <menuItem title="Database" id="11712">
-                                <menu key="submenu" title="Database" id="11713"/>
+                            <menuItem title="Herramientas ROI" id="1708">
+                                <menu key="submenu" title="Herramientas ROI" id="1709"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="b3P-6A-OAy"/>
+                            <menuItem title="Pre Process" id="1704">
+                                <menu key="submenu" title="Pre Process" id="1705"/>
+                            </menuItem>
+                            <menuItem title="Formato de Archivos" id="1711">
+                                <menu key="submenu" title="Formato de Archivos" id="1710"/>
+                            </menuItem>
+                            <menuItem title="Filtro de Fusión" id="fCx-bR-CUp">
+                                <menu key="submenu" title="Filtro de Fusión" id="BO3-nT-8mN"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="gLj-EA-LTd"/>
+                            <menuItem title="Otro" id="T8G-XC-wcY">
+                                <menu key="submenu" title="Otro" id="mSO-ws-TCy"/>
+                            </menuItem>
+                            <menuItem title="Acerca de ..." id="bHD-wx-vWn">
+                                <connections>
+                                    <action selector="aboutPlugins:" target="694" id="8D7-iS-c5g"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="最近使ったスタディ" id="62R-VA-Hjt">
+                <menuItem title="Recientes" id="62R-VA-Hjt">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="最近使ったスタディ" id="a5x-qR-mZL">
+                    <menu key="submenu" title="Recientes" id="a5x-qR-mZL">
                         <items>
                             <menuItem title="Empty" enabled="NO" id="jhM-yg-NvV">
                                 <modifierMask key="keyEquivalentModifierMask"/>
@@ -1887,8 +1821,8 @@ CA
                         </items>
                     </menu>
                 </menuItem>
-                <menuItem title="Window" id="19">
-                    <menu key="submenu" title="Window" systemMenu="window" id="24">
+                <menuItem title="Ventanas" id="19">
+                    <menu key="submenu" title="Ventanas" systemMenu="window" id="24">
                         <items>
                             <menuItem title="Minimize" keyEquivalent="m" id="23">
                                 <connections>
@@ -1959,13 +1893,17 @@ CA
         </menu>
         <customObject id="694" userLabel="AppController" customClass="AppController">
             <connections>
+                <outlet property="aboutMenu" destination="1703" id="55L-6n-asD"/>
                 <outlet property="browserController" destination="898" id="1906"/>
-                <outlet property="dbMenu" destination="11713" id="11825"/>
-                <outlet property="dbWindow" destination="885" id="12350"/>
-                <outlet property="filtersMenu" destination="1705" id="11822"/>
-                <outlet property="othersMenu" destination="1710" id="11824"/>
+                <outlet property="databaseMenu" destination="11713" id="eZn-7I-TTf"/>
+                <outlet property="fileFormatMenu" destination="1710" id="ydG-wd-8dA"/>
+                <outlet property="fusionFilterMenu" destination="BO3-nT-8mN" id="YeK-Pj-GKP"/>
+                <outlet property="imageFilterMenu" destination="KnM-5j-k4I" id="nSG-yI-UxH"/>
+                <outlet property="otherMenu" destination="mSO-ws-TCy" id="i4L-PJ-Yd3"/>
+                <outlet property="preProcessMenu" destination="1705" id="nn7-t2-l9n"/>
                 <outlet property="recentStudiesMenu" destination="a5x-qR-mZL" id="501-X4-zlN"/>
-                <outlet property="roisMenu" destination="1709" id="11823"/>
+                <outlet property="reportMenu" destination="wbv-iM-Urf" id="v66-pk-cHN"/>
+                <outlet property="roiToolMenu" destination="1709" id="AaA-s8-Fst"/>
                 <outlet property="windowsTilingMenuColumns" destination="14018" id="14037"/>
                 <outlet property="windowsTilingMenuRows" destination="14015" id="14036"/>
             </connections>
@@ -2958,7 +2896,6 @@ CA
                 <outlet property="albumTable" destination="1465" id="1572"/>
                 <outlet property="animationCheck" destination="1294" id="1305"/>
                 <outlet property="animationSlider" destination="1293" id="1304"/>
-                <outlet property="bannerSplit" destination="14624" id="14625"/>
                 <outlet property="bonjourPasswordWindow" destination="11804" id="11815"/>
                 <outlet property="bonjourSourcesBox" destination="11698" id="14241"/>
                 <outlet property="comparativeScrollView" destination="14720" id="8Jh-A5-YVN"/>

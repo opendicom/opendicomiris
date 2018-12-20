@@ -2001,11 +2001,11 @@ return YES;
 	else
 		toolbarItem = nil;
 	
-    for (id key in [PluginManager plugins])
+    for (id key in [PluginManager pluginSingletons])
     {
-        if ([[[PluginManager plugins] objectForKey:key] respondsToSelector:@selector(toolbarItemForItemIdentifier:forVRViewer:)])
+        if ([[[PluginManager pluginSingletons] objectForKey:key] respondsToSelector:@selector(toolbarItemForItemIdentifier:forVRViewer:)])
         {
-            NSToolbarItem *item = [[[PluginManager plugins] objectForKey:key] toolbarItemForItemIdentifier: itemIdent forVRViewer: self];
+            NSToolbarItem *item = [[[PluginManager pluginSingletons] objectForKey:key] toolbarItemForItemIdentifier: itemIdent forVRViewer: self];
             
             if( item)
                 toolbarItem = item;
@@ -2098,10 +2098,10 @@ return YES;
 		
         
         
-        for (id key in [PluginManager plugins])
+        for (id key in [PluginManager pluginSingletons])
         {
-            if ([[[PluginManager plugins] objectForKey:key] respondsToSelector:@selector(toolbarAllowedIdentifiersForVRViewer:)])
-                [a addObjectsFromArray: [[[PluginManager plugins] objectForKey:key] toolbarAllowedIdentifiersForVRViewer: self]];
+            if ([[[PluginManager pluginSingletons] objectForKey:key] respondsToSelector:@selector(toolbarAllowedIdentifiersForVRViewer:)])
+                [a addObjectsFromArray: [[[PluginManager pluginSingletons] objectForKey:key] toolbarAllowedIdentifiersForVRViewer: self]];
         }
         
 		return a;

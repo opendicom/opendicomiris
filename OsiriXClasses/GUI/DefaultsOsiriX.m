@@ -814,7 +814,7 @@ static NSHost *currentHost = nil;
     [defaultValues setObject:@"1" forKey:@"CFINDCommentsAndStatusSupport"];
     [defaultValues setObject:@"1" forKey:@"restorePasswordWebServer"];
     [defaultValues setObject:@"comment" forKey:@"commentFieldForAutoFill"];
-    [defaultValues setObject:[NSString stringWithFormat:@"%d", syncroRatio] forKey:@"DefaultModeForNonVolumicSeries"];
+    //JF[defaultValues setObject:[NSString stringWithFormat:@"%d", syncroRatio] forKey:@"DefaultModeForNonVolumicSeries"];
 	[defaultValues setObject:@"2" forKey:@"drawerState"]; // NSDrawerOpenState
 	if( [[NSProcessInfo processInfo] processorCount] >= 4)
 		[defaultValues setObject:@"2.0" forKey:@"superSampling"];

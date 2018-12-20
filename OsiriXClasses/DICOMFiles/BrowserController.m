@@ -37,8 +37,8 @@
 #import "dicomData.h"
 #import "BrowserController.h"
 #import "ViewerController.h"
-#import "PluginFilter.h"
-#import "ReportPluginFilter.h"
+#import "Plugin.h"
+#import "ReportPlugin.h"
 #import "DicomFile.h"
 #import "DicomFileDCMTKCategory.h"
 #import "NSSplitViewSave.h"
@@ -66,7 +66,7 @@
 #import "LogManager.h"
 #import "DCMTKStoreSCU.h"
 //#import "BonjourPublisher.h"
-#import "BonjourBrowser.h"
+//#import "BonjourBrowser.h"
 #import "WindowLayoutManager.h"
 #import "QTExportHTMLSummary.h"
 #import "BrowserControllerDCMTKCategory.h"
@@ -507,7 +507,8 @@ enum outlineColumns {
 @synthesize DateTimeWithSecondsFormat, matrixViewArray, oMatrix, testPredicate;
 @synthesize databaseOutline, albumTable, comparativePatientUID, distantStudyMessage;
 @synthesize bonjourSourcesBox, timeIntervalType, smartAlbumDistantName, selectedAlbumName;
-@synthesize bonjourBrowser, pathToEncryptedFile, comparativeStudies, distantTimeIntervalStart, distantTimeIntervalEnd;
+//@synthesize bonjourBrowser;
+@synthesize pathToEncryptedFile, comparativeStudies, distantTimeIntervalStart, distantTimeIntervalEnd;
 @synthesize searchString = _searchString, fetchPredicate = _fetchPredicate, distantSearchType, distantSearchString;
 @synthesize filterPredicate = _filterPredicate, filterPredicateDescription = _filterPredicateDescription;
 @synthesize modalityFilter;
@@ -10009,11 +10010,7 @@ static BOOL withReset = NO;
         proposedPosition = MIN(proposedPosition, [sender maxPossiblePositionOfDividerAtIndex:offset]);
     }
     
-    if ([sender isEqual: bannerSplit])
-    {
-        return [sender frame].size.height - (banner.image.size.height+3);
-    }
-	
+ 	
     if ([sender isEqual: splitAlbums])
     {
         proposedPosition = MAX(proposedPosition, [sender minPossiblePositionOfDividerAtIndex:offset]);
@@ -10314,15 +10311,6 @@ static BOOL withReset = NO;
         
         [animationSlider setFrameSize:NSMakeSize(splitFrame.size.width-dividerPosition-_bottomSplit.dividerThickness-animationCheck.frame.size.width-10, animationSlider.frame.size.height)]; // for some weird reason, we need this..
     }
-    else {
-        static BOOL noReentry = 1;
-        if( noReentry)
-        {
-            noReentry = 0;
-            [bannerSplit setPosition: bannerSplit.frame.size.height - (banner.image.size.height+3) ofDividerAtIndex: 0];
-            noReentry = 1;
-        }
-    }
 }
 
 - (BOOL)splitView: (NSSplitView *)sender canCollapseSubview: (NSView *)subview
@@ -10410,9 +10398,6 @@ static BOOL withReset = NO;
         else
             return [sender bounds].size.width-300;
     }
-    
-    if ([sender isEqual: bannerSplit])
-        return [sender frame].size.height - (banner.image.size.height+3);
 
     return proposedMin;
 }
@@ -10437,9 +10422,6 @@ static BOOL withReset = NO;
         else
             return [sender bounds].size.width-MINIMUMSIZEFORCOMPARATIVEDRAWER;
     }
-    
-    if (sender == bannerSplit)
-        return [sender frame].size.height - (banner.image.size.height+3);
     
     if (sender == splitAlbums)
     {
@@ -13842,14 +13824,9 @@ static NSArray*	openSubSeriesArray = nil;
     
     if (isWritable) { // TODO: allow report access, read-only
         [menu addItem: [NSMenuItem separatorItem]];
-        [menu addItemWithTitle: NSLocalizedString(@"Create/Open Report Editor", nil) action: @selector(generateReport:) keyEquivalent:@""];
+        [menu addItemWithTitle: NSLocalizedString(@"Save Report", nil) action: @selector(generateReport:) keyEquivalent:@""];
         [menu addItemWithTitle: NSLocalizedString(@"Delete Report Editor", nil) action: @selector(deleteReport:) keyEquivalent:@""];
-        [menu addItemWithTitle: NSLocalizedString(@"Sign Report", nil) action: @selector(signReport:) keyEquivalent:@""];
-        [menu addItemWithTitle: NSLocalizedString(@"Authenticate Report", nil) action: @selector(authenticateReport:) keyEquivalent:@""];
-        [menu addItemWithTitle: NSLocalizedString(@"Convert Report to PDF", nil) action: @selector(convertReportToPDF:) keyEquivalent:@""];
-        [menu addItemWithTitle: NSLocalizedString(@"Convert Report to DICOM PDF", nil) action: @selector(convertReportToDICOMPDF:) keyEquivalent:@""];
-        [menu addItemWithTitle: NSLocalizedString(@"Convert Report to DICOM CDA", nil) action: @selector(convertReportToDICOMCDA:) keyEquivalent:@""];
-	}
+    }
     
     if (isWritable) {
         [menu addItem: [NSMenuItem separatorItem]];
@@ -14096,12 +14073,13 @@ static NSArray*	openSubSeriesArray = nil;
             //	queueLock = [[NSConditionLock alloc] initWithCondition: QueueEmpty];
             //	[NSThread detachNewThreadSelector:@selector(runSendQueue:) toTarget:self withObject:nil];
             
-            // bonjour
+            /*/ bonjour
             bonjourBrowser = [[BonjourBrowser alloc] initWithBrowserController:self];
             [self displayBonjourServices];
-            
+           
             [[NSUserDefaultsController sharedUserDefaultsController] addObserver:self forValuesKey:OsirixBonjourSharingActiveFlagDefaultsKey options:NSKeyValueObservingOptionInitial context:bonjourBrowser];
-            
+             */
+
             [splitDrawer restoreDefault: @"SplitDrawer"];
             [splitAlbums restoreDefault: @"SplitAlbums"];
             [splitViewHorz restoreDefault: @"SplitHorz2"];
@@ -14179,7 +14157,6 @@ static NSArray*	openSubSeriesArray = nil;
         
         [self refreshMatrix: self];
         
-        #ifndef OSIRIX_LIGHT
         if( [[NSUserDefaults standardUserDefaults] boolForKey: @"restartAutoQueryAndRetrieve"] == YES && [[NSUserDefaults standardUserDefaults] objectForKey: @"savedAutoDICOMQuerySettingsArray"] != nil)
         {
             NSLog( @"-------- automatically restart DICOM AUTO-QUERY --------");
@@ -14194,11 +14171,8 @@ static NSArray*	openSubSeriesArray = nil;
         }
         else 
             [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"autoRetrieving"];
-        #endif
-        
-        [NSThread detachNewThreadSelector: @selector(checkForBanner:) toTarget: self withObject: nil];
-        
-        [bannerSplit setPosition: bannerSplit.frame.size.height - (banner.image.size.height+3) ofDividerAtIndex: 0];
+       
+       
 
         [[self window] setAnimationBehavior: NSWindowAnimationBehaviorNone];
         
@@ -14234,37 +14208,6 @@ static NSArray*	openSubSeriesArray = nil;
     }
 }
 
-- (IBAction) clickBanner:(id) sender
-{
-    if( [[self window] isKeyWindow])
-        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.osirix-viewer.com/Banner.html"]];
-}
-
-- (void) installBanner: (NSImage*) bannerImage
-{
-    [banner setImage: bannerImage];
-    [bannerSplit setPosition: bannerSplit.frame.size.height - (banner.image.size.height+3) ofDividerAtIndex: 0];
-}
-
-- (void) checkForBanner: (id) sender
-{
-    NSAutoreleasePool *pool = [NSAutoreleasePool new];
-    NSError *error = nil;
-    NSURLResponse *urlResponse = nil;
-    
-    NSURLRequest *request = [[[NSURLRequest alloc] initWithURL: [NSURL URLWithString:@"http://www.osirix-viewer.com/OsiriXBanner.png"] cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval: 30] autorelease];
-    NSData *imageData = [NSURLConnection sendSynchronousRequest: request returningResponse: &urlResponse error: &error];
-    
-    if( imageData && error == nil && [urlResponse.MIMEType isEqualToString: @"image/png"])
-    {
-        NSImage *bannerImage = [[[NSImage alloc] initWithData: imageData] autorelease];
-    
-        if( bannerImage)
-            [self performSelectorOnMainThread: @selector(installBanner:) withObject: bannerImage waitUntilDone: NO modes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
-    }
-    
-    [pool release];
-}
 
 -(void)dealloc
 {
@@ -14618,12 +14561,7 @@ static NSArray*	openSubSeriesArray = nil;
 			[menuItem action] == @selector(compressSelectedFiles:) || 
 			[menuItem action] == @selector(decompressSelectedFiles:) || 
 			[menuItem action] == @selector(generateReport:) || 
-         [menuItem action] == @selector(signReport:) ||
-         [menuItem action] == @selector(authenticateReport:) ||
 			[menuItem action] == @selector(deleteReport:) ||
-         [menuItem action] == @selector(convertReportToPDF:) ||
-         [menuItem action] == @selector(convertReportToDICOMPDF:) ||
-         [menuItem action] == @selector(convertReportToDICOMCDA:) ||
 			[menuItem action] == @selector(delItem:) ||
 			[menuItem action] == @selector(querySelectedStudy:) || 
 			[menuItem action] == @selector(burnDICOM:) || 
@@ -14651,11 +14589,6 @@ static NSArray*	openSubSeriesArray = nil;
            [menuItem action] == @selector(decompressSelectedFiles:) ||
            [menuItem action] == @selector(generateReport:) ||
            [menuItem action] == @selector(deleteReport:) ||
-           [menuItem action] == @selector(signReport:) ||
-           [menuItem action] == @selector(authenticateReport:) ||
-           [menuItem action] == @selector(convertReportToPDF:) ||
-           [menuItem action] == @selector(convertReportToDICOMPDF:) ||
-           [menuItem action] == @selector(convertReportToDICOMCDA:) ||
            [menuItem action] == @selector(delItem:) ||
            [menuItem action] == @selector(regenerateAutoComments:) ||
            [menuItem action] == @selector(copyToDBFolder:) ||
@@ -17714,6 +17647,8 @@ static volatile int numberOfThreadsForJPEG = 0;
 
 - (void)alternateButtonPressed: (NSNotification*)n
 {
+   NSLog(@"alternateButtonPressed");
+   /*
 	int i = [_sourcesTableView selectedRow];
 	if( i > 0)
 	{
@@ -17722,11 +17657,8 @@ static volatile int numberOfThreadsForJPEG = 0;
 		[self resetToLocalDatabase];
         [self unmountPath: path];
 	}
+    */
 }
-
-#ifndef OSIRIX_LIGHT
-
-#endif
 
 - (void) selectServer: (NSArray*)objects
 {
@@ -18099,96 +18031,6 @@ static volatile int numberOfThreadsForJPEG = 0;
 	}
 }
 
-- (IBAction) convertReportToDICOMCDA: (id)sender
-{
-   NSLog(@"convertReportToDICOMCDA");
-   NSMutableArray *studies = [NSMutableArray array];
-   
-   for( NSManagedObject *o in [self databaseSelection])
-   {
-      DicomStudy *study = nil;
-      
-      if( [[o valueForKey:@"type"] isEqualToString:@"Series"])
-         study = [o valueForKey:@"study"];
-      else
-         study = (DicomStudy*) o;
-      
-      if( [studies containsObject: study] == NO)
-         [studies addObject: study];
-   }
-   
-   NSMutableArray *newDICOMPDFReports = [NSMutableArray array];
-   for( DicomStudy *study in studies)
-   {
-      @try
-      {
-         NSString *filename = [self getNewFileDatabasePath: @"dcm"];
-         
-         [study saveReportAsDicomAtPath: filename];
-         
-         [newDICOMPDFReports addObject: filename];
-      }
-      @catch (NSException * e)
-      {
-         NSLog( @"***** exception in %s: %@", __PRETTY_FUNCTION__, e);
-         [AppController printStackTrace: e];
-      }
-      
-      [_database addFilesAtPaths: newDICOMPDFReports
-               postNotifications: YES
-                       dicomOnly: YES
-             rereadExistingItems: YES
-               generatedByOsiriX: YES];
-   }
-   
-   [self performSelector: @selector(updateReportToolbarIcon:) withObject: nil afterDelay: 0.1];
-}
-
-- (IBAction) convertReportToDICOMPDF: (id)sender
-{
-   NSLog(@"convertReportToDICOMPDF");
-    NSMutableArray *studies = [NSMutableArray array];
-    
-    for( NSManagedObject *o in [self databaseSelection])
-    {
-        DicomStudy *study = nil;
-        
-        if( [[o valueForKey:@"type"] isEqualToString:@"Series"])
-            study = [o valueForKey:@"study"];
-        else
-            study = (DicomStudy*) o;
-        
-        if( [studies containsObject: study] == NO)
-            [studies addObject: study];
-    }
-    
-    NSMutableArray *newDICOMPDFReports = [NSMutableArray array];
-    for( DicomStudy *study in studies)
-    {
-        @try 
-        {
-            NSString *filename = [self getNewFileDatabasePath: @"dcm"];
-            
-            [study saveReportAsDicomAtPath: filename];
-            
-            [newDICOMPDFReports addObject: filename];
-        }
-        @catch (NSException * e) 
-        {
-            NSLog( @"***** exception in %s: %@", __PRETTY_FUNCTION__, e);
-            [AppController printStackTrace: e];
-        }
-        
-        [_database addFilesAtPaths: newDICOMPDFReports
-                 postNotifications: YES
-                         dicomOnly: YES
-               rereadExistingItems: YES
-                 generatedByOsiriX: YES];
-    }
-    
-    [self performSelector: @selector(updateReportToolbarIcon:) withObject: nil afterDelay: 0.1];
-}
-
 
 - (IBAction) convertReportToPDF: (id)sender
 {
@@ -18199,8 +18041,6 @@ static volatile int numberOfThreadsForJPEG = 0;
 	if( item)
 	{
 		DicomStudy *studySelected;
-		
-//		[checkBonjourUpToDateThreadLock lock]; // TODO: merge
 		
 		@try 
 		{			
@@ -18227,7 +18067,6 @@ static volatile int numberOfThreadsForJPEG = 0;
 			[AppController printStackTrace: e];
 		}
 		
-//		[checkBonjourUpToDateThreadLock unlock]; // TODO: merge
 		[self performSelector: @selector(updateReportToolbarIcon:) withObject: nil afterDelay: 0.1];
 	}
 }
@@ -18260,11 +18099,9 @@ static volatile int numberOfThreadsForJPEG = 0;
 					
 					if( plugin)
 					{
-						PluginFilter* filter = [[plugin principalClass] filter];
+						Plugin* filter = [[plugin principalClass] filter];
                         
-                  [PluginManager startProtectForCrashWithFilter: filter];
 						[filter deleteReportForStudy: studySelected];
-                  [PluginManager endProtectForCrash];
 					}
 					else
 					{
@@ -18296,19 +18133,8 @@ static volatile int numberOfThreadsForJPEG = 0;
             N2LogExceptionWithStackTrace(e);
 		}
 		
-//		[checkBonjourUpToDateThreadLock unlock];
 		[self performSelector: @selector(updateReportToolbarIcon:) withObject: nil afterDelay: 0.1];
 	}
-}
-
-- (IBAction) signReport: (id)sender
-{
-   NSLog(@"signReport");
-}
-
-- (IBAction) authenticateReport: (id)sender
-{
-   NSLog(@"authenticateReport");
 }
 
 - (IBAction) generateReport: (id)sender
@@ -18335,12 +18161,10 @@ static volatile int numberOfThreadsForJPEG = 0;
 					@try
 					{
                   NSLog(@"[BrowserController generateReport]");
-						PluginFilter* filter = [[plugin principalClass] filter];
+						ReportPlugin* filter = [[plugin principalClass] filter];
                         
-                  [PluginManager startProtectForCrashWithFilter: filter];
-						[filter createReportForStudy: studySelected];
-                  [PluginManager endProtectForCrash];
-                        
+						[filter generateReportForStudy: studySelected];
+                  
 						NSLog(@"end generate report with plugin");
 					}
 					@catch (NSException * e) 
@@ -19031,14 +18855,14 @@ static volatile int numberOfThreadsForJPEG = 0;
 			[toolbarItem setImage: image];
 			
 			[toolbarItem setTarget: self];
-			[toolbarItem setAction: @selector(executeFilterFromToolbar:)];
+			[toolbarItem setAction: @selector(executeFilter:)];
 		}
         
-        for (id key in [PluginManager plugins])
+        for (id key in [PluginManager pluginSingletons])
         {
-            if ([[[PluginManager plugins] objectForKey:key] respondsToSelector:@selector(toolbarItemForItemIdentifier:forBrowserController:)])
+            if ([[[PluginManager pluginSingletons] objectForKey:key] respondsToSelector:@selector(toolbarItemForItemIdentifier:forBrowserController:)])
             {
-                NSToolbarItem *item = [[[PluginManager plugins] objectForKey:key] toolbarItemForItemIdentifier: itemIdent forBrowserController: self];
+                NSToolbarItem *item = [[[PluginManager pluginSingletons] objectForKey:key] toolbarItemForItemIdentifier: itemIdent forBrowserController: self];
                 
                 if( item)
                     toolbarItem = item;
@@ -19143,10 +18967,10 @@ static volatile int numberOfThreadsForJPEG = 0;
 	if( [pluginsItems count])
 		[array addObjectsFromArray: [pluginsItems allObjects]];
 	
-    for (id key in [PluginManager plugins])
+    for (id key in [PluginManager pluginSingletons])
     {
-        if ([[[PluginManager plugins] objectForKey:key] respondsToSelector:@selector(toolbarAllowedIdentifiersForBrowserController:)])
-            [array addObjectsFromArray: [[[PluginManager plugins] objectForKey:key] toolbarAllowedIdentifiersForBrowserController: self]];
+        if ([[[PluginManager pluginSingletons] objectForKey:key] respondsToSelector:@selector(toolbarAllowedIdentifiersForBrowserController:)])
+            [array addObjectsFromArray: [[[PluginManager pluginSingletons] objectForKey:key] toolbarAllowedIdentifiersForBrowserController: self]];
     }
     
     return array;
@@ -19568,12 +19392,7 @@ static volatile int numberOfThreadsForJPEG = 0;
 			[toolbarItem action] == @selector(compressSelectedFiles:) || 
 			[toolbarItem action] == @selector(decompressSelectedFiles:) || 
 			[toolbarItem action] == @selector(generateReport:) || 
-         [toolbarItem action] == @selector(signReport:) ||
-         [toolbarItem action] == @selector(authenticateReport:) ||
 			[toolbarItem action] == @selector(deleteReport:) ||
-         [toolbarItem action] == @selector(convertReportToPDF:) ||
-         [toolbarItem action] == @selector(convertReportToDICOMPDF:) ||
-         [toolbarItem action] == @selector(convertReportToDICOMCDA:) ||
 			[toolbarItem action] == @selector(delItem:) ||
 			[toolbarItem action] == @selector(querySelectedStudy:) || 
 			[toolbarItem action] == @selector(burnDICOM:) || 
@@ -19723,9 +19542,11 @@ static volatile int numberOfThreadsForJPEG = 0;
 #pragma mark-
 #pragma mark Plugins
 
-- (void)executeFilterFromString: (NSString*)name
+-(void)executeFilter:(id)sender
 {
-    id filter = [[PluginManager plugins] objectForKey:name];
+    NSLog( @"ViewerController executeFilter sender: %@", [sender description]);
+/*
+   id filter = [[PluginManager pluginSingletons] objectForKey:name];
 	
 	if( filter == nil)
 	{
@@ -19733,28 +19554,16 @@ static volatile int numberOfThreadsForJPEG = 0;
 		return;
 	}
 	
-    [PluginManager startProtectForCrashWithFilter: filter];
-    
-	long result = [filter prepareFilter: nil];
+   
 	[filter filterImage: name];
     
 	if( result)
     {
 		NSRunAlertPanel( NSLocalizedString( @"Plugins Error", nil), NSLocalizedString( @"OsiriX cannot launch the selected plugin.", nil), nil, nil, nil);
 	}
-    
-    [PluginManager endProtectForCrash];
+ */
 }
 
-- (void)executeFilterDB: (id)sender
-{
-	[self executeFilterFromString:[sender title]];
-}
-
-- (void)executeFilterFromToolbar: (id)sender
-{
-	[self executeFilterFromString:[sender label]];
-}
 
 - (void)setNetworkLogs
 {

@@ -1,20 +1,5 @@
-/*=========================================================================
-  Program:   OsiriX
-
-  Copyright (c) OsiriX Team
-  All rights reserved.
-  Distributed under GNU - LGPL
-  
-  See http://www.osirix-viewer.com/copyright.html for details.
-
-     This software is distributed WITHOUT ANY WARRANTY; without even
-     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-     PURPOSE.
-=========================================================================*/
-
 #import <Cocoa/Cocoa.h>
 
-/** \brief Plugin for adding file format */
 @interface PluginFileFormatDecoder : NSObject {
 
 	NSNumber *_height;
@@ -38,7 +23,7 @@
 
 /*
 	This is the main method to get the fImage float pointer used by DCMPix to create an image.  
-	If the data is RGB the pointe should be to unsigned char with the format ARGB
+	If the data is RGB the pointer should be to unsigned char with the format ARGB
 	Grayscale data is a float pointer
 */
 

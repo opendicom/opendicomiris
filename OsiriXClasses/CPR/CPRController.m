@@ -3926,11 +3926,11 @@ static float deg2rad = M_PI / 180.0;
 		toolbarItem = nil;
 	}
 	
-    for (id key in [PluginManager plugins])
+    for (id key in [PluginManager pluginSingletons])
     {
-        if ([[[PluginManager plugins] objectForKey:key] respondsToSelector:@selector(toolbarItemForItemIdentifier:forViewer:)])
+        if ([[[PluginManager pluginSingletons] objectForKey:key] respondsToSelector:@selector(toolbarItemForItemIdentifier:forViewer:)])
         {
-            NSToolbarItem *item = [[[PluginManager plugins] objectForKey:key] toolbarItemForItemIdentifier: itemIdent forViewer: self];
+            NSToolbarItem *item = [[[PluginManager pluginSingletons] objectForKey:key] toolbarItemForItemIdentifier: itemIdent forViewer: self];
             
             if( item)
                 toolbarItem = item;
@@ -3953,10 +3953,10 @@ static float deg2rad = M_PI / 180.0;
             NSToolbarSeparatorItemIdentifier,
             @"tbTools", @"tbWLWW", @"tbStraightenedCPRAngle", @"tbCPRType", @"tbHighRes", @"tbPathAssistant", @"tbCPRPathMode", @"tbViewsPosition", @"tbThickSlab", @"Reset.pdf", @"Export.icns", @"curvedPath.icns", @"BestRendering.pdf", @"AxisColors", @"AxisShowHide", @"CPRAxisShowHide", @"MousePositionShowHide", @"syncZoomLevel", nil];
     
-    for (id key in [PluginManager plugins])
+    for (id key in [PluginManager pluginSingletons])
     {
-        if ([[[PluginManager plugins] objectForKey:key] respondsToSelector:@selector(toolbarAllowedIdentifiersForViewer:)])
-            [array addObjectsFromArray: [[[PluginManager plugins] objectForKey:key] toolbarAllowedIdentifiersForViewer: self]];
+        if ([[[PluginManager pluginSingletons] objectForKey:key] respondsToSelector:@selector(toolbarAllowedIdentifiersForViewer:)])
+            [array addObjectsFromArray: [[[PluginManager pluginSingletons] objectForKey:key] toolbarAllowedIdentifiersForViewer: self]];
     }
     
     return array;

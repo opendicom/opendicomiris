@@ -1571,11 +1571,11 @@ extern int delayedTileWindows;
 		toolbarItem = nil;
 	}
     
-    for (id key in [PluginManager plugins])
+    for (id key in [PluginManager pluginSingletons])
     {
-        if ([[[PluginManager plugins] objectForKey:key] respondsToSelector:@selector(toolbarItemForItemIdentifier:forViewer:)])
+        if ([[[PluginManager pluginSingletons] objectForKey:key] respondsToSelector:@selector(toolbarItemForItemIdentifier:forViewer:)])
         {
-            NSToolbarItem *item = [[[PluginManager plugins] objectForKey:key] toolbarItemForItemIdentifier: itemIdent forViewer: self];
+            NSToolbarItem *item = [[[PluginManager pluginSingletons] objectForKey:key] toolbarItemForItemIdentifier: itemIdent forViewer: self];
             
             if( item)
                 toolbarItem = item;
@@ -1620,10 +1620,10 @@ extern int delayedTileWindows;
 										SearchToolbarItemIdentifier,
 										nil];
     
-    for (id key in [PluginManager plugins])
+    for (id key in [PluginManager pluginSingletons])
     {
-        if ([[[PluginManager plugins] objectForKey:key] respondsToSelector:@selector(toolbarAllowedIdentifiersForViewer:)])
-            [array addObjectsFromArray: [[[PluginManager plugins] objectForKey:key] toolbarAllowedIdentifiersForViewer: self]];
+        if ([[[PluginManager pluginSingletons] objectForKey:key] respondsToSelector:@selector(toolbarAllowedIdentifiersForViewer:)])
+            [array addObjectsFromArray: [[[PluginManager pluginSingletons] objectForKey:key] toolbarAllowedIdentifiersForViewer: self]];
     }
     
     return array;

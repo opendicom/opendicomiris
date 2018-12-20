@@ -478,10 +478,10 @@ NSInteger studyCompare(ViewerController *v1, ViewerController *v2, void *context
 {
 	BOOL used = NO;
 	
-	for (id key in [PluginManager plugins])
+	for (id key in [PluginManager pluginSingletons])
 	{
-		if ([[[PluginManager plugins] objectForKey:key] respondsToSelector:@selector(handleEvent:forViewer:)])
-			if ([[[PluginManager plugins] objectForKey:key] handleEvent:event forViewer:[self windowController]])
+		if ([[[PluginManager pluginSingletons] objectForKey:key] respondsToSelector:@selector(handleEvent:forViewer:)])
+			if ([[[PluginManager pluginSingletons] objectForKey:key] handleEvent:event forViewer:[self windowController]])
 				used = YES;
 	}
 	

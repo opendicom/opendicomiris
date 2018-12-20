@@ -20,7 +20,7 @@
 
 @class MPR2DController,NSCFDate, DicomStudy;
 @class ViewerController, DicomImage;
-@class BonjourBrowser;
+//@class BonjourBrowser;
 @class AnonymizerWindowController,QueryController;
 @class LogWindowController,PreviewView;
 @class MyOutlineView,DCMView,DCMPix;
@@ -111,7 +111,7 @@ extern NSString* O2AlbumDragType;
 	IBOutlet NSArrayController*		_sourcesArrayController;
 	IBOutlet NSTableView*			_sourcesTableView;
 	id								_sourcesHelper;
-	BonjourBrowser					*bonjourBrowser;
+	//BonjourBrowser					*bonjourBrowser;
 	
 	IBOutlet NSSlider				*animationSlider;
 	IBOutlet NSButton				*animationCheck;
@@ -227,8 +227,6 @@ extern NSString* O2AlbumDragType;
 	IBOutlet NSTableView* _activityTableView;
 	id _activityHelper;
     
-    IBOutlet NSSplitView *bannerSplit;
-    IBOutlet NSButton *banner;
     
     NSTimeInterval _timeIntervalOfLastLoadIconsDisplayIcons;
     NSThread *matrixLoadIconsThread;
@@ -276,7 +274,7 @@ extern NSString* O2AlbumDragType;
 @property(readonly) NSString *currentDatabasePath __deprecated, *localDatabasePath __deprecated, *documentsDirectory __deprecated, *fixedDocumentsDirectory __deprecated;
 
 @property(readonly) NSBox *bonjourSourcesBox;
-@property(readonly) BonjourBrowser *bonjourBrowser;
+//@property(readonly) BonjourBrowser *bonjourBrowser;
 @property(readonly) const char *cfixedDocumentsDirectory __deprecated, *cfixedIncomingDirectory __deprecated, *cfixedTempNoIndexDirectory __deprecated, *cfixedIncomingNoIndexDirectory __deprecated;
 
 @property(retain) NSString *searchString, *CDpassword, *pathToEncryptedFile, *passwordForExportEncryption, *temporaryNotificationEmail, *customTextNotificationEmail, *comparativePatientUID, *smartAlbumDistantName, *distantStudyMessage, *distantSearchString, *selectedAlbumName;
@@ -314,7 +312,6 @@ extern NSString* O2AlbumDragType;
 - (IBAction) saveAlbums:(id) sender;
 - (IBAction) addAlbums:(id) sender;
 - (IBAction) defaultAlbums: (id) sender;
-- (IBAction) clickBanner:(id) sender;
 - (IBAction) refreshPACSOnDemandResults:(id)sender;
 - (IBAction) drawerToggle: (id)sender;
 - (void) openDatabasePath: (NSString*) path __deprecated;
@@ -520,7 +517,6 @@ extern NSString* O2AlbumDragType;
 - (NSArray *)relatedStudiesForStudy:(id)study;
 
 //DB plugins
-- (void)executeFilterDB:(id)sender;
 
 + (NSString*) defaultDocumentsDirectory  __deprecated;
 - (NSString *)documentsDirectoryFor:(int) mode url:(NSString*) url  __deprecated;
@@ -535,11 +531,6 @@ extern NSString* O2AlbumDragType;
 - (void) willChangeContext;
 
 - (IBAction) generateReport: (id) sender;
-- (IBAction) signReport: (id) sender;
-- (IBAction) authenticateReport: (id) sender;
-- (IBAction) convertReportToPDF: (id)sender;
-- (IBAction) convertReportToDICOMPDF: (id)sender;
-- (IBAction) convertReportToDICOMCDA: (id)sender;
 - (IBAction) deleteReport: (id) sender;
 
 - (IBAction) rebuildThumbnails:(id) sender;

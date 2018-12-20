@@ -265,10 +265,10 @@ public:
 {
 	BOOL used = NO;
 	
-	for (id key in [PluginManager plugins])
+	for (id key in [PluginManager pluginSingletons])
 	{
-		if ([[[PluginManager plugins] objectForKey:key] respondsToSelector:@selector(handleEvent:forVRViewer:)])
-			if ([[[PluginManager plugins] objectForKey:key] handleEvent:event forVRViewer: [[self window] windowController]])
+		if ([[[PluginManager pluginSingletons] objectForKey:key] respondsToSelector:@selector(handleEvent:forVRViewer:)])
+			if ([[[PluginManager pluginSingletons] objectForKey:key] handleEvent:event forVRViewer: [[self window] windowController]])
 				used = YES;
 	}
 	

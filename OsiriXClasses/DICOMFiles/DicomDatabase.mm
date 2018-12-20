@@ -3107,16 +3107,14 @@ static BOOL protectionAgainstReentry = NO;
 				for (id filter in [PluginManager preProcessPlugins])
                 {
 					@try
-                    {
-                        [PluginManager startProtectForCrashWithFilter: filter];
-						[filter processFiles: filesArray];
-                        [PluginManager endProtectForCrash];
-					}
-                    @catch (NSException* e)
-                    {
+               {
+ 						[filter processFiles: filesArray];
+ 					}
+               @catch (NSException* e)
+               {
 						N2LogExceptionWithStackTrace(e);
 					}
-                }
+            }
 			}
 			
 			thread.status = [NSString stringWithFormat:NSLocalizedString(@"Processing %@...", nil), N2LocalizedSingularPluralCount(filesArray.count, NSLocalizedString(@"file", nil),NSLocalizedString(@"files", nil))];

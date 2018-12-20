@@ -62,6 +62,18 @@
 		4A2A49D5218D3C4700B4D164 /* Rainbow2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A2A49BF218D3C4700B4D164 /* Rainbow2.plist */; };
 		4A7E6F6F218A26D400BAF7B9 /* HL7.tif in Resources */ = {isa = PBXBuildFile; fileRef = 4A7E6F6E218A26D300BAF7B9 /* HL7.tif */; };
 		4AE9A9CC21B5B894002D0C3D /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC361A14DFA20067AA07 /* PluginManager.m */; };
+		4AE9A9DA21C184EE002D0C3D /* ImagePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9A9CE21C184E8002D0C3D /* ImagePlugin.m */; };
+		4AE9A9DB21C184EE002D0C3D /* FusionPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9A9CF21C184E9002D0C3D /* FusionPlugin.m */; };
+		4AE9A9DC21C184EE002D0C3D /* PreProcessPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9A9D021C184E9002D0C3D /* PreProcessPlugin.m */; };
+		4AE9A9DD21C184EE002D0C3D /* ImagePlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AE9A9D121C184EA002D0C3D /* ImagePlugin.h */; };
+		4AE9A9DE21C184EE002D0C3D /* ROIToolPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AE9A9D221C184EA002D0C3D /* ROIToolPlugin.h */; };
+		4AE9A9DF21C184EE002D0C3D /* DatabasePlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AE9A9D321C184EB002D0C3D /* DatabasePlugin.h */; };
+		4AE9A9E121C184EE002D0C3D /* FileFormatsPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AE9A9D521C184EB002D0C3D /* FileFormatsPlugin.h */; };
+		4AE9A9E221C184EE002D0C3D /* FileFormatsPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9A9D621C184EC002D0C3D /* FileFormatsPlugin.m */; };
+		4AE9A9E321C184EE002D0C3D /* FusionPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AE9A9D721C184EC002D0C3D /* FusionPlugin.h */; };
+		4AE9A9E421C184EE002D0C3D /* PreProcessPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AE9A9D821C184ED002D0C3D /* PreProcessPlugin.h */; };
+		4AE9A9E521C184EE002D0C3D /* ROIToolPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9A9D921C184ED002D0C3D /* ROIToolPlugin.m */; };
+		4AE9A9EE21CB3849002D0C3D /* DatabasePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9A9ED21CB3849002D0C3D /* DatabasePlugin.m */; };
 		4F4FAD491A9118B300B2EDFC /* OSIDerivedROI.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F4FAD451A9118B300B2EDFC /* OSIDerivedROI.h */; };
 		4F4FAD4A1A9118B300B2EDFC /* OSIDerivedROI.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F4FAD461A9118B300B2EDFC /* OSIDerivedROI.m */; };
 		4F4FAD4B1A9118B300B2EDFC /* OSIPETDerivedROI.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F4FAD471A9118B300B2EDFC /* OSIPETDerivedROI.h */; };
@@ -745,8 +757,8 @@
 		847AFEDA1A14DFA40067AA07 /* PlaceholderWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC301A14DFA20067AA07 /* PlaceholderWindowController.m */; };
 		847AFEDB1A14DFA40067AA07 /* PluginFileFormatDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFC311A14DFA20067AA07 /* PluginFileFormatDecoder.h */; };
 		847AFEDC1A14DFA40067AA07 /* PluginFileFormatDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC321A14DFA20067AA07 /* PluginFileFormatDecoder.m */; };
-		847AFEDD1A14DFA40067AA07 /* PluginFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFC331A14DFA20067AA07 /* PluginFilter.h */; };
-		847AFEDE1A14DFA40067AA07 /* PluginFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC341A14DFA20067AA07 /* PluginFilter.m */; };
+		847AFEDD1A14DFA40067AA07 /* Plugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFC331A14DFA20067AA07 /* Plugin.h */; };
+		847AFEDE1A14DFA40067AA07 /* Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC341A14DFA20067AA07 /* Plugin.m */; };
 		847AFEDF1A14DFA40067AA07 /* PluginManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFC351A14DFA20067AA07 /* PluginManager.h */; };
 		847AFEE31A14DFA40067AA07 /* pluginSDKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFC391A14DFA20067AA07 /* pluginSDKAdditions.h */; };
 		847AFEE41A14DFA40067AA07 /* pluginSDKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC3A1A14DFA20067AA07 /* pluginSDKAdditions.m */; };
@@ -769,8 +781,8 @@
 		847AFEF51A14DFA40067AA07 /* QTExportHTMLSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC4B1A14DFA20067AA07 /* QTExportHTMLSummary.m */; };
 		847AFEF61A14DFA40067AA07 /* QuicktimeExport.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFC4C1A14DFA20067AA07 /* QuicktimeExport.h */; };
 		847AFEF71A14DFA40067AA07 /* QuicktimeExport.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC4D1A14DFA20067AA07 /* QuicktimeExport.m */; };
-		847AFEF81A14DFA40067AA07 /* ReportPluginFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFC4E1A14DFA20067AA07 /* ReportPluginFilter.h */; };
-		847AFEF91A14DFA40067AA07 /* ReportPluginFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC4F1A14DFA20067AA07 /* ReportPluginFilter.m */; };
+		847AFEF81A14DFA40067AA07 /* ReportPlugin.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFC4E1A14DFA20067AA07 /* ReportPlugin.h */; };
+		847AFEF91A14DFA40067AA07 /* ReportPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC4F1A14DFA20067AA07 /* ReportPlugin.m */; };
 		847AFEFA1A14DFA40067AA07 /* Reports.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFC501A14DFA20067AA07 /* Reports.h */; };
 		847AFEFB1A14DFA40067AA07 /* Reports.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC511A14DFA20067AA07 /* Reports.m */; };
 		847AFEFC1A14DFA40067AA07 /* Schedulable.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFC521A14DFA20067AA07 /* Schedulable.h */; };
@@ -6563,6 +6575,18 @@
 		4A2A49BE218D3C4700B4D164 /* Flow.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Flow.plist; sourceTree = "<group>"; };
 		4A2A49BF218D3C4700B4D164 /* Rainbow2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Rainbow2.plist; sourceTree = "<group>"; };
 		4A7E6F6E218A26D300BAF7B9 /* HL7.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = HL7.tif; sourceTree = "<group>"; };
+		4AE9A9CE21C184E8002D0C3D /* ImagePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePlugin.m; sourceTree = "<group>"; };
+		4AE9A9CF21C184E9002D0C3D /* FusionPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FusionPlugin.m; sourceTree = "<group>"; };
+		4AE9A9D021C184E9002D0C3D /* PreProcessPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreProcessPlugin.m; sourceTree = "<group>"; };
+		4AE9A9D121C184EA002D0C3D /* ImagePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePlugin.h; sourceTree = "<group>"; };
+		4AE9A9D221C184EA002D0C3D /* ROIToolPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ROIToolPlugin.h; sourceTree = "<group>"; };
+		4AE9A9D321C184EB002D0C3D /* DatabasePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabasePlugin.h; sourceTree = "<group>"; };
+		4AE9A9D521C184EB002D0C3D /* FileFormatsPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileFormatsPlugin.h; sourceTree = "<group>"; };
+		4AE9A9D621C184EC002D0C3D /* FileFormatsPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileFormatsPlugin.m; sourceTree = "<group>"; };
+		4AE9A9D721C184EC002D0C3D /* FusionPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FusionPlugin.h; path = "../New Group/FusionPlugin.h"; sourceTree = "<group>"; };
+		4AE9A9D821C184ED002D0C3D /* PreProcessPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreProcessPlugin.h; sourceTree = "<group>"; };
+		4AE9A9D921C184ED002D0C3D /* ROIToolPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ROIToolPlugin.m; sourceTree = "<group>"; };
+		4AE9A9ED21CB3849002D0C3D /* DatabasePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabasePlugin.m; sourceTree = "<group>"; };
 		4F4FAD451A9118B300B2EDFC /* OSIDerivedROI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSIDerivedROI.h; sourceTree = "<group>"; };
 		4F4FAD461A9118B300B2EDFC /* OSIDerivedROI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OSIDerivedROI.m; sourceTree = "<group>"; };
 		4F4FAD471A9118B300B2EDFC /* OSIPETDerivedROI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OSIPETDerivedROI.h; sourceTree = "<group>"; };
@@ -7250,8 +7274,8 @@
 		847AFC301A14DFA20067AA07 /* PlaceholderWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceholderWindowController.m; sourceTree = "<group>"; };
 		847AFC311A14DFA20067AA07 /* PluginFileFormatDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginFileFormatDecoder.h; sourceTree = "<group>"; };
 		847AFC321A14DFA20067AA07 /* PluginFileFormatDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginFileFormatDecoder.m; sourceTree = "<group>"; };
-		847AFC331A14DFA20067AA07 /* PluginFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginFilter.h; sourceTree = "<group>"; };
-		847AFC341A14DFA20067AA07 /* PluginFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginFilter.m; sourceTree = "<group>"; };
+		847AFC331A14DFA20067AA07 /* Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plugin.h; sourceTree = "<group>"; };
+		847AFC341A14DFA20067AA07 /* Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Plugin.m; sourceTree = "<group>"; };
 		847AFC351A14DFA20067AA07 /* PluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PluginManager.h; sourceTree = "<group>"; };
 		847AFC361A14DFA20067AA07 /* PluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PluginManager.m; sourceTree = "<group>"; };
 		847AFC391A14DFA20067AA07 /* pluginSDKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pluginSDKAdditions.h; sourceTree = "<group>"; };
@@ -7275,8 +7299,8 @@
 		847AFC4B1A14DFA20067AA07 /* QTExportHTMLSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QTExportHTMLSummary.m; sourceTree = "<group>"; };
 		847AFC4C1A14DFA20067AA07 /* QuicktimeExport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuicktimeExport.h; sourceTree = "<group>"; };
 		847AFC4D1A14DFA20067AA07 /* QuicktimeExport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuicktimeExport.m; sourceTree = "<group>"; };
-		847AFC4E1A14DFA20067AA07 /* ReportPluginFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportPluginFilter.h; sourceTree = "<group>"; };
-		847AFC4F1A14DFA20067AA07 /* ReportPluginFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportPluginFilter.m; sourceTree = "<group>"; };
+		847AFC4E1A14DFA20067AA07 /* ReportPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportPlugin.h; sourceTree = "<group>"; };
+		847AFC4F1A14DFA20067AA07 /* ReportPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportPlugin.m; sourceTree = "<group>"; };
 		847AFC501A14DFA20067AA07 /* Reports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reports.h; sourceTree = "<group>"; };
 		847AFC511A14DFA20067AA07 /* Reports.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reports.m; sourceTree = "<group>"; };
 		847AFC521A14DFA20067AA07 /* Schedulable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schedulable.h; sourceTree = "<group>"; };
@@ -12787,6 +12811,57 @@
 			path = "NS categories";
 			sourceTree = "<group>";
 		};
+		4AE9A9CD21C1806C002D0C3D /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				4AE9A9E721C963C8002D0C3D /* data */,
+				4AE9A9E621C96391002D0C3D /* image */,
+				847AFC351A14DFA20067AA07 /* PluginManager.h */,
+				847AFC361A14DFA20067AA07 /* PluginManager.m */,
+				847AFC331A14DFA20067AA07 /* Plugin.h */,
+				847AFC341A14DFA20067AA07 /* Plugin.m */,
+			);
+			path = Plugins;
+			sourceTree = "<group>";
+		};
+		4AE9A9E621C96391002D0C3D /* image */ = {
+			isa = PBXGroup;
+			children = (
+				4AE9A9E821C9652B002D0C3D /* synthesis */,
+				847AFC391A14DFA20067AA07 /* pluginSDKAdditions.h */,
+				847AFC3A1A14DFA20067AA07 /* pluginSDKAdditions.m */,
+				4AE9A9D121C184EA002D0C3D /* ImagePlugin.h */,
+				4AE9A9CE21C184E8002D0C3D /* ImagePlugin.m */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
+		4AE9A9E721C963C8002D0C3D /* data */ = {
+			isa = PBXGroup;
+			children = (
+				4AE9A9ED21CB3849002D0C3D /* DatabasePlugin.m */,
+				4AE9A9D321C184EB002D0C3D /* DatabasePlugin.h */,
+				4AE9A9D521C184EB002D0C3D /* FileFormatsPlugin.h */,
+				4AE9A9D621C184EC002D0C3D /* FileFormatsPlugin.m */,
+				4AE9A9D821C184ED002D0C3D /* PreProcessPlugin.h */,
+				4AE9A9D021C184E9002D0C3D /* PreProcessPlugin.m */,
+				847AFC4E1A14DFA20067AA07 /* ReportPlugin.h */,
+				847AFC4F1A14DFA20067AA07 /* ReportPlugin.m */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
+		4AE9A9E821C9652B002D0C3D /* synthesis */ = {
+			isa = PBXGroup;
+			children = (
+				4AE9A9D221C184EA002D0C3D /* ROIToolPlugin.h */,
+				4AE9A9D921C184ED002D0C3D /* ROIToolPlugin.m */,
+				4AE9A9D721C184EC002D0C3D /* FusionPlugin.h */,
+				4AE9A9CF21C184E9002D0C3D /* FusionPlugin.m */,
+			);
+			path = synthesis;
+			sourceTree = "<group>";
+		};
 		4F8A1A791302C6E100A022D9 /* 3DGeometry */ = {
 			isa = PBXGroup;
 			children = (
@@ -13045,6 +13120,7 @@
 				847AFB2C1A14DFA00067AA07 /* DICOMFiles */,
 				847AFB941A14DFA10067AA07 /* DICOMNetwork */,
 				847AFBE31A14DFA10067AA07 /* GUI */,
+				4AE9A9CD21C1806C002D0C3D /* Plugins */,
 				847AFC7D1A14DFA20067AA07 /* OSI */,
 				847AFCA81A14DFA30067AA07 /* OsiriXHeaders.mm */,
 				847AFCA91A14DFA30067AA07 /* ROI */,
@@ -13555,12 +13631,6 @@
 				847AFC301A14DFA20067AA07 /* PlaceholderWindowController.m */,
 				847AFC311A14DFA20067AA07 /* PluginFileFormatDecoder.h */,
 				847AFC321A14DFA20067AA07 /* PluginFileFormatDecoder.m */,
-				847AFC331A14DFA20067AA07 /* PluginFilter.h */,
-				847AFC341A14DFA20067AA07 /* PluginFilter.m */,
-				847AFC351A14DFA20067AA07 /* PluginManager.h */,
-				847AFC361A14DFA20067AA07 /* PluginManager.m */,
-				847AFC391A14DFA20067AA07 /* pluginSDKAdditions.h */,
-				847AFC3A1A14DFA20067AA07 /* pluginSDKAdditions.m */,
 				847AFC3B1A14DFA20067AA07 /* PMDICOMStoreSCU.h */,
 				847AFC3C1A14DFA20067AA07 /* PreferencesView.h */,
 				847AFC3D1A14DFA20067AA07 /* PreferencesView.mm */,
@@ -13580,8 +13650,6 @@
 				847AFC4B1A14DFA20067AA07 /* QTExportHTMLSummary.m */,
 				847AFC4C1A14DFA20067AA07 /* QuicktimeExport.h */,
 				847AFC4D1A14DFA20067AA07 /* QuicktimeExport.m */,
-				847AFC4E1A14DFA20067AA07 /* ReportPluginFilter.h */,
-				847AFC4F1A14DFA20067AA07 /* ReportPluginFilter.m */,
 				847AFC501A14DFA20067AA07 /* Reports.h */,
 				847AFC511A14DFA20067AA07 /* Reports.m */,
 				847AFC521A14DFA20067AA07 /* Schedulable.h */,
@@ -19603,6 +19671,7 @@
 				BF3F21C309CB876F002736A5 /* diregbas.h in Headers */,
 				BF3F21C409CB876F002736A5 /* dirotat.h in Headers */,
 				847AFF051A14DFA40067AA07 /* SelectionView.h in Headers */,
+				4AE9A9E421C184EE002D0C3D /* PreProcessPlugin.h in Headers */,
 				BF3F21C509CB8770002736A5 /* discalet.h in Headers */,
 				BF3F21C609CB8771002736A5 /* displint.h in Headers */,
 				BF3F21C709CB8772002736A5 /* ditranst.h in Headers */,
@@ -19938,6 +20007,7 @@
 				CEBD874614F1ADD9000DA1FE /* ftcid.h in Headers */,
 				CEBD874714F1ADD9000DA1FE /* ftcimage.h in Headers */,
 				CEBD874814F1ADD9000DA1FE /* ftcmanag.h in Headers */,
+				4AE9A9DF21C184EE002D0C3D /* DatabasePlugin.h in Headers */,
 				CEBD874914F1ADD9000DA1FE /* ftcmru.h in Headers */,
 				CEBD874A14F1ADD9000DA1FE /* ftconfig 2.h in Headers */,
 				CEBD874B14F1ADD9000DA1FE /* ftconfig.h in Headers */,
@@ -20167,7 +20237,7 @@
 				CEBD881A14F1ADD9000DA1FE /* H5Opublic.h in Headers */,
 				CEBD881B14F1ADD9000DA1FE /* H5Oshared.h in Headers */,
 				CEBD881C14F1ADD9000DA1FE /* H5overflow.h in Headers */,
-				847AFEF81A14DFA40067AA07 /* ReportPluginFilter.h in Headers */,
+				847AFEF81A14DFA40067AA07 /* ReportPlugin.h in Headers */,
 				CEBD881D14F1ADD9000DA1FE /* H5PacketTable.h in Headers */,
 				847AFD6F1A14DFA30067AA07 /* OrthogonalMPRPETCTView.h in Headers */,
 				CEBD881E14F1ADD9000DA1FE /* H5Ppkg.h in Headers */,
@@ -20294,6 +20364,7 @@
 				CEBD888C14F1ADDA000DA1FE /* metaImageTypes.h in Headers */,
 				CEBD888D14F1ADDA000DA1FE /* metaImageUtils.h in Headers */,
 				CEBD888E14F1ADDA000DA1FE /* metaIOConfig.h in Headers */,
+				4AE9A9E321C184EE002D0C3D /* FusionPlugin.h in Headers */,
 				CEBD888F14F1ADDA000DA1FE /* metaITKUtils.h in Headers */,
 				CEBD889014F1ADDA000DA1FE /* metaLandmark.h in Headers */,
 				CEBD889114F1ADDA000DA1FE /* metaLine.h in Headers */,
@@ -20820,6 +20891,7 @@
 				CEBD8A7914F1ADDA000DA1FE /* vtkAttributesErrorMetric.h in Headers */,
 				CEBD8A7A14F1ADDA000DA1FE /* vtkAVIWriter.h in Headers */,
 				CEBD8A7B14F1ADDA000DA1FE /* vtkAVSucdReader.h in Headers */,
+				4AE9A9DE21C184EE002D0C3D /* ROIToolPlugin.h in Headers */,
 				CEBD8A7C14F1ADDA000DA1FE /* vtkAxes.h in Headers */,
 				CEBD8A7D14F1ADDA000DA1FE /* vtkAxesActor.h in Headers */,
 				CEBD8A7E14F1ADDA000DA1FE /* vtkAxesTransformRepresentation.h in Headers */,
@@ -20917,6 +20989,7 @@
 				CEBD8AD714F1ADDA000DA1FE /* vtkButtonWidget.h in Headers */,
 				CEBD8AD814F1ADDA000DA1FE /* vtkByteSwap.h in Headers */,
 				CEBD8AD914F1ADDA000DA1FE /* vtkBYUReader.h in Headers */,
+				4AE9A9E121C184EE002D0C3D /* FileFormatsPlugin.h in Headers */,
 				CEBD8ADA14F1ADDA000DA1FE /* vtkBYUWriter.h in Headers */,
 				847AFF271A14DFA40067AA07 /* OSICoalescedPlanarROI.h in Headers */,
 				CEBD8ADB14F1ADDA000DA1FE /* vtkCachedStreamingDemandDrivenPipeline.h in Headers */,
@@ -21154,7 +21227,7 @@
 				CEBD8BBA14F1ADDA000DA1FE /* vtkDataSetWriter.h in Headers */,
 				CEBD8BBB14F1ADDA000DA1FE /* vtkDataTransferHelper.h in Headers */,
 				CEBD8BBC14F1ADDA000DA1FE /* vtkDataWriter.h in Headers */,
-				847AFEDD1A14DFA40067AA07 /* PluginFilter.h in Headers */,
+				847AFEDD1A14DFA40067AA07 /* Plugin.h in Headers */,
 				CEBD8BBD14F1ADDA000DA1FE /* vtkDebugLeaks.h in Headers */,
 				847AFF031A14DFA40067AA07 /* SelectedKeyImagesArrayController.h in Headers */,
 				CEBD8BBE14F1ADDA000DA1FE /* vtkDebugLeaksManager.h in Headers */,
@@ -22473,6 +22546,7 @@
 				CEBD908614F1ADDB000DA1FE /* vtkQtChartMousePan.h in Headers */,
 				CEBD908714F1ADDB000DA1FE /* vtkQtChartMouseSelection.h in Headers */,
 				CEBD908814F1ADDB000DA1FE /* vtkQtChartMouseSelectionHandler.h in Headers */,
+				4AE9A9DD21C184EE002D0C3D /* ImagePlugin.h in Headers */,
 				CEBD908914F1ADDB000DA1FE /* vtkQtChartMouseZoom.h in Headers */,
 				CEBD908A14F1ADDB000DA1FE /* vtkQtChartNamedSeriesOptionsModel.h in Headers */,
 				CEBD908B14F1ADDB000DA1FE /* vtkQtChartPenGenerator.h in Headers */,
@@ -24507,6 +24581,7 @@
 				847AFF221A14DFA40067AA07 /* ThreadsManager.mm in Sources */,
 				847AFE161A14DFA40067AA07 /* DicomDatabase+Routing.mm in Sources */,
 				BFBF3E8D09B6828D00545F5E /* dcfilefo.cc in Sources */,
+				4AE9A9EE21CB3849002D0C3D /* DatabasePlugin.m in Sources */,
 				BFBF3E8F09B6828D00545F5E /* dchashdi.cc in Sources */,
 				847AFD081A14DFA30067AA07 /* ThumbnailsListNSWindow.m in Sources */,
 				BFBF3E9109B6828D00545F5E /* dcistrma.cc in Sources */,
@@ -24545,11 +24620,12 @@
 				BFBF3EC309B6828D00545F5E /* dcstack.cc in Sources */,
 				BFBF3EC509B6828D00545F5E /* dcswap.cc in Sources */,
 				BFBF3EC709B6828D00545F5E /* dctag.cc in Sources */,
-				847AFEDE1A14DFA40067AA07 /* PluginFilter.m in Sources */,
+				847AFEDE1A14DFA40067AA07 /* Plugin.m in Sources */,
 				BFBF3EC909B6828D00545F5E /* dctagkey.cc in Sources */,
 				BFBF3ECC09B6828D00545F5E /* dctypes.cc in Sources */,
 				BFBF3ECE09B6828D00545F5E /* dcuid.cc in Sources */,
 				BFBF3ED009B6828D00545F5E /* dcvm.cc in Sources */,
+				4AE9A9E221C184EE002D0C3D /* FileFormatsPlugin.m in Sources */,
 				BFBF3ED209B6828D00545F5E /* dcvr.cc in Sources */,
 				BFBF3ED409B6828D00545F5E /* dcvrae.cc in Sources */,
 				847AFD6A1A14DFA30067AA07 /* OpacityTransferView.m in Sources */,
@@ -24766,6 +24842,7 @@
 				BFBF41BE09B6828D00545F5E /* dsrtcotn.cc in Sources */,
 				BFBF41C009B6828D00545F5E /* dsrtcoto.cc in Sources */,
 				BFBF41C209B6828D00545F5E /* dsrtcovl.cc in Sources */,
+				4AE9A9DC21C184EE002D0C3D /* PreProcessPlugin.m in Sources */,
 				BFBF41C409B6828D00545F5E /* dsrtextn.cc in Sources */,
 				BFBF41C609B6828D00545F5E /* dsrtimtn.cc in Sources */,
 				BFBF41C909B6828D00545F5E /* dsrtncsr.cc in Sources */,
@@ -24850,7 +24927,7 @@
 				BF3F218609CB8737002736A5 /* dcmimage.cc in Sources */,
 				BF3F218309CB8722002736A5 /* diyp2img.cc in Sources */,
 				BF3F218009CB8720002736A5 /* diyf2img.cc in Sources */,
-				847AFEF91A14DFA40067AA07 /* ReportPluginFilter.m in Sources */,
+				847AFEF91A14DFA40067AA07 /* ReportPlugin.m in Sources */,
 				BF3F217D09CB871D002736A5 /* diybrimg.cc in Sources */,
 				847AFE881A14DFA40067AA07 /* SimplePing.c in Sources */,
 				BF3F217909CB8719002736A5 /* dirgbimg.cc in Sources */,
@@ -25060,6 +25137,7 @@
 				ABE470240A76411900327466 /* jmemmgr.c in Sources */,
 				ABE470250A76411900327466 /* jmemnobs.c in Sources */,
 				ABE4702A0A76411900327466 /* jquant1.c in Sources */,
+				4AE9A9DA21C184EE002D0C3D /* ImagePlugin.m in Sources */,
 				847AFDB01A14DFA40067AA07 /* Window3DController+StereoVision.m in Sources */,
 				ABE4702B0A76411900327466 /* jquant2.c in Sources */,
 				ABE4702C0A76411900327466 /* jutils.c in Sources */,
@@ -25122,6 +25200,7 @@
 				ABE470F30A76412700327466 /* jdinput.c in Sources */,
 				ABE470F40A76412700327466 /* jdlhuff.c in Sources */,
 				847AFDED1A14DFA40067AA07 /* AppControllerDCMTKCategory.mm in Sources */,
+				4AE9A9DB21C184EE002D0C3D /* FusionPlugin.m in Sources */,
 				ABE470F50A76412700327466 /* jdlossls.c in Sources */,
 				ABE470F60A76412700327466 /* jdlossy.c in Sources */,
 				847AFE931A14DFA40067AA07 /* ButtonAndTextField.m in Sources */,
@@ -25193,6 +25272,7 @@
 				714943D414D3008B008BCC08 /* NSHost+N2.mm in Sources */,
 				714D3BB3152AE40C003EB087 /* O2ScreensPrefsView.m in Sources */,
 				714D3BC6152B2410003EB087 /* NSScreen+N2.m in Sources */,
+				4AE9A9E521C184EE002D0C3D /* ROIToolPlugin.m in Sources */,
 				847AFE101A14DFA40067AA07 /* dicomData.m in Sources */,
 				84D7BBE5154A941A007B5A86 /* NSNotificationCenter+N2.mm in Sources */,
 				CE59440C155E3838007BDF5B /* NSString+SymlinksAndAliases.m in Sources */,

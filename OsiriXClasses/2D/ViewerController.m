@@ -17,7 +17,7 @@
 #import "NSAppleScript+HandlerCalls.h"
 #import "AYDicomPrintWindowController.h"
 #import "MyOutlineView.h"
-#import "PluginFilter.h"
+#import "Plugin.h"
 #import "DCMPix.h"
 #import "DicomImage.h"
 #import "VRController.h"
@@ -74,7 +74,7 @@
 #import "CalciumScoringWindowController.h"
 #import "HornRegistration.h"
 #import "N2Stuff.h"
-#import "BonjourBrowser.h"
+//#import "BonjourBrowser.h"
 #import "PluginManager.h"
 #import "DCMObject.h"
 #import "DCMAttributeTag.h"
@@ -7035,17 +7035,17 @@ static ViewerController *draggedController = nil;
 			[toolbarItem setImage: image];
 			
 			[toolbarItem setTarget: self];
-			[toolbarItem setAction: @selector(executeFilterFromToolbar:)];
+			[toolbarItem setAction: @selector(executeFilter:)];
 		}
 		else
 			toolbarItem = nil;
     }
     
-    for (id key in [PluginManager plugins])
+    for (id key in [PluginManager pluginSingletons])
     {
-        if ([[[PluginManager plugins] objectForKey:key] respondsToSelector:@selector(toolbarItemForItemIdentifier:forViewer:)])
+        if ([[[PluginManager pluginSingletons] objectForKey:key] respondsToSelector:@selector(toolbarItemForItemIdentifier:forViewer:)])
         {
-            NSToolbarItem *item = [[[PluginManager plugins] objectForKey:key] toolbarItemForItemIdentifier: itemIdent forViewer: self];
+            NSToolbarItem *item = [[[PluginManager pluginSingletons] objectForKey:key] toolbarItemForItemIdentifier: itemIdent forViewer: self];
             
             if( item)
                 toolbarItem = item;
@@ -7177,10 +7177,10 @@ static ViewerController *draggedController = nil;
 	if( [pluginsItems count])
 		[array addObjectsFromArray: [pluginsItems allObjects]];
 
-    for (id key in [PluginManager plugins])
+    for (id key in [PluginManager pluginSingletons])
     {
-        if ([[[PluginManager plugins] objectForKey:key] respondsToSelector:@selector(toolbarAllowedIdentifiersForViewer:)])
-            [array addObjectsFromArray: [[[PluginManager plugins] objectForKey:key] toolbarAllowedIdentifiersForViewer: self]];
+        if ([[[PluginManager pluginSingletons] objectForKey:key] respondsToSelector:@selector(toolbarAllowedIdentifiersForViewer:)])
+            [array addObjectsFromArray: [[[PluginManager pluginSingletons] objectForKey:key] toolbarAllowedIdentifiersForViewer: self]];
     }
     
 	return array;
@@ -9720,98 +9720,57 @@ static int avoidReentryRefreshDatabase = 0;
 
 #pragma mark 4.1.1. DICOM pipeline
 
-#pragma mark 4.1.1.1 Filters 
+#pragma mark 4.1.1.1 Filters from plugin
 
+- (void)executeFilter:(id)sender{
+   NSLog( @"ViewerController executeFilter sender: %@", [sender description]);
 
-// filter from plugin
-- (void)executeFilterFromString:(NSString*)name {
-    [self executeFilterFromBundle:nil title:name];
+/*
+   long         result;
+   id            filter = nil;
+   
+   filter = [[PluginManager pluginSingletons] objectForKey:name];
+   
+   
+   if( filter == nil)
+   {
+      NSRunAlertPanel(NSLocalizedString(@"Plugins Error", nil), NSLocalizedString(@"OsiriX cannot launch the selected plugin.", nil), nil, nil, nil);
+      return;
+   }
+   
+   [self checkEverythingLoaded];
+   [self computeInterval];
+   
+   [imageView stopROIEditingForce: YES];
+   
+   
+   
+   
+   @try
+   {
+      [[NSNotificationCenter defaultCenter] postNotificationName: @"OsiriXPluginImage" object: filter userInfo: nil];
+      
+#pragma mark TODO, replace name por sender and add self
+      result = [filter filterImage: name];
+      if( result)
+      {
+         NSRunAlertPanel(NSLocalizedString(@"Plugins Error", nil), NSLocalizedString(@"OsiriX cannot apply the selected plugin.", nil), nil, nil, nil);
+         return;
+      }
+   }
+   @catch (NSException * e)
+   {
+      N2LogExceptionWithStackTrace(e);
+      NSRunAlertPanel(NSLocalizedString(@"Plugins Error", nil), NSLocalizedString(@"OsiriX cannot launch the selected plugin.", nil), nil, nil, nil);
+   }
+   
+   
+   [imageView roiSet];
+   
+   [[NSNotificationCenter defaultCenter] postNotificationName: OsirixRecomputeROINotification object:self userInfo: nil];
+ */
 }
 
-- (void)executeFilterFromBundle:(NSBundle*)bundle title:(NSString*)name
-{
-	long			result;
-    id				filter = nil;
-    
-    if (bundle) {
-        
-	} else
-        filter = [[PluginManager plugins] objectForKey:name];
-    
-	if( [AppController willExecutePlugin: filter] == NO)
-		return;
-	
-	if( filter == nil)
-	{
-		NSRunAlertPanel(NSLocalizedString(@"Plugins Error", nil), NSLocalizedString(@"OsiriX cannot launch the selected plugin.", nil), nil, nil, nil);
-		return;
-	}
-	
-	[self checkEverythingLoaded];
-	[self computeInterval];
-	
-	[imageView stopROIEditingForce: YES];
-	
-    [PluginManager startProtectForCrashWithFilter: filter];
-    
-	NSLog( @"executeFilter");
-	
-	@try
-	{
-		result = [filter prepareFilter: self];
-		if( result)
-		{
-			NSRunAlertPanel(NSLocalizedString(@"Plugins Error", nil), NSLocalizedString(@"OsiriX cannot launch the selected plugin.", nil), nil, nil, nil);
-            [PluginManager endProtectForCrash];
-            
-			return;
-		}
-	}
-	@catch (NSException * e)
-	{
-		N2LogExceptionWithStackTrace(e);
-		NSRunAlertPanel(NSLocalizedString(@"Plugins Error", nil), NSLocalizedString(@"OsiriX cannot launch the selected plugin.", nil), nil, nil, nil);
-        [PluginManager endProtectForCrash];
-        
-		return;
-	}
-	
-	@try
-	{
-        [[NSNotificationCenter defaultCenter] postNotificationName: @"OsiriXPluginFilterImage" object: filter userInfo: nil];
-        
-		result = [filter filterImage: name];
-		if( result)
-		{
-			NSRunAlertPanel(NSLocalizedString(@"Plugins Error", nil), NSLocalizedString(@"OsiriX cannot apply the selected plugin.", nil), nil, nil, nil);
-            [PluginManager endProtectForCrash];
-            
-			return;
-		}
-	}
-	@catch (NSException * e)
-	{
-		N2LogExceptionWithStackTrace(e);
-		NSRunAlertPanel(NSLocalizedString(@"Plugins Error", nil), NSLocalizedString(@"OsiriX cannot launch the selected plugin.", nil), nil, nil, nil);
-	}
-	
-    [PluginManager endProtectForCrash];
-    
-	[imageView roiSet];
-	
-	[[NSNotificationCenter defaultCenter] postNotificationName: OsirixRecomputeROINotification object:self userInfo: nil];
-}
-
-
-- (void)executeFilter:(id)sender
-{
-	[self executeFilterFromString: [sender title]];
-}
-
-- (void) executeFilterFromToolbar:(id) sender
-{
-	[self executeFilterFromString: [sender label]];
-}
 
 #pragma mark resample image
 
@@ -13069,11 +13028,14 @@ float				matrix[25];
 	{
 		returnCode = -returnCode - 1;
 		[self clear8bitRepresentations];
-		
-		if( [[[PluginManager fusionPlugins] objectAtIndex: returnCode] isEqualToString: @"Subtraction Angio-CT"])
+#pragma mark TODO example substraction transformar in example plugin
+		if( [[[PluginManager fusionFilterPluginNames] objectAtIndex: returnCode] isEqualToString: @"Subtraction Angio-CT"])
 			[self blendWithViewer:blendedWindow blendingType: 9]; // LL filter
-		else
-			[self executeFilterFromString: [[PluginManager fusionPlugins] objectAtIndex: returnCode]];
+      else {
+         NSLog(@"ViewerController blendingSheetDidEnd");
+         //[self executeFilter:[[PluginManager fusionFilterPluginNames][returnCode]];
+
+      }
 	}
 	else if (returnCode > 0)
 	{
@@ -23072,13 +23034,11 @@ static BOOL viewerControllerPlaying = NO;
 	[self performSelector: @selector(updateReportToolbarIcon:) withObject: nil afterDelay: 0.1];
 }
 
-#ifndef OSIRIX_LIGHT
 - (IBAction)generateReport:(id)sender;
 {
 	[[BrowserController currentBrowser] generateReport:sender];
 	[self performSelector: @selector(updateReportToolbarIcon:) withObject: nil afterDelay: 0.1];
 }
-#endif
 
 - (NSImage*)reportIcon;
 {
@@ -23155,7 +23115,6 @@ static BOOL viewerControllerPlaying = NO;
 
 - (void)reportToolbarItemWillPopUp:(NSNotification *)notif;
 {
-	#ifndef OSIRIX_LIGHT
 	if([[notif object] isEqualTo:reportTemplatesListPopUpButton])
 	{
         [reportTemplatesListPopUpButton removeAllItems];
@@ -23172,7 +23131,6 @@ static BOOL viewerControllerPlaying = NO;
 		
         [reportTemplatesListPopUpButton setAction:@selector(generateReport:)];
 	}
-	#endif
 }
 
 

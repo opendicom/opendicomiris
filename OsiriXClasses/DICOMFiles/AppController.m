@@ -546,72 +546,6 @@ static NSString *getResolvedAliasPath(NSData* inData)
     return outPath;  
 }  
 
-static void dumpLSArchitecturesForX86_64()  
-{ 
-    // The path of the com.apple.LaunchServices.plist file.  
-    NSString *prefsPath = @"~/Library/Preferences/com.apple.LaunchServices.plist";  
-    prefsPath = [prefsPath stringByExpandingTildeInPath];  
-    
-    NSDictionary *mainDict = [NSDictionary dictionaryWithContentsOfFile:prefsPath];  
-    if(mainDict != nil)  
-    {  
-        // We are only interested by the  
-        // "LSArchitecturesForX86_64" dictionary.  
-        NSDictionary *architectureDict = [mainDict objectForKey:@"LSArchitecturesForX86_64"];  
-        
-        // Get the list of applications.  
-        // The array is ordered by applicationID.  
-        NSArray *applicationIDArray = [architectureDict allKeys];  
-        if(applicationIDArray != nil)  
-        {  
-            // For each applicationID  
-            NSUInteger i = 0;  
-            for(i = 0 ; i < [applicationIDArray count] ; i++)  
-            {  
-                NSString *applicationID = [applicationIDArray objectAtIndex:i];
-                NSArray *appArray = [architectureDict objectForKey:applicationID];
-                
-                // For each instance of the application,  
-                // there is a pair (Alias, architecture).  
-                // The alias is stored as a NSData  
-                // and the architecture as a NSString.  
-                NSUInteger j = 0;  
-                for(j = 0 ; j < [appArray count] / 2 ; j++)  
-                {  
-                    // Just for safety  
-                    if(j * 2 + 1 < [appArray count])  
-                    {  
-                        NSData *aliasData = [appArray objectAtIndex:j * 2];  
-                        
-                        NSString *theArch = [appArray objectAtIndex:j * 2 + 1];  
-                        
-                        if(aliasData != nil && theArch != nil)  
-                        {  
-                            // Get the path of the application  
-                            NSString *resolvedPath = getResolvedAliasPath(aliasData);  
-                            
-                            if( [resolvedPath isEqualToString: [[NSBundle mainBundle] bundlePath]])
-                            {
-                                if( [theArch isEqualToString: @"i386"])
-                                {										
-                                    NSAlert* alert = [[NSAlert new] autorelease];
-                                    [alert setMessageText: NSLocalizedString(@"64-bit", nil)];
-                                    [alert setInformativeText: NSLocalizedString(@"This version of OsiriX can run in 64-bit, but it is set to run in 32-bit. You can change this setting, by selecting the OsiriX icon in Applications folder, select 'Get Info' in Finder File menu and UNCHECK 'run in 32-bit mode'.", nil)];
-                                    [alert setShowsSuppressionButton:YES ];
-                                    [alert addButtonWithTitle: NSLocalizedString(@"Continue", nil)];
-                                    [alert runModal];
-                                    if ([[alert suppressionButton] state] == NSOnState)
-                                        [[NSUserDefaults standardUserDefaults] setBool:YES forKey: @"hideAlertRunIn32bit"];
-                                }
-                            }
-                        }  
-                    }  
-                }  
-            }  
-        }  
-    }
-}  
-
 void exceptionHandler(NSException *exception)
 {
     N2LogExceptionWithStackTrace(exception);
@@ -624,7 +558,7 @@ static NSDate *lastWarningDate = nil;
 
 @implementation AppController
 
-@synthesize checkAllWindowsAreVisibleIsOff, filtersMenu, windowsTilingMenuRows, recentStudiesMenu, windowsTilingMenuColumns, isSessionInactive, dicomBonjourPublisher = BonjourDICOMService, XMLRPCServer;
+@synthesize checkAllWindowsAreVisibleIsOff, windowsTilingMenuRows, recentStudiesMenu, windowsTilingMenuColumns, isSessionInactive, XMLRPCServer, dicomBonjourPublisher = BonjourDICOMService;
 @synthesize bonjourPublisher = _bonjourPublisher;
 
 
@@ -650,8 +584,9 @@ static BOOL _hasMacOSXSnowLeopard=NO;
          int osxaabbc=(osv.majorVersion*1000)+(osv.minorVersion*10)+osv.patchVersion;
          _hasMacOSXLion=(osxaabbc > 10074);
          _hasMacOSXSnowLeopard=(osxaabbc > 10059);
-
-         if( [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundlePackageType"] isEqualToString: @"APPL"])
+         NSBundle * mainBundle=[NSBundle mainBundle];
+         NSDictionary * infoDictionary=[mainBundle infoDictionary];
+         if( [infoDictionary[@"CFBundlePackageType"] isEqualToString: @"APPL"])
          {
             [NSThread detachNewThreadSelector: @selector(DNSResolve:) toTarget: self withObject: nil];
             
@@ -669,17 +604,14 @@ static BOOL _hasMacOSXSnowLeopard=NO;
             if (result == -1)
                processors = 1;
             
-            NSString *bits = @"32-bit";
-            if( sizeof( long) == 8)
-               bits = @"64-bit";
-            
             NSLog(@"*-+-*-+-*-+-*-+-*-+-*-+-*-+-*-+-*");
             NSLog(@"Number of processors: %d / %d", processors, (int) [[NSProcessInfo processInfo] processorCount]);
             NSLog(@"Number of screens: %d", (int) [[NSScreen screens] count]);
             NSLog(@"Main screen backingScaleFactor: %f", (float) [[NSScreen mainScreen] backingScaleFactor]);
-            NSLog(@"Version: %@", [[[NSBundle mainBundle] infoDictionary] objectForKey: @"CFBundleShortVersionString"]);
-            NSLog(@"architecture: %@", bits);
-            NSArray *components = [[[NSBundle mainBundle] pathForResource: @"Localizable" ofType: @"strings"] pathComponents];
+            NSLog(@"Version: %@", infoDictionary[@"CFBundleVersion"]);
+            if( sizeof( long) == 8) NSLog(@"architecture: 64-bit");
+            else                    NSLog(@"architecture: 32-bit");
+            NSArray *components = [[mainBundle pathForResource: @"Localizable" ofType: @"strings"] pathComponents];
             if( components.count > 3)
                NSLog(@"Localization: %@", [components objectAtIndex: components.count -2]);
 #ifdef NDEBUG
@@ -826,7 +758,7 @@ static BOOL _hasMacOSXSnowLeopard=NO;
                }
             }
             
-            pluginManager = [[PluginManager alloc] init];
+            //JF where plugin init was
             
             //Add Endoscopy LUT, WL/WW, shading to existing prefs
             // Shading Preset
@@ -947,8 +879,8 @@ static BOOL _hasMacOSXSnowLeopard=NO;
             
             Use_kdu_IfAvailable = [[NSUserDefaults standardUserDefaults] boolForKey:@"UseKDUForJPEG2000"];
             
-            [Reports checkForWordTemplates];
-            [Reports checkForPagesTemplate];
+            //JF[Reports checkForWordTemplates];
+            //JF[Reports checkForPagesTemplate];
             [DCMPixelDataAttribute setUse_kdu_IfAvailable: Use_kdu_IfAvailable];
             
          }
@@ -974,8 +906,6 @@ static BOOL _hasMacOSXSnowLeopard=NO;
       
       if ([[NSFileManager defaultManager] fileExistsAtPath:[[[[NSFileManager defaultManager] findSystemFolderOfType:kApplicationSupportFolderType forDomain:kLocalDomain] stringByAppendingPathComponent:[[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleNameKey]] stringByAppendingPathComponent:@"DLog.enable"]])
          [N2Debug setActive:YES];
-      
-      //  NSLog(@"%@ -> %d", [[[[NSFileManager defaultManager] findSystemFolderOfType:kApplicationSupportFolderType forDomain:kLocalDomain] stringByAppendingPathComponent:[[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleNameKey]] stringByAppendingPathComponent:@"DLog.enable"], [N2Debug isActive]);
       
       PapyrusLock = [[NSRecursiveLock alloc] init];
       STORESCP = [[NSRecursiveLock alloc] init];
@@ -1213,18 +1143,6 @@ static BOOL _hasMacOSXSnowLeopard=NO;
 	}
 	
 	return r;
-}
-
-+ (BOOL) willExecutePlugin
-{
-    return [self willExecutePlugin: nil];
-}
-
-+ (BOOL) willExecutePlugin:(id) filter;
-{
-	BOOL returnValue = YES;
-	
-	return returnValue;
 }
 
 - (void) pause
@@ -3229,9 +3147,10 @@ static BOOL firstCall = YES;
         }
     }
 	
-   //passes IBOutlets to be filled to PluginManager
-	[PluginManager setMenus:filtersMenu :roisMenu :othersMenu :dbMenu];
-    
+   //passes IBOutlets to be filled to PluginManager at init
+   pluginManager = [[PluginManager alloc] initForMenus:reportMenu :databaseMenu :imageFilterMenu :roiToolMenu];
+   if (pluginManager==nil) exit(-1);
+
 	appController = self;
    
    
@@ -3450,68 +3369,14 @@ static BOOL firstCall = YES;
 
 #pragma mark-
 
-+ (BOOL) isFDACleared
-{
-	return NO;
-}
-
-- (void) displayUpdateMessage: (NSString*) msg
-{
-	[msg retain];
-	
-	NSAutoreleasePool   *pool = [[NSAutoreleasePool alloc] init];
-	
-	if( [msg isEqualToString:@"LISTENER"])
-	{
-		NSRunAlertPanel( NSLocalizedString( @"DICOM Listener Error", nil), NSLocalizedString( @"OsiriX listener cannot start. Is the Port valid? Is there another process using this Port?\r\rSee Listener - Preferences.", nil), NSLocalizedString( @"OK", nil), nil, nil);
-	}
-	
-	if( [msg isEqualToString:@"UPTODATE"])
-	{
-		NSRunAlertPanel( NSLocalizedString( @"OsiriX is up-to-date", nil), NSLocalizedString( @"You have the most recent version of OsiriX.", nil), NSLocalizedString( @"OK", nil), nil, nil);
-	}
-	
-	if( [msg isEqualToString:@"ERROR"])
-	{
-		NSRunAlertPanel( NSLocalizedString( @"No Internet connection", nil), NSLocalizedString( @"Unable to check latest version available.", nil), NSLocalizedString( @"OK", nil), nil, nil);
-	}
-	
-    if( [msg isEqualToString: @"UPDATECRASH"])
-    {
-       /*JF
-        NSRunInformationalAlertPanel(NSLocalizedString(@"OsiriX crashed", nil), NSLocalizedString(@"OsiriX crashed... You are running an outdated version of OsiriX ! This bug is probably corrected in the last version !", nil), NSLocalizedString(@"OK",nil), nil, nil);
-        
-        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.osirix-viewer.com/Downloads.html"]];
-        */
-    }
-    
-	if( [msg isEqualToString:@"UPDATE"])
-	{
-      /*JF
-		int button = NSRunAlertPanel( NSLocalizedString( @"New Version Available", nil), NSLocalizedString( @"A new version of OsiriX is available. Would you like to download the new version now?", nil), NSLocalizedString( @"Download", nil), NSLocalizedString( @"Continue", nil), nil);
-		
-		if (NSOKButton == button)
-			[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.osirix-viewer.com"]];
-       */
-	}
-	
-	[pool release];
-	
-	[msg release];
-}
-
 - (id) splashScreen
 {
 	WaitRendering *wait = nil;
-	
-	#ifdef OSIRIX_LIGHT
-	wait = [[[WaitRendering alloc] init: NSLocalizedString(@"Starting OsiriX Lite...", nil)] autorelease];
-	#else
-	if( sizeof( long) == 8)
-		wait = [[[WaitRendering alloc] init: NSLocalizedString(@"Starting OsiriX 64-bit", nil)] autorelease];
+
+   if( sizeof( long) == 8)
+		wait = [[[WaitRendering alloc] init: NSLocalizedString(@"Starting opendicomiris 64-bit", nil)] autorelease];
 	else
-		wait = [[[WaitRendering alloc] init: NSLocalizedString(@"Starting OsiriX 32-bit", nil)] autorelease];
-	#endif
+		wait = [[[WaitRendering alloc] init: NSLocalizedString(@"Starting opendicomiris 32-bit", nil)] autorelease];
 
 	return wait;
 }
@@ -3527,17 +3392,20 @@ static BOOL firstCall = YES;
 
 - (IBAction) about: (id) sender
 {
-/*
-    if (!splashController)
-    {
-        splashController = [[SplashScreen alloc] init];
-    }
-*/
 	if (splashController)
 		[splashController release];
 	splashController = [[SplashScreen alloc] init];
 	[splashController showWindow:self];
 	[splashController affiche];
+}
+
+- (IBAction) aboutPlugins: (id) sender
+{
+   if (splashController)
+      [splashController release];
+   splashController = [[SplashScreen alloc] init];
+   [splashController showWindow:self];
+   [splashController affiche];
 }
 
 -(IBAction)showPreferencePanel:(id)sender

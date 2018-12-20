@@ -8579,9 +8579,7 @@ void erase_outside_circle(char *buf, int width, int height, int cx, int cy, int 
 			if ((fileFormatBundle = [[PluginManager fileFormatPlugins] objectForKey:[sourceFile pathExtension]]))
 			{
 				PluginFileFormatDecoder *decoder = [[[fileFormatBundle principalClass] alloc] init];
-                
-                [PluginManager startProtectForCrashWithFilter: decoder];
-                
+            
 				fImage = [decoder checkLoadAtPath:sourceFile];
 				//NSLog(@"decoder width %d", [decoder width]);
 				width = [[decoder width] intValue];
@@ -8592,7 +8590,6 @@ void erase_outside_circle(char *buf, int width, int height, int cx, int cy, int 
 				isRGB = [decoder isRGB];			
 				[decoder release];					
 				
-                [PluginManager endProtectForCrash];
 			}
 			else
 #endif

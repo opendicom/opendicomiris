@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OsiriXClasses/DICOMFiles/BrowserController.m"
-            timestampString = "566245699.648155"
+            timestampString = "567036763.372394"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "13052"
-            endingLineNumber = "13052"
+            startingLineNumber = "13034"
+            endingLineNumber = "13034"
             landmarkName = "-viewerDICOMInt:dcmFile:viewer:tileWindows:protocol:"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OsiriXClasses/DICOMFiles/BrowserController.m"
-            timestampString = "566245699.649473"
+            timestampString = "567036763.373464"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "6500"
-            endingLineNumber = "6500"
+            startingLineNumber = "6501"
+            endingLineNumber = "6501"
             landmarkName = "-outlineView:objectValueForTableColumn:byItem:"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OsiriXClasses/DICOMFiles/BrowserController.m"
-            timestampString = "566245699.650086"
+            timestampString = "567036763.37359"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "6444"
-            endingLineNumber = "6444"
+            startingLineNumber = "6445"
+            endingLineNumber = "6445"
             landmarkName = "-intOutlineView:objectValueForTableColumn:byItem:"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OsiriXClasses/DICOMFiles/DicomDatabase.mm"
-            timestampString = "566245699.650661"
+            timestampString = "567036763.373675"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1869"
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OsiriXClasses/DICOMFiles/AppController.m"
-            timestampString = "566245699.650972"
+            timestampString = "567036763.373893"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "965"
-            endingLineNumber = "965"
+            startingLineNumber = "897"
+            endingLineNumber = "897"
             landmarkName = "-init"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OsiriXClasses/3D/VRView.mm"
-            timestampString = "566245699.6512409"
+            timestampString = "567036763.37414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "834"
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OsiriXClasses/DICOMFiles/BrowserController.m"
-            timestampString = "566245699.651552"
+            timestampString = "567036763.374336"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "13527"
-            endingLineNumber = "13527"
+            startingLineNumber = "13509"
+            endingLineNumber = "13509"
             landmarkName = "-initWithWindow:"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OsiriXClasses/2D/DCMView.m"
-            timestampString = "566245699.6520621"
+            timestampString = "567036763.374431"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "12891"
@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OsiriXClasses/DICOMNetwork/DCMTKQueryNode.mm"
-            timestampString = "566245699.652269"
+            timestampString = "567036763.374655"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1875"
@@ -170,12 +170,140 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "OsiriXClasses/DICOMNetwork/QueryController.mm"
-            timestampString = "566245699.6524661"
+            timestampString = "567036763.374862"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2284"
             endingLineNumber = "2284"
             landmarkName = "-realtimeCFindResults:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OsiriXClasses/2D/ViewerController.m"
+            timestampString = "567036763.375039"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "9773"
+            endingLineNumber = "9773"
+            landmarkName = "ViewerController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OsiriXClasses/2D/ViewerController.m"
+            timestampString = "567036763.3751529"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "9773"
+            endingLineNumber = "9773"
+            landmarkName = "ViewerController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OsiriXClasses/2D/ViewerController.m"
+            timestampString = "567036763.375231"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13039"
+            endingLineNumber = "13039"
+            landmarkName = "-blendingSheetDidEnd:returnCode:contextInfo:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OsiriXClasses/2D/ViewerController.m"
+            timestampString = "567036763.375285"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13039"
+            endingLineNumber = "13039"
+            landmarkName = "-blendingSheetDidEnd:returnCode:contextInfo:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OsiriXClasses/2D/ViewerController.m"
+            timestampString = "567036763.375333"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "9726"
+            endingLineNumber = "9726"
+            landmarkName = "-executeFilter:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OsiriXClasses/DICOMFiles/BrowserController.m"
+            timestampString = "567036763.375549"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19549"
+            endingLineNumber = "19549"
+            landmarkName = "-executeFilter:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OsiriXClasses/DICOMFiles/BrowserController.m"
+            timestampString = "567036763.375599"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18098"
+            endingLineNumber = "18098"
+            landmarkName = "-deleteReport:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OsiriXClasses/DICOMFiles/BrowserController.m"
+            timestampString = "567036763.375646"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18157"
+            endingLineNumber = "18157"
+            landmarkName = "-generateReport:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
