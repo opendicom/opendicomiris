@@ -23083,20 +23083,12 @@ static BOOL viewerControllerPlaying = NO;
 
 - (void)setToolbarReportIconForItem:(NSToolbarItem *)item;
 {
-	#ifndef OSIRIX_LIGHT
     NSMutableArray* templatesArray = nil;
-    switch ([[[NSUserDefaults standardUserDefaults] stringForKey:@"REPORTSMODE"] intValue]) {
-        case 2:
-            templatesArray = [Reports pagesTemplatesList];
-            break;
-        case 0:
-            templatesArray = [Reports wordTemplatesList];
-            break;
-    }
-    
+   //JF agregar function to create the template array
+   
 	DicomStudy* studySelected = [[fileList[0] objectAtIndex:0] valueForKeyPath:@"series.study"];
 	
-    if (!studySelected.reportURL && templatesArray.count > 1)
+    if (!studySelected.reportURL && templatesArray && templatesArray.count > 1)
 	{
         [reportTemplatesImageView setImage:[self reportIcon]];
 		[item setView:reportTemplatesView];
@@ -23107,9 +23099,6 @@ static BOOL viewerControllerPlaying = NO;
 	{
 		[item setImage:[self reportIcon]];
 	}
-	#else
-	[item setImage: [NSImage imageNamed: @"Report.icns"]];
-	#endif
 }
 
 
@@ -23125,7 +23114,7 @@ static BOOL viewerControllerPlaying = NO;
                 [reportTemplatesListPopUpButton addItemsWithTitles:[Reports pagesTemplatesList]];
                 break;
             case 0:
-                [reportTemplatesListPopUpButton addItemsWithTitles:[Reports wordTemplatesList]];
+                [reportTemplatesListPopUpButton addItemsWithTitles:[NSArray array]];//JF reemplazar por array de templates
                 break;
         }
 		

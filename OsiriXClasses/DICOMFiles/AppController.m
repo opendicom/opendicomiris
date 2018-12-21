@@ -758,8 +758,6 @@ static BOOL _hasMacOSXSnowLeopard=NO;
                }
             }
             
-            //JF where plugin init was
-            
             //Add Endoscopy LUT, WL/WW, shading to existing prefs
             // Shading Preset
             NSMutableArray *shadingArray = [[[[NSUserDefaults standardUserDefaults] objectForKey:@"shadingsPresets"] mutableCopy] autorelease];
@@ -879,9 +877,7 @@ static BOOL _hasMacOSXSnowLeopard=NO;
             
             Use_kdu_IfAvailable = [[NSUserDefaults standardUserDefaults] boolForKey:@"UseKDUForJPEG2000"];
             
-            //JF[Reports checkForWordTemplates];
-            //JF[Reports checkForPagesTemplate];
-            [DCMPixelDataAttribute setUse_kdu_IfAvailable: Use_kdu_IfAvailable];
+             [DCMPixelDataAttribute setUse_kdu_IfAvailable: Use_kdu_IfAvailable];
             
          }
       }
@@ -3162,8 +3158,6 @@ static BOOL firstCall = YES;
 	[DicomDatabase initializeDicomDatabaseClass];
 	[BrowserController initializeBrowserControllerClass];
 	[WebPortal initializeWebPortalClass];
-   //JF bonjour no
-   //_bonjourPublisher = [[BonjourPublisher alloc] init];
 
 	if( [d boolForKey:@"httpXMLRPCServer"]) {
 		if(XMLRPCServer == nil) XMLRPCServer = [[XMLRPCInterface alloc] init];

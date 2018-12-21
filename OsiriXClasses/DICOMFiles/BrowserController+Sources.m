@@ -582,8 +582,7 @@ static void* const SearchDicomNodesContext = @"SearchDicomNodesContext";
                 }];
             }
         }
-        //JF*/
-        if (context == DicomBrowserSourcesContext)
+         if (context == DicomBrowserSourcesContext)
         {
             NSArray* a = [[NSUserDefaults standardUserDefaults] objectForKey:@"SERVERS"];
             NSMutableDictionary* aa = [NSMutableDictionary dictionary];

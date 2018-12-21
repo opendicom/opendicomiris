@@ -56,10 +56,6 @@ static DCMNetServiceDelegate *_netServiceDelegate = nil;
 	return self;
 }
 
-//JF- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-//{
-//}
-
 - (void)dealloc
 {
 	NSLog(@"DCMNetServiceDelegate dealloc");

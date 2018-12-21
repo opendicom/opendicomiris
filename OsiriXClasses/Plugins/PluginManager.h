@@ -12,6 +12,10 @@
 
 @interface PluginManager : NSObject {}
 
+//non categorized plugins
+@property (class,readonly,retain) NSDictionary * pluginClasses;
+@property (class,readonly,retain) NSDictionary * pluginSingletons;
+
 //receiver
 @property (class,readonly,retain) NSArray * preProcessClasses;
 @property (class,readonly,retain) NSArray * preProcessSingletons;

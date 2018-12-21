@@ -18354,17 +18354,11 @@ static volatile int numberOfThreadsForJPEG = 0;
 {
 	@try
 	{
-		#ifndef OSIRIX_LIGHT
 		NSMutableArray* templatesArray = nil;
-        switch ([[[NSUserDefaults standardUserDefaults] stringForKey:@"REPORTSMODE"] intValue]) {
-            case 2:
-                templatesArray = [Reports pagesTemplatesList];
-                break;
-            case 0:
-                templatesArray = [Reports wordTemplatesList];
-                break;
-        }
-        
+      //JFsame method found in ViewerController
+      //JF add function to find array of template
+      //JFreport.url seems to be the right way
+      
 		NSIndexSet* index = [databaseOutline selectedRowIndexes];
 		NSManagedObject	*selectedItem = [databaseOutline itemAtRow:[index firstIndex]];
 		DicomStudy* studySelected;
@@ -18410,9 +18404,6 @@ static volatile int numberOfThreadsForJPEG = 0;
 
 			[item setImage:icon];
 		}
-		#else
-		[item setImage:[NSImage imageNamed:@"Report.icns"]];
-		#endif
 	}
 	@catch (NSException * e)
 	{
@@ -18423,7 +18414,6 @@ static volatile int numberOfThreadsForJPEG = 0;
 
 - (void)reportToolbarItemWillPopUp: (NSNotification *)notif
 {
-	#ifndef OSIRIX_LIGHT
 	if ([[notif object] isEqualTo:reportTemplatesListPopUpButton])
 	{
 		[reportTemplatesListPopUpButton removeAllItems];
@@ -18431,16 +18421,15 @@ static volatile int numberOfThreadsForJPEG = 0;
 		
         switch ([[[NSUserDefaults standardUserDefaults] stringForKey:@"REPORTSMODE"] intValue]) {
             case 2:
-                [reportTemplatesListPopUpButton addItemsWithTitles:[Reports pagesTemplatesList]];
+                [reportTemplatesListPopUpButton addItemsWithTitles:[NSArray array]];//JF change for list of templates
                 break;
             case 0:
-                [reportTemplatesListPopUpButton addItemsWithTitles:[Reports wordTemplatesList]];
+                [reportTemplatesListPopUpButton addItemsWithTitles:[NSArray array]];//JF change for list of templates
                 break;
         }
 		
         [reportTemplatesListPopUpButton setAction:@selector(generateReport:)];
 	}
-	#endif
 }
 
 //ÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑÑ

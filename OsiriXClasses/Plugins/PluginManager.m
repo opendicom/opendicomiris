@@ -4,17 +4,19 @@
 enum{
    reportType=0,
    databaseType,
-   imageFilterType,
+   imageType,
    roiToolType,
    preProcessType,
    fileFormatType,
-   fusionFilterType,
-   otherType
-};
+   fusionFilterType
+};//other types
 
 static NSArray *         pluginTypes=nil;
 
 static NSMenu *         _fusionMenu = nil;
+
+static NSDictionary *   _pluginClasses = nil;
+static NSDictionary *   _pluginSingletons = nil;
 
 static NSDictionary *   _fileFormatClasses = nil;
 static NSDictionary *   _fileFormatSingletons = nil;
@@ -31,6 +33,9 @@ static NSArray *        _preProcessSingletons = nil;
 
 +(NSDictionary*)fileFormatClasses {return _fileFormatClasses;}
 +(NSDictionary*)fileFormatSingletons {return _fileFormatSingletons;}
+
++(NSDictionary*)pluginClasses {return _pluginClasses;}
++(NSDictionary*)pluginSingletons {return _pluginSingletons;}
 
 
 #pragma mark -
@@ -120,12 +125,14 @@ NSMenuItem* menuItemBasedOnDict(NSString* name, id target, SEL action, NSMenu* c
                     @"preProcess",
                     @"fileFormat",
                     @"fusion",
-                    @"other"
                     ];
       [pluginTypes retain];
       
       _fusionMenu   = [[NSMenu alloc]initWithTitle:@"" ];
       [_fusionMenu retain];
+
+      NSMutableDictionary* pluginClasses = [NSMutableDictionary dictionary];
+      NSMutableDictionary* pluginSingletons = [NSMutableDictionary dictionary];
 
       NSMutableDictionary* fileFormatClasses = [NSMutableDictionary dictionary];
       NSMutableDictionary* fileFormatSingletons = [NSMutableDictionary dictionary];
@@ -203,7 +210,7 @@ NSMenuItem* menuItemBasedOnDict(NSString* name, id target, SEL action, NSMenu* c
                      
 #pragma mark reportType
                   case reportType:;
-                     //filterImage: opens a report template
+                     //opens a report template
                      menuItemBasedOnDict(
                                           name,
                                           pluginSingleton,
@@ -216,164 +223,116 @@ NSMenuItem* menuItemBasedOnDict(NSString* name, id target, SEL action, NSMenu* c
                      //file>report>delete borra el editor
                      break;
                      
-/*
+
 #pragma mark databaseType
                   case databaseType:
-                     //filterImage: realiza una operación sobre el browser (NO sobre 2D viewers)
-                     if (menuTitles && [menuTitles count])
-                     {
-                        for (NSString* menuTitle in menuTitles)
-                        {
-                           NSString* compoundKey=[bundleName stringByAppendingPathExtension:menuTitle];
-                           [pluginClasses setObject:pluginClass forKey:compoundKey];
-                           [pluginSingletons setObject:pluginSingleton forKey:compoundKey];
-                           [databasePluginNames setObject:bundle forKey:compoundKey];
-                        }
-                     }
-                     else
-                     {
-                        [pluginClasses setObject:pluginClass forKey:bundleName];
-                        [pluginSingletons setObject:pluginSingleton forKey:bundleName];
-                        [databasePluginNames setObject:bundle forKey:bundleName];
-                     }
+                     //operación sobre browser objects (NO sobre 2D viewers)
+                     menuItemBasedOnDict(
+                                         name,
+                                         pluginSingleton,
+                                         @selector(execute:),
+                                         databaseMenu,
+                                         name,
+                                         infoDictionary[@"menuItems"]
+                                         );
                      break;
                      
-                     
+
 #pragma mark imageFilterType
-                  case imageFilterType:
-                     //filterImage: crea visualizador 2D
-                     if (menuTitles && [menuTitles count])
-                     {
-                        for (NSString* menuTitle in menuTitles)
-                        {
-                           NSString* compoundKey=[bundleName stringByAppendingPathExtension:menuTitle];
-                           [pluginClasses setObject:pluginClass forKey:compoundKey];
-                           [pluginSingletons setObject:pluginSingleton forKey:compoundKey];
-                           [imageFilterPluginNames setObject:bundle forKey:compoundKey];
-                        }
-                     }
-                     else
-                     {
-                        [pluginClasses setObject:pluginClass forKey:bundleName];
-                        [pluginSingletons setObject:pluginSingleton forKey:bundleName];
-                        [imageFilterPluginNames setObject:bundle forKey:bundleName];
-                     }
+                  case imageType:
+                     //visualizador 2D
+                     menuItemBasedOnDict(
+                                         name,
+                                         pluginSingleton,
+                                         @selector(execute:),
+                                         imageMenu,
+                                         name,
+                                         infoDictionary[@"menuItems"]
+                                         );
                      break;
                      
                      
 #pragma mark roiToolType
                   case roiToolType:
-                     //filterImage: actua sobre un visualizador existente
-                     if (menuTitles && [menuTitles count])
-                     {
-                        for (NSString* menuTitle in menuTitles)
-                        {
-                           NSString* compoundKey=[bundleName stringByAppendingPathExtension:menuTitle];
-                           [pluginClasses setObject:pluginClass forKey:compoundKey];
-                           [pluginSingletons setObject:pluginSingleton forKey:compoundKey];
-                           [roiToolPluginNames setObject:bundle forKey:compoundKey];
-                        }
-                     }
-                     else
-                     {
-                        [pluginClasses setObject:pluginClass forKey:bundleName];
-                        [pluginSingletons setObject:pluginSingleton forKey:bundleName];
-                        [roiToolPluginNames setObject:bundle forKey:bundleName];
-                     }
+                     //graphic layer
+                     menuItemBasedOnDict(
+                                         name,
+                                         pluginSingleton,
+                                         @selector(execute:),
+                                         roiToolMenu,
+                                         name,
+                                         infoDictionary[@"menuItems"]
+                                         );
                      break;
                      
-                     
+
 #pragma mark preProcessType
                   case preProcessType:
                      //processFiles: modify of the list of files received in INCOMING
                      [preProcessClasses addObject:pluginClass];
                      [preProcessSingletons addObject:pluginSingleton];
-                     NSString* compoundKey=[bundleName stringByAppendingPathExtension:bundleName];
-                     [preProcessPluginNames setObject:bundle forKey:compoundKey];
                      break;
                      
-                     
+
 #pragma mark fileFormatType
                   case fileFormatType:;
                      //reading of the files to feed a 2D viewer
                      for (NSDictionary* documentTypes in (NSArray*)infoDictionary[@"Document types"])
                      {
                         for (NSString* ext in (NSArray*)documentTypes[@"CFBundleTypeExtensions"]){
-                           NSString* compoundKey=[bundleName stringByAppendingPathExtension:ext];
-                           [fileFormatClasses setObject:pluginClass forKey:compoundKey];
-                           [fileFormatSingletons setObject:pluginSingleton forKey:compoundKey];
-                           [fileFormatPluginNames setObject:bundle forKey:ext];
+                           [fileFormatClasses setObject:pluginClass forKey:ext];
+                           [fileFormatSingletons setObject:pluginSingleton forKey:ext];
                         }
                         for (NSString* mime in (NSArray*)documentTypes[@"Document MIME Types"]){
-                           NSString* compoundKey=[bundleName stringByAppendingPathExtension:mime];
-                           [fileFormatClasses setObject:pluginClass forKey:compoundKey];
-                           [fileFormatSingletons setObject:pluginSingleton forKey:compoundKey];
-                           [fileFormatPluginNames setObject:bundle forKey:mime];
+                           [fileFormatClasses setObject:pluginClass forKey:mime];
+                           [fileFormatSingletons setObject:pluginSingleton forKey:mime];
                         }
                         for (NSString* uti in (NSArray*)documentTypes[@"Exportable Type UTIs"]){
-                           NSString* compoundKey=[bundleName stringByAppendingPathExtension:uti];
-                           [fileFormatClasses setObject:pluginClass forKey:compoundKey];
-                           [fileFormatSingletons setObject:pluginSingleton forKey:compoundKey];
-                           [fileFormatPluginNames setObject:bundle forKey:uti];
+                           [fileFormatClasses setObject:pluginClass forKey:uti];
+                           [fileFormatSingletons setObject:pluginSingleton forKey:uti];
                         }
                      }
                      break;
                      
-                     
+
 #pragma mark fusionFilterType
                   case fusionFilterType:
                      //appears in the fusion panel
-                     if (menuTitles && [menuTitles count])
-                     {
-                        for (NSString* menuTitle in menuTitles)
-                        {
-                           NSString* compoundKey=[bundleName stringByAppendingPathExtension:menuTitle];
-                           [pluginClasses setObject:pluginClass forKey:compoundKey];
-                           [pluginSingletons setObject:pluginSingleton forKey:compoundKey];
-                           [fusionFilterPluginNames setObject:bundle forKey:compoundKey];
-                        }
-                     }
-                     else
-                     {
-                        [pluginClasses setObject:pluginClass forKey:bundleName];
-                        [pluginSingletons setObject:pluginSingleton forKey:bundleName];
-                        [fusionFilterPluginNames setObject:bundle forKey:bundleName];
-                     }
+                     menuItemBasedOnDict(
+                                         name,
+                                         pluginSingleton,
+                                         @selector(execute:),
+                                         _fusionMenu,
+                                         name,
+                                         infoDictionary[@"menuItems"]
+                                         );
                      break;
                      
-                     
+
 #pragma mark otherType
                   default://other
-                     if (menuTitles && [menuTitles count])
-                     {
-                        for (NSString* menuTitle in menuTitles)
-                        {
-                           NSString* compoundKey=[bundleName stringByAppendingPathExtension:menuTitle];
-                           [pluginClasses setObject:pluginClass forKey:compoundKey];
-                           [pluginSingletons setObject:pluginSingleton forKey:compoundKey];
-                           [otherPluginNames setObject:bundle forKey:compoundKey];
-                        }
-                     }
-                     else
-                     {
-                        [pluginClasses setObject:pluginClass forKey:bundleName];
-                        [pluginSingletons setObject:pluginSingleton forKey:bundleName];
-                        [otherPluginNames setObject:bundle forKey:bundleName];
-                     }
-                     break;
- */
+                           [pluginClasses setObject:pluginClass forKey:name];
+                           [pluginSingletons setObject:pluginSingleton forKey:name];
+                      break;
                }
-
-               
             }
          }
       }
+
+      _pluginClasses=[[NSDictionary alloc]initWithDictionary:pluginClasses];
+      [_pluginClasses retain];
+      _pluginSingletons=[[NSDictionary alloc]initWithDictionary:pluginSingletons];
+      [_pluginSingletons retain];
+
+      _fileFormatClasses=[NSDictionary dictionaryWithDictionary:fileFormatClasses];
+      [_fileFormatClasses retain];
+      _fileFormatSingletons=[NSDictionary dictionaryWithDictionary:fileFormatSingletons];
+      [_fileFormatSingletons retain];
       
-      _fileFormatClasses=[[NSDictionary dictionaryWithDictionary:fileFormatClasses]retain];
-      _fileFormatSingletons=[[NSDictionary dictionaryWithDictionary:fileFormatSingletons]retain];
-      
-      _preProcessClasses=[[NSArray arrayWithArray:preProcessClasses]retain];
-      _preProcessSingletons=[[NSArray arrayWithArray:preProcessSingletons]retain];
+      _preProcessClasses=[NSArray arrayWithArray:preProcessClasses];
+      [_preProcessClasses retain];
+      _preProcessSingletons=[NSArray arrayWithArray:preProcessSingletons];
+      [_preProcessSingletons retain];
       
       
       NSLog( @"|||||||| Plugins loading END ||||||||");
@@ -381,117 +340,5 @@ NSMenuItem* menuItemBasedOnDict(NSString* name, id target, SEL action, NSMenu* c
    }
    return self;
 }
-
-#pragma mark -
-
-NSMenuItem* appendTitleItem(NSMenu* menu, NSString* title)
-{
-   if ([title isEqualToString:@"-"])
-   {
-      [menu insertItem:[NSMenuItem separatorItem] atIndex:[menu numberOfItems]];
-      return nil;
-   }
-   NSMenuItem* titleItem = [[[NSMenuItem alloc] init] autorelease];
-   [titleItem setTitle:title];
-   [menu insertItem:titleItem atIndex:[menu numberOfItems]];
-   return titleItem;
-}
-
-void setPluginMenus(NSMenu* mainMenu, NSDictionary* pluginNames)
-{
-   NSMutableString* previousName=[NSMutableString string];
-   NSMenu* currentMenu=nil;
-   NSMenuItem* currentMenuItem=nil;
-   for (NSString* nameTitle in pluginNames)
-   {
-      NSString* name=[nameTitle stringByDeletingPathExtension];
-      if (![name isEqualToString:previousName])
-      {
-         //append another plugin
-         [previousName setString:name];
-         currentMenu=mainMenu;
-         NSMenuItem *nameItem = [[[NSMenuItem alloc] init] autorelease];
-         [nameItem setTitle:name];
-         [nameItem setRepresentedObject:pluginNames[nameTitle]];
-         [currentMenu insertItem:nameItem atIndex:[currentMenu numberOfItems]];
-         
-         if ([name isEqualToString:nameTitle]) currentMenuItem=nameItem;//is leaf (without title)
-         else //is node
-         {
-            NSMenu* subMenu=[[[NSMenu alloc] initWithTitle:name] autorelease];
-            [currentMenu setSubmenu:subMenu forItem:nameItem];
-            
-            //move to node submenu
-            currentMenu=subMenu;
-            
-            //...and appened the first title
-            currentMenuItem=appendTitleItem(currentMenu,[nameTitle pathExtension]);
-         }
-      }
-      else
-      {
-         //appened another title
-         currentMenuItem=appendTitleItem(currentMenu,[nameTitle pathExtension]);
-      }
-      
-      
-      //bind
-      if (currentMenuItem)
-      {
-         //no action
-      }
-   }
-   
-}
-
-
-void setImageFilterPluginMenus(NSMenu* mainMenu, NSDictionary* pluginNames)
-{
-   NSMutableString* previousName=[NSMutableString string];
-   NSMenu* currentMenu=nil;
-   NSMenuItem* currentMenuItem=nil;
-   for (NSString* nameTitle in pluginNames)
-   {
-      NSString* name=[nameTitle stringByDeletingPathExtension];
-      if (![name isEqualToString:previousName])
-      {
-         //append another plugin
-         [previousName setString:name];
-         currentMenu=mainMenu;
-         NSMenuItem *nameItem = [[[NSMenuItem alloc] init] autorelease];
-         [nameItem setTitle:name];
-         [nameItem setRepresentedObject:pluginNames[nameTitle]];
-         [currentMenu insertItem:nameItem atIndex:[currentMenu numberOfItems]];
-         
-         if ([name isEqualToString:nameTitle]) currentMenuItem=nameItem;//is leaf (without title)
-         else //is node
-         {
-            NSMenu* subMenu=[[[NSMenu alloc] initWithTitle:name] autorelease];
-            [currentMenu setSubmenu:subMenu forItem:nameItem];
-            
-            //move to node submenu
-            currentMenu=subMenu;
-            
-            //...and appened the first title
-            currentMenuItem=appendTitleItem(currentMenu,[nameTitle pathExtension]);
-         }
-      }
-      else
-      {
-         //appened another title
-         currentMenuItem=appendTitleItem(currentMenu,[nameTitle pathExtension]);
-      }
-      
-      
-      //bind
-      if (currentMenuItem)
-      {
-         [currentMenuItem setTarget:nil];   // FIRST RESPONDER !
-         [currentMenuItem setAction:@selector(executeFilter:)];
-      }
-   }
-   
-}
-
 
 @end

@@ -37,7 +37,6 @@
 	
 	[self readTemplates];
 	
-	//JFfooterString = NSLocalizedString(@"Made with <a href='http://www.osirix-viewer.com' target='_blank'>OsiriX</a><br />Requires <a href='http://www.apple.com/quicktime/' target='_blank'>QuickTime</a> to display some of the images",nil);
    footerString = NSLocalizedString(@"",nil);
 	[footerString retain];
 	

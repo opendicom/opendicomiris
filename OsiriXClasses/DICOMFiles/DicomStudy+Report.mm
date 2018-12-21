@@ -178,11 +178,7 @@
 {
    if ([reportPath.pathExtension.lowercaseString isEqualToString:@"pages"])
    {
-      NSString *path = nil;
-      if( [Reports Pages5orHigher])
-         path = [[NSBundle mainBundle] pathForResource:@"pages2pdf" ofType:@"applescript"];
-      else
-         path = [[NSBundle mainBundle] pathForResource:@"pages092pdf" ofType:@"applescript"];
+      NSString *path = [[NSBundle mainBundle] pathForResource:@"pages2pdf" ofType:@"applescript"];
       
       [[self class] _runAppleScriptAtPath:path withArguments:[NSArray arrayWithObjects: reportPath, outPdfPath, nil]];
    }

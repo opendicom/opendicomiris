@@ -426,25 +426,8 @@ static DicomDatabase* activeLocalDatabase = nil;
             if ([NSFileManager.defaultManager fileExistsAtPath:self.toBeIndexedDirPath])
                 [NSFileManager.defaultManager moveItemAtPath:self.toBeIndexedDirPath toPath:[self.incomingDirPath stringByAppendingPathComponent:@"TOBEINDEXED.noindex"] error:NULL];
             
-            // report templates
-    #ifndef MACAPPSTORE
-    #ifndef OSIRIX_LIGHT
-            
-            for (NSString* rfn in [NSArray arrayWithObjects: @"", @"ReportTemplate.odt", nil]) {
-                NSString* rfp = [self.baseDirPath stringByAppendingPathComponent:rfn];
-                if (rfp && ![NSFileManager.defaultManager fileExistsAtPath:rfp]) {
-                    [NSFileManager.defaultManager copyItemAtPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:rfn] toPath:rfp error:NULL];
-                    [NSFileManager.defaultManager applyFileModeOfParentToItemAtPath:rfp];
-                }
-            }
-            
-            [Reports checkForPagesTemplate];
-            [Reports checkForWordTemplates];
-            
-    #endif
-    #endif
-
-            [self checkForHtmlTemplates];
+ 
+            //JF[self checkForHtmlTemplates];
             
             if (isNewFile && [NSThread isMainThread] && ![p hasPrefix:@"/tmp/"] && !isNewDb) {
                 [NSThread.currentThread enterOperation];
