@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AB28B42E05B7921E00A9906C"
                BuildableName = "OsiriX-OS.app"
-               BlueprintName = "OsiriX"
+               BlueprintName = "opendicomiris"
                ReferencedContainer = "container:opendicomiris.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,7 +34,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AB28B42E05B7921E00A9906C"
             BuildableName = "OsiriX-OS.app"
-            BlueprintName = "OsiriX"
+            BlueprintName = "opendicomiris"
             ReferencedContainer = "container:opendicomiris.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -57,7 +57,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AB28B42E05B7921E00A9906C"
             BuildableName = "OsiriX-OS.app"
-            BlueprintName = "OsiriX"
+            BlueprintName = "opendicomiris"
             ReferencedContainer = "container:opendicomiris.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -76,7 +76,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AB28B42E05B7921E00A9906C"
             BuildableName = "OsiriX-OS.app"
-            BlueprintName = "OsiriX"
+            BlueprintName = "opendicomiris"
             ReferencedContainer = "container:opendicomiris.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
