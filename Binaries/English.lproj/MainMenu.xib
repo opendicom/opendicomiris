@@ -149,7 +149,7 @@
                             <menuItem title="Report" id="12353">
                                 <menu key="submenu" title="Report" id="12354">
                                     <items>
-                                        <menuItem title="Save Report" keyEquivalent="s" id="12355">
+                                        <menuItem title="Finalize" keyEquivalent="s" id="12355">
                                             <connections>
                                                 <action selector="generateReport:" target="898" id="12363"/>
                                             </connections>

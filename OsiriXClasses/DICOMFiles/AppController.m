@@ -565,9 +565,7 @@ static NSDate *lastWarningDate = nil;
 
 
 static BOOL initialized = NO;
-static BOOL _hasMacOSXLion=NO;
 static BOOL _hasMacOSXSnowLeopard=NO;
-+(BOOL) hasMacOSXLion { return _hasMacOSXLion;}
 +(BOOL) hasMacOSXSnowLeopard { return _hasMacOSXSnowLeopard;}
 
 + (void) initialize
@@ -582,7 +580,6 @@ static BOOL _hasMacOSXSnowLeopard=NO;
          NSOperatingSystemVersion osv=[[NSProcessInfo processInfo]  operatingSystemVersion];
          NSLog(@"[AppController initialize] macos %d.%d.%d",osv.majorVersion,osv.minorVersion,osv.patchVersion);
          int osxaabbc=(osv.majorVersion*1000)+(osv.minorVersion*10)+osv.patchVersion;
-         _hasMacOSXLion=(osxaabbc > 10074);
          _hasMacOSXSnowLeopard=(osxaabbc > 10059);
          NSBundle * mainBundle=[NSBundle mainBundle];
          NSDictionary * infoDictionary=[mainBundle infoDictionary];
@@ -890,25 +887,41 @@ static BOOL _hasMacOSXSnowLeopard=NO;
 
 - (id)init
 {
+   NSLog(@"init appController");
    @try
    {
       self = [super init];
-//      OsiriX = appController = self;
-      
-#ifndef OSIRIX_LIGHT
+
+      NSFileManager * defaultManager=[NSFileManager defaultManager];
+
+//clean TLS keys and tmp
       [DICOMTLS eraseKeys];
-#endif
-      [[NSFileManager defaultManager] removeItemAtPath:[[NSFileManager defaultManager] tmpDirPath] error:NULL];
-      
-      if ([[NSFileManager defaultManager] fileExistsAtPath:[[[[NSFileManager defaultManager] findSystemFolderOfType:kApplicationSupportFolderType forDomain:kLocalDomain] stringByAppendingPathComponent:[[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleNameKey]] stringByAppendingPathComponent:@"DLog.enable"]])
-         [N2Debug setActive:YES];
-      
+      [defaultManager removeItemAtPath:[defaultManager tmpDirPath] error:NULL];
+
+//debug
+      NSString * applictionSuportPath =[defaultManager findSystemFolderOfType:kApplicationSupportFolderType forDomain:kLocalDomain];
+      NSString * bundleName =[[NSBundle mainBundle]
+                              objectForInfoDictionaryKey:(NSString*)kCFBundleNameKey];
+      if ([defaultManager fileExistsAtPath:
+           [[applictionSuportPath
+             stringByAppendingPathComponent:bundleName] stringByAppendingPathComponent:@"DLog.enable"]
+           ]
+          ) [N2Debug setActive:YES];
+
+//locks
       PapyrusLock = [[NSRecursiveLock alloc] init];
       STORESCP = [[NSRecursiveLock alloc] init];
       STORESCPTLS = [[NSRecursiveLock alloc] init];
-      
-      [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self andSelector:@selector(getUrl:withReplyEvent:) forEventClass:kInternetEventClass andEventID:kAEGetURL];
-      
+
+//URL schema
+      [[NSAppleEventManager sharedAppleEventManager]
+       setEventHandler:self
+           andSelector:@selector(getUrl:withReplyEvent:)
+         forEventClass:kInternetEventClass
+            andEventID:kAEGetURL
+       ];
+
+//graphic board
       [VRView testGraphicBoard];
    }
    @catch (NSException * e)
@@ -919,6 +932,211 @@ static BOOL _hasMacOSXSnowLeopard=NO;
    }
    
    return self;
+}
+
+// Manage osirix URL : osirix://
+
+- (void)getUrl:(NSAppleEventDescriptor *)event
+withReplyEvent:(NSAppleEventDescriptor *)replyEvent
+{
+   NSString *str = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
+   NSURL *url = [NSURL URLWithString: str];
+   
+   if( [[url scheme] isEqualToString: @"osirix"])
+   {
+      if( [[NSUserDefaults standardUserDefaults] boolForKey: @"httpXMLRPCServer"] == NO)
+      {
+         int result = NSRunInformationalAlertPanel(NSLocalizedString(@"URL scheme", nil), NSLocalizedString(@"OsiriX URL scheme (osirix://) is currently not activated!\r\rShould I activate it now? Restart is necessary.", nil), NSLocalizedString(@"No",nil), NSLocalizedString(@"Activate & Restart",nil), nil);
+         
+         if( result == NSAlertAlternateReturn)
+         {
+            [[NSUserDefaults standardUserDefaults] setBool: YES forKey: @"httpXMLRPCServer"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [[NSApplication sharedApplication] terminate: self];
+         }
+      }
+      
+      NSString *content = [url resourceSpecifier];
+      
+      BOOL betweenQuotation = NO;
+      
+      NSMutableString *parsedContent = [NSMutableString string];
+      for( int i = 0 ; i < content.length; i++)
+      {
+         if( [content characterAtIndex: i] == '\'')
+            betweenQuotation = !betweenQuotation;
+         
+         if( [content characterAtIndex: i] == '?' && betweenQuotation)
+            [parsedContent appendString: @"__question__"];
+         else
+            [parsedContent appendFormat: @"%c", [content characterAtIndex: i]];
+      }
+      
+      // parse the URL to find the parameters (if any)
+      
+      NSArray *urlComponents = [NSArray array];
+      for( NSString *s in [parsedContent componentsSeparatedByString: @"?"])
+      {
+         urlComponents = [urlComponents arrayByAddingObject: [s stringByReplacingOccurrencesOfString:@"__question__" withString:@"?"]];
+      }
+      
+      if([urlComponents count] == 2)
+      {
+         NSString *parameterString = @"";
+         parameterString = [[urlComponents lastObject] stringByReplacingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+         
+         NSMutableDictionary *urlParameters = [NSMutableDictionary dictionary];
+         if(![parameterString isEqualToString: @""])
+         {
+            NSMutableString *parsedParameterString = [NSMutableString string];
+            for( int i = 0 ; i < parameterString.length; i++)
+            {
+               if( [parameterString characterAtIndex: i] == '\'')
+                  betweenQuotation = !betweenQuotation;
+               
+               if( [parameterString characterAtIndex: i] == '&' && betweenQuotation)
+                  [parsedParameterString appendString: @"__and__"];
+               else
+                  [parsedParameterString appendFormat: @"%c", [parameterString characterAtIndex: i]];
+            }
+            
+            NSArray *paramArray = [NSArray array];
+            for( NSString *s in [parsedParameterString componentsSeparatedByString: @"&"])
+            {
+               paramArray = [paramArray arrayByAddingObject: [s stringByReplacingOccurrencesOfString:@"__and__" withString:@"&"]];
+            }
+            
+            for(NSString *param in paramArray)
+            {
+               NSRange separatorRange = [param rangeOfString: @"="];
+               
+               if( separatorRange.location != NSNotFound)
+               {
+                  @try
+                  {
+                     NSString* value = [param substringFromIndex:separatorRange.location+1];
+                     unichar c = [value characterAtIndex:0];
+                     if ((c == '"' || c == '\'') && [value characterAtIndex:value.length-1] == c)
+                        value = [value substringWithRange:NSMakeRange(1,value.length-2)];
+                     [urlParameters setObject:value forKey:[param substringToIndex: separatorRange.location]];
+                  }
+                  @catch (NSException * e)
+                  {
+                     NSLog( @"**** exception in getUrl: %@", param);
+                  }
+               }
+            }
+            
+            if( [urlParameters objectForKey: @"methodName"]) // XML-RPC message
+            {
+               NSMutableDictionary* paramDict = [NSMutableDictionary dictionaryWithDictionary:urlParameters];
+               [XMLRPCServer methodCall:[urlParameters objectForKey:@"methodName"] parameters:paramDict error:NULL];
+            }
+            
+            if( [urlParameters objectForKey: @"image"])
+            {
+               NSArray *components = [[urlParameters objectForKey: @"image"] componentsSeparatedByString:@"+"];
+               
+               if( [components count] == 2)
+               {
+                  NSString *sopclassuid = [components objectAtIndex: 0];
+                  NSString *sopinstanceuid = [components objectAtIndex: 1];
+                  //                  int frame = [[urlParameters objectForKey: @"frames"] intValue];
+                  
+                  BOOL succeeded = NO;
+                  
+                  //First try to find it in the selected study
+                  if( succeeded == NO)
+                  {
+                     NSMutableArray *allImages = [NSMutableArray array];
+                     [[BrowserController currentBrowser] filesForDatabaseOutlineSelection: allImages];
+                     
+                     NSManagedObjectContext *context = [[[BrowserController currentBrowser] database] managedObjectContext];
+                     
+                     [context lock];
+                     
+                     @try
+                     {
+                        NSPredicate   *request = [NSComparisonPredicate predicateWithLeftExpression: [NSExpression expressionForKeyPath: @"compressedSopInstanceUID"] rightExpression: [NSExpression expressionForConstantValue: [DicomImage sopInstanceUIDEncodeString: sopinstanceuid]] customSelector: @selector(isEqualToSopInstanceUID:)];
+                        
+                        NSArray *imagesArray = [allImages filteredArrayUsingPredicate: request];
+                        
+                        if( [imagesArray count])
+                        {
+                           [[BrowserController currentBrowser] displayStudy: [[imagesArray lastObject] valueForKeyPath: @"series.study"] object: [imagesArray lastObject] command: @"Open"];
+                           succeeded = YES;
+                        }
+                     }
+                     @catch (NSException * e)
+                     {
+                        N2LogExceptionWithStackTrace(e);
+                     }
+                     
+                     [context unlock];
+                  }
+                  //Second option, try to find the uid in the ENTIRE db....
+                  
+                  if( succeeded == NO)
+                  {
+                     NSFetchRequest *dbRequest = [[[NSFetchRequest alloc] init] autorelease];
+                     [dbRequest setEntity: [[[BrowserController currentBrowser] database] seriesEntity]];
+                     [dbRequest setPredicate: [NSPredicate predicateWithFormat: @"seriesSOPClassUID == %@", sopclassuid]];
+                     
+                     NSManagedObjectContext *context = [[[BrowserController currentBrowser] database] managedObjectContext];
+                     
+                     [context lock];
+                     
+                     WaitRendering *wait = [[WaitRendering alloc] init: NSLocalizedString( @"Locating the image in the database...", nil)];
+                     [wait showWindow: self];
+                     [wait setCancel: YES];
+                     [wait start];
+                     
+                     @try
+                     {
+                        NSError   *error = nil;
+                        NSArray *allSeries = [[context executeFetchRequest: dbRequest error: &error] valueForKey: @"images"];
+                        
+                        NSMutableArray *allImages = [NSMutableArray array];
+                        for( NSSet *s in allSeries)
+                           [allImages addObjectsFromArray: [s allObjects]];
+                        
+                        NSData *searchedUID = [DicomImage sopInstanceUIDEncodeString: sopinstanceuid];
+                        DicomImage *searchUIDImage = nil;
+                        
+                        for( DicomImage *i in allImages)
+                        {
+                           if( [[i valueForKey: @"compressedSopInstanceUID"] isEqualToSopInstanceUID: searchedUID])
+                              searchUIDImage = i;
+                           
+                           if( searchUIDImage)
+                              break;
+                           
+                           if( [wait run] == NO)
+                              break;
+                        }
+                        
+                        if( searchUIDImage)
+                           [[BrowserController currentBrowser] displayStudy: [searchUIDImage valueForKeyPath: @"series.study"] object: searchUIDImage command: @"Open"];
+                     }
+                     @catch (NSException * e)
+                     {
+                        N2LogExceptionWithStackTrace(e);
+                     }
+                     [wait end];
+                     [wait close];
+                     [wait autorelease];
+                     
+                     [context unlock];
+                  }
+               }
+            }
+         }
+      }
+      else if( [url.pathExtension isEqualToString: @"xml"])
+      {
+         [BrowserController asyncWADOXMLDownloadURL: url];
+      }
+   }
 }
 
 #pragma mark -
@@ -2256,209 +2474,6 @@ static BOOL _hasMacOSXSnowLeopard=NO;
 	return;
 }
 
-// Manage osirix URL : osirix://
-
-- (void)getUrl:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent
-{
-	NSString *str = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
-	NSURL *url = [NSURL URLWithString: str];
-		
-	if( [[url scheme] isEqualToString: @"osirix"])
-	{
-		if( [[NSUserDefaults standardUserDefaults] boolForKey: @"httpXMLRPCServer"] == NO)
-		{
-			int result = NSRunInformationalAlertPanel(NSLocalizedString(@"URL scheme", nil), NSLocalizedString(@"OsiriX URL scheme (osirix://) is currently not activated!\r\rShould I activate it now? Restart is necessary.", nil), NSLocalizedString(@"No",nil), NSLocalizedString(@"Activate & Restart",nil), nil);
-			
-			if( result == NSAlertAlternateReturn)
-			{
-				[[NSUserDefaults standardUserDefaults] setBool: YES forKey: @"httpXMLRPCServer"];
-				[[NSUserDefaults standardUserDefaults] synchronize];
-				[[NSApplication sharedApplication] terminate: self];
-			}
-		}
-		
-		NSString *content = [url resourceSpecifier];
-		
-		BOOL betweenQuotation = NO;
-		
-		NSMutableString *parsedContent = [NSMutableString string];
-		for( int i = 0 ; i < content.length; i++)
-		{
-			if( [content characterAtIndex: i] == '\'')
-				betweenQuotation = !betweenQuotation;
-				
-			if( [content characterAtIndex: i] == '?' && betweenQuotation)
-				[parsedContent appendString: @"__question__"];
-			else
-				[parsedContent appendFormat: @"%c", [content characterAtIndex: i]];
-		}
-		
-		// parse the URL to find the parameters (if any)
-		
-		NSArray *urlComponents = [NSArray array];
-		for( NSString *s in [parsedContent componentsSeparatedByString: @"?"])
-		{
-			urlComponents = [urlComponents arrayByAddingObject: [s stringByReplacingOccurrencesOfString:@"__question__" withString:@"?"]];
-		}
-		
-        if([urlComponents count] == 2)
-		{
-            NSString *parameterString = @"";
-			parameterString = [[urlComponents lastObject] stringByReplacingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
-		
-			NSMutableDictionary *urlParameters = [NSMutableDictionary dictionary];
-			if(![parameterString isEqualToString: @""])
-			{
-				NSMutableString *parsedParameterString = [NSMutableString string];
-				for( int i = 0 ; i < parameterString.length; i++)
-				{
-					if( [parameterString characterAtIndex: i] == '\'')
-						betweenQuotation = !betweenQuotation;
-						
-					if( [parameterString characterAtIndex: i] == '&' && betweenQuotation)
-						[parsedParameterString appendString: @"__and__"];
-					else
-						[parsedParameterString appendFormat: @"%c", [parameterString characterAtIndex: i]];
-				}
-				
-				NSArray *paramArray = [NSArray array];
-				for( NSString *s in [parsedParameterString componentsSeparatedByString: @"&"])
-				{
-					paramArray = [paramArray arrayByAddingObject: [s stringByReplacingOccurrencesOfString:@"__and__" withString:@"&"]];
-				}
-				
-				for(NSString *param in paramArray)
-				{
-					NSRange separatorRange = [param rangeOfString: @"="];
-					
-					if( separatorRange.location != NSNotFound)
-					{
-						@try
-						{
-                            NSString* value = [param substringFromIndex:separatorRange.location+1];
-                            unichar c = [value characterAtIndex:0];
-                            if ((c == '"' || c == '\'') && [value characterAtIndex:value.length-1] == c)
-                                value = [value substringWithRange:NSMakeRange(1,value.length-2)];
-							[urlParameters setObject:value forKey:[param substringToIndex: separatorRange.location]];
-						}
-						@catch (NSException * e)
-						{
-							NSLog( @"**** exception in getUrl: %@", param);
-						}
-					}
-				}
-				
-				if( [urlParameters objectForKey: @"methodName"]) // XML-RPC message
-				{
-                    NSMutableDictionary* paramDict = [NSMutableDictionary dictionaryWithDictionary:urlParameters];
-                    [XMLRPCServer methodCall:[urlParameters objectForKey:@"methodName"] parameters:paramDict error:NULL];
-				}
-				
-				if( [urlParameters objectForKey: @"image"])
-				{
-					NSArray *components = [[urlParameters objectForKey: @"image"] componentsSeparatedByString:@"+"];
-					
-					if( [components count] == 2)
-					{
-						NSString *sopclassuid = [components objectAtIndex: 0];
-						NSString *sopinstanceuid = [components objectAtIndex: 1];
-//						int frame = [[urlParameters objectForKey: @"frames"] intValue];
-						
-						BOOL succeeded = NO;
-						
-						//First try to find it in the selected study
-						if( succeeded == NO)
-						{
-							NSMutableArray *allImages = [NSMutableArray array];
-							[[BrowserController currentBrowser] filesForDatabaseOutlineSelection: allImages];
-							
-							NSManagedObjectContext *context = [[[BrowserController currentBrowser] database] managedObjectContext];
-							
-							[context lock];
-							
-							@try
-							{
-								NSPredicate	*request = [NSComparisonPredicate predicateWithLeftExpression: [NSExpression expressionForKeyPath: @"compressedSopInstanceUID"] rightExpression: [NSExpression expressionForConstantValue: [DicomImage sopInstanceUIDEncodeString: sopinstanceuid]] customSelector: @selector(isEqualToSopInstanceUID:)];
-								
-								NSArray *imagesArray = [allImages filteredArrayUsingPredicate: request];
-								
-								if( [imagesArray count])
-								{
-									[[BrowserController currentBrowser] displayStudy: [[imagesArray lastObject] valueForKeyPath: @"series.study"] object: [imagesArray lastObject] command: @"Open"];
-									succeeded = YES;
-								}
-							}
-							@catch (NSException * e)
-							{
-                                N2LogExceptionWithStackTrace(e);
-							}
-							
-							[context unlock];
-						}
-						//Second option, try to find the uid in the ENTIRE db....
-						
-						if( succeeded == NO)
-						{
-							NSFetchRequest *dbRequest = [[[NSFetchRequest alloc] init] autorelease];
-							[dbRequest setEntity: [[[BrowserController currentBrowser] database] seriesEntity]];
-							[dbRequest setPredicate: [NSPredicate predicateWithFormat: @"seriesSOPClassUID == %@", sopclassuid]];
-							
-							NSManagedObjectContext *context = [[[BrowserController currentBrowser] database] managedObjectContext];
-							
-							[context lock];
-							
-							WaitRendering *wait = [[WaitRendering alloc] init: NSLocalizedString( @"Locating the image in the database...", nil)];
-							[wait showWindow: self];
-							[wait setCancel: YES];
-							[wait start];
-							
-							@try
-							{
-								NSError	*error = nil;
-								NSArray *allSeries = [[context executeFetchRequest: dbRequest error: &error] valueForKey: @"images"];
-								
-								NSMutableArray *allImages = [NSMutableArray array];
-								for( NSSet *s in allSeries)
-									[allImages addObjectsFromArray: [s allObjects]];
-								
-								NSData *searchedUID = [DicomImage sopInstanceUIDEncodeString: sopinstanceuid];
-								DicomImage *searchUIDImage = nil;
-								
-								for( DicomImage *i in allImages)
-								{
-									if( [[i valueForKey: @"compressedSopInstanceUID"] isEqualToSopInstanceUID: searchedUID])
-										searchUIDImage = i;
-									
-									if( searchUIDImage)
-										break;
-									
-									if( [wait run] == NO)
-										break;
-								}
-								
-								if( searchUIDImage)
-									[[BrowserController currentBrowser] displayStudy: [searchUIDImage valueForKeyPath: @"series.study"] object: searchUIDImage command: @"Open"];
-							}
-							@catch (NSException * e)
-							{
-                                N2LogExceptionWithStackTrace(e);
-							}
-							[wait end];
-							[wait close];
-							[wait autorelease];
-							
-							[context unlock];
-						}
-					}
-				}
-			}
-		}
-        else if( [url.pathExtension isEqualToString: @"xml"])
-        {
-            [BrowserController asyncWADOXMLDownloadURL: url];
-		}
-	}
-}
 
 - (void)application:(NSApplication *)sender openFiles:(NSArray *)filenames
 {
@@ -2887,6 +2902,7 @@ static BOOL firstCall = YES;
     }
 }
 
+//JF URL
 - (void) checkForOsirixMimeType
 {
 	NSString *path = @"~/Library/Preferences/com.apple.LaunchServices.plist";

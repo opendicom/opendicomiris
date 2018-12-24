@@ -1,5 +1,8 @@
 #import "DatabasePlugin.h"
 
+#import "BrowserController.h"
+#import "DicomSeries.h"
+
 @implementation DatabasePlugin
 
 #pragma mark common instanciating and recycling
@@ -37,6 +40,22 @@
 {
    NSLog( @"DatabasePlugin execute Error, you should not be here!");
    return -1;
+}
+
+#pragma mark tools
+
+-(NSMutableSet*)selectedDicomStudy
+{
+   MyOutlineView *databaseOutline=[BrowserController currentBrowser].databaseOutline;
+ 
+   NSMutableSet * dicomStudyset=[NSMutableSet set];
+   NSIndexSet *selectedItems = [databaseOutline selectedRowIndexes];
+   [selectedItems enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+      NSManagedObject *item = [databaseOutline itemAtRow:idx];
+      if ([item isKindOfClass:[DicomSeries class]]) item = [item valueForKey:@"study"];
+      [dicomStudyset addObject:item];
+   }];
+   return dicomStudyset;
 }
 
 @end

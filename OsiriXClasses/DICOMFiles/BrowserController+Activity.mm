@@ -215,10 +215,7 @@ static NSString* const BrowserActivityHelperContext = @"BrowserActivityHelperCon
         //		[self.progressIndicator startAnimation:self];
             }
             
-            NSRect progressFrame;
-            if ([AppController hasMacOSXLion])
-                progressFrame = NSMakeRect(frame.origin.x+3, frame.origin.y+27, frame.size.width-6, frame.size.height-32);
-            else progressFrame = NSMakeRect(frame.origin.x+1, frame.origin.y+26, frame.size.width-2, frame.size.height-28);
+            NSRect progressFrame = NSMakeRect(frame.origin.x+1, frame.origin.y+26, frame.size.width-2, frame.size.height-28);
                 
             if (!NSEqualRects(cell.progressIndicator.frame, progressFrame))
                 [cell.progressIndicator setFrame:progressFrame];

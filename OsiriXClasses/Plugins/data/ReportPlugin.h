@@ -3,11 +3,13 @@
 @interface ReportPlugin : DatabasePlugin {
 }
 
+//object=sender
+//currentStudy obtained through DatabasePlugin -currentStudy
+-(long)execute:(id)object;//open editor with template sender object for current study
 
 #pragma mark to subclass
--(long)reportEditorWithMenuName:(NSString*)menuName ForStudy:(id)study;
--(long)resetReportEditorForStudy:(id)study;
--(long)generateReportForStudy:(id)study;
+-(long)reset:(id)object;//reset editor for current study
+-(long)generateReport:(id)object;//finalizes a document based on the editor
 
 
 +(long)convertReportToPDF:(NSMutableData**)pdfData forStudy:(id)study;

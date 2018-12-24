@@ -832,22 +832,13 @@ public:
 + (void) testGraphicBoard
 {    
     int vram = [VTKView VRAMSizeForDisplayID: [[[[NSScreen mainScreen] deviceDescription] objectForKey: @"NSScreenNumber"] intValue]] / (1024*1024);
-    
-    if( [[NSUserDefaults standardUserDefaults] integerForKey: @"VRAMAmount"] != vram)
+   
+   NSUserDefaults * standardUserDefaults=[NSUserDefaults standardUserDefaults];
+    if( [standardUserDefaults integerForKey: @"VRAMAmount"] != vram)
     {
-        if( vram >= 2000 && [AppController hasMacOSXLion])
-        {
-            [[NSUserDefaults standardUserDefaults] setInteger: 1 forKey: @"VRDefaultViewSize"];     // full screen
-            [[NSUserDefaults standardUserDefaults] setInteger: 1 forKey: @"MAPPERMODEVR"];          // gpu
-        }
-        else
-        {
-            [[NSUserDefaults standardUserDefaults] setInteger: 0 forKey: @"VRDefaultViewSize"];     // square
-            [[NSUserDefaults standardUserDefaults] setInteger: 0 forKey: @"MAPPERMODEVR"];          // cpu
-        }
-        
-        [[NSUserDefaults standardUserDefaults] setInteger: vram forKey: @"VRAMAmount"];
-        
+        [standardUserDefaults setInteger: 0    forKey: @"VRDefaultViewSize"];// square
+        [standardUserDefaults setInteger: 0    forKey: @"MAPPERMODEVR"];     // cpu
+        [standardUserDefaults setInteger: vram forKey: @"VRAMAmount"];
         NSLog( @"--- Changing Volume Rendering settings (vram: %d)", (int) vram);
     }
 }
@@ -953,12 +944,6 @@ public:
 
 - (void) setEngine: (long) newEngine showWait:(BOOL) showWait
 {
-    if( newEngine != 0 && [AppController hasMacOSXLion] == NO)
-    {
-        NSRunCriticalAlertPanel( NSLocalizedString(@"GPU Rendering", nil),  NSLocalizedString( @"GPU Rendering requires MacOS 10.7 or higher.", nil), NSLocalizedString( @"OK", nil), nil, nil);
-        newEngine = 0;
-    }
-    
     if( newEngine == 1)
     {
         long vram = [VTKView VRAMSizeForDisplayID: [[[[[self window] screen] deviceDescription] objectForKey: @"NSScreenNumber"] intValue]];

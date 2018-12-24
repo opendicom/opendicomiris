@@ -16707,7 +16707,6 @@ static volatile int numberOfThreadsForJPEG = 0;
 	return mstr;
 }
 
-#ifndef OSIRIX_LIGHT
 - (void) importReport:(NSString*) path UID: (NSString*) uid
 {
 	if( [[NSFileManager defaultManager] fileExistsAtPath: path])
@@ -16750,7 +16749,6 @@ static volatile int numberOfThreadsForJPEG = 0;
 		[context unlock];
 	}
 }
-#endif
 
 - (NSArray*) exportDICOMFileInt: (NSString*) location files: (NSMutableArray*) filesToExport objects: (NSMutableArray*) dicomFiles2Export
 {
@@ -18139,6 +18137,7 @@ static volatile int numberOfThreadsForJPEG = 0;
 
 - (IBAction) generateReport: (id)sender
 {
+   
 	NSIndexSet *index = [databaseOutline selectedRowIndexes];
 	NSManagedObject *item = [databaseOutline itemAtRow:[index firstIndex]];
    if ([item isKindOfClass:[DicomSeries class]]) item = [item valueForKey:@"study"];

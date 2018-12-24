@@ -34,26 +34,27 @@
 }
 
 
--(long)execute:(id)object
+#pragma mark to subclass
+
+//open editor with template object for current study
+-(long)execute:(id)sender
 {
    NSLog( @"ReportPlugin execute Error, you should not be here!");
    return -1;
 }
 
-#pragma mark to subclass
--(long)reportEditorWithMenuName:(NSString*)menuName ForStudy:(id)study
+
+//reset editor for current study
+-(long)reset:(id)sender;
 {
+   NSLog( @"ReportPlugin execute Error, you should not be here!");
    return -1;
 }
 
--(long)resetReportEditorForStudy:(id)study
-{
-   return -1;
-}
 
-
--(long)generateReportForStudy:(id)study
+-(long)generateReport:(id)sender;
 {
+   NSLog( @"ReportPlugin execute Error, you should not be here!");
    return -1;
 }
 

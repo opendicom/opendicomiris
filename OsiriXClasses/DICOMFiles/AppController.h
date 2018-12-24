@@ -102,7 +102,6 @@ extern AppController* OsiriX;
 //singleton
 + (AppController*) sharedAppController;
 
-+ (BOOL) hasMacOSXLion;
 + (BOOL) hasMacOSXSnowLeopard;
 
 +(NSString*)UID;
