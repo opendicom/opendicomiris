@@ -440,15 +440,9 @@ NSString* const SessionDicomCStorePortKey = @"DicomCStorePort"; // NSNumber (int
 	// SECURITY: we cannot allow the client to read any file on the hard disk (outside the shared dir), so no ".." 
 	requestedPath = [[urlComponenents objectAtIndex:0] stringByReplacingOccurrencesOfString:@"../" withString:@""];
 	
-//	NSString* userAgent = [(id)CFHTTPMessageCopyHeaderFieldValue(request, (CFStringRef)@"User-Agent") autorelease];
-//	BOOL isIOS [userAgent contains:@"iPhone"] || [userAgent contains:@"iPad"];	
-//	BOOL isMacOS [userAgent contains:@"Mac OS"];	
-
 	NSString* ext = [requestedPath pathExtension];
 	if ([ext compare:@"jar" options:NSCaseInsensitiveSearch|NSLiteralSearch] == NSOrderedSame)
 		response.mimeType = @"application/java-archive";
-	if ([ext compare:@"swf" options:NSCaseInsensitiveSearch|NSLiteralSearch] == NSOrderedSame)
-		response.mimeType = @"application/x-shockwave-flash";
     if( [ext compare:@"css" options:NSCaseInsensitiveSearch|NSLiteralSearch] == NSOrderedSame)
         response.mimeType = @"text/css";
     if( [ext compare:@"js" options:NSCaseInsensitiveSearch|NSLiteralSearch] == NSOrderedSame)
@@ -554,7 +548,7 @@ NSString* const SessionDicomCStorePortKey = @"DicomCStorePort"; // NSNumber (int
                 if ([requestedPath hasPrefix:@"/imageAsScreenCapture."])
                     [self processImageAsScreenCapture: YES];
                 else
-                if ([requestedPath isEqualToString:@"/movie.mov"] || [requestedPath isEqualToString:@"/movie.m4v"] || [requestedPath isEqualToString:@"/movie.mp4"] || [requestedPath isEqualToString:@"/movie.swf"])
+                if ([requestedPath isEqualToString:@"/movie.mov"] || [requestedPath isEqualToString:@"/movie.m4v"] || [requestedPath isEqualToString:@"/movie.mp4"])
                     [self processMovie];
                 else
                 if ([requestedPath isEqualToString:@"/password_forgotten"])

@@ -698,10 +698,7 @@ ss
                     [self drawText: [NSString stringWithFormat: @"%d / %d", (int) ([allImages indexOfObject: im]+1), totalImages]  atLocation: NSMakePoint( 1, newImage.size.height - TEXTHEIGHT)];
                     [newImage unlockFocus];
                     
-                    if ([outFile hasSuffix:@"swf"])
-                        [[[NSBitmapImageRep imageRepWithData:[newImage TIFFRepresentation]] representationUsingType:NSJPEGFileType properties:imageProps] writeToFile:[[fileName stringByAppendingString:@" dir"] stringByAppendingPathComponent:[NSString stringWithFormat:@"%6.6d.jpg", x]] atomically:YES];
-                    else
-                        [[newImage TIFFRepresentationUsingCompression: NSTIFFCompressionLZW factor: 1.0] writeToFile: [[fileName stringByAppendingString: @" dir"] stringByAppendingPathComponent: [NSString stringWithFormat: @"%6.6d.tiff", x]] atomically: YES];
+                    [[newImage TIFFRepresentationUsingCompression: NSTIFFCompressionLZW factor: 1.0] writeToFile: [[fileName stringByAppendingString: @" dir"] stringByAppendingPathComponent: [NSString stringWithFormat: @"%6.6d.tiff", x]] atomically: YES];
                     
                     [dcmPix release];
                 }
@@ -841,125 +838,105 @@ const NSString* const GenerateMovieDicomImagesParamKey = @"dicomImageArray";
             
 			NSLog( @"generateMovie: start writeMovie process");
             
-            if( [outFile hasSuffix:@".swf"]) // FLASH
-            {
-                @try
-                {
-                    NSTask *theTask = [[[NSTask alloc] init] autorelease];
-                    
-                    [theTask setArguments: [NSArray arrayWithObjects: outFile, @"writeMovie", [outFile stringByAppendingString: @" dir"], [[NSNumber numberWithInteger:fps] stringValue], nil]];
-                    [theTask setLaunchPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Decompress"]];
-                    [theTask launch];
-                    
-                    while( [theTask isRunning]) [NSThread sleepForTimeInterval: 0.01];
-                }
-                @catch (NSException *e)
-                {
-                    NSLog( @"***** writeMovie exception : %@", e);
-                }
-            }
-            else
-            {
-                @try
-                {
-                    NSString *root = [fileName stringByAppendingString: @" dir"];
-                    
-                    CMTimeValue timeValue = 600 / fps;
-                    CMTime frameDuration = CMTimeMake( timeValue, 600);
-                    
-                    NSError *error = nil;
-                    AVAssetWriter *writer = [[AVAssetWriter alloc] initWithURL:[NSURL fileURLWithPath: outFile] fileType: AVFileTypeQuickTimeMovie error:&error];
-                    
-                    if (!error)
-                    {
-                        double bitsPerSecond = width * height * fps * 4;
-                        
-                        if( bitsPerSecond > 0)
-                        {
-                            NSDictionary *videoSettings = nil;
-                            
-                            if( self.requestIsIOS) // AVVideoCodecH264
-                            {
-                                videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                 AVVideoCodecH264, AVVideoCodecKey,
-                                                 [NSDictionary dictionaryWithObjectsAndKeys:
-                                                  [NSNumber numberWithDouble: bitsPerSecond], AVVideoAverageBitRateKey,
-                                                  [NSNumber numberWithInteger: 1], AVVideoMaxKeyFrameIntervalKey,
-                                                  nil], AVVideoCompressionPropertiesKey,
-                                                 [NSNumber numberWithInt: width], AVVideoWidthKey,
-                                                 [NSNumber numberWithInt: height], AVVideoHeightKey, nil];
-                            }
-                            else // AVVideoCodecJPEG
-                            {
-                                videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:
-                                                 AVVideoCodecJPEG, AVVideoCodecKey,
-                                                 [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithFloat: 0.9], AVVideoQualityKey, nil] ,AVVideoCompressionPropertiesKey,
-                                                 [NSNumber numberWithInt: width], AVVideoWidthKey,
-                                                 [NSNumber numberWithInt: height], AVVideoHeightKey, nil];
-                            }
-                            
-                            // Instanciate the AVAssetWriterInput
-                            AVAssetWriterInput *writerInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:videoSettings];
-                            
-                            if( writerInput == nil)
-                                N2LogStackTrace( @"**** writerInput == nil : %@", videoSettings);
-                            
-                            // Instanciate the AVAssetWriterInputPixelBufferAdaptor to be connected to the writer input
-                            AVAssetWriterInputPixelBufferAdaptor *pixelBufferAdaptor = [AVAssetWriterInputPixelBufferAdaptor assetWriterInputPixelBufferAdaptorWithAssetWriterInput:writerInput sourcePixelBufferAttributes:nil];
-                            // Add the writer input to the writer and begin writing
-                            [writer addInput:writerInput];
-                            [writer startWriting];
-                            
-                            CMTime nextPresentationTimeStamp;
-                            
-                            nextPresentationTimeStamp = kCMTimeZero;
-                            
-                            [writer startSessionAtSourceTime:nextPresentationTimeStamp];
-                            
-                            for( NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath: root error: nil])
-                            {
-                                NSAutoreleasePool *pool = [NSAutoreleasePool new];
-                                
-                                CVPixelBufferRef buffer = nil;
-                                
-                                {
-                                    NSImage *im = [[NSImage alloc] initWithContentsOfFile: [root stringByAppendingPathComponent: file]];
-                                    if( im)
-                                        buffer = [QuicktimeExport CVPixelBufferFromNSImage: im];
-                                    [im release];
-                                }
-                                
-                                [pool release];
-                                
-                                if( buffer)
-                                {
-                                    CVPixelBufferLockBaseAddress(buffer, 0);
-                                    while( writerInput && [writerInput isReadyForMoreMediaData] == NO)
-                                        [NSThread sleepForTimeInterval: 0.1];
-                                    [pixelBufferAdaptor appendPixelBuffer:buffer withPresentationTime:nextPresentationTimeStamp];
-                                    CVPixelBufferUnlockBaseAddress(buffer, 0);
-                                    CVPixelBufferRelease(buffer);
-                                    buffer = nil;
-                                    
-                                    nextPresentationTimeStamp = CMTimeAdd(nextPresentationTimeStamp, frameDuration);
-                                }
-                            }
-                            [writerInput markAsFinished];
-                        }
-                        else
-                            N2LogStackTrace( @"********** bitsPerSecond == 0");
-                        
-                        [writer finishWriting];
-                    }
-                    [[NSFileManager defaultManager] removeItemAtPath: root error: nil];
-                    
-                    [writer release];
-                }
-                @catch (NSException *e)
-                {
-                    NSLog( @"***** writeMovie exception : %@", e);
-                }
-            }
+          @try
+          {
+              NSString *root = [fileName stringByAppendingString: @" dir"];
+              
+              CMTimeValue timeValue = 600 / fps;
+              CMTime frameDuration = CMTimeMake( timeValue, 600);
+              
+              NSError *error = nil;
+              AVAssetWriter *writer = [[AVAssetWriter alloc] initWithURL:[NSURL fileURLWithPath: outFile] fileType: AVFileTypeQuickTimeMovie error:&error];
+              
+              if (!error)
+              {
+                  double bitsPerSecond = width * height * fps * 4;
+                  
+                  if( bitsPerSecond > 0)
+                  {
+                      NSDictionary *videoSettings = nil;
+                      
+                      if( self.requestIsIOS) // AVVideoCodecH264
+                      {
+                          videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:
+                                           AVVideoCodecH264, AVVideoCodecKey,
+                                           [NSDictionary dictionaryWithObjectsAndKeys:
+                                            [NSNumber numberWithDouble: bitsPerSecond], AVVideoAverageBitRateKey,
+                                            [NSNumber numberWithInteger: 1], AVVideoMaxKeyFrameIntervalKey,
+                                            nil], AVVideoCompressionPropertiesKey,
+                                           [NSNumber numberWithInt: width], AVVideoWidthKey,
+                                           [NSNumber numberWithInt: height], AVVideoHeightKey, nil];
+                      }
+                      else // AVVideoCodecJPEG
+                      {
+                          videoSettings = [NSDictionary dictionaryWithObjectsAndKeys:
+                                           AVVideoCodecJPEG, AVVideoCodecKey,
+                                           [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithFloat: 0.9], AVVideoQualityKey, nil] ,AVVideoCompressionPropertiesKey,
+                                           [NSNumber numberWithInt: width], AVVideoWidthKey,
+                                           [NSNumber numberWithInt: height], AVVideoHeightKey, nil];
+                      }
+                      
+                      // Instanciate the AVAssetWriterInput
+                      AVAssetWriterInput *writerInput = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:videoSettings];
+                      
+                      if( writerInput == nil)
+                          N2LogStackTrace( @"**** writerInput == nil : %@", videoSettings);
+                      
+                      // Instanciate the AVAssetWriterInputPixelBufferAdaptor to be connected to the writer input
+                      AVAssetWriterInputPixelBufferAdaptor *pixelBufferAdaptor = [AVAssetWriterInputPixelBufferAdaptor assetWriterInputPixelBufferAdaptorWithAssetWriterInput:writerInput sourcePixelBufferAttributes:nil];
+                      // Add the writer input to the writer and begin writing
+                      [writer addInput:writerInput];
+                      [writer startWriting];
+                      
+                      CMTime nextPresentationTimeStamp;
+                      
+                      nextPresentationTimeStamp = kCMTimeZero;
+                      
+                      [writer startSessionAtSourceTime:nextPresentationTimeStamp];
+                      
+                      for( NSString *file in [[NSFileManager defaultManager] contentsOfDirectoryAtPath: root error: nil])
+                      {
+                          NSAutoreleasePool *pool = [NSAutoreleasePool new];
+                          
+                          CVPixelBufferRef buffer = nil;
+                          
+                          {
+                              NSImage *im = [[NSImage alloc] initWithContentsOfFile: [root stringByAppendingPathComponent: file]];
+                              if( im)
+                                  buffer = [QuicktimeExport CVPixelBufferFromNSImage: im];
+                              [im release];
+                          }
+                          
+                          [pool release];
+                          
+                          if( buffer)
+                          {
+                              CVPixelBufferLockBaseAddress(buffer, 0);
+                              while( writerInput && [writerInput isReadyForMoreMediaData] == NO)
+                                  [NSThread sleepForTimeInterval: 0.1];
+                              [pixelBufferAdaptor appendPixelBuffer:buffer withPresentationTime:nextPresentationTimeStamp];
+                              CVPixelBufferUnlockBaseAddress(buffer, 0);
+                              CVPixelBufferRelease(buffer);
+                              buffer = nil;
+                              
+                              nextPresentationTimeStamp = CMTimeAdd(nextPresentationTimeStamp, frameDuration);
+                          }
+                      }
+                      [writerInput markAsFinished];
+                  }
+                  else
+                      N2LogStackTrace( @"********** bitsPerSecond == 0");
+                  
+                  [writer finishWriting];
+              }
+              [[NSFileManager defaultManager] removeItemAtPath: root error: nil];
+              
+              [writer release];
+          }
+          @catch (NSException *e)
+          {
+              NSLog( @"***** writeMovie exception : %@", e);
+          }
 			NSLog( @"generateMovie: end");
 		}
 	}

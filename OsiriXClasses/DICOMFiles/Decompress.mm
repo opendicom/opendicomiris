@@ -3,7 +3,6 @@
 #import "AppController.h"
 #import "DCMPix.h"
 #import <WebKit/WebKit.h>
-#include <mingpp.h>
 #import "N2Debug.h"
 #import <Quartz/Quartz.h>
 
@@ -105,8 +104,6 @@ int compressionForModality( NSArray *array, NSArray *arrayLow, int limit, NSStri
 	
 	return [[[s objectAtIndex: 0] valueForKey: @"compression"] intValue];
 }
-
-void createSwfMovie(NSArray* inputFiles, NSString* path, float frameRate);
 
 int main(int argc, const char *argv[])
 {
@@ -615,36 +612,7 @@ int main(int argc, const char *argv[])
 						DcmXfer filexfer(fileformat.getDataset()->getOriginalXfer());
 						
 						//hopefully dcmtk willsupport jpeg2000 compression and decompression in the future: November 7th 2010 : I did it !
-						
-//						if( useDCMTKForJP2K == NO && (filexfer.getXfer() == EXS_JPEG2000LosslessOnly || filexfer.getXfer() == EXS_JPEG2000))
-//						{
-//                          [DCMPixelDataAttribute setUse_kdu_IfAvailable: [[dict objectForKey:@"UseKDUForJPEG2000"]; intValue]];
-//							DCMObject *dcmObject = [[DCMObject alloc] initWithContentsOfFile: curFile decodingPixelData: NO];
-//							@try
-//							{
-//								status = [dcmObject writeToFile: curFileDest withTransferSyntax:[DCMTransferSyntax ImplicitVRLittleEndianTransferSyntax] quality:1 AET:@"OsiriX" atomically:YES];	//ImplicitVRLittleEndianTransferSyntax
-//							}
-//							@catch (NSException *e)
-//							{
-//								NSLog( @"dcmObject writeToFile failed: %@", e);
-//							}
-//							[dcmObject release];
-//							
-//							if( status == NO)
-//							{
-//                                myunlink([curFileDest fileSystemRepresentation]);
-//								
-//								if( destDirec)
-//								{
-//                                    myunlink([curFile fileSystemRepresentation]);
-//									NSLog( @"failed to decompress file: %@, the file is deleted", curFile);
-//								}
-//								else
-//									NSLog( @"failed to decompress file: %@", curFile);
-//							}
-//						}
-//						else
-                            if( filexfer.getXfer() != EXS_LittleEndianExplicit || filexfer.getXfer() != EXS_LittleEndianImplicit)
+                  if( filexfer.getXfer() != EXS_LittleEndianExplicit || filexfer.getXfer() != EXS_LittleEndianImplicit)
 						{
 							DcmDataset *dataset = fileformat.getDataset();
 							
@@ -670,23 +638,6 @@ int main(int argc, const char *argv[])
 							}
 							else status = NO;
 							
-//							if( status == NO) // Try DCM Framework...
-//							{
-//                                NSLog( @"********* Failed to open with dcmtk, try DCMFramework");
-//                                
-//                                myunlink([curFileDest fileSystemRepresentation]);
-//								
-//								DCMObject *dcmObject = [[DCMObject alloc] initWithContentsOfFile: curFile decodingPixelData: NO];
-//								@try
-//								{
-//									status = [dcmObject writeToFile: curFileDest withTransferSyntax:[DCMTransferSyntax ImplicitVRLittleEndianTransferSyntax] quality:1 AET:@"OsiriX" atomically:YES];	//ImplicitVRLittleEndianTransferSyntax
-//								}
-//								@catch (NSException *e)
-//								{
-//									NSLog( @"******** dcmObject writeToFile failed: %@", e);
-//								}
-//								[dcmObject release];
-//							}
 							
 							if( status == NO)
 							{
@@ -723,28 +674,6 @@ int main(int argc, const char *argv[])
 			}
 		}
 		
-# pragma mark writeMovie
-		if( [what isEqualToString: @"writeMovie"])
-		{
-			if( ![path hasSuffix:@".swf"])
-			{
-                NSLog( @"******** writeMovie Decompress - not available");
-			}
-			else
-			{ // SWF!!
-				NSString* inputDir = [NSString stringWithUTF8String:argv[fileListFirstItemIndex++]];
-				NSArray* inputFiles = [inputDir stringsByAppendingPaths:[[NSFileManager defaultManager] contentsOfDirectoryAtPath:inputDir error:NULL]];
-                
-                float frameRate = 0;
-                
-                if( fileListFirstItemIndex < argc)
-                    frameRate = [[NSString stringWithUTF8String: argv[ fileListFirstItemIndex]] floatValue];
-                
-				createSwfMovie(inputFiles, path, frameRate);
-                
-                [[NSFileManager defaultManager] removeItemAtPath: inputDir error: nil];
-			}
-		}
 				
 # pragma mark pdfFromURL
 		if( [what isEqualToString: @"pdfFromURL"])
@@ -857,164 +786,3 @@ int main(int argc, const char *argv[])
 	return 0;
 }
 
-void createSwfMovie(NSArray* inputFiles, NSString* path, float frameRate) {
-	if (path)
-		[[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
-	
-	Ming_init();
-	Ming_setSWFCompression(9); // 9 = maximum compression
-	SWFMovie* swf = new SWFMovie(7);
-	swf->setBackground(0x88, 0x88, 0x88);
-    
-    if( frameRate < 1)
-        frameRate = 10;
-	swf->setRate(frameRate);
-	
-	BOOL sizeSet = NO;
-	NSSize swfSize;
-	
-	NSString* as = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"SWFInit" ofType:@"as"] encoding:NSUTF8StringEncoding error:NULL];
-	//NSLog(@"AS:\n%@", as);
-	SWFAction* action = new SWFAction([as cStringUsingEncoding:NSISOLatin1StringEncoding]);
-	//		int len, res = action->compile(7, &len);
-	//	NSLog(@"compile ret:%d len:%d", res, len);
-	swf->add(action);
-	
-	const CGFloat ControllerHeight = 14, PlayPauseWidth = 0;
-	const CGFloat ControllerPadTop = 1, ControllerPadBottom = 1;
-	const CGFloat MarkHeight = ControllerHeight-ControllerPadTop-ControllerPadBottom, MarkWidth = MarkHeight-2;
-	const CGFloat ControllerPadLeft = MarkWidth/2, ControllerPadRight = MarkWidth/2+PlayPauseWidth;
-	NSRect ControllerRect;
-	NSRect ControllerNavigationRect;
-	const CGFloat ControllerBarThickness = 2, ControllerBarPadLeft = -ControllerBarThickness/2, ControllerBarPadRight = -ControllerBarThickness/2;
-	
-	// movie controller left of mark
-	SWFShape* squareS = new SWFShape();
-	squareS->setRightFillStyle(SWFFillStyle::SolidFillStyle(0,0,0,0));
-	squareS->movePenTo(0,0);
-	squareS->drawLine(1,0);
-	squareS->drawLine(0,MarkHeight);
-	squareS->drawLine(-1,0);
-	squareS->drawLine(0,-MarkHeight);
-	SWFButton* leftBarB = new SWFButton();
-	leftBarB->addShape(squareS, SWFBUTTON_HIT|SWFBUTTON_UP|SWFBUTTON_DOWN|SWFBUTTON_OVER);
-	leftBarB->addAction(new SWFAction("leftBarMouseDown();"), SWFBUTTON_MOUSEDOWN);
-	SWFDisplayItem* leftBarDI = swf->add(leftBarB);
-	leftBarDI->setName("leftBarDI");
-	// movie controller right of mark
-	squareS = new SWFShape();
-	squareS->setRightFillStyle(SWFFillStyle::SolidFillStyle(0,0,0,0));
-	squareS->movePenTo(0,0);
-	squareS->drawLine(-1,0);
-	squareS->drawLine(0,MarkHeight);
-	squareS->drawLine(1,0);
-	squareS->drawLine(0,-MarkHeight);
-	SWFButton* rightBarB = new SWFButton();
-	rightBarB->addShape(squareS, SWFBUTTON_HIT|SWFBUTTON_UP|SWFBUTTON_DOWN|SWFBUTTON_OVER);
-	rightBarB->addAction(new SWFAction("rightBarMouseDown();"), SWFBUTTON_MOUSEDOWN);
-	SWFDisplayItem* rightBarDI = swf->add(rightBarB);
-	rightBarDI->setName("rightBarDI");
-	
-	// movie controller mark
-	SWFShape* markS = new SWFShape();
-	markS->setRightFillStyle(SWFFillStyle::SolidFillStyle(64,64,64,191));
-	markS->movePenTo(-MarkWidth/2, -MarkHeight/2);
-	markS->drawLine(MarkWidth,0);
-	markS->drawLine(0,MarkHeight);
-	markS->drawLine(-MarkWidth,0);
-	markS->drawLine(0,-MarkHeight);
-	SWFButton* markB = new SWFButton();
-	markB->addShape(markS, SWFBUTTON_HIT|SWFBUTTON_UP|SWFBUTTON_DOWN|SWFBUTTON_OVER);
-	markB->addAction(new SWFAction("markMouseDown();"), SWFBUTTON_MOUSEDOWN);
-	SWFDisplayItem* markDI = swf->add(markB);
-	markDI->setName("markDI");
-	
-	SWFBitmap* bitmap[inputFiles.count];
-	SWFDisplayItem* displayItem[inputFiles.count];
-//#pragma omp parallel for default(private)				
-	for (int i = 0; i < inputFiles.count; ++i) {
-		NSString* imgPath = [inputFiles objectAtIndex:i];
-//		NSLog(@"%@", imgPath);
-		
-		bitmap[i] = new SWFBitmap(imgPath.UTF8String, NULL);
-		if (!bitmap[i])
-			NSLog(@"SWF creation FAILED: could not read %@", imgPath);
-		NSSize bitmapSize = NSMakeSize(bitmap[i]->getWidth(), bitmap[i]->getHeight());
-		
-		if (!sizeSet) {
-			swfSize = NSMakeSize(bitmapSize.width, bitmapSize.height+ControllerHeight); // 15 is the controller height
-			swf->setDimension(swfSize.width, swfSize.height);
-			sizeSet = YES;
-		}
-		
-		SWFShape* shape = new SWFShape();
-		shape->setRightFillStyle(SWFFillStyle::BitmapFillStyle(bitmap[i], SWFFILL_CLIPPED_BITMAP));
-		shape->drawLine(bitmapSize.width,0);
-		shape->drawLine(0,bitmapSize.height);
-		shape->drawLine(-bitmapSize.width,0);
-		shape->drawLine(0,-bitmapSize.height);
-		
-		displayItem[i] = swf->add(shape);
-		displayItem[i]->moveTo(0,0);
-		displayItem[i]->scaleTo(0);
-	}
-	
-	// controller
-	
-	ControllerRect = NSMakeRect(0, swfSize.height-ControllerHeight, swfSize.width, ControllerHeight);
-	ControllerNavigationRect = NSMakeRect(ControllerRect.origin.x+ControllerPadLeft, ControllerRect.origin.y+ControllerPadTop, ControllerRect.size.width-ControllerPadLeft-ControllerPadRight, ControllerRect.size.height-ControllerPadTop-ControllerPadBottom);
-	swf->add(new SWFAction([[NSString stringWithFormat:@"_root.ControllerOriginX = %f; _root.ControllerWidth = %f;", ControllerNavigationRect.origin.x, ControllerNavigationRect.size.width] cStringUsingEncoding:NSISOLatin1StringEncoding]));
-	NSRect ControllerBarRect = NSMakeRect(ControllerNavigationRect.origin.x+ControllerBarPadLeft, (ControllerNavigationRect.origin.y*2+ControllerNavigationRect.size.height-ControllerBarThickness)/2, ControllerNavigationRect.size.width-ControllerBarPadLeft-ControllerBarPadRight, ControllerBarThickness);
-	
-	SWFShape* controllerBar = new SWFShape();
-	controllerBar->setRightFillStyle(SWFFillStyle::SolidFillStyle(191,191,191,127));
-	controllerBar->movePenTo(0, 0);
-	controllerBar->drawLine(1,0);
-	controllerBar->drawLine(0,1);
-	controllerBar->drawLine(-1,0);
-	controllerBar->drawLine(0,-1);
-	controllerBar->setRightFillStyle(SWFFillStyle::SolidFillStyle(191,191,191,127));
-	SWFDisplayItem* controllerBarDisplayItem = swf->add(controllerBar);
-	controllerBarDisplayItem->moveTo(ControllerBarRect.origin.x, ControllerBarRect.origin.y);
-	controllerBarDisplayItem->scaleTo(ControllerBarRect.size.width, ControllerBarRect.size.height);	
-
-    // Click in image to play/stop
-    SWFShape* button = new SWFShape();
-    button->setRightFillStyle(SWFFillStyle::SolidFillStyle(0,50,0,0));
-    button->drawLine(swfSize.width,0);
-    button->drawLine(0,swfSize.height-ControllerHeight);
-    button->drawLine(-swfSize.width,0);
-    button->drawLine(0,-swfSize.height-ControllerHeight);
-    
-    SWFButton* playStop = new SWFButton();
-	playStop->addShape( button, SWFBUTTON_HIT|SWFBUTTON_UP|SWFBUTTON_DOWN|SWFBUTTON_OVER);
-	playStop->addAction(new SWFAction("if( playing == 1) playing = 0; else playing = 1; if( playing) play(); else stop();"), SWFBUTTON_MOUSEDOWN);
-    SWFDisplayItem* playItemDI = swf->add(playStop);
-    playItemDI->setName("playItemDI");
-    playItemDI->moveTo(0, 0);
-    
-	// animation
-	
-	for (int i = 0; i < inputFiles.count; ++i) {
-		markDI->moveTo(ControllerNavigationRect.origin.x+ControllerNavigationRect.size.width/((long)inputFiles.count-1)*i, ControllerNavigationRect.origin.y+ControllerNavigationRect.size.height/2);
-		leftBarDI->scaleTo(ControllerNavigationRect.size.width/((long)inputFiles.count-1)*i, 1);
-		leftBarDI->moveTo(ControllerNavigationRect.origin.x, ControllerNavigationRect.origin.y);
-		rightBarDI->scaleTo(ControllerNavigationRect.size.width/((long)inputFiles.count-1)*((long)inputFiles.count-1-i),1);
-		rightBarDI->moveTo(ControllerNavigationRect.origin.x+ControllerNavigationRect.size.width, ControllerNavigationRect.origin.y);
-		
-		for (int d = MAX(0,i-1); d < MIN(inputFiles.count,i+1); ++d)
-			if (d == i)
-				displayItem[d]->scaleTo(1);
-			else displayItem[d]->scaleTo(0);
-		
-		swf->nextFrame();
-	}
-	
-	swf->save(path.UTF8String);
-	
-	for (int i = 0; i < inputFiles.count; ++i)
-		delete bitmap[i];
-	
-	delete swf;
-	Ming_cleanup();	
-}
