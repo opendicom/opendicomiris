@@ -1982,22 +1982,6 @@ public:
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(windowWillClose:) name: NSWindowWillCloseNotification object: [self window]];
 		
 		advancedCLUT = NO;
-		
-        
-        
-//        [[NSUserDefaults standardUserDefaults] setBool: YES forKey: @"InvertViewsColors"];
-//        if( [[[[NSUserDefaults standardUserDefaults] persistentDomainForName: @"com.apple.CoreGraphics"] objectForKey: @"DisplayUseInvertedPolarity"] boolValue])
-//        {
-//            NSView *v = (NSView*) _cocoaRenderWindow->GetWindowId();
-//            
-//            [v setWantsLayer: YES];
-//            CIFilter *CIColorInvert = [CIFilter filterWithName:@"CIColorInvert"];
-//            [CIColorInvert setDefaults];
-//            v.contentFilters = [NSArray arrayWithObject:CIColorInvert];
-//        }
-        
-        
-//        [[IMService notificationCenter] addObserver:self selector:@selector(_iChatStateChanged:) name:IMAVManagerStateChangedNotification object:nil];
 	}
     
     return self;
@@ -2196,11 +2180,7 @@ public:
 - (void) drawRect:(NSRect)aRect
 {
 	if( drawLock == nil) drawLock = [[NSRecursiveLock alloc] init];
-	
-//	BOOL iChatRunning = [[IChatTheatreDelegate sharedDelegate] isIChatTheatreRunning];
-	
-//	if(iChatRunning) [drawLock lock];
-	
+		
     minimumStep = 0;
     
 	@try
@@ -2256,8 +2236,6 @@ public:
 	{
 		NSLog( @"Exception during drawRect: %@", e);
 	}
-
-//	if(iChatRunning) [drawLock unlock];
 }
 
 -(void)dealloc
@@ -9036,70 +9014,6 @@ public:
     *pixelFormatOut = kCVPixelFormatType_32ARGB;
 }
 
-// This callback is called periodically when we're in the IMAVActive state.
-// We copy (actually, re-render) what's currently on the screen into the provided 
-// CVPixelBufferRef.
-//
-// Note that this will be called on a non-main thread. 
-- (BOOL) renderIntoPixelBuffer:(CVPixelBufferRef)buffer forTime:(CVTimeStamp*)timeStamp
-{
-//	NSLog(@"renderIntoPixelBuffer");
-    // We ignore the timestamp, signifying that we're providing content for 'now'.
-	CVReturn err;
-	
-	// If the image has not changed since we provided the last one return 'NO'.
-    // This enables more efficient transmission of the frame when there is no
-    // new information.
-	if ([self checkHasChanged] == NO)
-	{
-		return NO;
-	}
-	
-	
-    // Lock the pixel buffer's base address so that we can draw into it.
-	if((err = CVPixelBufferLockBaseAddress(buffer, 0)) != kCVReturnSuccess) {
-        // This should not happen.  If it does, the safe thing to do is return 
-        // 'NO'.
-		NSLog(@"Warning, could not lock pixel buffer base address in %s - error %ld", __func__, (long)err);
-		return NO;
-	}
-    @synchronized (self) {
-    // Create a CGBitmapContext with the CVPixelBuffer.  Parameters /must/ match 
-    // pixel format returned in getPixelBufferPixelFormat:, above, width and
-    // height should be read from the provided CVPixelBuffer.
-    iChatWidth = CVPixelBufferGetWidth(buffer); 
-    iChatHeight = CVPixelBufferGetHeight(buffer);
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGContextRef cgContext = CGBitmapContextCreate(CVPixelBufferGetBaseAddress(buffer),
-                                                   iChatWidth, iChatHeight,
-                                                   8,
-                                                   CVPixelBufferGetBytesPerRow(buffer),
-                                                   colorSpace,
-                                                   kCGImageAlphaPremultipliedFirst);
-    CGColorSpaceRelease(colorSpace);
-    
-	[self setIChatFrame:YES];
-	
-    // Derive an NSGraphicsContext, make it current, and ask our SlideshowView 
-    // to draw.
-    NSGraphicsContext *context = [NSGraphicsContext graphicsContextWithGraphicsPort:cgContext flipped:NO];
-    [NSGraphicsContext setCurrentContext:context];
-	//get NSImage and draw in the rect
-	NSImage *image = [self nsimage:NO];
-	
-	if(image) //if([image size].width>0 && [image size].height>0)
-		[self drawImage:image inBounds:NSMakeRect(0.0, 0.0, iChatWidth, iChatHeight)];
-	else
-		[self drawImage:[[NSWorkspace sharedWorkspace] iconForFile:[[NSBundle mainBundle] bundlePath]] inBounds:NSMakeRect(0.0, 0.0, iChatWidth, iChatHeight)];
-    [context flushGraphics];
-    
-    // Clean up - remember to unlock the pixel buffer's base address (we locked
-    // it above so that we could draw into it).
-    CGContextRelease(cgContext);
-    CVPixelBufferUnlockBaseAddress(buffer, 0);
-    }
-    return YES;
-}
 
 - (void)drawImage:(NSImage *)image inBounds:(NSRect)rect
 {
@@ -9152,41 +9066,6 @@ public:
     // Calling with 'NO' clears _hasChanged after the call (see above).
     return [self _checkHasChanged:NO];
 }
-
-- (void)setIChatFrame:(BOOL)set;
-{
-	if([[[self controller] style] isEqualToString:@"panel"]) return;
-
-	//NSLog(@"setIChatFrame");
-	if(set)
-	{
-		if(iChatFrameIsSet) return;
-		//NSLog(@"iChatWidth : %f , iChatHeight : %f", iChatWidth, iChatHeight);
-		if(iChatWidth==0 || iChatHeight==0) return;
-
-		iChatFrameIsSet = YES;
-		
-		savedViewSizeFrame = [self frame];
-		
-		NSRect frame;
-		frame.size.width = iChatWidth;
-		frame.size.height = iChatHeight;
-		frame.origin.x = savedViewSizeFrame.origin.x + (savedViewSizeFrame.size.width-iChatWidth)/2.0;
-		frame.origin.y = savedViewSizeFrame.origin.y + (savedViewSizeFrame.size.height-iChatHeight)/2.0;
-		[self setFrame:frame];
-	}
-	else
-	{
-		iChatFrameIsSet = NO;
-		if(savedViewSizeFrame.size.width>0 && savedViewSizeFrame.size.height>0)
-			[self setFrame:savedViewSizeFrame];
-	}
-}
-
-//- (void)_iChatStateChanged:(NSNotification *)aNotification;
-//{
-//	[self setIChatFrame:[[IChatTheatreDelegate sharedDelegate] isIChatTheatreRunning]];
-//}
 
 - (BOOL)becomeFirstResponder
 {

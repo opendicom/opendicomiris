@@ -47,9 +47,10 @@ extern NSString* O2AlbumDragType;
 */
 
 @interface BrowserController : NSWindowController
-#if (MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5)
-<NSTableViewDelegate, NSDrawerDelegate, NSMatrixDelegate, NSToolbarDelegate, NSMenuDelegate,NSSplitViewDelegate>   //NSObject
-#endif
+//#if (MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5)
+<NSTableViewDelegate, NSDrawerDelegate, NSMatrixDelegate, NSToolbarDelegate, NSMenuDelegate,NSSplitViewDelegate>
+//NSObject
+//#endif
 {
 	DicomDatabase*					_database;
 	NSMutableDictionary				*databaseIndexDictionary;
@@ -58,8 +59,8 @@ extern NSString* O2AlbumDragType;
 	
 	NSRect					visibleScreenRect[ 40];
 	NSString				*transferSyntax;
-    NSArray                 *dirArray;
-    NSToolbar               *toolbar;
+   NSArray                 *dirArray;
+   NSToolbar               *toolbar;
 	
 	NSMutableArray			*sendQueue;
 	NSMutableDictionary		*reportFilesToCheck;

@@ -734,11 +734,6 @@
 		[super setVtkCamera:aVtkCamera];
 }
 
-- (void)setIChatFrame:(BOOL)set;
-{
-	return;
-}
-
 - (BOOL)becomeFirstResponder
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:OsirixVRViewDidBecomeFirstResponderNotification object:self];

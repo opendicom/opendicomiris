@@ -371,10 +371,7 @@ typedef char* VTKStereoVRView;
 	
 	BOOL						_contextualMenuActive;
 	
-	//Context for rendering to iChat
 	BOOL						_hasChanged;
-	float						iChatWidth, iChatHeight;
-	BOOL						iChatFrameIsSet;
 	
 	// 3DConnexion SpaceNavigator
 	NSTimer			*snCloseEventTimer;
@@ -621,8 +618,6 @@ typedef char* VTKStereoVRView;
 
 - (void)drawImage:(NSImage *)image inBounds:(NSRect)rect;
 - (BOOL)checkHasChanged;
-- (void)setIChatFrame:(BOOL)boo;
-//- (void)_iChatStateChanged:(NSNotification *)aNotification;
 
 - (void)yaw:(float)degrees;
 - (void)panX:(double)x Y:(double)y;

@@ -311,10 +311,6 @@
 		847AFCDE1A14DFA30067AA07 /* HistogramWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFA2F1A14DF9E0067AA07 /* HistogramWindow.m */; };
 		847AFCDF1A14DFA30067AA07 /* HistoView.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFA301A14DF9E0067AA07 /* HistoView.h */; };
 		847AFCE01A14DFA30067AA07 /* HistoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFA311A14DF9E0067AA07 /* HistoView.m */; };
-		847AFCE11A14DFA30067AA07 /* IChatTheatreDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFA321A14DF9E0067AA07 /* IChatTheatreDelegate.h */; };
-		847AFCE21A14DFA30067AA07 /* IChatTheatreDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFA331A14DF9E0067AA07 /* IChatTheatreDelegate.m */; };
-		847AFCE31A14DFA30067AA07 /* IChatTheatreHelpWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFA341A14DF9E0067AA07 /* IChatTheatreHelpWindowController.h */; };
-		847AFCE41A14DFA30067AA07 /* IChatTheatreHelpWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFA351A14DF9E0067AA07 /* IChatTheatreHelpWindowController.m */; };
 		847AFCE51A14DFA30067AA07 /* LoupeController.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFA361A14DF9E0067AA07 /* LoupeController.h */; };
 		847AFCE61A14DFA30067AA07 /* LoupeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFA371A14DF9E0067AA07 /* LoupeController.m */; };
 		847AFCE71A14DFA30067AA07 /* LoupeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFA381A14DF9E0067AA07 /* LoupeView.h */; };
@@ -1686,12 +1682,6 @@
 		ABDEBD6D063D693F005B99B4 /* minus.tif in Resources */ = {isa = PBXBuildFile; fileRef = ABDEBD52063D6938005B99B4 /* minus.tif */; };
 		ABDF5A1D0A1B641F002A353A /* small_sharedSmartAlbum.tif in Resources */ = {isa = PBXBuildFile; fileRef = A9B411C10890496400913770 /* small_sharedSmartAlbum.tif */; };
 		ABE0D6940CDB1A4400F0494B /* iChatHelper.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABE0D6920CDB1A4400F0494B /* iChatHelper.xib */; };
-		ABE0D6A20CDB1B9E00F0494B /* browse2OsiriX_small.png in Resources */ = {isa = PBXBuildFile; fileRef = ABE0D69B0CDB1B9E00F0494B /* browse2OsiriX_small.png */; };
-		ABE0D6A30CDB1B9E00F0494B /* iChatIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = ABE0D69C0CDB1B9E00F0494B /* iChatIcon.png */; };
-		ABE0D6A40CDB1B9E00F0494B /* iChatTheatre-English.html in Resources */ = {isa = PBXBuildFile; fileRef = ABE0D69D0CDB1B9E00F0494B /* iChatTheatre-English.html */; };
-		ABE0D6A60CDB1B9E00F0494B /* shareFromMenu_small.png in Resources */ = {isa = PBXBuildFile; fileRef = ABE0D69F0CDB1B9E00F0494B /* shareFromMenu_small.png */; };
-		ABE0D6A70CDB1B9E00F0494B /* shareFromVideoChatWindow_small.png in Resources */ = {isa = PBXBuildFile; fileRef = ABE0D6A00CDB1B9E00F0494B /* shareFromVideoChatWindow_small.png */; };
-		ABE0D6A80CDB1B9E00F0494B /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = ABE0D6A10CDB1B9E00F0494B /* style.css */; };
 		ABE1E8B00649F4150028E2E0 /* iPod.icns in Resources */ = {isa = PBXBuildFile; fileRef = ABE1E8AE0649F4150028E2E0 /* iPod.icns */; };
 		ABE46F910A76410F00327466 /* jaricom.c in Sources */ = {isa = PBXBuildFile; fileRef = BFBF3C1409B6828200545F5E /* jaricom.c */; };
 		ABE46F920A76410F00327466 /* jcapimin.c in Sources */ = {isa = PBXBuildFile; fileRef = BFBF3C1509B6828200545F5E /* jcapimin.c */; };
@@ -2559,7 +2549,6 @@
 		CE111A641165CDC000EDD254 /* jcshuff.c in Sources */ = {isa = PBXBuildFile; fileRef = BFBF3CCA09B6828400545F5E /* jcshuff.c */; };
 		CE111A791165CE7F00EDD254 /* sirsa.h in Headers */ = {isa = PBXBuildFile; fileRef = BFBF3DC709B6828800545F5E /* sirsa.h */; };
 		CE114AC417F9568600CB4ED7 /* RTStructIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE114AC317F9568600CB4ED7 /* RTStructIcon.jpg */; };
-		CE1335EA06B02DC000B7FC03 /* iChat.icns in Resources */ = {isa = PBXBuildFile; fileRef = CE1335E806B02DC000B7FC03 /* iChat.icns */; };
 		CE1366B50B41D0F200944876 /* mpeg2.tif in Resources */ = {isa = PBXBuildFile; fileRef = CE1366B40B41D0F200944876 /* mpeg2.tif */; };
 		CE1C4EF20FDA6F4600185561 /* nameDictionary.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFEB763B0677FDA700F242F3 /* nameDictionary.plist */; };
 		CE1C4EF30FDA6F5300185561 /* tagDictionary.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFEB763C0677FDA700F242F3 /* tagDictionary.plist */; };
@@ -6825,10 +6814,6 @@
 		847AFA2F1A14DF9E0067AA07 /* HistogramWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistogramWindow.m; sourceTree = "<group>"; };
 		847AFA301A14DF9E0067AA07 /* HistoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoView.h; sourceTree = "<group>"; };
 		847AFA311A14DF9E0067AA07 /* HistoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoView.m; sourceTree = "<group>"; };
-		847AFA321A14DF9E0067AA07 /* IChatTheatreDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IChatTheatreDelegate.h; sourceTree = "<group>"; };
-		847AFA331A14DF9E0067AA07 /* IChatTheatreDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IChatTheatreDelegate.m; sourceTree = "<group>"; };
-		847AFA341A14DF9E0067AA07 /* IChatTheatreHelpWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IChatTheatreHelpWindowController.h; sourceTree = "<group>"; };
-		847AFA351A14DF9E0067AA07 /* IChatTheatreHelpWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IChatTheatreHelpWindowController.m; sourceTree = "<group>"; };
 		847AFA361A14DF9E0067AA07 /* LoupeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoupeController.h; sourceTree = "<group>"; };
 		847AFA371A14DF9E0067AA07 /* LoupeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoupeController.m; sourceTree = "<group>"; };
 		847AFA381A14DF9E0067AA07 /* LoupeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoupeView.h; sourceTree = "<group>"; };
@@ -7832,12 +7817,6 @@
 		ABDEBD51063D6938005B99B4 /* add.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = add.tif; sourceTree = "<group>"; };
 		ABDEBD52063D6938005B99B4 /* minus.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = minus.tif; sourceTree = "<group>"; };
 		ABE0D6930CDB1A4400F0494B /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Binaries/English.lproj/iChatHelper.xib; sourceTree = "<group>"; };
-		ABE0D69B0CDB1B9E00F0494B /* browse2OsiriX_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = browse2OsiriX_small.png; sourceTree = "<group>"; };
-		ABE0D69C0CDB1B9E00F0494B /* iChatIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iChatIcon.png; sourceTree = "<group>"; };
-		ABE0D69D0CDB1B9E00F0494B /* iChatTheatre-English.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "iChatTheatre-English.html"; sourceTree = "<group>"; };
-		ABE0D69F0CDB1B9E00F0494B /* shareFromMenu_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareFromMenu_small.png; sourceTree = "<group>"; };
-		ABE0D6A00CDB1B9E00F0494B /* shareFromVideoChatWindow_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareFromVideoChatWindow_small.png; sourceTree = "<group>"; };
-		ABE0D6A10CDB1B9E00F0494B /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		ABE1E8AE0649F4150028E2E0 /* iPod.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = iPod.icns; sourceTree = "<group>"; };
 		ABE881440FC1444D009F5C80 /* ILCrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ILCrashReporter.framework; path = Binaries/ILCrashReporter.framework; sourceTree = "<group>"; };
 		ABEF846909A23EF5006CEC3E /* ReportTemplate.doc */ = {isa = PBXFileReference; lastKnownFileType = file; name = ReportTemplate.doc; path = Binaries/ReportTemplate.doc; sourceTree = "<group>"; };
@@ -8710,7 +8689,6 @@
 		CE06475110F12DA500551AD9 /* PlayTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayTemplate.png; sourceTree = "<group>"; };
 		CE0C478F1831366600D4C50E /* pages092pdf.applescript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.applescript; name = pages092pdf.applescript; path = Binaries/ReportsToPDF/pages092pdf.applescript; sourceTree = "<group>"; };
 		CE114AC317F9568600CB4ED7 /* RTStructIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = RTStructIcon.jpg; sourceTree = "<group>"; };
-		CE1335E806B02DC000B7FC03 /* iChat.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = iChat.icns; sourceTree = "<group>"; };
 		CE1366B40B41D0F200944876 /* mpeg2.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = mpeg2.tif; sourceTree = "<group>"; };
 		CE1D97CE0883B65E005A3A22 /* FlyThru.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = FlyThru.pdf; sourceTree = "<group>"; };
 		CE1E7F5A07E2DD0D00A85908 /* DatabaseWindow.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = DatabaseWindow.icns; sourceTree = "<group>"; };
@@ -12665,7 +12643,6 @@
 				59D9471C125333640095680D /* SWFInit.as */,
 				AB78245B0D3BACC700460DCE /* WebServicesHTML */,
 				CEC4B5A20C7DF2D600AF5A76 /* 3DPRESETS */,
-				ABE0D69A0CDB1B9E00F0494B /* iChatTheatreHelp */,
 				ABE0D6920CDB1A4400F0494B /* iChatHelper.xib */,
 				59FB652912312D8900EBA136 /* weasis */,
 				7183153D1610651E0098576F /* weasis-ext-config.properties */,
@@ -13145,10 +13122,6 @@
 				847AFA2F1A14DF9E0067AA07 /* HistogramWindow.m */,
 				847AFA301A14DF9E0067AA07 /* HistoView.h */,
 				847AFA311A14DF9E0067AA07 /* HistoView.m */,
-				847AFA321A14DF9E0067AA07 /* IChatTheatreDelegate.h */,
-				847AFA331A14DF9E0067AA07 /* IChatTheatreDelegate.m */,
-				847AFA341A14DF9E0067AA07 /* IChatTheatreHelpWindowController.h */,
-				847AFA351A14DF9E0067AA07 /* IChatTheatreHelpWindowController.m */,
 				847AFA361A14DF9E0067AA07 /* LoupeController.h */,
 				847AFA371A14DF9E0067AA07 /* LoupeController.m */,
 				847AFA381A14DF9E0067AA07 /* LoupeView.h */,
@@ -14297,7 +14270,6 @@
 				A917CF1A0BF49314002F415E /* HUDLeftArrowButtonPressed.tif */,
 				A917CF1B0BF49314002F415E /* HUDRightArrowButtonNeutral.tif */,
 				A917CF1C0BF49314002F415E /* HUDRightArrowButtonPressed.tif */,
-				CE1335E806B02DC000B7FC03 /* iChat.icns */,
 				A9EFC40C15C6CBE3000D1179 /* Import.pdf */,
 				BF398B8A065B124700AD1F25 /* InArrow.tif */,
 				CE2BFE56153B177C00037546 /* iPad.png */,
@@ -14456,19 +14428,6 @@
 			name = LibTiff;
 			path = Binaries/LibTiff;
 			sourceTree = SOURCE_ROOT;
-		};
-		ABE0D69A0CDB1B9E00F0494B /* iChatTheatreHelp */ = {
-			isa = PBXGroup;
-			children = (
-				ABE0D69B0CDB1B9E00F0494B /* browse2OsiriX_small.png */,
-				ABE0D69C0CDB1B9E00F0494B /* iChatIcon.png */,
-				ABE0D69D0CDB1B9E00F0494B /* iChatTheatre-English.html */,
-				ABE0D69F0CDB1B9E00F0494B /* shareFromMenu_small.png */,
-				ABE0D6A00CDB1B9E00F0494B /* shareFromVideoChatWindow_small.png */,
-				ABE0D6A10CDB1B9E00F0494B /* style.css */,
-			);
-			path = iChatTheatreHelp;
-			sourceTree = "<group>";
 		};
 		ABF1427B056469CC00CB071B /* Papyrus */ = {
 			isa = PBXGroup;
@@ -20349,7 +20308,6 @@
 				CEBD888214F1ADD9000DA1FE /* metaCommand.h in Headers */,
 				CEBD888314F1ADD9000DA1FE /* metaContour.h in Headers */,
 				CEBD888414F1ADD9000DA1FE /* metaDTITube.h in Headers */,
-				847AFCE31A14DFA30067AA07 /* IChatTheatreHelpWindowController.h in Headers */,
 				CEBD888514F1ADD9000DA1FE /* metaEllipse.h in Headers */,
 				CEBD888614F1ADD9000DA1FE /* metaEvent.h in Headers */,
 				CEBD888714F1ADD9000DA1FE /* metaFEMObject.h in Headers */,
@@ -22490,7 +22448,6 @@
 				847AFDEA1A14DFA40067AA07 /* AppController.h in Headers */,
 				847AFF111A14DFA40067AA07 /* SplashScreen.h in Headers */,
 				CEBD905814F1ADDB000DA1FE /* vtkPythonArgs.h in Headers */,
-				847AFCE11A14DFA30067AA07 /* IChatTheatreDelegate.h in Headers */,
 				CEBD905914F1ADDB000DA1FE /* vtkPythonCommand.h in Headers */,
 				CEBD905A14F1ADDB000DA1FE /* vtkPythonOverload.h in Headers */,
 				CEBD905B14F1ADDB000DA1FE /* vtkPythonUtil.h in Headers */,
@@ -23653,7 +23610,6 @@
 				AB9139BA06839830006F3936 /* lsm.icns in Resources */,
 				CE279EF006AEFB87008315C8 /* Mail.icns in Resources */,
 				4A2A49A8218D2E8200B4D164 /* doc.png in Resources */,
-				CE1335EA06B02DC000B7FC03 /* iChat.icns in Resources */,
 				CE74824206C9701200FFA74C /* trash.icns in Resources */,
 				BFD4BFFC06F2A96900EC9A90 /* ContrastCursor.tif in Resources */,
 				BFD4BFFD06F2A96900EC9A90 /* RotateCursor.tif in Resources */,
@@ -23836,13 +23792,7 @@
 				A977ECAE0CD1F7E500C418D8 /* QRalreadyInDatabase.tif in Resources */,
 				4A2A499C218B21B100B4D164 /* opendicom.pdf in Resources */,
 				ABE0D6940CDB1A4400F0494B /* iChatHelper.xib in Resources */,
-				ABE0D6A20CDB1B9E00F0494B /* browse2OsiriX_small.png in Resources */,
-				ABE0D6A30CDB1B9E00F0494B /* iChatIcon.png in Resources */,
 				841B0B3A18980EFF0007E5C5 /* 3DCutRead.png in Resources */,
-				ABE0D6A40CDB1B9E00F0494B /* iChatTheatre-English.html in Resources */,
-				ABE0D6A60CDB1B9E00F0494B /* shareFromMenu_small.png in Resources */,
-				ABE0D6A70CDB1B9E00F0494B /* shareFromVideoChatWindow_small.png in Resources */,
-				ABE0D6A80CDB1B9E00F0494B /* style.css in Resources */,
 				CEDEF7D60D020E9100CADB15 /* TIFFSmall.tif in Resources */,
 				CEDEF7D70D020E9100CADB15 /* MailSmall.tif in Resources */,
 				CEDEF7D80D020E9100CADB15 /* JPEGSmall.tif in Resources */,
@@ -24675,7 +24625,6 @@
 				BFBF3F9609B6828D00545F5E /* djdecbas.cc in Sources */,
 				BFBF3F9809B6828D00545F5E /* djdecext.cc in Sources */,
 				BFBF3F9A09B6828D00545F5E /* djdeclol.cc in Sources */,
-				847AFCE21A14DFA30067AA07 /* IChatTheatreDelegate.m in Sources */,
 				BFBF3F9C09B6828D00545F5E /* djdecode.cc in Sources */,
 				BFBF3F9E09B6828D00545F5E /* djdecpro.cc in Sources */,
 				847AFE3D1A14DFA40067AA07 /* XMLController.m in Sources */,
@@ -25185,7 +25134,6 @@
 				ABE470EB0A76412700327466 /* jdatasrc.c in Sources */,
 				ABE470EC0A76412700327466 /* jdcoefct.c in Sources */,
 				847AFE731A14DFA40067AA07 /* O2DicomPredicateEditorFormatters.m in Sources */,
-				847AFCE41A14DFA30067AA07 /* IChatTheatreHelpWindowController.m in Sources */,
 				847AFE4E1A14DFA40067AA07 /* DCMTKQueryNode.mm in Sources */,
 				ABE470ED0A76412700327466 /* jdcolor.c in Sources */,
 				ABE470EF0A76412700327466 /* jddctmgr.c in Sources */,

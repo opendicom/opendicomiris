@@ -34,7 +34,6 @@ NSString* const OsirixUpdateCLUTMenuNotification = @"UpdateCLUTMenu";
 NSString* const OsirixUpdateOpacityMenuNotification = @"UpdateOpacityMenu";
 NSString* const OsirixRecomputeROINotification = @"recomputeROI";
 NSString* const OsirixStopPlayingNotification = @"notificationStopPlaying";
-NSString* const OsirixChatBroadcastNotification = @"notificationiChatBroadcast";
 NSString* const OsirixSyncSeriesNotification = @"notificationSyncSeries";
 NSString* const OsirixOrthoMPRSyncSeriesNotification = @"orthoMPRSyncSeriesNotification";
 NSString* const OsirixReportModeChangedNotification = @"reportModeChanged";

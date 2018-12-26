@@ -2477,7 +2477,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 
 - (void)application:(NSApplication *)sender openFiles:(NSArray *)filenames
 {
-	if([filenames count] == 1) // for iChat Theatre... (drag & drop a DICOM file on the video chat window)
+	if([filenames count] == 1)
 	{
 		for( ViewerController *v in [ViewerController getDisplayed2DViewers])
 		{
@@ -3437,14 +3437,9 @@ static BOOL firstCall = YES;
 	[dcmtkQRSCPTLS release];
 	dcmtkQRSCPTLS = nil;
 	
-//	#ifndef OSIRIX_LIGHT
-//	[IChatTheatreDelegate releaseSharedDelegate];
-//	#endif
-	
     [super dealloc];
 }
 
-//———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 
 - (id) FindViewer:(NSString*) nib :(NSArray*) pixList
 {

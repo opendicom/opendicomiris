@@ -1,16 +1,3 @@
-/*=========================================================================
- Program:   OsiriX
- 
- Copyright (c) OsiriX Team
- All rights reserved.
- Distributed under GNU - LGPL
- 
- See http://www.osirix-viewer.com/copyright.html for details.
- 
- This software is distributed WITHOUT ANY WARRANTY; without even
- the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
- PURPOSE.
- =========================================================================*/
 
 #import "ToolbarPanel.h"
 #import "DicomDatabase.h"
@@ -241,7 +228,6 @@ static NSString*	AnonymizerToolbarItemIdentifier		= @"Anonymizer.pdf";
 static NSString*	QueryToolbarItemIdentifier			= @"QueryRetrieve.pdf";
 static NSString*	SendToolbarItemIdentifier			= @"Send.pdf";
 static NSString*	ViewerToolbarItemIdentifier			= @"Viewer.pdf";
-//static NSString*	CDRomToolbarItemIdentifier			= @"cd.icns";
 static NSString*	MovieToolbarItemIdentifier			= @"Movie.pdf";
 static NSString*	TrashToolbarItemIdentifier			= @"trash.icns";
 static NSString*	ReportToolbarItemIdentifier			= @"Report.icns";
@@ -18821,7 +18807,8 @@ static volatile int numberOfThreadsForJPEG = 0;
     }
 	else
 	{
-		// Is it a plugin menu item?
+/*JFPluginManager
+ // Is it a plugin menu item?
 		if( [[PluginManager pluginBundles] objectForKey: itemIdent] != nil)
 		{
 			NSBundle *bundle = [[PluginManager pluginBundles] objectForKey: itemIdent];
@@ -18856,13 +18843,13 @@ static volatile int numberOfThreadsForJPEG = 0;
                     toolbarItem = item;
             }
         }
+ */
 	}
-    
 	return toolbarItem;
 }
 
 
-- (NSArray *)toolbarDefaultItemIdentifiers: (NSToolbar *)toolbar
+- (NSArray *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar
 {
     return [NSArray arrayWithObjects:
 //          ToggleDrawerToolbarItemIdentifier, // removed from default items because we have a dedicated button on the bottom left of this window
@@ -18920,7 +18907,7 @@ static volatile int numberOfThreadsForJPEG = 0;
 			 ReportToolbarItemIdentifier,
 			 ToggleDrawerToolbarItemIdentifier,
 			 nil];
-	
+/*JFPluginManager
 	NSArray*		allPlugins = [[PluginManager pluginBundles] allKeys];
 	NSMutableSet*	pluginsItems = [NSMutableSet setWithCapacity: [allPlugins count]];
 	
@@ -18960,7 +18947,7 @@ static volatile int numberOfThreadsForJPEG = 0;
         if ([[[PluginManager pluginSingletons] objectForKey:key] respondsToSelector:@selector(toolbarAllowedIdentifiersForBrowserController:)])
             [array addObjectsFromArray: [[[PluginManager pluginSingletons] objectForKey:key] toolbarAllowedIdentifiersForBrowserController: self]];
     }
-    
+*/
     return array;
 }
 

@@ -130,7 +130,6 @@ static NSString*	ReconstructionToolbarItemIdentifier = @"Reconstruction";
 static NSString*	RGBFactorToolbarItemIdentifier		= @"RGB";
 static NSString*	ExportToolbarItemIdentifier			= @"Export.icns";
 static NSString*	MailToolbarItemIdentifier			= @"Mail.icns";
-//static NSString*	iChatBroadCastToolbarItemIdentifier = @"iChat.icns";
 static NSString*	StatusToolbarItemIdentifier			= @"status";
 static NSString*	SyncSeriesToolbarItemIdentifier		= @"Sync.pdf";
 static NSString*	ResetToolbarItemIdentifier			= @"Reset.pdf";
@@ -6666,21 +6665,7 @@ static ViewerController *draggedController = nil;
 	[toolbarItem setTarget: [AppController sharedAppController]];
 	[toolbarItem setAction: @selector(tileWindows:)];
     } 
-//	else if ([itemIdent isEqualToString: iChatBroadCastToolbarItemIdentifier]) {
-//	
-//	[toolbarItem setLabel: NSLocalizedString(@"iChat", nil)];
-//	[toolbarItem setPaletteLabel: NSLocalizedString(@"iChat", nil)];
-//	[toolbarItem setToolTip: NSLocalizedString(@"iChat", nil)];
-////	[toolbarItem setImage: [NSImage imageNamed: iChatBroadCastToolbarItemIdentifier]]; //	/Applications/iChat/Contents/Resources/Prefs_Camera.icns is maybe a better image...
-//	NSString *path = [[NSWorkspace sharedWorkspace] absolutePathForAppBundleWithIdentifier:@"com.apple.iChat"];
-//	[toolbarItem setImage: [[NSWorkspace sharedWorkspace] iconForFile:path]];
-////	[toolbarItem setImage: [NSImage imageNamed:NSImageNameIChatTheaterTemplate]];
-//	[toolbarItem setTarget: self];
-//	[toolbarItem setAction: @selector(iChatBroadcast:)];
-//    } 
     else if([itemIdent isEqualToString: SpeedToolbarItemIdentifier]) {
-//	NSMenu *submenu = nil;
-//	NSMenuItem *submenuItem = nil, *menuFormRep = nil;
 	
 	// Set up the standard properties 
 	[toolbarItem setLabel: NSLocalizedString(@"Rate", nil)];
@@ -7014,48 +6999,39 @@ static ViewerController *draggedController = nil;
 		[toolbarItem setTarget:nil];
 		[toolbarItem setAction:@selector(navigator:)];
     }
+   /*JFPluginManager
     else
-	{
-		// Is it a plugin menu item?
-		if( [[PluginManager pluginBundles] objectForKey: itemIdent] != nil)
-		{
-			NSBundle *bundle = [[PluginManager pluginBundles] objectForKey: itemIdent];
-			NSDictionary *info = [bundle infoDictionary];
+	 {
+		 // Is it a plugin menu item?
+		 if( [[PluginManager pluginBundles] objectForKey: itemIdent] != nil)
+		 {
+			 NSBundle *bundle = [[PluginManager pluginBundles] objectForKey: itemIdent];
+			 NSDictionary *info = [bundle infoDictionary];
 			
-			[toolbarItem setLabel: itemIdent];
-			[toolbarItem setPaletteLabel: itemIdent];
-			NSDictionary* toolTips = [info objectForKey: @"ToolbarToolTips"];
-			if( toolTips)
-				[toolbarItem setToolTip: [toolTips objectForKey: itemIdent]];
-			else
-				[toolbarItem setToolTip: itemIdent];
+			 [toolbarItem setLabel: itemIdent];
+			 [toolbarItem setPaletteLabel: itemIdent];
+			 NSDictionary* toolTips = [info objectForKey: @"ToolbarToolTips"];
+			 if( toolTips) [toolbarItem setToolTip: [toolTips objectForKey: itemIdent]];
+			 else [toolbarItem setToolTip: itemIdent];
 			
-			NSImage	*image = [[[NSImage alloc] initWithContentsOfFile:[bundle pathForImageResource:[info objectForKey:@"ToolbarIcon"]]] autorelease];
-			if( !image) image = [[NSWorkspace sharedWorkspace] iconForFile: [bundle bundlePath]];
-			[toolbarItem setImage: image];
-			
-			[toolbarItem setTarget: self];
-			[toolbarItem setAction: @selector(executeFilter:)];
-		}
-		else
-			toolbarItem = nil;
+			 NSImage	*image = [[[NSImage alloc] initWithContentsOfFile:[bundle pathForImageResource:[info objectForKey:@"ToolbarIcon"]]] autorelease];
+			 if( !image) image = [[NSWorkspace sharedWorkspace] iconForFile: [bundle bundlePath]];
+			 [toolbarItem setImage: image];
+			 [toolbarItem setTarget: self];
+			 [toolbarItem setAction: @selector(executeFilter:)];
+		 }
+		 else toolbarItem = nil;
     }
-    
     for (id key in [PluginManager pluginSingletons])
     {
         if ([[[PluginManager pluginSingletons] objectForKey:key] respondsToSelector:@selector(toolbarItemForItemIdentifier:forViewer:)])
         {
             NSToolbarItem *item = [[[PluginManager pluginSingletons] objectForKey:key] toolbarItemForItemIdentifier: itemIdent forViewer: self];
             
-            if( item)
-                toolbarItem = item;
+            if( item) toolbarItem = item;
         }
     }
-    
-//    [toolbarItem setMinSize: NSMakeSize( toolbarItem.minSize.width, 53)];
-//    [toolbarItem setMaxSize: NSMakeSize( toolbarItem.maxSize.width, 53)];
-//    
-//    [toolbarItem.view setFrameSize: NSMakeSize( toolbarItem.view.frame.size.width, 53)];
+    */
     
     return toolbarItem;
 }
@@ -7125,7 +7101,6 @@ static ViewerController *draggedController = nil;
 														RGBFactorToolbarItemIdentifier,
 														FilterToolbarItemIdentifier,
 														ToolsToolbarItemIdentifier,
-//														iChatBroadCastToolbarItemIdentifier,
 														StatusToolbarItemIdentifier,
 														KeyImagesToolbarItemIdentifier,
 														ReportToolbarItemIdentifier,
@@ -7140,7 +7115,7 @@ static ViewerController *draggedController = nil;
 														nil];
 	
 	if([AppController canDisplay12Bit]) [array addObject: LUT12BitToolbarItemIdentifier];
-	
+/*JFPluginManager
 	NSArray*		allPlugins = [[PluginManager pluginBundles] allKeys];
 	NSMutableSet*	pluginsItems = [NSMutableSet setWithCapacity: [allPlugins count]];
 	
@@ -7182,7 +7157,7 @@ static ViewerController *draggedController = nil;
         if ([[[PluginManager pluginSingletons] objectForKey:key] respondsToSelector:@selector(toolbarAllowedIdentifiersForViewer:)])
             [array addObjectsFromArray: [[[PluginManager pluginSingletons] objectForKey:key] toolbarAllowedIdentifiersForViewer: self]];
     }
-    
+*/
 	return array;
 }
 
@@ -7246,12 +7221,7 @@ return YES;
     {
         if([fileList[ curMovieIndex] count] == 1 && [imageView.imageObj.numberOfFrames intValue] <=  1) enable = NO;
     }
-	
-//	if ([[toolbarItem itemIdentifier] isEqualToString: iChatBroadCastToolbarItemIdentifier])
-//	{
-//		enable = YES;
-//	}
-	
+		
 	if([[toolbarItem itemIdentifier] isEqualToString: SUVToolbarItemIdentifier])
 	{
 		enable = [[imageView curDCM] hasSUV];
@@ -20640,48 +20610,6 @@ static BOOL viewerControllerPlaying = NO;
 	}
 }
 
-//#define ICHAT_WIDTH 640
-//#define ICHAT_HEIGHT 480
-//
-//#ifndef OSIRIX_LIGHT
-//- (void)iChatBroadcast:(id)sender
-//{
-//    if( [IChatTheatreDelegate initSharedDelegate])
-//    {
-//        [[IChatTheatreDelegate sharedDelegate] showIChatHelp];
-//        NSString *path = [[NSWorkspace sharedWorkspace] absolutePathForAppBundleWithIdentifier:@"com.apple.iChat"];
-//        [[NSWorkspace sharedWorkspace] launchApplication:path];
-//    }
-//    else
-//    {
-//        NSRunAlertPanel(NSLocalizedString( @"Address Book", nil), NSLocalizedString(@"Access to address book is required to start an iChat session. See Privacy tab in System Preferences.", nil), nil, nil, nil);
-//    }
-//}
-//
-//- (void) notificationiChatBroadcast:(NSNotification*)note
-//{
-//	if( timeriChat) [self iChatBroadcast:[self findiChatButton]];
-//}
-//
-//
-//-(id) findiChatButton
-//{
-////	for( x = 0; x < [[NSScreen screens] count]; x++)
-//	{
-//		NSArray *items = [toolbar items];
-//		
-//		for( id loopItem in items)
-//		{
-//			if( [[loopItem itemIdentifier] isEqualToString:iChatBroadCastToolbarItemIdentifier] == YES)
-//			{
-//				return loopItem;
-//			}
-//		}
-//	}
-//	
-//	return nil;
-//}
-//#endif
 
 - (void)exportTextFieldDidChange:(NSNotification *)note
 {
@@ -21361,7 +21289,6 @@ static BOOL viewerControllerPlaying = NO;
     [nc addObserver:self selector:@selector(CloseViewerNotification:) name:OsirixCloseViewerNotification object:nil];
 	[nc addObserver:self selector:@selector(recomputeROI:) name:OsirixRecomputeROINotification object:nil];
 	[nc addObserver:self selector:@selector(notificationStopPlaying:) name:OsirixStopPlayingNotification object:nil];
-//	[nc addObserver:self selector:@selector(notificationiChatBroadcast:) name:OsirixChatBroadcastNotification object:nil];
 	[nc addObserver:self selector:@selector(notificationSyncSeries:) name:OsirixSyncSeriesNotification object:nil];
 	[nc	addObserver:self selector:@selector(exportTextFieldDidChange:) name:NSControlTextDidChangeNotification object:nil];
 	[nc addObserver:self selector:@selector(updateReportToolbarIcon:) name:OsirixReportModeChangedNotification object:nil];

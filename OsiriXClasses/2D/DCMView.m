@@ -1717,7 +1717,6 @@ NSInteger studyCompare(ViewerController *v1, ViewerController *v2, void *context
 			NSMutableDictionary *stanStringAttrib = [NSMutableDictionary dictionary];
 			
 			if( fontL == labelFontListGL) [stanStringAttrib setObject:labelFont forKey:NSFontAttributeName];
-//			else if( fontL == iChatFontListGL) [stanStringAttrib setObject:iChatFontGL forKey:NSFontAttributeName];
 			else [stanStringAttrib setObject:fontGL forKey:NSFontAttributeName];
 			[stanStringAttrib setObject:[NSColor whiteColor] forKey:NSForegroundColorAttributeName];
             
@@ -1765,13 +1764,11 @@ NSInteger studyCompare(ViewerController *v1, ViewerController *v2, void *context
 		if(align==DCMViewTextAlignRight)
 		{
 			if( fontL == labelFontListGL) x -= [DCMView lengthOfString:cstrOut forFont:labelFontListGLSize] + 2*self.window.backingScaleFactor;
-//			else if( fontL == iChatFontListGL) x -= [DCMView lengthOfString:cstrOut forFont:iChatFontListGLSize] + 2*self.window.backingScaleFactor;
 			else x -= [DCMView lengthOfString:cstrOut forFont:fontListGLSize] + 2;
 		}
 		else if(align==DCMViewTextAlignCenter)
 		{
 			if( fontL == labelFontListGL) x -= [DCMView lengthOfString:cstrOut forFont:labelFontListGLSize]/2.0 + 2*self.window.backingScaleFactor;
-//			else if( fontL == iChatFontListGL) x -= [DCMView lengthOfString:cstrOut forFont:iChatFontListGLSize]/2.0 + 2*self.window.backingScaleFactor;
 			else x -= [DCMView lengthOfString:cstrOut forFont:fontListGLSize]/2.0 + 2*self.window.backingScaleFactor;
 		}
 		
@@ -3595,7 +3592,8 @@ NSInteger studyCompare(ViewerController *v1, ViewerController *v2, void *context
         
         @try
         {
-            [[self openGLContext] makeCurrentContext];	// Important for iChat compatibility
+            //JF was for iChat. Eliminate?
+           [[self openGLContext] makeCurrentContext];
             
             NSPoint imageLocation = [self ConvertFromNSView2GL: eventLocationInView];
             
@@ -6564,19 +6562,14 @@ NSInteger studyCompare(ViewerController *v1, ViewerController *v2, void *context
     dcmPixList = nil;
     dcmFilesList = nil;
     
-    [[self openGLContext] makeCurrentContext];	// Important for iChat compatibility
-        
+   //JF was for iChat. Eliminate?
+   [[self openGLContext] makeCurrentContext];	//
     blendingFactor = 0.5;
 	
     GLint swap = 1;  // LIMIT SPEED TO VBL if swap == 1
 	[[self openGLContext] setValues:&swap forParameter:NSOpenGLCPSwapInterval];
     
 	[self FindMinimumOpenGLCapabilities];
-
-//    glEnable (GL_MULTISAMPLE_ARB);
-//    glHint (GL_MULTISAMPLE_FILTER_HINT_NV, GL_NICEST);
-	
-//	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 	
 	CGLContextObj cgl_ctx = [[NSOpenGLContext currentContext] CGLContextObj];
 	if( cgl_ctx)
@@ -7529,25 +7522,6 @@ NSInteger studyCompare(ViewerController *v1, ViewerController *v2, void *context
     }
 }
 
-//- (NSPoint) convertFromNSView2iChat: (NSPoint) a
-//{
-//	//inverse Y scaling system
-//	a.y = [self drawingFrameRect].size.height - a.y;		// inverse Y scaling system
-//	
-//	return a;
-//}
-
-//- (NSPoint) convertFromView2iChat: (NSPoint) a
-//{
-//	if( [NSOpenGLContext currentContext] == _alternateContext)
-//	{
-////		NSRect	iChat = [[[NSOpenGLContext currentContext] view] frame];
-//		NSRect	windowRect = [self frame];
-//
-//		return NSMakePoint( a.x - (windowRect.size.width - iChatWidth)/2.0, a.y - (windowRect.size.height - iChatHeight)/2.0);
-//	}
-//	else return a;
-//}
 
 -(NSPoint) rotatePoint:(NSPoint) a
 {
@@ -8246,29 +8220,12 @@ NSInteger studyCompare(ViewerController *v1, ViewerController *v2, void *context
 //	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glLineWidth(1.0 * self.window.backingScaleFactor);
 	
-//	#ifndef OSIRIX_LIGHT
-//	if( iChatRunning && cgl_ctx==[_alternateContext CGLContextObj])
-//	{
-//		if(!iChatFontListGL) iChatFontListGL = glGenLists(150);
-//		iChatFontGL = [NSFont systemFontOfSize: 12];
-//		[iChatFontGL makeGLDisplayListFirst:' ' count:150 base:iChatFontListGL :iChatFontListGLSize :1];
-//		iChatStringSize = [DCMView sizeOfString:@"B" forFont:iChatFontGL];
-//	}
-//	#endif
 	
 	GLuint fontList;
 	NSSize _stringSize;
-//	if(cgl_ctx==[_alternateContext CGLContextObj])
-//	{
-//		fontList = iChatFontListGL;
-//		_stringSize = iChatStringSize;
-//	}
-//	else
-//	{
 		fontList = fontListGL;
 		_stringSize = stringSize;
-//	}
-    
+   
     if( NSIsEmptyRect( screenCaptureRect) == NO)
         size = screenCaptureRect;
     else
@@ -9129,14 +9086,6 @@ static int hasYosemite = -1;
 	long clutBars = CLUTBARS, annotations = annotationType;
 	BOOL frontMost = NO, is2DViewer = [self is2DViewer];
 	float sf = self.window.backingScaleFactor;
-    
-//	#ifndef OSIRIX_LIGHT
-//    iChatRunning = NO;
-//    if( is2DViewer)
-//        iChatRunning = [[IChatTheatreDelegate sharedDelegate] isIChatTheatreRunning];
-//	#else
-//    iChatRunning = NO;
-//	#endif
 	
 	if( is2DViewer)
 		frontMost = self.window.isKeyWindow;    //[ViewerController isFrontMost2DViewer: [self window]];
@@ -9146,17 +9095,8 @@ static int hasYosemite = -1;
 		firstTimeDisplay = YES;
 		[self updatePresentationStateFromSeries];
 	}
-	
-//	if( iChatRunning)
-//	{
-//		if( drawLock == nil) drawLock = [[NSRecursiveLock alloc] init];
-//		[drawLock lock];
-//	}
-//	else
-	{
-		[drawLock release];
-		drawLock = nil;
-	}
+   [drawLock release];
+   drawLock = nil;
 	
 	[ctx makeCurrentContext];
 	if( ctx == nil)
@@ -9164,7 +9104,7 @@ static int hasYosemite = -1;
     
 	@try 
 	{
-		if( needToLoadTexture)// || iChatRunning)
+		if( needToLoadTexture)
 			[self loadTexturesCompute];
 		
 		if( noScale)
@@ -9262,70 +9202,6 @@ static int hasYosemite = -1;
 					glDisable(GL_BLEND);
 				}
 			}
-			
-			// highlight the visible part of the view (the part visible through iChat)
-//			#ifndef OSIRIX_LIGHT
-//			if( iChatRunning && ctx!=_alternateContext && [[self window] isMainWindow] && isKeyView && iChatWidth>0 && iChatHeight>0)
-//			{
-//				glLoadIdentity (); // reset model view matrix to identity (eliminates rotation basically)
-//				glScalef (2.0f / drawingFrameRect.size.width, -2.0f /  drawingFrameRect.size.height, 1.0f); // scale to port per pixel scale
-//				glTranslatef (-(drawingFrameRect.size.width) / 2.0f, -(drawingFrameRect.size.height) / 2.0f, 0.0f); // translate center to upper left
-//				NSPoint topLeft;
-//				topLeft.x = drawingFrameRect.size.width/2 - iChatWidth/2.0;
-//				topLeft.y = drawingFrameRect.size.height/2 - iChatHeight/2.0;
-//					
-//				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//				glEnable(GL_BLEND);
-//				
-//				glColor4f (0.0f, 0.0f, 0.0f, 0.7f);
-//				glLineWidth(1.0 * sf);
-//				glBegin(GL_QUADS);
-//					glVertex2f(0.0, 0.0);
-//					glVertex2f(0.0, topLeft.y);
-//					glVertex2f(drawingFrameRect.size.width, topLeft.y);
-//					glVertex2f(drawingFrameRect.size.width, 0.0);
-//				glEnd();
-//
-//				glBegin(GL_QUADS);
-//					glVertex2f(0.0, topLeft.y);
-//					glVertex2f(topLeft.x, topLeft.y);
-//					glVertex2f(topLeft.x, topLeft.y+iChatHeight);
-//					glVertex2f(0.0, topLeft.y+iChatHeight);
-//				glEnd();
-//
-//				glBegin(GL_QUADS);
-//					glVertex2f(topLeft.x+iChatWidth, topLeft.y);
-//					glVertex2f(drawingFrameRect.size.width, topLeft.y);
-//					glVertex2f(drawingFrameRect.size.width, topLeft.y+iChatHeight);
-//					glVertex2f(topLeft.x+iChatWidth, topLeft.y+iChatHeight);
-//				glEnd();
-//
-//				glBegin(GL_QUADS);
-//					glVertex2f(0.0, topLeft.y+iChatHeight);
-//					glVertex2f(drawingFrameRect.size.width, topLeft.y+iChatHeight);
-//					glVertex2f(drawingFrameRect.size.width, drawingFrameRect.size.height);
-//					glVertex2f(0.0, drawingFrameRect.size.height);
-//				glEnd();
-//
-//				glColor4f (1.0f, 1.0f, 1.0f, 0.8f);
-//				glBegin(GL_LINE_LOOP);
-//					glVertex2f(topLeft.x, topLeft.y);
-//					glVertex2f(topLeft.x, topLeft.y+iChatHeight);
-//					glVertex2f(topLeft.x+iChatWidth, topLeft.y+iChatHeight);
-//					glVertex2f(topLeft.x+iChatWidth, topLeft.y);
-//				glEnd();
-//				
-//				glLineWidth(1.0 * sf);
-//				glDisable(GL_BLEND);
-//				
-//				// label
-//				NSPoint iChatTheatreSharedViewLabelPosition;
-//				iChatTheatreSharedViewLabelPosition.x = drawingFrameRect.size.width/2.0;
-//				iChatTheatreSharedViewLabelPosition.y = topLeft.y;
-//
-//				[self DrawNSStringGL:NSLocalizedString(@"iChat Theatre shared view", nil) :fontListGL :iChatTheatreSharedViewLabelPosition.x :iChatTheatreSharedViewLabelPosition.y align:DCMViewTextAlignCenter useStringTexture:YES];
-//			}
-//			#endif
 			// ***********************
 			// DRAW CLUT BARS ********
 			
@@ -9616,7 +9492,7 @@ static int hasYosemite = -1;
                     {
                         for( int i = (long)[curRoiList count]-1; i >= 0; i--)
                         {
-                            ROI *r = [[curRoiList objectAtIndex:i] retain];	// If we are not in the main thread (iChat), we want to be sure to keep our ROIs
+                            ROI *r = [[curRoiList objectAtIndex:i] retain];
                             
                             if( resetData) [r recompute];
                             r.curView = self;
@@ -9917,79 +9793,6 @@ static int hasYosemite = -1;
 				[self drawROISelectorRegion];
 			}
 			
-//			if(ctx == _alternateContext && [[NSApplication sharedApplication] isActive]) // iChat Theatre context
-//			{
-//				glLoadIdentity (); // reset model view matrix to identity (eliminates rotation basically)
-//				glScalef (2.0f / drawingFrameRect.size.width, -2.0f /  drawingFrameRect.size.height, 1.0f); // scale to port per pixel scale
-//				glTranslatef (-(drawingFrameRect.size.width) / 2.0f, -(drawingFrameRect.size.height) / 2.0f, 0.0f); // translate center to upper left
-//									
-//				NSPoint eventLocation = [[self window] convertScreenToBase: [NSEvent mouseLocation]];
-//				
-//				// location of the mouse in the OsiriX View
-//				eventLocation = [self convertPoint:eventLocation fromView:nil];
-//				eventLocation.y = [self frame].size.height - eventLocation.y;
-//				
-//				// generate iChat cursor Texture Buffer (only once)
-//				if(!iChatCursorTextureBuffer)
-//				{
-//					NSLog(@"generate iChatCursor Texture Buffer");
-//					NSImage *iChatCursorImage;
-//					if ((iChatCursorImage = [[NSCursor pointingHandCursor] image]))
-//					{
-//						iChatCursorHotSpot = [[NSCursor pointingHandCursor] hotSpot];
-//						iChatCursorImageSize = [iChatCursorImage size];
-//						
-//						NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithData:[iChatCursorImage TIFFRepresentation]]; // [NSBitmapImageRep imageRepWithData: [iChatCursorImage TIFFRepresentation]]
-//
-//						iChatCursorTextureBuffer = malloc([bitmap bytesPerRow] * iChatCursorImageSize.height);
-//						memcpy(iChatCursorTextureBuffer, [bitmap bitmapData], [bitmap bytesPerRow] * iChatCursorImageSize.height);
-//
-//						[bitmap release];
-//						
-//						iChatCursorTextureName = 0;
-//						glGenTextures(1, &iChatCursorTextureName);
-//						glBindTexture(GL_TEXTURE_RECTANGLE_EXT, iChatCursorTextureName);
-//						glPixelStorei(GL_UNPACK_ROW_LENGTH, [bitmap bytesPerRow]/4);
-//						glPixelStorei(GL_UNPACK_CLIENT_STORAGE_APPLE, 1);
-//						glTexParameteri (GL_TEXTURE_RECTANGLE_EXT, GL_TEXTURE_STORAGE_HINT_APPLE, GL_STORAGE_CACHED_APPLE);
-//						
-//						glTexImage2D(GL_TEXTURE_RECTANGLE_EXT, 0, GL_RGBA, iChatCursorImageSize.width, iChatCursorImageSize.height, 0, GL_RGBA, GL_UNSIGNED_INT_8_8_8_8_REV, iChatCursorTextureBuffer);
-//					}
-//				}
-//
-//				// draw the cursor in the iChat Theatre View
-//				if(iChatCursorTextureBuffer)
-//				{
-//					eventLocation.x -= iChatCursorHotSpot.x;
-//					eventLocation.y -= iChatCursorHotSpot.y;
-//					
-//					glEnable(GL_TEXTURE_RECTANGLE_EXT);
-//					
-//					glBindTexture(GL_TEXTURE_RECTANGLE_EXT, iChatCursorTextureName);
-//					glBlendEquation(GL_FUNC_ADD);
-//					glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//					glEnable(GL_BLEND);
-//					
-//					glColor4f(1.0, 1.0, 1.0, 1.0);
-//					glBegin(GL_QUAD_STRIP);
-//						glTexCoord2f(0, 0);
-//						glVertex2f(eventLocation.x, eventLocation.y);
-//					
-//						glTexCoord2f(iChatCursorImageSize.width, 0);
-//						glVertex2f(eventLocation.x + iChatCursorImageSize.width, eventLocation.y);
-//					
-//						glTexCoord2f(0, iChatCursorImageSize.height);
-//						glVertex2f(eventLocation.x, eventLocation.y + iChatCursorImageSize.height);
-//					
-//						glTexCoord2f(iChatCursorImageSize.width, iChatCursorImageSize.height);
-//						glVertex2f(eventLocation.x + iChatCursorImageSize.width, eventLocation.y + iChatCursorImageSize.height);
-//					
-//						glEnd();
-//					glDisable(GL_BLEND);
-//					
-//					glDisable(GL_TEXTURE_RECTANGLE_EXT);
-//				}
-//			} // end iChat Theatre context	
 			
 			if( showDescriptionInLarge)
 			{
@@ -10257,12 +10060,7 @@ static int hasYosemite = -1;
 //	[NSOpenGLContext clearCurrentContext];
 	
 	drawingFrameRect = [self convertRectToBacking: [self frame]];
-	
-//	if( ctx == _alternateContext)
-//		drawingFrameRect = savedDrawingFrameRect;
-	
-//	if(iChatRunning) [drawLock unlock];
-	
+		
 	(void) [self _checkHasChanged:YES];
 	
 }
@@ -13912,126 +13710,6 @@ static int hasYosemite = -1;
 
 //#pragma mark -
 //#pragma mark IMAVManager delegate methods.
-//// The IMAVManager will call this to ask for the context we'll be providing frames with.
-//- (void)getOpenGLBufferContext:(CGLContextObj *)contextOut pixelFormat:(CGLPixelFormatObj *)pixelFormatOut
-//{
-//
-//    *contextOut = [_alternateContext CGLContextObj];
-//    *pixelFormatOut = [[self pixelFormat] CGLPixelFormatObj];
-//}
-//
-//// The IMAVManager will call this when it wants a frame.
-//// Note that this will be called on a non-main thread.
-//
-//- (BOOL)renderIntoOpenGLBuffer:(CVOpenGLBufferRef)buffer onScreen:(int *)screenInOut forTime:(CVTimeStamp*)timeStamp
-//{
-//	// We ignore the timestamp, signifying that we're providing content for 'now'.	
-//	if(!_hasChanged)
-//		return NO;
-//	
-//	if( [[self window] isVisible] == NO)
-//		return NO;
-//	
-//	if( [self is2DViewer])
-//	{
-//		if( [[self windowController] windowWillClose])
-//			return NO;
-//	}
-//	
-//	// Make sure we agree on the screen ID.
-// 	CGLContextObj cgl_ctx = [_alternateContext CGLContextObj];
-//	CGLGetVirtualScreen(cgl_ctx, screenInOut);
-//	
-//	//CGLContextObj CGL_MACRO_CONTEXT = [_alternateContext CGLContextObj];
-//	//CGLGetVirtualScreen(CGL_MACRO_CONTEXT, screenInOut);
-//	
-//	// Attach the OpenGLBuffer and render into the _alternateContext.
-//
-////	if (CVOpenGLBufferAttach(buffer, [_alternateContext CGLContextObj], 0, 0, *screenInOut) == kCVReturnSuccess) {
-//	if (CVOpenGLBufferAttach(buffer, cgl_ctx, 0, 0, *screenInOut) == kCVReturnSuccess)
-//	{
-//        // In case the buffers have changed in size, reset the viewport.
-//        NSDictionary *attributes = (NSDictionary *)CVOpenGLBufferGetAttributes(buffer);
-//        GLfloat width = [[attributes objectForKey:(NSString *)kCVOpenGLBufferWidth] floatValue];
-//        GLfloat height = [[attributes objectForKey:(NSString *)kCVOpenGLBufferHeight] floatValue];
-//		iChatWidth = width;
-//		iChatHeight = height;
-//		
-//		// Render!
-//		iChatDrawing = YES;
-//        [self drawRect:NSMakeRect(0,0,width,height) withContext:_alternateContext];
-//		iChatDrawing = NO;
-//        return YES;
-//    }
-//	else
-//	{
-//        // This should never happen.  The safest thing to do if it does it return
-//        // 'NO' (signifying that the frame has not changed).
-//        return NO;
-//    }
-//}
-//
-//// Callback from IMAVManager asking what pixel format we'll be providing frames in.
-//- (void)getPixelBufferPixelFormat:(OSType *)pixelFormatOut
-//{
-//    *pixelFormatOut = kCVPixelFormatType_32ARGB;
-//}
-//
-//// This callback is called periodically when we're in the IMAVActive state.
-//// We copy (actually, re-render) what's currently on the screen into the provided 
-//// CVPixelBufferRef.
-////
-//// Note that this will be called on a non-main thread. 
-//- (BOOL) renderIntoPixelBuffer:(CVPixelBufferRef)buffer forTime:(CVTimeStamp*)timeStamp
-//{
-//    // We ignore the timestamp, signifying that we're providing content for 'now'.
-//	CVReturn err;
-//	
-//	// If the image has not changed since we provided the last one return 'NO'.
-//    // This enables more efficient transmission of the frame when there is no
-//    // new information.
-//	if ([self checkHasChanged])
-//		return NO;
-//	
-//    // Lock the pixel buffer's base address so that we can draw into it.
-//	if((err = CVPixelBufferLockBaseAddress(buffer, 0)) != kCVReturnSuccess) {
-//        // This should not happen.  If it does, the safe thing to do is return 
-//        // 'NO'.
-//		NSLog(@"Warning, could not lock pixel buffer base address in %s - error %ld", __func__, (long)err);
-//		return NO;
-//	}
-//    @synchronized (self)
-//	{
-//		// Create a CGBitmapContext with the CVPixelBuffer.  Parameters /must/ match 
-//		// pixel format returned in getPixelBufferPixelFormat:, above, width and
-//		// height should be read from the provided CVPixelBuffer.
-//		size_t width = CVPixelBufferGetWidth(buffer); 
-//		size_t height = CVPixelBufferGetHeight(buffer);
-//		CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-//		CGContextRef cgContext = CGBitmapContextCreate(CVPixelBufferGetBaseAddress(buffer),
-//													   width, height,
-//													   8,
-//													   CVPixelBufferGetBytesPerRow(buffer),
-//													   colorSpace,
-//													   kCGImageAlphaPremultipliedFirst);
-//		CGColorSpaceRelease(colorSpace);
-//		
-//		// Derive an NSGraphicsContext, make it current, and ask our SlideshowView 
-//		// to draw.
-//		NSGraphicsContext *context = [NSGraphicsContext graphicsContextWithGraphicsPort:cgContext flipped:NO];
-//		[NSGraphicsContext setCurrentContext:context];
-//		//get NSImage and draw in the rect
-//		
-//		[self drawImage: [self nsimage:NO] inBounds:NSMakeRect(0.0, 0.0, width, height)];
-//		[context flushGraphics];
-//		
-//		// Clean up - remember to unlock the pixel buffer's base address (we locked
-//		// it above so that we could draw into it).
-//		CGContextRelease(cgContext);
-//		CVPixelBufferUnlockBaseAddress(buffer, 0);
-//	}
-//    return YES;
-//}
 
 - (void) drawImage:(NSImage *)image inBounds:(NSRect)rect
 {

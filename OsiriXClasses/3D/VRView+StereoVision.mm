@@ -39,7 +39,6 @@ dddd
 #import "BrowserController.h"
 #import "DICOMExport.h"
 #import "DefaultsOsiriX.h" // for HotKeys
-//#import "IChatTheatreDelegate.h"
 #import "DicomImage.h"
 #import "Notifications.h"
 
@@ -230,7 +229,6 @@ static void  updateRight(vtkObject*, unsigned long eid, void* clientdata, void *
 		else
 			lowResLODFactor = 2.5;
 		
-		[[IMService notificationCenter] addObserver:self selector:@selector(_iChatStateChanged:) name:IMAVManagerStateChangedNotification object:nil];
 	}
     
     return self;
