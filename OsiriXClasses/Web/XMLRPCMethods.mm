@@ -39,7 +39,7 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectionOpened:) name:N2ConnectionListenerOpenedConnectionNotification object:_listener];
         
         if( _listener)
-            NSLog( @"--- XML-RPC interface activated on port: %d", (int) port);
+            NSLog( @"XMLRPCInterface as N2ConnectionListener on port: %d", (int) port);
     }
 	
 	return self;
@@ -47,7 +47,8 @@
 
 -(void)dealloc {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[_listener release]; _listener = NULL;
+	[_listener release];
+   _listener = NULL;
 	[super dealloc];
 }
 
@@ -57,7 +58,6 @@
     if( [connection isKindOfClass: [XMLRPCInterfaceConnection class]])
     {
         XMLRPCInterfaceConnection *xmlrpcConnection = (XMLRPCInterfaceConnection*) connection;
-        xmlrpcConnection.dontSpecifyStringType = YES;
         [xmlrpcConnection setDelegate:self];
     }
 }
@@ -147,9 +147,7 @@
  */
 -(void)KillOsiriX:(NSDictionary*)params error:(NSError**)error {
     
-    if( error)
-        *error = nil;
-    
+    if( error) *error = nil;    
     [[AppController sharedAppController] performSelectorOnMainThread:@selector(terminate:) withObject:self waitUntilDone:NO];
 }
 
@@ -1042,30 +1040,6 @@
     ReturnWithErrorValueAndObjectForKey(0, path, @"currentDCMPath");
 }
 
-#pragma mark Old
-
-- (void)processXMLRPCMessage:(NSString*)selName httpServerMessage:(NSMutableDictionary*)httpServerMessage HTTPServerRequest:(HTTPServerRequest*)mess version:(NSString*)vers paramDict:(NSDictionary*)paramDict encoding:(NSString*)encoding { // __deprecated
-    XMLRPCInterfaceConnection* conn = [[[XMLRPCInterfaceConnection alloc] init] autorelease];
-    conn.delegate = self;
-    
-    NSError* error = nil;
-    id response = nil;
-    @try {
-        response = [conn methodCall:selName params:[NSArray arrayWithObject:paramDict] error:&error];
-    } @catch (NSException* e) {
-        if (!error)
-            error = [NSError errorWithDomain:NSCocoaErrorDomain code:-1 userInfo:nil];
-    }
-    if (error)
-        response = [NSDictionary dictionaryWithObject:[[NSNumber numberWithInteger:error.code] stringValue] forKey:@"error"];
-
-    if (response && httpServerMessage) {
-        [httpServerMessage setValue:response forKey:@"ASResponse"];
-        [httpServerMessage setValue:[[[NSXMLDocument alloc] initWithXMLString:[N2XMLRPC responseWithValue:response] options:0 error:NULL] autorelease] forKey:@"NSXMLDocumentResponse"];
-    }
-}
-
-#pragma mark New
 
 -(id)methodCall:(NSString*)methodName parameters:(NSDictionary*)parameters error:(NSError**)error {
     XMLRPCInterfaceConnection* conn = [[[XMLRPCInterfaceConnection alloc] init] autorelease];
@@ -1077,7 +1051,11 @@
 
 @implementation XMLRPCInterfaceConnection
 
--(id)methodCall:(NSString*)methodName params:(NSArray*)params error:(NSError**)error {
+-(id)methodCall:(NSString*)methodName params:(NSArray*)params error:(NSError**)error
+{
+   //called as a new XMLRPCInterfaceConnection with delegate XMLRPCMethod
+   
+   //N2XMLRPCConnection
     NSXMLDocument* doc = _doc? _doc : [[[NSXMLDocument alloc] initWithXMLString:[N2XMLRPC requestWithMethodName:methodName arguments:params] options:0 error:NULL] autorelease];
     
     NSMutableDictionary* notificationObject = nil;
@@ -1107,5 +1085,3 @@
 }
 
 @end
-
-// TODO: announce with bonjour type _http._tcp.

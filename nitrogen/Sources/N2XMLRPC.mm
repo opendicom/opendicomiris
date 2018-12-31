@@ -1,17 +1,3 @@
-/*=========================================================================
- Program:   OsiriX
- 
- Copyright (c) OsiriX Team
- All rights reserved.
- Distributed under GNU - LGPL
- 
- See http://www.osirix-viewer.com/copyright.html for details.
- 
- This software is distributed WITHOUT ANY WARRANTY; without even
- the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
- PURPOSE.
- =========================================================================*/
-
 #import "N2XMLRPC.h"
 #import "ISO8601DateFormatter.h"
 #import <NSData+N2.h>
@@ -79,7 +65,7 @@
 	[NSException raise:NSGenericException format:@"unhandled XMLRPC data type: %@", [e name]]; return NULL;
 }
 
-+(NSString*)FormatElement:(NSObject*)o options:(NSUInteger)options {
++(NSString*)FormatElement:(NSObject*)o {
 	if (!o)
 		return @"<nil/>";
 	
@@ -87,22 +73,24 @@
 		NSMutableString* s = [NSMutableString stringWithCapacity:512];
 		[s appendString:@"<struct>"];
 		for (NSString* k in (NSDictionary*)o)
-			[s appendFormat:@"<member><name>%@</name><value>%@</value></member>", k, [N2XMLRPC FormatElement:[(NSDictionary*)o objectForKey:k] options:options]];
+			[s appendFormat:@"<member><name>%@</name><value>%@</value></member>",
+          k,
+          [N2XMLRPC FormatElement:[(NSDictionary*)o objectForKey:k] ]
+          ];
 		[s appendString:@"</struct>"];
 		return [NSString stringWithString:s];
 	}
 	
-	if ([o isKindOfClass:[NSString class]]) {
-		if (options & N2XMLRPCDontSpecifyStringTypeOptionMask)
-            return [(NSString*)o xmlEscapedString];
-        else return [NSString stringWithFormat:@"<string>%@</string>", [(NSString*)o xmlEscapedString]];
-	}
+	if ([o isKindOfClass:[NSString class]]) return [NSString stringWithFormat:@"<string>%@</string>", [(NSString*)o xmlEscapedString]];
+
 	
 	if ([o isKindOfClass:[NSArray class]]) {
 		NSMutableString* s = [NSMutableString stringWithCapacity:512];
 		[s appendString:@"<array><data>"];
 		for (NSObject* o2 in (NSArray*)o)
-			[s appendFormat:@"<value>%@</value>", [N2XMLRPC FormatElement:o2 options:options]];
+			[s appendFormat:@"<value>%@</value>",
+          [N2XMLRPC FormatElement:o2]
+          ];
 		[s appendString:@"</data></array>"];
 		return [NSString stringWithString:s];
 	}
@@ -142,47 +130,6 @@
 	
 	[NSException raise:NSGenericException format:@"execution succeeded but return class %@ unsupported", [o className]]; return NULL;
 }
-
-+(NSString*)FormatElement:(NSObject*)o {
-    return [[self class] FormatElement:o options:0];
-}
-
-/*+(NSString*)ReturnElement:(NSInvocation*)invocation options:(NSUInteger)options { 
-    NSUInteger length = [[invocation methodSignature] methodReturnLength];
-    uint8_t buff[length];
-    [invocation getReturnValue:&buff[0]];
-    
-    const char* returnType = [[invocation methodSignature] methodReturnType];
-	if (returnType[0] == @encode(char)[0])
-    
-    switch (returnType[0]) {
-		case '@': {
-			return [N2XMLRPC FormatElement:(id)*(&buff[0]) options:options];
-		} break;
-		case 'i': {
-			int i; [invocation getReturnValue:&i];
-			return [NSString stringWithFormat:@"<int>%d</int>", (int)*(&buff[0])];
-		} break;
-		case 'l': {
-			long l; [invocation getReturnValue:&l];
-			return [NSString stringWithFormat:@"<int>%ld</int>", l];
-		} break;
-		case 'f': {
-			float f; [invocation getReturnValue:&f];
-			return [NSString stringWithFormat:@"<double>%f</double>", f];
-		} break;
-		case 'd': {
-			double d; [invocation getReturnValue:&d];
-			return [NSString stringWithFormat:@"<double>%f</double>", d];
-		} break;
-	}
-	
-	[NSException raise:NSGenericException format:@"execution succeeded but return type %c unsupported", returnType[0]]; return NULL;
-}
-
-+(NSString*)ReturnElement:(NSInvocation*)invocation {
-    return [[self class] ReturnElement:invocation options:0];
-}*/
 
 +(NSString*)requestWithMethodName:(NSString*)methodName arguments:(NSArray*)args {
     NSMutableString* request = [NSMutableString stringWithFormat:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?><methodCall><methodName>%@</methodName><params>", methodName];

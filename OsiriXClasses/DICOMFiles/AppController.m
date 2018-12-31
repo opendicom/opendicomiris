@@ -936,6 +936,12 @@ static BOOL _hasMacOSXSnowLeopard=NO;
 
 // Manage private URL scheme opendicomiris
 
+/*
+ private scheme activates an apple event captured by AppController
+ 
+ in case the arguments contain a value for the name "methodName" it will be handled as a xmlrpc message, with the args of the url transformed into an xml before invoking the method class by notification of the xml
+ */
+
 - (void)getUrl:(NSAppleEventDescriptor *)event
 withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 {
@@ -947,14 +953,12 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
    BOOL pluginOverride=false;
    for (NSString *key in [PluginManager privateSchemeRegexes])
    {
-      if (!
-          [
+      if ([
            [PluginManager privateSchemeRegexes][key]
            numberOfMatchesInString:[urlComponents path]
            options:0
            range:NSMakeRange(0,[[urlComponents path] length])
-           ]
-          )
+           ])
       {
          pluginOverride=true;
          NSLog(@"[%@ privateSchemeExecuteWithURLString:%@",key,urlString);
@@ -969,17 +973,18 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
       NSString * imageQueryItemValue = nil;
       for (NSURLQueryItem *qi in urlComponents.queryItems)
       {
-         [paramDict setObject:qi.value forKey:qi.name];
-         if ([qi.name isEqualToString:@"methodName"]) methodQueryItemValue=qi.value;
-         if ([qi.name isEqualToString:@"image"]) imageQueryItemValue=qi.value;
+              if ([qi.name isEqualToString:@"methodName"]) methodQueryItemValue=qi.value;
+         else if ([qi.name isEqualToString:@"image"]) imageQueryItemValue=qi.value;
+         else    [paramDict setObject:qi.value forKey:qi.name];
       }
-      if( methodQueryItemValue) // XML-RPC message
+// XML-RPC message
+      if( methodQueryItemValue)
       {
          [XMLRPCServer methodCall:methodQueryItemValue parameters:paramDict error:NULL];
       }
-      
-      if( imageQueryItemValue)
+      else if( imageQueryItemValue)
       {
+// image query
          NSArray * components = [imageQueryItemValue componentsSeparatedByString:@"+"];
          
          if( [components count] == 2)
@@ -1075,19 +1080,16 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
             }
          }
       }
-      
-      if( [[urlComponents.path pathExtension] isEqualToString: @"xml"])
+      else if( [[urlComponents.path pathExtension] isEqualToString: @"xml"])
       {
+//wadoxml
          [BrowserController asyncWADOXMLDownloadURL: [NSURL URLWithString:urlString]];
       }
+      else NSLog(@"unknown private scheme: %@",urlString);
    }//end !pluginOverride
 }
 
 #pragma mark -
-
-+ (void) createNoIndexDirectoryIfNecessary:(NSString*) path { // __deprecated
-	[[NSFileManager defaultManager] confirmNoIndexDirectoryAtPath:path];
-}
 
 + (void) pause
 {
@@ -2525,12 +2527,7 @@ static BOOL firstCall = YES;
 {
 	unlink( "/tmp/kill_all_storescu");
 	
-#ifndef OSIRIX_LIGHT
-    [DICOMTLS eraseKeys];
-#endif
-    
-//	[webServer release];
-//	webServer = nil;
+   [DICOMTLS eraseKeys];
 	
 	[XMLRPCServer release];
 	XMLRPCServer = nil;
@@ -2554,14 +2551,6 @@ static BOOL firstCall = YES;
 
     quitting = YES;
 	
-//	if (BUILTIN_DCMTK == YES)
-//	{
-//		[dcmtkQRSCP release];
-//		dcmtkQRSCP = nil;
-//
-//		[dcmtkQRSCPTLS release];
-//		dcmtkQRSCPTLS = nil;
-//	}
 	
 	[self destroyDCMTK];
 	
@@ -2640,23 +2629,18 @@ static BOOL firstCall = YES;
 {
 	if( [[BrowserController currentBrowser] shouldTerminate: sender] == NO) return;
 
-#ifndef OSIRIX_LIGHT
     [[NSUserDefaults standardUserDefaults] setBool: [[[QueryController currentQueryController] window] isVisible] forKey: @"isQueryControllerVisible"];
-#endif
-    for( NSWindow *w in [NSApp windows])
+
+   for( NSWindow *w in [NSApp windows])
 		[w orderOut:sender];
     
-	#ifndef OSIRIX_LIGHT
 	[dcmtkQRSCP abort];
 	[dcmtkQRSCPTLS abort];
-	#endif
 	
-    [NSThread sleepForTimeInterval: 0.5];
+   [NSThread sleepForTimeInterval: 0.5];
     
-	#ifndef OSIRIX_LIGHT
 	[[QueryController currentQueryController] release];
 	[[QueryController currentAutoQueryController] release];
-    #endif
 	
     NSTimeInterval t = [NSDate timeIntervalSinceReferenceDate];
     while ([[[ThreadsManager defaultManager] threads] count] && [NSDate timeIntervalSinceReferenceDate]-t < 10) { // give declared background threads 10 secs to cancel

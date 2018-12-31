@@ -118,8 +118,10 @@
 		pathWithExt = [path substringToIndex:path.length-ext.length];
 	}
 	
-	BOOL pathWithoutExtIsDir = YES, pathWithoutExtExists = [self fileExistsAtPath:pathWithoutExt isDirectory:&pathWithoutExtIsDir];
-	BOOL pathWithExtIsDir = YES, pathWithExtExists = [self fileExistsAtPath:pathWithExt isDirectory:&pathWithExtIsDir];
+   BOOL pathWithoutExtIsDir = YES;
+   BOOL pathWithoutExtExists = [self fileExistsAtPath:pathWithoutExt isDirectory:&pathWithoutExtIsDir];
+   BOOL pathWithExtIsDir = YES;
+   BOOL pathWithExtExists = [self fileExistsAtPath:pathWithExt isDirectory:&pathWithExtIsDir];
 	
 	if (pathWithExtExists && !pathWithExtIsDir) {
 		[self removeItemAtPath:pathWithExt error:NULL];

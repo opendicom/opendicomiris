@@ -1,17 +1,3 @@
-/*=========================================================================
- Program:   OsiriX
- 
- Copyright (c) OsiriX Team
- All rights reserved.
- Distributed under GNU - LGPL
- 
- See http://www.osirix-viewer.com/copyright.html for details.
- 
- This software is distributed WITHOUT ANY WARRANTY; without even
- the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
- PURPOSE.
- =========================================================================*/
-
 #import "N2XMLRPCConnection.h"
 #import "N2Debug.h"
 #import "N2XMLRPC.h"
@@ -22,14 +8,6 @@
 @implementation N2XMLRPCConnection
 
 @synthesize delegate = _delegate;
-@synthesize dontSpecifyStringType = _dontSpecifyStringType;
-
--(NSUInteger)N2XMLRPCOptions {
-    NSUInteger o = 0;
-    if (self.dontSpecifyStringType)
-        o |= N2XMLRPCDontSpecifyStringTypeOptionMask;
-    return o;
-}
 
 -(id)initWithAddress:(NSString*)address port:(NSInteger)port tls:(BOOL)tlsFlag is:(NSInputStream*)is os:(NSOutputStream*)os {
 	if ((self = [super initWithAddress:address port:port tls:tlsFlag is:is os:os])) {
@@ -92,25 +70,6 @@
 		CFRelease(request);
         return;
 	}
-    
-	/*NSString* version = [(NSString*)CFHTTPMessageCopyVersion(request) autorelease];
-    if (!version) version = (NSString*)kCFHTTPVersion1_1;
-	
-    NSString* method = [(NSString*)CFHTTPMessageCopyRequestMethod(request) autorelease];
-    if (!method)
-    {
-        [self writeAndReleaseResponse:CFHTTPMessageCreateResponse(kCFAllocatorDefault, 400, NULL, (CFStringRef)version)];
-        CFRelease(request);
-        return;
-    }
-	
-	if (![method isEqualToString:@"POST"])
-    {
-		[self writeAndReleaseResponse:CFHTTPMessageCreateResponse(kCFAllocatorDefault, 405, NULL, (CFStringRef)version)];
-        CFRelease(request);
-		return;
-	}*/
-	
 	_executed = YES;
 	[self handleRequest:request];
 	
@@ -189,16 +148,8 @@
         
         DLog(@"XMLRPC call: %@", methodName);
         
-        //		NSArray* methodParameterNames = [doc nodesForXPath:@"methodCall/params//member/name" error:NULL];
-        //		NSMutableArray* methodParameterValues = [[doc nodesForXPath:@"methodCall/params//member/value" error:NULL] mutableArray];
-        //		if ([methodParameterNames count] != [methodParameterValues count])
-        //			[NSException raise:NSGenericException format:@"request parameters inconsistent", [methodNames count]];
         NSArray* params = [methodCall nodesForXPath:@"params/param/value" error:NULL];
-        
-        //		NSMutableDictionary* methodParameters = [NSMutableDictionary dictionaryWithCapacity:[methodParameterNames count]];
-        //		for (int i = 0; i < [methodParameterNames count]; ++i)
-        //			[methodParameters setObject:[[methodParameterValues objectAtIndex:i] objectValue] forKey:[[methodParameterNames objectAtIndex:i] objectValue]];
-        
+       
         NSMutableArray* objcparams = [NSMutableArray array];
         for (NSXMLNode* param in params)
             [objcparams addObject:[N2XMLRPC ParseElement:param]];
@@ -216,7 +167,7 @@
         
         DLog(@"\tXMLRPC done, took %f seconds.", -[dateBeforeCall timeIntervalSinceNow]);
         
-        NSData* responseData = [[N2XMLRPC responseWithValue:result options:[self N2XMLRPCOptions]] dataUsingEncoding:NSUTF8StringEncoding];
+        NSData* responseData = [[N2XMLRPC responseWithValue:result] dataUsingEncoding:NSUTF8StringEncoding];
         
         CFHTTPMessageRef response = CFHTTPMessageCreateResponse(kCFAllocatorDefault, 200, NULL, (CFStringRef)version);
         CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Content-Length", (CFStringRef)[NSString stringWithFormat:@"%d", (int) [responseData length]]);

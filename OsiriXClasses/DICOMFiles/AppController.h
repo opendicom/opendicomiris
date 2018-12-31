@@ -109,7 +109,6 @@ extern AppController* OsiriX;
 #pragma mark-
 #pragma mark initialization of the main event loop
 
-+ (void) createNoIndexDirectoryIfNecessary:(NSString*) path __deprecated;
 + (void) resizeWindowWithAnimation:(NSWindow*) window newSize: (NSRect) newWindowFrame;
 + (void) pause __deprecated;
 + (ThumbnailsListPanel*)thumbnailsListPanelForScreen:(NSScreen*)screen;

@@ -2260,7 +2260,7 @@ static NSConditionLock *threadLock = nil;
 	{
 		NSString *OUTpath = [_database dataDirPath];
 		
-		[AppController createNoIndexDirectoryIfNecessary: OUTpath];
+      [[NSFileManager defaultManager] confirmNoIndexDirectoryAtPath:OUTpath];
 		
 		if( [[options objectForKey: @"async"] boolValue])
 		{

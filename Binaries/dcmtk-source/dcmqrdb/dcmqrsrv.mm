@@ -58,56 +58,6 @@ extern int AbortAssociationTimeOut;
 
 static int numberOfActiveAssociations = 0;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//static N2ConnectionListener* listenerForSCPProcess = nil;
-//
-//@interface listenerForSCPProcessClass : N2Connection{
-//    
-//    NSPoint origin;
-//}
-//
-//@end
-//
-//@implementation listenerForSCPProcessClass
-//
-//-(id)initWithAddress:(NSString *)address port:(NSInteger)port is:(NSInputStream *)is os:(NSOutputStream *)os
-//{
-//    if( (self = [super initWithAddress:address port:port is:is os:os]))
-//    {
-//        NSLog( @"SCP Process Connected");
-//    }
-//    
-//    return self;
-//}
-//
-//
-//-(void)handleData:(NSMutableData*)data
-//{
-//    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-//    @try
-//    {
-//        NSDictionary *dict = [NSKeyedUnarchiver unarchiveObjectWithData: data];
-//        
-//        NSLog( @"***** %@", dict);
-//        
-//        NSDictionary *response = [NSDictionary dictionaryWithObjectsAndKeys: @"Hello World", @"message", nil];
-//        
-//        [self writeData: [NSKeyedArchiver archivedDataWithRootObject: response]];
-//    }
-//    @catch (NSException* e)
-//    {
-//        N2LogException( e);
-//    }
-//    @finally
-//    {
-//        [pool release];
-//    }
-//}
-//@end
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @implementation ContextCleaner
 

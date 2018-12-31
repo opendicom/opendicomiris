@@ -2809,8 +2809,8 @@ static BOOL protectionAgainstReentry = NO;
 		listenerCompressionSettings = 0;
 #endif
 		
-		[AppController createNoIndexDirectoryIfNecessary:self.dataDirPath];
-		
+      [[NSFileManager defaultManager] confirmNoIndexDirectoryAtPath:self.dataDirPath];
+      
 		int maxNumberOfFiles = [[NSUserDefaults standardUserDefaults] integerForKey:@"maxNumberOfFilesForCheckIncoming"];
 		if (maxNumberOfFiles < 100) maxNumberOfFiles = 100;
 		if (maxNumberOfFiles > 30000) maxNumberOfFiles = 30000;

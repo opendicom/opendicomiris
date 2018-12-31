@@ -1,17 +1,3 @@
-/*=========================================================================
-  Program:   OsiriX
-
-  Copyright (c) OsiriX Team
-  All rights reserved.
-  Distributed under GNU - LGPL
-  
-  See http://www.osirix-viewer.com/copyright.html for details.
-
-     This software is distributed WITHOUT ANY WARRANTY; without even
-     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-     PURPOSE.
-=========================================================================*/
-
 #import <Cocoa/Cocoa.h>
 
 extern NSString* N2ConnectionStatusDidChangeNotification;
@@ -24,9 +10,9 @@ enum N2ConnectionStatus {
 };
 
 @interface N2Connection : NSObject
-#if (MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5)
+//JF#if (MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5)
 <NSStreamDelegate>
-#endif
+//JF#endif
 {
 	id _address;
 	NSInteger _port;
