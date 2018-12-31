@@ -2541,7 +2541,6 @@
 		BFEB76420677FDA700F242F3 /* tagDictionary.plist in Resources */ = {isa = PBXBuildFile; fileRef = BFEB763C0677FDA700F242F3 /* tagDictionary.plist */; };
 		BFEB767F0678071400F242F3 /* DCMUIDs.h in Headers */ = {isa = PBXBuildFile; fileRef = BFEB767E0678071400F242F3 /* DCMUIDs.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE03A3CC0EA2AE0300951EF4 /* iPhone.tif in Resources */ = {isa = PBXBuildFile; fileRef = CE03A3CB0EA2AE0300951EF4 /* iPhone.tif */; };
-		CE04B81B15289AF400EF6E52 /* Growl.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = CE2BE05D1524344D00AE6156 /* Growl.framework */; };
 		CE06475210F12DA500551AD9 /* PlayTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = CE06475110F12DA500551AD9 /* PlayTemplate.png */; };
 		CE0C4792183139C400D4C50E /* pages092pdf.applescript in Resources */ = {isa = PBXBuildFile; fileRef = CE0C478F1831366600D4C50E /* pages092pdf.applescript */; };
 		CE1119351165CA2000EDD254 /* jcdiffct.c in Sources */ = {isa = PBXBuildFile; fileRef = BFBF3C6909B6828300545F5E /* jcdiffct.c */; };
@@ -2561,7 +2560,6 @@
 		CE286C120964196C001A4573 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE286C100964196C001A4573 /* Localizable.strings */; };
 		CE289B1D0D00AF91004F0A93 /* Mail.scpt in Resources */ = {isa = PBXBuildFile; fileRef = CE289B020D00ADBA004F0A93 /* Mail.scpt */; };
 		CE2AC2681830BEFB00C2B67B /* ThickSlab.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2AC2661830BEFB00C2B67B /* ThickSlab.xib */; };
-		CE2BE05E1524344D00AE6156 /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2BE05D1524344D00AE6156 /* Growl.framework */; };
 		CE2BFE57153B177C00037546 /* iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2BFE56153B177C00037546 /* iPad.png */; };
 		CE2C82EC0C708B380093C162 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF5F14C20B14E12700B309B9 /* CoreVideo.framework */; };
 		CE3F99440C84724B00CB38F1 /* SmartAlbum.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3F98E40C84724B00CB38F1 /* SmartAlbum.xib */; };
@@ -2875,7 +2873,7 @@
 		CE9A04440C7DBC060007809F /* libxerces-c.27.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = CE6693C60AF551210073D923 /* libxerces-c.27.dylib */; };
 		CE9A04450C7DBC060007809F /* libdcmprintscu.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = CE586CC30C74B75D00DB7D5A /* libdcmprintscu.dylib */; };
 		CE9C734A0B34946B0062FCCC /* echoscu in Resources */ = {isa = PBXBuildFile; fileRef = CE9C73490B34946B0062FCCC /* echoscu */; };
-		CE9E11D013DBB5DD008B2848 /* OsiriX.sdef in Resources */ = {isa = PBXBuildFile; fileRef = CE9E11CF13DBB5DD008B2848 /* OsiriX.sdef */; };
+		CE9E11D013DBB5DD008B2848 /* opendicomiris.sdef in Resources */ = {isa = PBXBuildFile; fileRef = CE9E11CF13DBB5DD008B2848 /* opendicomiris.sdef */; };
 		CEA4F07515AEA5FE009584C7 /* Cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA4F07215AEA5FE009584C7 /* Cloud.png */; };
 		CEA4F07715AEA5FE009584C7 /* OSIPACSOnDemandPreferencePane.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA4F07315AEA5FE009584C7 /* OSIPACSOnDemandPreferencePane.m */; };
 		CEA4F07915AEA5FE009584C7 /* OSIPACSOnDemandPreferencePane.h in Headers */ = {isa = PBXBuildFile; fileRef = CEA4F07415AEA5FE009584C7 /* OSIPACSOnDemandPreferencePane.h */; };
@@ -6474,7 +6472,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				59F1A515104BA8AE009E3215 /* OsiriXAPI.framework in Copy Frameworks */,
-				CE04B81B15289AF400EF6E52 /* Growl.framework in Copy Frameworks */,
 				CE81E2A50FDA9F00000D3D96 /* OsiriX.framework in Copy Frameworks */,
 				CE9A04440C7DBC060007809F /* libxerces-c.27.dylib in Copy Frameworks */,
 				84F453570FC3DF5400D29666 /* ILCrashReporter.framework in Copy Frameworks */,
@@ -8778,7 +8775,7 @@
 		CE995075183E05D60087E409 /* PerpendicularLines.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = PerpendicularLines.pdf; sourceTree = "<group>"; };
 		CE99E88E073AB4C500725ABC /* iPhoto.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = iPhoto.icns; sourceTree = "<group>"; };
 		CE9C73490B34946B0062FCCC /* echoscu */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = echoscu; path = Binaries/DCMTK/echoscu; sourceTree = SOURCE_ROOT; };
-		CE9E11CF13DBB5DD008B2848 /* OsiriX.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = OsiriX.sdef; sourceTree = "<group>"; };
+		CE9E11CF13DBB5DD008B2848 /* opendicomiris.sdef */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = opendicomiris.sdef; sourceTree = "<group>"; };
 		CEA4F07215AEA5FE009584C7 /* Cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Cloud.png; path = "Preference Panes/OSIPACSOnDemandPreferencePane/Cloud.png"; sourceTree = "<group>"; };
 		CEA4F07315AEA5FE009584C7 /* OSIPACSOnDemandPreferencePane.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OSIPACSOnDemandPreferencePane.m; path = "Preference Panes/OSIPACSOnDemandPreferencePane/OSIPACSOnDemandPreferencePane.m"; sourceTree = "<group>"; };
 		CEA4F07415AEA5FE009584C7 /* OSIPACSOnDemandPreferencePane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OSIPACSOnDemandPreferencePane.h; path = "Preference Panes/OSIPACSOnDemandPreferencePane/OSIPACSOnDemandPreferencePane.h"; sourceTree = "<group>"; };
@@ -12487,7 +12484,6 @@
 				CEB7E9E414F31458001C64EA /* libITKBioCell-4.1.a in Frameworks */,
 				CEB7E9E514F31458001C64EA /* libITKBiasCorrection-4.1.a in Frameworks */,
 				CEB5B18E14F5507F0043457F /* libvtkOsiriX.a in Frameworks */,
-				CE2BE05E1524344D00AE6156 /* Growl.framework in Frameworks */,
 				8476BC2F1599D4B200451331 /* AVFoundation.framework in Frameworks */,
 				8476BC341599D7E900451331 /* CoreMedia.framework in Frameworks */,
 				CE65D9F115C4843300E9D94C /* DiskArbitration.framework in Frameworks */,
@@ -12717,7 +12713,7 @@
 				ABBFDA3F063480490011BD0A /* Deployment-Info.plist */,
 				ABFDE81610A8003100E33E0F /* Deployment-Info OsiriXLite.plist */,
 				CE286C100964196C001A4573 /* Localizable.strings */,
-				CE9E11CF13DBB5DD008B2848 /* OsiriX.sdef */,
+				CE9E11CF13DBB5DD008B2848 /* opendicomiris.sdef */,
 				B7CDAC730AB3003200068D70 /* PAGES */,
 			);
 			name = Resources;
@@ -23871,7 +23867,7 @@
 				CEB98C791335087D0083F3FD /* OSI3DPreferencePanePref.xib in Resources */,
 				4A2A49C3218D3C4700B4D164 /* NIH.plist in Resources */,
 				CEB98C851335088C0083F3FD /* AYDicomPrintPref.xib in Resources */,
-				CE9E11D013DBB5DD008B2848 /* OsiriX.sdef in Resources */,
+				CE9E11D013DBB5DD008B2848 /* opendicomiris.sdef in Resources */,
 				59C447E21451705900D71580 /* Eject_gray.pdf in Resources */,
 				59C447E41451705900D71580 /* Eject_lightgray.pdf in Resources */,
 				848CE28F145AC9AE00BEB249 /* curvedPath.icns in Resources */,
@@ -26346,6 +26342,7 @@
 					"-Wno-deprecated",
 					"-no-pedantic",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.opendicom.opendicomiris;
 				PRODUCT_NAME = opendicomiris;
 				SDKROOT = macosx10.13;
 				USER_HEADER_SEARCH_PATHS = "ITK180/Modules/Core/Common/include ITK180/Modules/ThirdParty/VNL/src/vxl/core ITK180/Modules/ThirdParty/VNL/src/vxl/vcl ITK180/Modules/Core/Common ITK180/Modules/Core/Mesh/include ITK180/Modules/Segmentation/RegionGrowing/include ITK180/Modules/Filtering/CurvatureFlow/include ITK180/Modules/Core/ImageFunction/include ITK180/Modules/Core/FiniteDifference/include ITK180/Modules/Filtering/ImageFilterBase/include ITK180/Modules/Segmentation/LevelSets/include ITK180/Modules/Filtering/FastMarching/include ITK180/Modules/Filtering/ImageIntensity/include ITK180/Modules/Bridge/VTK/include ITK180/Modules/Filtering/MathematicalMorphology/include ITK180/Modules/Core/Transform/include ITK180/Modules/Filtering/ImageGrid/include ITK180/Modules/Filtering/BinaryMathematicalMorphology/include ITK180/Modules/ThirdParty/NrrdIO/src/NrrdIO";

@@ -177,7 +177,7 @@
 	<key>CFBundleExecutable</key>
 	<string>opendicomiris</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.opendicomiris.osirix</string>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -190,7 +190,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>opendicomiris Remote Access</string>
+			<string>opendicomiris</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>opendicomiris</string>
@@ -220,7 +220,7 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>OSAScriptingDefinition</key>
-	<string>OsiriX.sdef</string>
+	<string>opendicomiris.sdef</string>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>

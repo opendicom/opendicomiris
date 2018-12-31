@@ -12,6 +12,10 @@
 
 @interface PluginManager : NSObject {}
 
+//first segment of url path
+@property (class,readonly,retain) NSDictionary * privateSchemeRegexes;
+@property (class,readonly,retain) NSDictionary * privateSchemeSingletons;
+
 //non categorized plugins
 @property (class,readonly,retain) NSDictionary * pluginClasses;
 @property (class,readonly,retain) NSDictionary * pluginSingletons;

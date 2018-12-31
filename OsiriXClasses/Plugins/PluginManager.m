@@ -15,6 +15,9 @@ static NSArray *         pluginTypes=nil;
 
 static NSMenu *         _fusionMenu = nil;
 
+static NSDictionary *   _privateSchemeRegexes = nil;
+static NSDictionary *   _privateSchemeSingletons = nil;
+
 static NSDictionary *   _pluginClasses = nil;
 static NSDictionary *   _pluginSingletons = nil;
 
@@ -30,6 +33,9 @@ static NSArray *        _preProcessSingletons = nil;
 
 +(NSArray*)preProcessClasses {return _preProcessClasses;}
 +(NSArray*)preProcessSingletons {return _preProcessSingletons;}
+
++(NSDictionary*)privateSchemeRegexes {return _privateSchemeRegexes;}
++(NSDictionary*)privateSchemeSingletons {return _privateSchemeSingletons;}
 
 +(NSDictionary*)fileFormatClasses {return _fileFormatClasses;}
 +(NSDictionary*)fileFormatSingletons {return _fileFormatSingletons;}
@@ -112,7 +118,7 @@ NSMenuItem* menuItemBasedOnDict(NSString* name, id target, SEL action, NSMenu* c
    return self;
 }
 
-//first init from appController
+//unique init from appController
 -(id)initForMenus:(NSMenu *)reportMenu :(NSMenu *)databaseMenu :(NSMenu *)imageMenu :(NSMenu *)roiToolMenu
 {
    if (self = [super init])
@@ -130,6 +136,9 @@ NSMenuItem* menuItemBasedOnDict(NSString* name, id target, SEL action, NSMenu* c
       
       _fusionMenu   = [[NSMenu alloc]initWithTitle:@"" ];
       [_fusionMenu retain];
+
+      NSMutableDictionary* privateSchemeRegexes = [NSMutableDictionary dictionary];
+      NSMutableDictionary* privateSchemeSingletons = [NSMutableDictionary dictionary];
 
       NSMutableDictionary* pluginClasses = [NSMutableDictionary dictionary];
       NSMutableDictionary* pluginSingletons = [NSMutableDictionary dictionary];
@@ -160,6 +169,7 @@ NSMenuItem* menuItemBasedOnDict(NSString* name, id target, SEL action, NSMenu* c
       
 
       NSLog( @"|||||||| PlugIns loading START ||||||||");
+ 
       for (NSString* path in @[appPath, userPath])
       {
          NSArray* pluginsInDir = [defaultManager directoryContentsAtPath:path];
@@ -204,6 +214,21 @@ NSMenuItem* menuItemBasedOnDict(NSString* name, id target, SEL action, NSMenu* c
                
                NSDictionary* infoDictionary=[bundle infoDictionary];
                NSLog( @"version: %@",infoDictionary[@"CFBundleVersion"]);
+               
+               
+               
+ #pragma mark privateSchemeRegexes
+               if (   infoDictionary[@"privateSchemeRegex"]
+                   && [infoDictionary[@"privateSchemeRegex"] length]
+                   )
+               {
+                  NSRegularExpression * regex=[NSRegularExpression regularExpressionWithPattern:infoDictionary[@"privateSchemeRegex"] options:NSRegularExpressionCaseInsensitive error:NULL];
+                  [regex retain];
+                  [privateSchemeRegexes setObject:regex forKey:name];
+                  [privateSchemeSingletons setObject:pluginSingleton forKey:name];
+               }
+               
+               
 
                switch ([pluginTypes indexOfObject:(infoDictionary[@"pluginType"])]) {
                      
@@ -318,6 +343,11 @@ NSMenuItem* menuItemBasedOnDict(NSString* name, id target, SEL action, NSMenu* c
             }
          }
       }
+
+      _privateSchemeRegexes=[[NSDictionary alloc]initWithDictionary:privateSchemeRegexes];
+      [_privateSchemeRegexes retain];
+      _privateSchemeSingletons=[[NSDictionary alloc]initWithDictionary:privateSchemeSingletons];
+      [_privateSchemeSingletons retain];
 
       _pluginClasses=[[NSDictionary alloc]initWithDictionary:pluginClasses];
       [_pluginClasses retain];

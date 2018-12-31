@@ -39,5 +39,9 @@
     return -1;
 }
 
+-(void)privateSchemeExecuteWithURLString:(NSString*)urlString
+{
+   NSLog( @"Plugin Error.Should be overriden by subclass");
+}
 
 @end
