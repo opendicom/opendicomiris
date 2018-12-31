@@ -1054,11 +1054,9 @@
 -(id)methodCall:(NSString*)methodName params:(NSArray*)params error:(NSError**)error
 {
    //called as a new XMLRPCInterfaceConnection with delegate XMLRPCMethod
-   
-   //N2XMLRPCConnection
-    NSXMLDocument* doc = _doc? _doc : [[[NSXMLDocument alloc] initWithXMLString:[N2XMLRPC requestWithMethodName:methodName arguments:params] options:0 error:NULL] autorelease];
-    
-    NSMutableDictionary* notificationObject = nil;
+
+
+   NSMutableDictionary* notificationObject = nil;
     if ([params count] < 1)
         notificationObject = [NSMutableDictionary dictionary];
     else {
@@ -1067,18 +1065,34 @@
             notificationObject = [[dic mutableCopy] autorelease];
         else notificationObject = [NSMutableDictionary dictionary];
     }
-    
-    [notificationObject addEntriesFromDictionary:[NSDictionary dictionaryWithObjectsAndKeys: methodName, @"MethodName", methodName, @"methodName", doc, @"NSXMLDocument", self.address, @"peerAddress", nil]];
+
+   
+   NSXMLDocument* doc = _doc? _doc : [[[NSXMLDocument alloc] initWithXMLString:[N2XMLRPC requestWithMethodName:methodName arguments:params] options:0 error:NULL] autorelease];
+   NSLog(@"%@",[self description]);
+   [notificationObject setObject:methodName   forKey:@"MethodName"];
+   [notificationObject setObject:methodName   forKey:@"methodName"];
+   [notificationObject setObject:doc          forKey:@"NSXMLDocument"];
+   [notificationObject setObject:self.address forKey:@"peerAddress"];
+   
     [[NSNotificationCenter defaultCenter] postNotificationName:OsirixXMLRPCMessageNotification object:notificationObject];
     
-    if ([[notificationObject valueForKey:@"Processed"] boolValue] || [notificationObject valueForKey:@"Response"] || [notificationObject valueForKey:@"NSXMLDocumentResponse"]) { // request processed, most probably by a plugin
+    if ([[notificationObject valueForKey:@"Processed"] boolValue] || [notificationObject valueForKey:@"Response"] || [notificationObject valueForKey:@"NSXMLDocumentResponse"]) {
+        // request processed, most probably by a plugin
         // new plugins are expected to return a value through the Response key, containing Cocoa values (NSNumber, NSArray, NSDictionary...)
         id response = [notificationObject valueForKey:@"Response"];
         if (response)
             return response;
         // older plugins returned a NSXMLDocument in the NSXMLDocumentResponse key
-        doc = [notificationObject valueForKey:@"NSXMLDocumentResponse"];
-        return [N2XMLRPC ParseElement:[[doc objectsForXQuery:@"/methodResponse/params/param/value" error:NULL] objectAtIndex:0]];
+        return [N2XMLRPC ParseElement:
+                [
+                 [
+                  [notificationObject valueForKey:@"NSXMLDocumentResponse"]
+                  objectsForXQuery:@"/methodResponse/params/param/value"
+                  error:NULL
+                  ]
+                 objectAtIndex:0
+                 ]
+                ];
     }
     
     return [super methodCall:methodName params:params error:error];

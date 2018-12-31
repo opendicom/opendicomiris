@@ -191,9 +191,12 @@ NSString* N2ConnectionStatusDidChangeNotification = @"N2ConnectionStatusDidChang
 }
 
 -(NSString*)address {
+   //JF
     if ([_address isKindOfClass:[NSString class]])
         return _address;
-    return [(NSHost*)_address address];
+   NSString * hostAddress = [(NSHost*)_address address];
+   if (hostAddress) return hostAddress;
+   return @"";
 }
 
 -(void)reconnectToAddress:(id)address port:(NSInteger)port {

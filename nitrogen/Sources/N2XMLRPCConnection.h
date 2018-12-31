@@ -1,4 +1,4 @@
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 #import "N2Connection.h"
 
 @protocol N2XMLRPCConnectionDelegate <NSObject>
@@ -8,6 +8,9 @@
 -(BOOL)isSelectorAvailableToXMLRPC:(NSString*)selectorString;
 
 @end
+
+//-------------------------------------------------------------------
+
 
 @interface N2XMLRPCConnection : N2Connection {
 	NSObject<N2XMLRPCConnectionDelegate>* _delegate;

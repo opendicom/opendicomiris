@@ -1,4 +1,4 @@
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 extern NSString* N2ConnectionStatusDidChangeNotification;
 
@@ -9,37 +9,41 @@ enum N2ConnectionStatus {
 	N2ConnectionStatusOk
 };
 
-@interface N2Connection : NSObject
-//JF#if (MAC_OS_X_VERSION_MAX_ALLOWED > MAC_OS_X_VERSION_10_5)
-<NSStreamDelegate>
-//JF#endif
+@interface N2Connection : NSObject <NSStreamDelegate>
 {
-	id _address;
-	NSInteger _port;
-	NSInputStream* _inputStream;
-	NSOutputStream* _outputStream;
-	NSMutableData *_inputBuffer, *_outputBuffer;
-	//BOOL _hasBytesAvailable, _hasSpaceAvailable, _handleConnectionClose;
-	NSUInteger _handleOpenCompleted, _maximumReadSizePerEvent, _handleHasSpaceAvailable, _outputBufferIndex;
-	NSInteger _status;
-	BOOL _tlsFlag;
-    BOOL _closeOnRemoteClose, _closeWhenDoneSending, _closeOnNextSpaceAvailable, _handlingData;
-    NSError* _error;
-    NSTimeInterval lastEventTimeInterval;
+	id               _address;
+	NSInteger        _port;
+	NSInputStream  * _inputStream;
+	NSOutputStream * _outputStream;
+   NSMutableData  * _inputBuffer;
+   NSMutableData  * _outputBuffer;
+   NSUInteger       _handleOpenCompleted;
+   NSUInteger       _maximumReadSizePerEvent;
+   NSUInteger       _handleHasSpaceAvailable;
+   NSUInteger       _outputBufferIndex;
+	NSInteger        _status;
+	BOOL             _tlsFlag;
+   BOOL             _closeOnRemoteClose;
+   BOOL             _closeWhenDoneSending;
+   BOOL             _closeOnNextSpaceAvailable;
+   BOOL             _handlingData;
+   NSError        * _error;
+   NSTimeInterval   lastEventTimeInterval;
 }
 
-@property(readonly) NSString* address;
-@property(readonly) NSTimeInterval lastEventTimeInterval;
-@property(nonatomic) NSInteger status;
-@property NSUInteger maximumReadSizePerEvent;
-@property BOOL closeOnRemoteClose;
-@property BOOL closeWhenDoneSending;
-@property BOOL closeOnNextSpaceAvailable;
-@property(readonly,retain) NSError* error;
+@property(readonly)        NSString       * address;
+@property(readonly)        NSTimeInterval   lastEventTimeInterval;
+@property(nonatomic)       NSInteger        status;
+@property                  NSUInteger       maximumReadSizePerEvent;
+@property                  BOOL             closeOnRemoteClose;
+@property                  BOOL             closeWhenDoneSending;
+@property                  BOOL             closeOnNextSpaceAvailable;
+@property(readonly,retain) NSError        * error;
 
 // non-tls
 +(NSData*)sendSynchronousRequest:(NSData*)request toAddress:(id)address port:(NSInteger)port;
-+(NSData*)sendSynchronousRequest:(NSData*)request toAddress:(id)address port:(NSInteger)port dataHandlerTarget:(id)target selector:(SEL)selector context:(void*)context; // -(NSInteger)connection:(N2Connection*)connection dummyDataHandler:(NSData*)data context:(void*)context
++(NSData*)sendSynchronousRequest:(NSData*)request toAddress:(id)address port:(NSInteger)port dataHandlerTarget:(id)target selector:(SEL)selector context:(void*)context;
+// -(NSInteger)connection:(N2Connection*)connection dummyDataHandler:(NSData*)data context:(void*)context
 -(id)initWithAddress:(id)address port:(NSInteger)port;
 -(id)initWithAddress:(id)address port:(NSInteger)port is:(NSInputStream*)is os:(NSOutputStream*)os;
 

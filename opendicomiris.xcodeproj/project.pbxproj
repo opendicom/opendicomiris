@@ -96,8 +96,6 @@
 		592CFF0B1212F84F00176E39 /* N2ConnectionListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = 592CFEF31212F84F00176E39 /* N2ConnectionListener.mm */; };
 		592CFF0C1212F84F00176E39 /* N2WebServiceClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 592CFEF51212F84F00176E39 /* N2WebServiceClient.h */; };
 		592CFF0D1212F84F00176E39 /* N2WebServiceClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = 592CFEF61212F84F00176E39 /* N2WebServiceClient.mm */; };
-		592CFF0E1212F84F00176E39 /* N2RedundantWebServiceClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 592CFEF71212F84F00176E39 /* N2RedundantWebServiceClient.h */; };
-		592CFF0F1212F84F00176E39 /* N2RedundantWebServiceClient.mm in Sources */ = {isa = PBXBuildFile; fileRef = 592CFEF81212F84F00176E39 /* N2RedundantWebServiceClient.mm */; };
 		592CFF101212F84F00176E39 /* N2XMLRPC.h in Headers */ = {isa = PBXBuildFile; fileRef = 592CFEFA1212F84F00176E39 /* N2XMLRPC.h */; };
 		592CFF111212F84F00176E39 /* N2XMLRPC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 592CFEFB1212F84F00176E39 /* N2XMLRPC.mm */; };
 		592CFF121212F84F00176E39 /* N2XMLRPCWebServiceClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 592CFEFD1212F84F00176E39 /* N2XMLRPCWebServiceClient.h */; };
@@ -6594,8 +6592,6 @@
 		592CFEF31212F84F00176E39 /* N2ConnectionListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = N2ConnectionListener.mm; path = nitrogen/Sources/N2ConnectionListener.mm; sourceTree = "<group>"; };
 		592CFEF51212F84F00176E39 /* N2WebServiceClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = N2WebServiceClient.h; path = nitrogen/Sources/N2WebServiceClient.h; sourceTree = "<group>"; };
 		592CFEF61212F84F00176E39 /* N2WebServiceClient.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = N2WebServiceClient.mm; path = nitrogen/Sources/N2WebServiceClient.mm; sourceTree = "<group>"; };
-		592CFEF71212F84F00176E39 /* N2RedundantWebServiceClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = N2RedundantWebServiceClient.h; path = nitrogen/Sources/N2RedundantWebServiceClient.h; sourceTree = "<group>"; };
-		592CFEF81212F84F00176E39 /* N2RedundantWebServiceClient.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = N2RedundantWebServiceClient.mm; path = nitrogen/Sources/N2RedundantWebServiceClient.mm; sourceTree = "<group>"; };
 		592CFEFA1212F84F00176E39 /* N2XMLRPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = N2XMLRPC.h; path = nitrogen/Sources/N2XMLRPC.h; sourceTree = "<group>"; };
 		592CFEFB1212F84F00176E39 /* N2XMLRPC.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = N2XMLRPC.mm; path = nitrogen/Sources/N2XMLRPC.mm; sourceTree = "<group>"; };
 		592CFEFD1212F84F00176E39 /* N2XMLRPCWebServiceClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = N2XMLRPCWebServiceClient.h; path = nitrogen/Sources/N2XMLRPCWebServiceClient.h; sourceTree = "<group>"; };
@@ -12868,8 +12864,6 @@
 				592CFEF91212F84F00176E39 /* XMLRPC */,
 				592CFEF51212F84F00176E39 /* N2WebServiceClient.h */,
 				592CFEF61212F84F00176E39 /* N2WebServiceClient.mm */,
-				592CFEF71212F84F00176E39 /* N2RedundantWebServiceClient.h */,
-				592CFEF81212F84F00176E39 /* N2RedundantWebServiceClient.mm */,
 			);
 			name = "Web Services";
 			sourceTree = "<group>";
@@ -19730,7 +19724,6 @@
 				847AFE6E1A14DFA40067AA07 /* O2DicomPredicateEditorDatePicker.h in Headers */,
 				592CFF0C1212F84F00176E39 /* N2WebServiceClient.h in Headers */,
 				847AFD0F1A14DFA30067AA07 /* ViewerController+CPP.h in Headers */,
-				592CFF0E1212F84F00176E39 /* N2RedundantWebServiceClient.h in Headers */,
 				592CFF101212F84F00176E39 /* N2XMLRPC.h in Headers */,
 				592CFF121212F84F00176E39 /* N2XMLRPCWebServiceClient.h in Headers */,
 				592CFF141212F84F00176E39 /* N2XMLRPCConnection.h in Headers */,
@@ -24430,7 +24423,6 @@
 				592CFF091212F84F00176E39 /* N2Connection.mm in Sources */,
 				592CFF0B1212F84F00176E39 /* N2ConnectionListener.mm in Sources */,
 				592CFF0D1212F84F00176E39 /* N2WebServiceClient.mm in Sources */,
-				592CFF0F1212F84F00176E39 /* N2RedundantWebServiceClient.mm in Sources */,
 				847AFEED1A14DFA40067AA07 /* PrettyCell.mm in Sources */,
 				592CFF111212F84F00176E39 /* N2XMLRPC.mm in Sources */,
 				847AFEFE1A14DFA40067AA07 /* Scheduler.m in Sources */,

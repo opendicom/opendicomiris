@@ -1,14 +1,13 @@
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 
 @interface N2XMLRPC : NSObject {
 }
 
-+(NSObject*)ParseElement:(NSXMLNode*)n;
-+(NSString*)FormatElement:(NSObject*)o;
++(NSObject*)ParseElement:(NSXMLNode*)node;
++(NSString*)FormatElement:(NSObject*)object;
 
 +(NSString*)requestWithMethodName:(NSString*)methodName arguments:(NSArray*)args;
 +(NSString*)responseWithValue:(id)value;
-+(NSString*)responseWithValue:(id)value options:(NSUInteger)options;
 
 @end

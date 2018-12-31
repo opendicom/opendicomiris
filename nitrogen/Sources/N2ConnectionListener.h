@@ -1,4 +1,4 @@
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 extern NSString* N2ConnectionListenerOpenedConnectionNotification;
 extern NSString* N2ConnectionListenerOpenedConnection;
