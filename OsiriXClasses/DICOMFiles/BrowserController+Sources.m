@@ -13,7 +13,6 @@
  =========================================================================*/
 
 #import "BrowserController+Sources.h"
-#import "BrowserController+Sources+Copy.h"
 #import "DataNodeIdentifier.h"
 #import "PrettyCell.h"
 #import "DicomDatabase.h"
@@ -1100,6 +1099,7 @@ static void* const SearchDicomNodesContext = @"SearchDicomNodesContext";
 	return NSDragOperationNone;
 }
 
+/*JF
 -(BOOL)tableView:(NSTableView*)tableView acceptDrop:(id<NSDraggingInfo>)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation
 {
 	NSPasteboard* pb = [info draggingPasteboard];
@@ -1115,6 +1115,7 @@ static void* const SearchDicomNodesContext = @"SearchDicomNodesContext";
 	
 	return [_browser initiateCopyImages:dicomImages toSource:[_browser sourceIdentifierAtRow:row]];
 }
+*/
 
 -(void)tableViewSelectionDidChange:(NSNotification*)notification
 {

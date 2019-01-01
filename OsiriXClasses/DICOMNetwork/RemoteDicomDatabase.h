@@ -56,9 +56,6 @@
 
 -(void)uploadFilesAtPaths:(NSArray*)paths
              imageObjects:(NSArray*)images;
--(void)uploadFilesAtPaths:(NSArray*)paths
-             imageObjects:(NSArray*)images
-        generatedByOsiriX:(BOOL)generatedByOsiriX;
 
 -(void)addStudies:(NSArray*)dicomStudies
           toAlbum:(DicomAlbum*)dicomAlbum;

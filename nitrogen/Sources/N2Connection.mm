@@ -114,7 +114,13 @@ NSString* N2ConnectionStatusDidChangeNotification = @"N2ConnectionStatusDidChang
                             port:(NSInteger)port
                              tls:(BOOL)tlsFlag
 {
-	return [self sendSynchronousRequest:request toAddress:address port:port tls:tlsFlag dataHandlerTarget:nil selector:nil context:nil];
+	return [self sendSynchronousRequest:request
+                             toAddress:address
+                                  port:port
+                                   tls:tlsFlag
+                     dataHandlerTarget:nil
+                              selector:nil
+                               context:nil];
 } 
 +(NSData*)sendSynchronousRequest:(NSData*)request
                        toAddress:(NSString*)address
@@ -179,14 +185,14 @@ NSString* N2ConnectionStatusDidChangeNotification = @"N2ConnectionStatusDidChang
 		NSInteger port = [[io objectAtIndex:4] integerValue];
 		BOOL tlsFlag = [[io objectAtIndex:5] boolValue];
 		
-		if (io.count == 9) {
+		/*jf
 			id dataHandlerTarget = [io objectAtIndex:6];
 			SEL dataHandlerSelector = (SEL)[[io objectAtIndex:7] pointerValue];
 			void* dataHandlerContext = [[io objectAtIndex:8] pointerValue];
 			c = [[N2ConnectionWithDelegateHandler alloc] initWithAddress:address port:port tls:tlsFlag dataHandlerTarget:dataHandlerTarget selector:dataHandlerSelector context:dataHandlerContext];
-		} else {
+		*/
 			c = [[N2Connection alloc] initWithAddress:address port:port tls:tlsFlag];
-		}
+		
 		
         c.closeOnRemoteClose = YES;
 		c.maximumReadSizePerEvent = 1024*128;

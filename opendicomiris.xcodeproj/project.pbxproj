@@ -535,8 +535,6 @@
 		847AFDEE1A14DFA40067AA07 /* BioradHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFB421A14DFA00067AA07 /* BioradHeader.h */; };
 		847AFDEF1A14DFA40067AA07 /* BrowserController+Activity.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFB431A14DFA00067AA07 /* BrowserController+Activity.h */; };
 		847AFDF01A14DFA40067AA07 /* BrowserController+Activity.mm in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB441A14DFA00067AA07 /* BrowserController+Activity.mm */; };
-		847AFDF11A14DFA40067AA07 /* BrowserController+Sources+Copy.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFB451A14DFA00067AA07 /* BrowserController+Sources+Copy.h */; };
-		847AFDF21A14DFA40067AA07 /* BrowserController+Sources+Copy.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB461A14DFA00067AA07 /* BrowserController+Sources+Copy.m */; };
 		847AFDF31A14DFA40067AA07 /* BrowserController+Sources.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFB471A14DFA00067AA07 /* BrowserController+Sources.h */; };
 		847AFDF41A14DFA40067AA07 /* BrowserController+Sources.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB481A14DFA00067AA07 /* BrowserController+Sources.m */; };
 		847AFDF51A14DFA40067AA07 /* BrowserController.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFB491A14DFA00067AA07 /* BrowserController.h */; };
@@ -7033,8 +7031,6 @@
 		847AFB421A14DFA00067AA07 /* BioradHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BioradHeader.h; sourceTree = "<group>"; };
 		847AFB431A14DFA00067AA07 /* BrowserController+Activity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BrowserController+Activity.h"; sourceTree = "<group>"; };
 		847AFB441A14DFA00067AA07 /* BrowserController+Activity.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "BrowserController+Activity.mm"; sourceTree = "<group>"; };
-		847AFB451A14DFA00067AA07 /* BrowserController+Sources+Copy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BrowserController+Sources+Copy.h"; sourceTree = "<group>"; };
-		847AFB461A14DFA00067AA07 /* BrowserController+Sources+Copy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BrowserController+Sources+Copy.m"; sourceTree = "<group>"; };
 		847AFB471A14DFA00067AA07 /* BrowserController+Sources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BrowserController+Sources.h"; sourceTree = "<group>"; };
 		847AFB481A14DFA00067AA07 /* BrowserController+Sources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BrowserController+Sources.m"; sourceTree = "<group>"; };
 		847AFB491A14DFA00067AA07 /* BrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserController.h; sourceTree = "<group>"; };
@@ -13359,8 +13355,6 @@
 				847AFB421A14DFA00067AA07 /* BioradHeader.h */,
 				847AFB431A14DFA00067AA07 /* BrowserController+Activity.h */,
 				847AFB441A14DFA00067AA07 /* BrowserController+Activity.mm */,
-				847AFB451A14DFA00067AA07 /* BrowserController+Sources+Copy.h */,
-				847AFB461A14DFA00067AA07 /* BrowserController+Sources+Copy.m */,
 				847AFB471A14DFA00067AA07 /* BrowserController+Sources.h */,
 				847AFB481A14DFA00067AA07 /* BrowserController+Sources.m */,
 				847AFB491A14DFA00067AA07 /* BrowserController.h */,
@@ -22748,7 +22742,6 @@
 				CEBD917714F1ADDB000DA1FE /* vtkSLACReader.h in Headers */,
 				CEBD917814F1ADDB000DA1FE /* vtkSLCReader.h in Headers */,
 				CEBD917914F1ADDB000DA1FE /* vtkSliceAndDiceLayoutStrategy.h in Headers */,
-				847AFDF11A14DFA40067AA07 /* BrowserController+Sources+Copy.h in Headers */,
 				CEBD917A14F1ADDB000DA1FE /* vtkSliceCubes.h in Headers */,
 				847AFD9D1A14DFA30067AA07 /* VRFlyThruAdapter.h in Headers */,
 				847AFCD21A14DFA30067AA07 /* altivecFunctions.h in Headers */,
@@ -24898,7 +24891,6 @@
 				ABE46F990A76410F00327466 /* jchuff.c in Sources */,
 				4F4FAD4A1A9118B300B2EDFC /* OSIDerivedROI.m in Sources */,
 				847AFDC41A14DFA40067AA07 /* CPRMPRDCMView.m in Sources */,
-				847AFDF21A14DFA40067AA07 /* BrowserController+Sources+Copy.m in Sources */,
 				847AFDA61A14DFA30067AA07 /* VRView.mm in Sources */,
 				ABE46F9B0A76410F00327466 /* jcinit.c in Sources */,
 				ABE46F9C0A76410F00327466 /* jclhuff.c in Sources */,
