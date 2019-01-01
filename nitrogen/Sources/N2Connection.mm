@@ -54,34 +54,108 @@ NSString* N2ConnectionStatusDidChangeNotification = @"N2ConnectionStatusDidChang
 @synthesize closeOnNextSpaceAvailable = _closeOnNextSpaceAvailable;
 @synthesize lastEventTimeInterval;
 
-+(NSData*)sendSynchronousRequest:(NSData*)request toAddress:(NSString*)address port:(NSInteger)port {
-	return [self sendSynchronousRequest:request toAddress:address port:port tls:NO];
+
+#pragma mark -
+-(id)initWithAddress:(NSString*)address
+                port:(NSInteger)port
+{
+   return [self initWithAddress:address port:port is:nil os:nil];
+}
+-(id)initWithAddress:(NSString*)address
+                port:(NSInteger)port
+                  is:(NSInputStream*)is
+                  os:(NSOutputStream*)os
+{
+   return [self initWithAddress:address port:port tls:NO is:is os:os];
+}
+-(id)initWithAddress:(NSString*)address
+                port:(NSInteger)port
+                 tls:(BOOL)tlsFlag
+{
+   return [self initWithAddress:address port:port tls:tlsFlag is:nil os:nil];
 }
 
-+(NSData*)sendSynchronousRequest:(NSData*)request toAddress:(NSString*)address port:(NSInteger)port tls:(BOOL)tlsFlag {
+#pragma mark main init
+-(id)initWithAddress:(NSString*)address
+                port:(NSInteger)port
+                 tls:(BOOL)tlsFlag
+                  is:(NSInputStream*)is
+                  os:(NSOutputStream*)os
+{
+   if ((self = [super init])) {
+      _address = [address retain];
+      _port = port;
+      _tlsFlag = tlsFlag;
+      
+      _inputBuffer = [[NSMutableData alloc] initWithCapacity:1024*128];
+      _outputBuffer = [[NSMutableData alloc] initWithCapacity:1024*128];
+      
+      if (is && os) {
+         _status = N2ConnectionStatusConnecting;
+         _inputStream = [is retain];
+         _outputStream = [os retain];
+         [self open];
+      } else
+         [self reconnect];
+   }
+   
+   return self;
+}
+#pragma mark -
+
++(NSData*)sendSynchronousRequest:(NSData*)request
+                       toAddress:(NSString*)address
+                            port:(NSInteger)port
+{
+	return [self sendSynchronousRequest:request toAddress:address port:port tls:NO];
+}
++(NSData*)sendSynchronousRequest:(NSData*)request
+                       toAddress:(NSString*)address
+                            port:(NSInteger)port
+                             tls:(BOOL)tlsFlag
+{
 	return [self sendSynchronousRequest:request toAddress:address port:port tls:tlsFlag dataHandlerTarget:nil selector:nil context:nil];
 } 
-
-+(NSData*)sendSynchronousRequest:(NSData*)request toAddress:(NSString*)address port:(NSInteger)port dataHandlerTarget:(id)target selector:(SEL)selector context:(void*)context {
++(NSData*)sendSynchronousRequest:(NSData*)request
+                       toAddress:(NSString*)address
+                            port:(NSInteger)port
+               dataHandlerTarget:(id)target
+                        selector:(SEL)selector
+                         context:(void*)context
+{
 	return [self sendSynchronousRequest:request toAddress:address port:port tls:NO dataHandlerTarget:target selector:selector context:context];
 }
 
-+(NSData*)sendSynchronousRequest:(NSData*)request toAddress:(NSString*)address port:(NSInteger)port tls:(BOOL)tlsFlag dataHandlerTarget:(id)target selector:(SEL)selector context:(void*)context  {
+
+
+#pragma mark main invocation
++(NSData*)sendSynchronousRequest:(NSData*)request
+                       toAddress:(NSString*)address
+                            port:(NSInteger)port
+                             tls:(BOOL)tlsFlag
+               dataHandlerTarget:(id)target
+                        selector:(SEL)selector
+                         context:(void*)context
+{
 	if (!request) request = [NSData data];
 	
 	NSConditionLock* conditionLock = [[NSConditionLock alloc] initWithCondition:0]; 
-	NSMutableArray* io = [NSMutableArray arrayWithObjects: conditionLock, [NSThread currentThread], request, address, [NSNumber numberWithInteger:port], [NSNumber numberWithBool:tlsFlag], target, [NSValue valueWithPointer:selector], [NSValue valueWithPointer:context], nil];
+	NSMutableArray* io = [NSMutableArray arrayWithObjects:
+                         conditionLock,
+                         [NSThread currentThread],
+                         request,
+                         address,
+                         [NSNumber numberWithInteger:port],
+                         [NSNumber numberWithBool:tlsFlag],
+                         target,
+                         [NSValue valueWithPointer:selector],
+                         [NSValue valueWithPointer:context],
+                         nil];
 	
 	NSThread* thread = [[NSThread alloc] initWithTarget:self selector:@selector(sendSynchronousRequestThread:) object:io];
 	[thread start];
 	[conditionLock lockWhenCondition:1];
-	
-	//	if (io.count == 9) {
-	//		NSInvocation* invocation = [io objectAtIndex:7];
-	//		[invocation invoke];
-	//		[conditionLock unlockWithCondition:0];
-	//	}
-	
+		
 	[conditionLock unlock];
 	[conditionLock release];
 	[thread release];
@@ -91,6 +165,7 @@ NSString* N2ConnectionStatusDidChangeNotification = @"N2ConnectionStatusDidChang
 		@throw response;
 	return response;
 }
+
 
 +(void)sendSynchronousRequestThread:(NSMutableArray*)io {
 	NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
@@ -109,7 +184,6 @@ NSString* N2ConnectionStatusDidChangeNotification = @"N2ConnectionStatusDidChang
 			SEL dataHandlerSelector = (SEL)[[io objectAtIndex:7] pointerValue];
 			void* dataHandlerContext = [[io objectAtIndex:8] pointerValue];
 			c = [[N2ConnectionWithDelegateHandler alloc] initWithAddress:address port:port tls:tlsFlag dataHandlerTarget:dataHandlerTarget selector:dataHandlerSelector context:dataHandlerContext];
-			//			[io addObject:((N2ConnectionWithDelegateHandler*)c).invocation];
 		} else {
 			c = [[N2Connection alloc] initWithAddress:address port:port tls:tlsFlag];
 		}
@@ -157,38 +231,8 @@ NSString* N2ConnectionStatusDidChangeNotification = @"N2ConnectionStatusDidChang
 	}
 }
 
--(id)initWithAddress:(NSString*)address port:(NSInteger)port {
-	return [self initWithAddress:address port:port is:nil os:nil];
-}
+#pragma mark -
 
--(id)initWithAddress:(NSString*)address port:(NSInteger)port is:(NSInputStream*)is os:(NSOutputStream*)os {
-	return [self initWithAddress:address port:port tls:NO is:is os:os];
-}
-
--(id)initWithAddress:(NSString*)address port:(NSInteger)port tls:(BOOL)tlsFlag {
-	return [self initWithAddress:address port:port tls:tlsFlag is:nil os:nil];
-}
-
--(id)initWithAddress:(NSString*)address port:(NSInteger)port tls:(BOOL)tlsFlag is:(NSInputStream*)is os:(NSOutputStream*)os {
-	if ((self = [super init])) {
-        _address = [address retain];
-        _port = port;
-        _tlsFlag = tlsFlag;
-        
-        _inputBuffer = [[NSMutableData alloc] initWithCapacity:1024*128];
-        _outputBuffer = [[NSMutableData alloc] initWithCapacity:1024*128];
-        
-        if (is && os) {
-            _status = N2ConnectionStatusConnecting;
-            _inputStream = [is retain];
-            _outputStream = [os retain];
-            [self open];
-        } else
-            [self reconnect];
-    }
-	
-	return self;
-}
 
 -(NSString*)address {
    //JF

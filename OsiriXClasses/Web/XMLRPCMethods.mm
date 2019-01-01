@@ -1053,8 +1053,7 @@
 
 -(id)methodCall:(NSString*)methodName params:(NSArray*)params error:(NSError**)error
 {
-   //called as a new XMLRPCInterfaceConnection with delegate XMLRPCMethod
-
+#pragma mark notify plugins
 
    NSMutableDictionary* notificationObject = nil;
     if ([params count] < 1)
@@ -1074,9 +1073,10 @@
    [notificationObject setObject:doc          forKey:@"NSXMLDocument"];
    [notificationObject setObject:self.address forKey:@"peerAddress"];
    
-    [[NSNotificationCenter defaultCenter] postNotificationName:OsirixXMLRPCMessageNotification object:notificationObject];
-    
-    if ([[notificationObject valueForKey:@"Processed"] boolValue] || [notificationObject valueForKey:@"Response"] || [notificationObject valueForKey:@"NSXMLDocumentResponse"]) {
+   
+   [[NSNotificationCenter defaultCenter] postNotificationName:OsirixXMLRPCMessageNotification object:notificationObject];
+   
+   if ([[notificationObject valueForKey:@"Processed"] boolValue] || [notificationObject valueForKey:@"Response"] || [notificationObject valueForKey:@"NSXMLDocumentResponse"]) {
         // request processed, most probably by a plugin
         // new plugins are expected to return a value through the Response key, containing Cocoa values (NSNumber, NSArray, NSDictionary...)
         id response = [notificationObject valueForKey:@"Response"];
@@ -1094,7 +1094,9 @@
                  ]
                 ];
     }
-    
+ 
+#pragma mark default to N2XMLRPCConnection
+
     return [super methodCall:methodName params:params error:error];
 }
 

@@ -40,18 +40,52 @@ enum N2ConnectionStatus {
 @property                  BOOL             closeOnNextSpaceAvailable;
 @property(readonly,retain) NSError        * error;
 
-// non-tls
-+(NSData*)sendSynchronousRequest:(NSData*)request toAddress:(id)address port:(NSInteger)port;
-+(NSData*)sendSynchronousRequest:(NSData*)request toAddress:(id)address port:(NSInteger)port dataHandlerTarget:(id)target selector:(SEL)selector context:(void*)context;
-// -(NSInteger)connection:(N2Connection*)connection dummyDataHandler:(NSData*)data context:(void*)context
--(id)initWithAddress:(id)address port:(NSInteger)port;
--(id)initWithAddress:(id)address port:(NSInteger)port is:(NSInputStream*)is os:(NSOutputStream*)os;
+#pragma mark -
+-(id)initWithAddress:(id)address
+                port:(NSInteger)port;
+-(id)initWithAddress:(id)address
+                port:(NSInteger)port
+                  is:(NSInputStream*)is
+                  os:(NSOutputStream*)os;
+-(id)initWithAddress:(id)address
+                port:(NSInteger)port
+                 tls:(BOOL)tlsFlag;
 
-// generic
-+(NSData*)sendSynchronousRequest:(NSData*)request toAddress:(id)address port:(NSInteger)port tls:(BOOL)tlsFlag;
-+(NSData*)sendSynchronousRequest:(NSData*)request toAddress:(id)address port:(NSInteger)port tls:(BOOL)tlsFlag dataHandlerTarget:(id)target selector:(SEL)selector context:(void*)context; // -(NSInteger)connection:(N2Connection*)connection dummyDataHandler:(NSData*)data context:(void*)context
--(id)initWithAddress:(id)address port:(NSInteger)port tls:(BOOL)tlsFlag;
--(id)initWithAddress:(id)address port:(NSInteger)port tls:(BOOL)tlsFlag is:(NSInputStream*)is os:(NSOutputStream*)os;
+
+#pragma mark main init
+-(id)initWithAddress:(id)address
+                port:(NSInteger)port
+                 tls:(BOOL)tlsFlag
+                  is:(NSInputStream*)is
+                  os:(NSOutputStream*)os;
+#pragma mark -
+
++(NSData*)sendSynchronousRequest:(NSData*)request
+                       toAddress:(id)address
+                            port:(NSInteger)port;
++(NSData*)sendSynchronousRequest:(NSData*)request
+                       toAddress:(id)address
+                            port:(NSInteger)port
+                             tls:(BOOL)tlsFlag;
++(NSData*)sendSynchronousRequest:(NSData*)request
+                       toAddress:(id)address
+                            port:(NSInteger)port
+               dataHandlerTarget:(id)target
+                        selector:(SEL)selector
+                         context:(void*)context;
+
+
+#pragma mark main invocation
++(NSData*)sendSynchronousRequest:(NSData*)request
+                       toAddress:(id)address
+                            port:(NSInteger)port
+                             tls:(BOOL)tlsFlag
+               dataHandlerTarget:(id)target
+                        selector:(SEL)selector
+                         context:(void*)context;
+//sendSynchronousRequestThread:
+#pragma mark -
+
 
 -(void)reconnect;
 -(void)close;

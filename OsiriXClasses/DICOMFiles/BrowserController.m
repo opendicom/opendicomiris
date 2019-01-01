@@ -11197,7 +11197,7 @@ static BOOL withReset = NO;
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
 	if (![_database isLocal])
-		[(RemoteDicomDatabase*)_database uploadFilesAtPaths:files imageObjects:nil generatedByOsiriX:NO];
+		[(RemoteDicomDatabase*)_database uploadFilesAtPaths:files imageObjects:nil];
 	
 	[pool release];
 }
@@ -11207,7 +11207,7 @@ static BOOL withReset = NO;
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
 	if (![_database isLocal])
-		[(RemoteDicomDatabase*)_database uploadFilesAtPaths:files imageObjects:nil generatedByOsiriX:YES];
+		[(RemoteDicomDatabase*)_database uploadFilesAtPaths:files imageObjects:nil];
 	
 	[pool release];
 }

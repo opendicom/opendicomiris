@@ -184,17 +184,19 @@
     
     if (filesToSend.count)
     {
-        [RemoteDicomDatabase performSelectorInBackground:@selector(_uploadFilesAtPathsGeneratedByOsiriX:) withObject:[NSArray arrayWithObjects:filesToSend, filesToSendObjectIDs, [NSNumber numberWithBool:generatedByOsiriX], self, nil]];
+       //JF [RemoteDicomDatabase performSelectorInBackground:@selector(_uploadFilesAtPathsGeneratedByOsiriX:) withObject:[NSArray arrayWithObjects:filesToSend, filesToSendObjectIDs, [NSNumber numberWithBool:generatedByOsiriX], self, nil]];
+        [RemoteDicomDatabase performSelectorInBackground:@selector(_uploadFilesAtPaths:) withObject:[NSArray arrayWithObjects:filesToSend, filesToSendObjectIDs, self, nil]];
     }
     return objectIDs;
 }
 
-+(void)_uploadFilesAtPathsGeneratedByOsiriX:(NSArray*)io {
++(void)_uploadFilesAtPaths:(NSArray*)io
+{
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     @try {
         NSArray* paths = [io objectAtIndex:0];
         NSArray* objIDs = [io objectAtIndex:1];
-        BOOL byOsiriX = [[io objectAtIndex:2] boolValue];
+        //BOOL byOsiriX = [[io objectAtIndex:2] boolValue];
         RemoteDicomDatabase *remoteDB = [io objectAtIndex:3];
         NSManagedObjectContext *iContext = [remoteDB independentContext];
         
@@ -212,7 +214,8 @@
                 // nothing, just look for other objects
             }
         
-        [remoteDB uploadFilesAtPaths:paths imageObjects:images generatedByOsiriX:byOsiriX];
+        [remoteDB uploadFilesAtPaths:paths
+                        imageObjects:images];
         
     } @catch (NSException* e) {
         N2LogExceptionWithStackTrace(e);
@@ -223,7 +226,18 @@
 
 #pragma mark Communication
 
--(NSData*)synchronousRequest:(NSData*)request urgent:(BOOL)urgent dataHandlerTarget:(id)target selector:(SEL)sel context:(void*)context {
+-(NSData*)synchronousRequest:(NSData*)request
+                      urgent:(BOOL)now
+{
+   return [self synchronousRequest:request urgent:now dataHandlerTarget:nil selector:nil context:nil];
+}
+
+-(NSData*)synchronousRequest:(NSData*)request
+                      urgent:(BOOL)urgent
+           dataHandlerTarget:(id)target
+                    selector:(SEL)sel
+                     context:(void*)context
+{
     OSStatus waitOnSemaphoreStatus = 0;
     if (urgent)
         waitOnSemaphoreStatus = -1; // to avoid MPSignalSemaphore
@@ -245,10 +259,6 @@
     }
     
     return nil;
-}
-
--(NSData*)synchronousRequest:(NSData*)request urgent:(BOOL)now {
-    return [self synchronousRequest:request urgent:now dataHandlerTarget:nil selector:nil context:nil];
 }
 
 +(void)_data:(NSMutableData*)data appendInt:(unsigned int)i {
@@ -557,9 +567,6 @@ enum RemoteDicomDatabaseStudiesAlbumAction { RemoteDicomDatabaseStudiesAlbumActi
 	[self _studies:dicomStudies album:dicomAlbum action:RemoteDicomDatabaseStudiesAlbumActionRemove];
 }
 
--(void)uploadFilesAtPaths:(NSArray*)paths imageObjects:(NSArray*)images {
-	return [self uploadFilesAtPaths:paths imageObjects:images generatedByOsiriX:NO];
-}
 
 +(BOOL)data:(NSMutableData*)data readInteger:(unsigned int*)valp {
     if (data.length < 4)
@@ -571,7 +578,9 @@ enum RemoteDicomDatabaseStudiesAlbumAction { RemoteDicomDatabaseStudiesAlbumActi
     return YES;
 }
 
--(void)uploadFilesAtPaths:(NSArray*)paths imageObjects:(NSArray*)images generatedByOsiriX:(BOOL)generatedByOsiriX {
+-(void)uploadFilesAtPaths:(NSArray*)paths
+             imageObjects:(NSArray*)images
+{
 	NSThread* thread = [NSThread currentThread];
 	[thread enterOperation];
 	@try {
@@ -579,7 +588,8 @@ enum RemoteDicomDatabaseStudiesAlbumAction { RemoteDicomDatabaseStudiesAlbumActi
 			if (![NSFileManager.defaultManager fileExistsAtPath:path])
 				[NSException raise:NSInvalidArgumentException format:@"File not available."];
 		
-		NSMutableData* request = [NSMutableData dataWithBytes: generatedByOsiriX? "SENDG" : "SENDD" length:6];
+		//NSMutableData* request = [NSMutableData dataWithBytes: generatedByOsiriX? "SENDG" : "SENDD" length:6];
+      NSMutableData* request = [NSMutableData dataWithBytes:"SENDD" length:6];
 		[RemoteDicomDatabase _data:request appendInt:paths.count];
 		NSMutableArray* filesInRequest = [NSMutableArray array];
 		NSMutableArray* dbObjsInRequest = images? [NSMutableArray array] : nil;

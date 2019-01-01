@@ -1,17 +1,3 @@
-/*=========================================================================
- Program:   OsiriX
- 
- Copyright (c) OsiriX Team
- All rights reserved.
- Distributed under GNU - LGPL
- 
- See http://www.osirix-viewer.com/copyright.html for details.
- 
- This software is distributed WITHOUT ANY WARRANTY; without even
- the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
- PURPOSE.
- =========================================================================*/
-
 #import "DicomDatabase.h"
 #import "NSString+N2.h"
 #import "Notifications.h"
@@ -86,21 +72,21 @@ NSString* const CurrentDatabaseVersion = @"2.5";
 }
 
 static NSString* const SqlFileName = @"Database.sql";
-NSString* const OsirixDataDirName = @"OsiriX OS Data";
+NSString* const opendicomirisDataDirName = @"opendicomiris";
 NSString* const O2ScreenCapturesSeriesName = NSLocalizedString(@"OsiriX Screen Captures", nil);;
 
 +(NSString*)baseDirPathForPath:(NSString*)path {
-	// were we given a path inside a OsirixDataDirName dir?
+	// were we given a path inside a opendicomirisDataDirName dir?
 	NSArray* pathParts = path.pathComponents;
 	for (int i = (long)pathParts.count-1; i >= 0; --i)
-		if ([[pathParts objectAtIndex:i] isEqualToString:OsirixDataDirName]) {
+		if ([[pathParts objectAtIndex:i] isEqualToString:opendicomirisDataDirName]) {
 			path = [NSString pathWithComponents:[pathParts subarrayWithRange:NSMakeRange(0,i+1)]];
 			break;
 		}
 	
-	// otherwise, consider the path was incomplete and just append the OsirixDataDirName element to tho path
-	if (![[path lastPathComponent] isEqualToString:OsirixDataDirName]) 
-		path = [path stringByAppendingPathComponent:OsirixDataDirName];
+	// otherwise, consider the path was incomplete and just append the opendicomirisDataDirName element to tho path
+	if (![[path lastPathComponent] isEqualToString:opendicomirisDataDirName])
+		path = [path stringByAppendingPathComponent:opendicomirisDataDirName];
 	
 	return path;
 }
@@ -326,17 +312,20 @@ static DicomDatabase* activeLocalDatabase = nil;
 
 #pragma mark Instance
 
-@synthesize baseDirPath = _baseDirPath, dataBaseDirPath = _dataBaseDirPath, dataFileIndex = _dataFileIndex, name = _name, timeOfLastModification = _timeOfLastModification;
-@synthesize isReadOnly = _isReadOnly;
-@synthesize sourcePath = _sourcePath;
-@synthesize processFilesLock = _processFilesLock;
+@synthesize baseDirPath =                    _baseDirPath;
+@synthesize dataBaseDirPath =                _dataBaseDirPath;
+@synthesize dataFileIndex =                  _dataFileIndex;
+@synthesize name =                           _name;
+@synthesize timeOfLastModification =         _timeOfLastModification;
+@synthesize isReadOnly =                     _isReadOnly;
+@synthesize sourcePath =                     _sourcePath;
+@synthesize processFilesLock =               _processFilesLock;
 @synthesize importFilesFromIncomingDirLock = _importFilesFromIncomingDirLock;
-@synthesize hasPotentiallySlowDataAccess = _hasPotentiallySlowDataAccess;
-@synthesize compressQueue = _compressQueue, decompressQueue = _decompressQueue, compressDecompressThread = _compressDecompressThread;
+@synthesize hasPotentiallySlowDataAccess =   _hasPotentiallySlowDataAccess;
+@synthesize compressQueue =                  _compressQueue;
+@synthesize decompressQueue =                _decompressQueue;
+@synthesize compressDecompressThread =       _compressDecompressThread;
 
-/*- (void)setIsReadOnly:(BOOL)isReadOnly {
-    _isReadOnly = isReadOnly;
-}*/
 
 -(DataNodeIdentifier*)dataNodeIdentifier {
     return [LocalDatabaseNodeIdentifier localDatabaseNodeIdentifierWithPath:self.baseDirPath];
@@ -431,7 +420,7 @@ static DicomDatabase* activeLocalDatabase = nil;
             
             if (isNewFile && [NSThread isMainThread] && ![p hasPrefix:@"/tmp/"] && !isNewDb) {
                 [NSThread.currentThread enterOperation];
-                NSThread.currentThread.name = NSLocalizedString(@"Rebuilding default OsiriX database...", nil);
+                NSThread.currentThread.name = NSLocalizedString(@"Rebuilding default opendicomiris database...", nil);
                 ThreadModalForWindowController* tmfwc = [[ThreadModalForWindowController alloc] initWithThread:[NSThread currentThread] window:nil];
                 [self rebuild:YES];
                 [tmfwc invalidate];
@@ -1239,34 +1228,6 @@ NSString* const DicomDatabaseLogEntryEntityName = @"LogEntry";
 }
 
 
-
-//- (void)listenerAnonymizeFiles: (NSArray*)files
-//{
-//#ifndef OSIRIX_LIGHT
-//	NSArray* array = [NSArray arrayWithObjects: [DCMAttributeTag tagWithName:@"PatientsName"], @"**anonymized**", nil];
-//	NSMutableArray* tags = [NSMutableArray array];
-//	
-//	[tags addObject:array];
-//	
-//	for( NSString *file in files)
-//	{
-//		NSString *destPath = [file stringByAppendingString:@"temp"];
-//		
-//		@try
-//		{
-//			[DCMObject anonymizeContentsOfFile: file  tags:tags  writingToFile:destPath];
-//		}
-//		@catch (NSException * e)
-//		{
-//          N2LogExceptionWithStackTrace(e);
-//		}
-//		
-//		[[NSFileManager defaultManager] removeFileAtPath: file handler: nil];
-//		[[NSFileManager defaultManager] movePath:destPath toPath: file handler: nil];
-//	}
-//#endif
-//}
-
 -(BOOL)compressFilesAtPaths:(NSArray*)paths
 {
 	return [DicomDatabase compressDicomFilesAtPaths:paths];
@@ -1422,38 +1383,39 @@ NSString* const DicomDatabaseLogEntryEntityName = @"LogEntry";
 	return [self addFilesAtPaths:paths postNotifications:YES];
 }
 
--(NSArray*)addFilesAtPaths:(NSArray*)paths postNotifications:(BOOL)postNotifications
+-(NSArray*)addFilesAtPaths:(NSArray*)paths
+         postNotifications:(BOOL)postNotifications
 {
 	return [self addFilesAtPaths:paths postNotifications:postNotifications dicomOnly:[[NSUserDefaults standardUserDefaults] boolForKey: @"onlyDICOM"] rereadExistingItems:NO];
 }
 
--(NSArray*)addFilesAtPaths:(NSArray*)paths postNotifications:(BOOL)postNotifications dicomOnly:(BOOL)dicomOnly rereadExistingItems:(BOOL)rereadExistingItems
+-(NSArray*)addFilesAtPaths:(NSArray*)paths
+         postNotifications:(BOOL)postNotifications
+                 dicomOnly:(BOOL)dicomOnly
+       rereadExistingItems:(BOOL)rereadExistingItems
 {
-	return [self addFilesAtPaths:paths postNotifications:postNotifications dicomOnly:dicomOnly rereadExistingItems:rereadExistingItems generatedByOsiriX:NO];
+    return [self addFilesAtPaths: paths postNotifications:postNotifications dicomOnly:dicomOnly rereadExistingItems:rereadExistingItems returnArray: YES];
 }
 
--(NSArray*)addFilesAtPaths:(NSArray*)paths postNotifications:(BOOL)postNotifications dicomOnly:(BOOL)dicomOnly rereadExistingItems:(BOOL)rereadExistingItems generatedByOsiriX:(BOOL)generatedByOsiriX
+-(NSArray*)addFilesAtPaths:(NSArray*)paths
+         postNotifications:(BOOL)postNotifications
+                 dicomOnly:(BOOL)dicomOnly
+       rereadExistingItems:(BOOL)rereadExistingItems
+               returnArray:(BOOL)returnArray
 {
-    return [self addFilesAtPaths: paths postNotifications:postNotifications dicomOnly:dicomOnly rereadExistingItems:rereadExistingItems generatedByOsiriX:generatedByOsiriX returnArray: YES];
+    return [self addFilesAtPaths: paths postNotifications: postNotifications dicomOnly: dicomOnly rereadExistingItems: rereadExistingItems importedFiles: NO returnArray: returnArray];
 }
 
--(NSArray*)addFilesAtPaths:(NSArray*)paths postNotifications:(BOOL)postNotifications dicomOnly:(BOOL)dicomOnly rereadExistingItems:(BOOL)rereadExistingItems generatedByOsiriX:(BOOL)generatedByOsiriX returnArray: (BOOL) returnArray
-{
-    return [self addFilesAtPaths: paths postNotifications: postNotifications dicomOnly: dicomOnly rereadExistingItems: rereadExistingItems generatedByOsiriX: generatedByOsiriX importedFiles: NO returnArray: returnArray];
-}
-
--(NSArray*)addFilesAtPaths:(NSArray*)paths postNotifications:(BOOL)postNotifications dicomOnly:(BOOL)dicomOnly rereadExistingItems:(BOOL)rereadExistingItems generatedByOsiriX:(BOOL)generatedByOsiriX importedFiles: (BOOL) importedFiles returnArray: (BOOL) returnArray
+-(NSArray*)addFilesAtPaths:(NSArray*)paths
+         postNotifications:(BOOL)postNotifications
+                 dicomOnly:(BOOL)dicomOnly
+       rereadExistingItems:(BOOL)rereadExistingItems
+             importedFiles:(BOOL)importedFiles
+               returnArray:(BOOL)returnArray
 {
 	NSThread* thread = [NSThread currentThread];
     
-    //#define RANDOMFILES
-#ifdef RANDOMFILES
-    NSMutableArray* randomArray = [NSMutableArray array];
-    for( int i = 0; i < 50000; i++)
-        [randomArray addObject:@"yahoo/google/osirix/microsoft"];
-    paths = randomArray;
-#endif
-    
+   
     #ifndef NDEBUG
     [self checkForCorrectContextThread];
     #endif
@@ -1587,10 +1549,8 @@ NSString* const DicomDatabaseLogEntryEntityName = @"LogEntry";
         
 		[thread enterOperationIgnoringLowerLevels];
         thread.status = [NSString stringWithFormat:NSLocalizedString(@"Adding %@", nil), N2LocalizedSingularPluralCount(dicomFilesArray.count, NSLocalizedString(@"file", nil), NSLocalizedString(@"files", nil))];
-//        NSLog(@"before: %X", self.managedObjectContext);
-//      NSArray* addedImagesArray = [self addFilesInDictionaries:dicomFilesArray postNotifications:postNotifications rereadExistingItems:rereadExistingItems generatedByOsiriX:generatedByOsiriX];
-        
-        NSArray* objectIDs = [self addFilesDescribedInDictionaries:dicomFilesArray postNotifications:postNotifications rereadExistingItems:rereadExistingItems generatedByOsiriX:generatedByOsiriX importedFiles: importedFiles returnArray: returnArray];
+       
+        NSArray* objectIDs = [self addFilesDescribedInDictionaries:dicomFilesArray postNotifications:postNotifications rereadExistingItems:rereadExistingItems importedFiles: importedFiles returnArray: returnArray];
         
 		[thread exitOperation];
 		
@@ -1680,19 +1640,28 @@ NSString* const DicomDatabaseLogEntryEntityName = @"LogEntry";
  addFilesDescribedInDictionaries:postNotifications:rereadExistingItems:generatedByOsiriX:
  
  */
--(NSArray*)addFilesDescribedInDictionaries:(NSArray*)dicomFilesArray postNotifications:(BOOL)postNotifications rereadExistingItems:(BOOL)rereadExistingItems generatedByOsiriX:(BOOL)generatedByOsiriX
+-(NSArray*)addFilesDescribedInDictionaries:(NSArray*)dicomFilesArray
+                         postNotifications:(BOOL)postNotifications
+                       rereadExistingItems:(BOOL)rereadExistingItems
 {
-    return [self addFilesDescribedInDictionaries: dicomFilesArray postNotifications: postNotifications rereadExistingItems: rereadExistingItems generatedByOsiriX: generatedByOsiriX returnArray: YES];
+    return [self addFilesDescribedInDictionaries: dicomFilesArray postNotifications: postNotifications rereadExistingItems: rereadExistingItems returnArray: YES];
 }
 
 static BOOL protectionAgainstReentry = NO;
 
--(NSArray*)addFilesDescribedInDictionaries:(NSArray*)dicomFilesArray postNotifications:(BOOL)postNotifications rereadExistingItems:(BOOL)rereadExistingItems generatedByOsiriX:(BOOL)generatedByOsiriX returnArray: (BOOL) returnArray
+-(NSArray*)addFilesDescribedInDictionaries:(NSArray*)dicomFilesArray
+                         postNotifications:(BOOL)postNotifications
+                       rereadExistingItems:(BOOL)rereadExistingItems
+                               returnArray: (BOOL) returnArray
 {
-    return [self addFilesDescribedInDictionaries: dicomFilesArray postNotifications: postNotifications rereadExistingItems: rereadExistingItems generatedByOsiriX: generatedByOsiriX importedFiles: NO returnArray: returnArray];
+    return [self addFilesDescribedInDictionaries: dicomFilesArray postNotifications: postNotifications rereadExistingItems: rereadExistingItems importedFiles: NO returnArray: returnArray];
 }
 
--(NSArray*)addFilesDescribedInDictionaries:(NSArray*)dicomFilesArray postNotifications:(BOOL)postNotifications rereadExistingItems:(BOOL)rereadExistingItems generatedByOsiriX:(BOOL)generatedByOsiriX importedFiles: (BOOL) importedFiles returnArray: (BOOL) returnArray
+-(NSArray*)addFilesDescribedInDictionaries:(NSArray*)dicomFilesArray
+                         postNotifications:(BOOL)postNotifications
+                       rereadExistingItems:(BOOL)rereadExistingItems
+                             importedFiles:(BOOL)importedFiles
+                               returnArray: (BOOL) returnArray
 {
 #ifndef NDEBUG
     [self checkForCorrectContextThread];
@@ -1770,9 +1739,10 @@ static BOOL protectionAgainstReentry = NO;
                     
                     BOOL DICOMSR = NO;
                     BOOL inParseExistingObject = rereadExistingItems;
-                    
+                   
                     NSString *SOPClassUID = [curDict objectForKey:@"SOPClassUID"];
                     
+                   /*JF
                     if ([DCMAbstractSyntaxUID isStructuredReport: SOPClassUID])
                     {
                         // Check if it is an OsiriX Annotations SR
@@ -1810,7 +1780,9 @@ static BOOL protectionAgainstReentry = NO;
                             DICOMSR = YES;
                         }
                     }
-                    
+                    */
+                   
+                   /*JF
                     if( [[NSUserDefaults standardUserDefaults] boolForKey: @"acceptUnsupportedSOPClassUID"] == NO)
                     {
                         if( SOPClassUID != nil)
@@ -1832,13 +1804,15 @@ static BOOL protectionAgainstReentry = NO;
                             }
                         }
                     }
-                    
-                    if ([curDict objectForKey:@"SOPClassUID"] == nil && [[curDict objectForKey: @"fileType"] hasPrefix:@"DICOM"] == YES)
+                    */
+                   
+                   /*JF
+                    if (!SOPClassUID && [curDict[@"fileType"] hasPrefix:@"DICOM"])
                     {
                         NSLog(@"no DICOM SOP CLASS -> for the file: %@", newFile);
 //                        curDict = nil;
                     }
-                    
+                    */
                     if (curDict != nil)
                     {
                         if ([[curDict objectForKey: @"studyID"] isEqualToString: curStudyID] == YES && [[curDict objectForKey: @"patientUID"] compare: curPatientUID options: NSCaseInsensitiveSearch | NSDiacriticInsensitiveSearch | NSWidthInsensitiveSearch] == NSOrderedSame)
@@ -2183,12 +2157,7 @@ static BOOL protectionAgainstReentry = NO;
                                         image.importedFile = @YES;
                                     else
                                         image.importedFile = nil;
-                                    
-                                    if (generatedByOsiriX)
-                                        [image setValue: [NSNumber numberWithBool: generatedByOsiriX] forKey: @"generatedByOsiriX"];
-                                    else
-                                        [image setValue: 0L forKey: @"generatedByOsiriX"];
-                                    
+                                   
                                     if (newObject) {
                                         [seriesTable setValue: nil forKey: @"windowWidth"];
                                         [seriesTable setValue: nil forKey: @"windowLevel"];
@@ -2231,32 +2200,34 @@ static BOOL protectionAgainstReentry = NO;
                                             }
                                         }
                                         
-                                        if (generatedByOsiriX == NO && [(NSString*)[curDict objectForKey: @"seriesComments"] length] > 0)
+                                        if ([(NSString*)curDict[@"seriesComments"] length])
                                         {
                                             [seriesTable willChangeValueForKey: @"comment"];
                                             [seriesTable setPrimitiveValue: [curDict objectForKey: @"seriesComments"] forKey: @"comment"];
                                             [seriesTable didChangeValueForKey: @"comment"];
                                         }
                                         
-                                        if (generatedByOsiriX == NO && [(NSString*)[curDict objectForKey: @"studyComments"] length] > 0)
+                                        if ([(NSString*)curDict[@"studyComments"] length])
                                         {
                                             [study willChangeValueForKey: @"comment"];
                                             [study setPrimitiveValue: [curDict objectForKey: @"studyComments"] forKey: @"comment"];
                                             [study didChangeValueForKey: @"comment"];
                                         }
                                         
-                                        if (generatedByOsiriX == NO && [[study valueForKey:@"stateText"] intValue] == 0 && [[curDict objectForKey: @"stateText"] intValue] != 0)
+                                        if (  ![[study valueForKey:@"stateText"] intValue]
+                                            && [curDict[@"stateText"] intValue]
+                                            )
                                         {
                                             [study willChangeValueForKey: @"stateText"];
                                             [study setPrimitiveValue: [curDict objectForKey: @"stateText"] forKey: @"stateText"];
                                             [study didChangeValueForKey: @"stateText"];
                                         }
                                         
-                                        if (generatedByOsiriX == NO && [curDict objectForKey: @"keyFrames"])
+                                        if (curDict[@"keyFrames"])
                                         {
                                             @try
                                             {
-                                                for( NSString *k in [curDict objectForKey: @"keyFrames"])
+                                                for( NSString *k in curDict[@"keyFrames"])
                                                 {
                                                     if ([k intValue] == f) // corresponding frame
                                                     {
@@ -2658,12 +2629,10 @@ static BOOL protectionAgainstReentry = NO;
                         
                         BOOL succeed = YES;
                         
-        #ifndef OSIRIX_LIGHT
                         thread.status = NSLocalizedString(@"Validating the files...", nil);
                         if( [[NSUserDefaults standardUserDefaults] boolForKey: @"validateFilesBeforeImporting"] && [[dict objectForKey: @"mountedVolume"] boolValue] == NO) // mountedVolume : it's too slow to test the files now from a CD
                             succeed = [DicomDatabase testFiles: copiedFiles];
-        #endif
-                        
+                       
                         NSArray *objects = nil;
                         
                         if( succeed)
@@ -2672,7 +2641,7 @@ static BOOL protectionAgainstReentry = NO;
                             
                             DicomDatabase *idatabase = self.isMainDatabase? self.independentDatabase : [self.mainDatabase independentDatabase];
                             
-                            objects = [idatabase addFilesAtPaths:copiedFiles postNotifications:YES dicomOnly:onlyDICOM rereadExistingItems:YES generatedByOsiriX:NO importedFiles:YES returnArray:YES];
+                            objects = [idatabase addFilesAtPaths:copiedFiles postNotifications:YES dicomOnly:onlyDICOM rereadExistingItems:YES importedFiles:YES returnArray:YES];
                             
                             DicomDatabase* mdatabase = self.isMainDatabase? self : self.mainDatabase;
                             if( [[BrowserController currentBrowser] database] == mdatabase && [[dict objectForKey:@"addToAlbum"] boolValue])
@@ -2805,9 +2774,6 @@ static BOOL protectionAgainstReentry = NO;
 		}
 		
 		NSMutableArray *filesArray = [NSMutableArray array];
-#ifdef OSIRIX_LIGHT
-		listenerCompressionSettings = 0;
-#endif
 		
       [[NSFileManager defaultManager] confirmNoIndexDirectoryAtPath:self.dataDirPath];
       
@@ -3023,14 +2989,15 @@ static BOOL protectionAgainstReentry = NO;
 							&& [[NSFileManager defaultManager] fileExistsAtPath:dstPath] == NO))
 						{
 							if (isDicomFile && isImage)
-                            {
-								if ((isJPEGCompressed == YES && listenerCompressionSettings == 1) || (isJPEGCompressed == NO && listenerCompressionSettings == 2
-#ifndef OSIRIX_LIGHT
-																									  && [DicomDatabase fileNeedsDecompression: srcPath]
-#else	
-#endif
-								))
-                                {
+                     {
+								if (  (   isJPEGCompressed == YES
+                               && listenerCompressionSettings == 1)
+                            || (   isJPEGCompressed == NO
+                                && listenerCompressionSettings == 2
+                                && [DicomDatabase fileNeedsDecompression: srcPath]
+                                )
+                            )
+                       {
 									NSString *compressedPath = [self.decompressionDirPath stringByAppendingPathComponent: lastPathComponent];
 									[[NSFileManager defaultManager] moveItemAtPath:srcPath toPath:compressedPath error:NULL];
 									[compressedPathArray addObject: compressedPath];
@@ -3143,35 +3110,23 @@ static BOOL protectionAgainstReentry = NO;
     if (enumer.nextObject) // there is more data
         [self performSelector:@selector(initiateImportFilesFromIncomingDirUnlessAlreadyImporting) withObject:nil afterDelay:0];
 	
-#ifndef OSIRIX_LIGHT
 	if ([compressedPathArray count] > 0) // there are files to compress/decompress in the decompression dir
     {
 		if (listenerCompressionSettings == 1 || listenerCompressionSettings == 0) // decompress, listenerCompressionSettings == 0 for zip support!
         { 
-//            [self performSelectorInBackground:@selector(_threadDecompressToIncoming:) withObject:compressedPathArray];
-            
             @synchronized (_decompressQueue) {
                 [_decompressQueue addObjectsFromArray:compressedPathArray];
             }
-            
             [self kickstartCompressDecompress];
-            
-//            [self initiateDecompressFilesAtPaths: compressedPathArray intoDirAtPath: self.incomingDirPath];
 		}
         else if (listenerCompressionSettings == 2) // compress
         { 
-//            [self performSelectorInBackground:@selector(_threadCompressToIncoming:) withObject:compressedPathArray];
-            
             @synchronized (_decompressQueue) {
                 [_compressQueue addObjectsFromArray:compressedPathArray];
             }
-            
             [self kickstartCompressDecompress];
-            
-//            [self initiateCompressFilesAtPaths: compressedPathArray intoDirAtPath: self.incomingDirPath];
         }
 	}
-#endif
 
 	return addedFilesCount;
 }
@@ -3405,7 +3360,7 @@ static BOOL protectionAgainstReentry = NO;
                 r = NSAlertDefaultReturn;
             }
             else
-                r = NSRunAlertPanel(NSLocalizedString(@"OsiriX Database", nil), NSLocalizedString(@"OsiriX cannot understand the model of current saved database... The database index will be deleted and reconstructed (no images are lost).", nil), NSLocalizedString(@"OK", nil), NSLocalizedString(@"Quit", nil), nil);
+                r = NSRunAlertPanel(NSLocalizedString(@"opendicomiris Database", nil), NSLocalizedString(@"opendicomiris cannot understand the model of current saved database... The database index will be deleted and reconstructed (no images are lost).", nil), NSLocalizedString(@"OK", nil), NSLocalizedString(@"Quit", nil), nil);
             
             if (r == NSAlertAlternateReturn)
             {
@@ -3939,7 +3894,7 @@ static BOOL protectionAgainstReentry = NO;
         
         @autoreleasepool
         {
-            [self addFilesAtPaths: filesArray postNotifications: NO dicomOnly: [[NSUserDefaults standardUserDefaults] boolForKey: @"onlyDICOM"] rereadExistingItems: NO generatedByOsiriX: NO returnArray: NO];
+            [self addFilesAtPaths: filesArray postNotifications: NO dicomOnly: [[NSUserDefaults standardUserDefaults] boolForKey: @"onlyDICOM"] rereadExistingItems: NO returnArray: NO];
         }
         
 		NSLog(@"End Rebuild");
@@ -4010,7 +3965,6 @@ static BOOL protectionAgainstReentry = NO;
 }
 
 -(void)checkForExistingReportForStudy:(DicomStudy*)study {
-#ifndef OSIRIX_LIGHT
 	@try { // is there a report?
 		NSArray* filenames = [NSArray arrayWithObjects: [Reports getUniqueFilename:study], [Reports getOldUniqueFilename:study], NULL];
 		NSArray* extensions = [NSArray arrayWithObjects: @"pages", @"odt", @"doc", @"docx", @"rtf", NULL];
@@ -4025,7 +3979,6 @@ static BOOL protectionAgainstReentry = NO;
 	} @catch ( NSException *e) {
 		N2LogExceptionWithStackTrace(e);
 	}
-#endif
 }
 
 -(BOOL)allowAutoroutingWithPostNotifications:(BOOL)postNotifications rereadExistingItems:(BOOL)rereadExistingItems

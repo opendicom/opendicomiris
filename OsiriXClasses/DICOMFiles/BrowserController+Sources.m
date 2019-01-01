@@ -962,7 +962,7 @@ static void* const SearchDicomNodesContext = @"SearchDicomNodesContext";
                 N2LogExceptionWithStackTrace(e);
             }
         }
-        else if( [[NSFileManager defaultManager] fileExistsAtPath: [path stringByAppendingPathComponent: OsirixDataDirName]])
+        else if( [[NSFileManager defaultManager] fileExistsAtPath: [path stringByAppendingPathComponent: opendicomirisDataDirName]])
         {
             @try {
                 [_browser.sources addObject:[MountedDatabaseNodeIdentifier mountedDatabaseNodeIdentifierWithPath:path description:path.lastPathComponent dictionary:nil type:MountTypeGeneric]];
@@ -1300,7 +1300,7 @@ static void* const SearchDicomNodesContext = @"SearchDicomNodesContext";
 	
 	// does it contain an OsiriX Data folder?
 	BOOL isDir;
-	if ([[NSFileManager defaultManager] fileExistsAtPath:[devicePath stringByAppendingPathComponent:OsirixDataDirName] isDirectory:&isDir] && isDir) {
+	if ([[NSFileManager defaultManager] fileExistsAtPath:[devicePath stringByAppendingPathComponent:opendicomirisDataDirName] isDirectory:&isDir] && isDir) {
 		path = devicePath;
 		scan = NO;
 	}

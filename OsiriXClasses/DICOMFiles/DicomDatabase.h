@@ -17,35 +17,39 @@
 enum {Compress, Decompress};
 
 extern NSString* const CurrentDatabaseVersion;
-extern NSString* const OsirixDataDirName;
+extern NSString* const opendicomirisDataDirName;
 extern NSString* const O2ScreenCapturesSeriesName;
 
 @class N2MutableUInteger, DicomAlbum, DataNodeIdentifier;
 
 @interface DicomDatabase : N2ManagedDatabase {
-	N2MutableUInteger* _dataFileIndex;
-	NSString* _baseDirPath;
-	NSString* _dataBaseDirPath;
-    NSString* _sourcePath;
-	NSString* _name;
-	NSRecursiveLock* _processFilesLock;
-	NSRecursiveLock* _importFilesFromIncomingDirLock;
-	BOOL _isFileSystemFreeSizeLimitReached;
-	NSTimeInterval _timeOfLastIsFileSystemFreeSizeLimitReachedVerification;
-	NSTimeInterval _timeOfLastModification;
-	char baseDirPathC[4096], incomingDirPathC[4096], tempDirPathC[4096]; // these paths are used from the DICOM listener
-    BOOL _isReadOnly, _hasPotentiallySlowDataAccess;
-    // compression/decompression
-    NSMutableArray* _decompressQueue;
-    NSMutableArray* _compressQueue;
-    NSThread* _compressDecompressThread;
+	N2MutableUInteger * _dataFileIndex;
+	NSString          * _baseDirPath;
+	NSString          * _dataBaseDirPath;
+   NSString          * _sourcePath;
+	NSString          * _name;
+	NSRecursiveLock   * _processFilesLock;
+	NSRecursiveLock   * _importFilesFromIncomingDirLock;
+	BOOL                _isFileSystemFreeSizeLimitReached;
+	NSTimeInterval      _timeOfLastIsFileSystemFreeSizeLimitReachedVerification;
+	NSTimeInterval      _timeOfLastModification;
+   char                baseDirPathC[4096];
+   char                incomingDirPathC[4096];
+   char                tempDirPathC[4096]; //used by DICOM listener
+   BOOL                _isReadOnly;
+   BOOL                _hasPotentiallySlowDataAccess;
+   
+   // compression/decompression
+   NSMutableArray    * _decompressQueue;
+   NSMutableArray    * _compressQueue;
+   NSThread          * _compressDecompressThread;
 	// +Routing
-	NSMutableArray* _routingSendQueues;
-	NSRecursiveLock* _routingLock;
+	NSMutableArray    * _routingSendQueues;
+	NSRecursiveLock   * _routingLock;
 	// +Clean
-	NSRecursiveLock* _cleanLock;
+	NSRecursiveLock   * _cleanLock;
     
-    volatile BOOL _deallocating;
+   volatile BOOL       _deallocating;
 }
 
 +(void)initializeDicomDatabaseClass;
@@ -121,15 +125,43 @@ extern NSString* const DicomDatabaseLogEntryEntityName;
 
 #pragma mark Add files
 -(NSArray*)addFilesAtPaths:(NSArray*)paths;
--(NSArray*)addFilesAtPaths:(NSArray*)paths postNotifications:(BOOL)postNotifications;	
--(NSArray*)addFilesAtPaths:(NSArray*)paths postNotifications:(BOOL)postNotifications dicomOnly:(BOOL)dicomOnly rereadExistingItems:(BOOL)rereadExistingItems;	
--(NSArray*)addFilesAtPaths:(NSArray*)paths postNotifications:(BOOL)postNotifications dicomOnly:(BOOL)dicomOnly rereadExistingItems:(BOOL)rereadExistingItems generatedByOsiriX:(BOOL)generatedByOsiriX;
--(NSArray*)addFilesAtPaths:(NSArray*)paths postNotifications:(BOOL)postNotifications dicomOnly:(BOOL)dicomOnly rereadExistingItems:(BOOL)rereadExistingItems generatedByOsiriX:(BOOL)generatedByOsiriX returnArray: (BOOL) returnArray;
--(NSArray*)addFilesAtPaths:(NSArray*)paths postNotifications:(BOOL)postNotifications dicomOnly:(BOOL)dicomOnly rereadExistingItems:(BOOL)rereadExistingItems generatedByOsiriX:(BOOL)generatedByOsiriX importedFiles: (BOOL) importedFiles returnArray: (BOOL) returnArray;
 
--(NSArray*)addFilesDescribedInDictionaries:(NSArray*)dicomFilesArray postNotifications:(BOOL)postNotifications rereadExistingItems:(BOOL)rereadExistingItems generatedByOsiriX:(BOOL)generatedByOsiriX; // returns NSArray<NSManagedObjectID>
--(NSArray*)addFilesDescribedInDictionaries:(NSArray*)dicomFilesArray postNotifications:(BOOL)postNotifications rereadExistingItems:(BOOL)rereadExistingItems generatedByOsiriX:(BOOL)generatedByOsiriX returnArray: (BOOL) returnArray;
--(NSArray*)addFilesDescribedInDictionaries:(NSArray*)dicomFilesArray postNotifications:(BOOL)postNotifications rereadExistingItems:(BOOL)rereadExistingItems generatedByOsiriX:(BOOL)generatedByOsiriX importedFiles: (BOOL) importedFiles returnArray: (BOOL) returnArray;
+-(NSArray*)addFilesAtPaths:(NSArray*)paths
+         postNotifications:(BOOL)postNotifications;
+
+-(NSArray*)addFilesAtPaths:(NSArray*)paths
+         postNotifications:(BOOL)postNotifications
+                 dicomOnly:(BOOL)dicomOnly
+       rereadExistingItems:(BOOL)rereadExistingItems;
+
+-(NSArray*)addFilesAtPaths:(NSArray*)paths
+         postNotifications:(BOOL)postNotifications
+                 dicomOnly:(BOOL)dicomOnly
+       rereadExistingItems:(BOOL)rereadExistingItems
+               returnArray:(BOOL)returnArray;
+
+-(NSArray*)addFilesAtPaths:(NSArray*)paths
+         postNotifications:(BOOL)postNotifications
+                 dicomOnly:(BOOL)dicomOnly
+       rereadExistingItems:(BOOL)rereadExistingItems
+             importedFiles:(BOOL)importedFiles
+               returnArray:(BOOL)returnArray;
+
+-(NSArray*)addFilesDescribedInDictionaries:(NSArray*)dicomFilesArray
+                         postNotifications:(BOOL)postNotifications
+                       rereadExistingItems:(BOOL)rereadExistingItems;
+// returns NSArray<NSManagedObjectID>
+
+-(NSArray*)addFilesDescribedInDictionaries:(NSArray*)dicomFilesArray
+                         postNotifications:(BOOL)postNotifications
+                       rereadExistingItems:(BOOL)rereadExistingItems
+                               returnArray: (BOOL) returnArray;
+
+-(NSArray*)addFilesDescribedInDictionaries:(NSArray*)dicomFilesArray
+                         postNotifications:(BOOL)postNotifications
+                       rereadExistingItems:(BOOL)rereadExistingItems
+                             importedFiles:(BOOL)importedFiles
+                               returnArray: (BOOL) returnArray;
 
 #pragma mark Incoming
 -(BOOL)isFileSystemFreeSizeLimitReached;
