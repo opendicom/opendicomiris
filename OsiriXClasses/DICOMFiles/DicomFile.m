@@ -3587,13 +3587,12 @@ char* replaceBadCharacter (char* str, NSStringEncoding encoding)
 	NSString	*extension = [[filePath pathExtension] lowercaseString];	
 	NoOfFrames = 1;	
 	
-	id fileFormatBundle;
-	
-	if ((fileFormatBundle = [[PluginManager fileFormatPlugins] objectForKey:extension]))
+   id fileFormatClass = PluginManager.fileFormatClasses[extension];
+   if (fileFormatClass)
 	{
 		fileType = [@"IMAGE" retain];
 		
-		PluginFileFormatDecoder *decoder = [[[fileFormatBundle principalClass] alloc] init];
+		PluginFileFormatDecoder *decoder = [[fileFormatClass alloc] init];
       
 		float *fImage = [decoder checkLoadAtPath:filePath];
 		width = [[decoder width] floatValue];

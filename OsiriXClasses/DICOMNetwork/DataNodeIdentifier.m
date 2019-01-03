@@ -14,7 +14,6 @@
 
 #import "DataNodeIdentifier.h"
 #import "PrettyCell.h"
-#import "RemoteDicomDatabase.h"
 #import "NSImage+N2.h"
 #import "NSHost+N2.h"
 #import <stdlib.h>

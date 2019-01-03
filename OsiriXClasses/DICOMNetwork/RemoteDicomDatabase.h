@@ -1,37 +1,25 @@
-/*=========================================================================
- Program:   OsiriX
- 
- Copyright (c) OsiriX Team
- All rights reserved.
- Distributed under GNU - LGPL
- 
- See http://www.osirix-viewer.com/copyright.html for details.
- 
- This software is distributed WITHOUT ANY WARRANTY; without even
- the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
- PURPOSE.
- =========================================================================*/
-
 #import "DicomDatabase.h"
 
-@class DicomImage, DicomAlbum;
+@class DicomImage;
+@class DicomAlbum;
 
-@interface RemoteDicomDatabase : DicomDatabase {
-	NSString* _baseBaseDirPath;
-	NSString* _sqlFileName;
-	NSString* _address;
-	NSInteger _port;
-	NSHost* _host;
-	NSRecursiveLock* _updateLock;
-	NSTimer* _updateTimer;
-	NSTimeInterval _timestamp;
-   dispatch_semaphore_t _connectionsSemaphoreId;
-   NSString *password;
+@interface RemoteDicomDatabase : DicomDatabase
+{
+	NSString             * _baseBaseDirPath;
+	NSString             * _sqlFileName;
+	NSString             * _address;
+	NSInteger              _port;
+	NSHost               * _host;
+	NSRecursiveLock      * _updateLock;
+	NSTimer              * _updateTimer;
+	NSTimeInterval         _timestamp;
+   dispatch_semaphore_t   _connectionsSemaphoreId;
+   NSString             * password;
 }
 
-@property(readonly,retain) NSString* address;
-@property(readonly) NSInteger port;
-@property(readonly,retain) NSHost* host;
+@property(readonly,retain) NSString  * address;
+@property(readonly)        NSInteger   port;
+@property(readonly,retain) NSHost    * host;
 
 +(RemoteDicomDatabase*)databaseForLocation:(NSString*)location
                                       port:(NSUInteger)port

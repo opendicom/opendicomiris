@@ -60,6 +60,8 @@
 		4A2A49D3218D3C4700B4D164 /* ired.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A2A49BD218D3C4700B4D164 /* ired.plist */; };
 		4A2A49D4218D3C4700B4D164 /* Flow.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A2A49BE218D3C4700B4D164 /* Flow.plist */; };
 		4A2A49D5218D3C4700B4D164 /* Rainbow2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A2A49BF218D3C4700B4D164 /* Rainbow2.plist */; };
+		4A62F21E21DCECF9001E318C /* PluginManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFC351A14DFA20067AA07 /* PluginManager.h */; };
+		4A62F21F21DCED52001E318C /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC361A14DFA20067AA07 /* PluginManager.m */; };
 		4A7E6F6F218A26D400BAF7B9 /* HL7.tif in Resources */ = {isa = PBXBuildFile; fileRef = 4A7E6F6E218A26D300BAF7B9 /* HL7.tif */; };
 		4AE9A9CC21B5B894002D0C3D /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC361A14DFA20067AA07 /* PluginManager.m */; };
 		4AE9A9DA21C184EE002D0C3D /* ImagePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9A9CE21C184E8002D0C3D /* ImagePlugin.m */; };
@@ -19106,6 +19108,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		4A62F21D21DCECDF001E318C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A62F21E21DCECF9001E318C /* PluginManager.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7E0B3A3A067526CD00908593 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -23444,6 +23454,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AB724FF30ADE6ECB00A212A0 /* Build configuration list for PBXNativeTarget "Decompress" */;
 			buildPhases = (
+				4A62F21D21DCECDF001E318C /* Headers */,
 				AB724F310ADE6ECB00A212A0 /* Sources */,
 				AB724FEA0ADE6ECB00A212A0 /* Frameworks */,
 			);
@@ -25224,6 +25235,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A62F21F21DCED52001E318C /* PluginManager.m in Sources */,
 				59DB26FB1450787E00E78E03 /* N2Debug.mm in Sources */,
 				AB724F4F0ADE6ECB00A212A0 /* dcfilefo.cc in Sources */,
 				AB724F500ADE6ECB00A212A0 /* dcxfer.cc in Sources */,
@@ -26464,8 +26476,6 @@
 					"\"$(PROJECT_DIR)/Binaries/CharLS\"",
 					"\"$(PROJECT_DIR)/Binaries/VTKLibs\"",
 					"\"$(PROJECT_DIR)/Binaries/LibTiff\"",
-					"$(PROJECT_DIR)/Binaries/KDU",
-					SDK,
 					"$(PROJECT_DIR)/Binaries/VTKLibs",
 					"$(PROJECT_DIR)/Binaries/Ming",
 					"$(PROJECT_DIR)/Binaries/CharLS",

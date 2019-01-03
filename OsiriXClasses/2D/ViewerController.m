@@ -16609,11 +16609,13 @@ int i,j,l;
 	{
 		[[fileList[ curMovieIndex] objectAtIndex:[imageView curImage]] setValue:composedMenuTitle forKeyPath:@"series.comment"];
 		
+      /*JF
 		if([[BrowserController currentBrowser] isCurrentDatabaseBonjour])
 		{
 			[[BrowserController currentBrowser] setBonjourDatabaseValue:[fileList[curMovieIndex] objectAtIndex:[imageView curImage]] value:[CommentsEditField stringValue] forKey:@"series.comment"];
 		}
-		
+		*/
+      
 		[[[BrowserController currentBrowser] databaseOutline] reloadData];
 		
 		[CommentsField setTitle: composedMenuTitle];

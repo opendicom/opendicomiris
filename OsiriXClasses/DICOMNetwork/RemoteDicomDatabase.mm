@@ -273,33 +273,46 @@
 	if (cstr) [data appendBytes:cstr length:cstrlen];
 }
 
--(NSString*)fetchDatabaseVersion {
+-(NSString*)fetchDatabaseVersion
+{
 	NSMutableData* request = [NSMutableData dataWithBytes:"DBVER" length:6];
+   
 	NSData* response = [self synchronousRequest:request urgent:YES];
+   
 	if (!response.length) [NSException raise:NSObjectInaccessibleException format:@"%@", NSLocalizedString(@"Failed to connect to the remote host. Is database sharing activated on the distant computer?", nil)];
 	return [[[NSString alloc] initWithData:response encoding:NSUTF8StringEncoding] autorelease];
 }
 
--(BOOL)fetchIsPasswordProtected {
+-(BOOL)fetchIsPasswordProtected
+{
+   
 	NSMutableData* request = [NSMutableData dataWithBytes:"ISPWD" length:6];
+   
 	NSData* response = [self synchronousRequest:request urgent:YES];
+   
 	if (!response.length) [NSException raise:NSObjectInaccessibleException format:@"%@", NSLocalizedString(@"Failed to connect to the remote host. Is database sharing activated on the distant computer?", nil)];
 	if (response.length != sizeof(int)) [NSException raise:NSInternalInconsistencyException format:@"%@", NSLocalizedString(@"Invalid response data from remote host.", nil)];
 	return NSSwapBigIntToHost(*((int*)response.bytes))? YES : NO;
 }
 
--(BOOL)fetchIsRightPassword:(NSString*)pwd {
+-(BOOL)fetchIsRightPassword:(NSString*)pwd
+{
 	NSMutableData* request = [NSMutableData dataWithBytes:"PASWD" length:6];
+   
 	[RemoteDicomDatabase _data:request appendStringUTF8:pwd];
+   
 	NSData* response = [self synchronousRequest:request urgent:YES];
 	if (!response.length) [NSException raise:NSObjectInaccessibleException format:@"%@", NSLocalizedString(@"Failed to connect to the remote host. Is database sharing activated on the distant computer?", nil)];
 	if (response.length != sizeof(int)) [NSException raise:NSInternalInconsistencyException format:@"%@", NSLocalizedString(@"Invalid response data from remote host.", nil)];
 	return NSSwapBigIntToHost(*((int*)response.bytes))? YES : NO;
 }
 
--(unsigned int)fetchDatabaseIndexSize {
+-(unsigned int)fetchDatabaseIndexSize
+{
 	NSMutableData* request = [NSMutableData dataWithBytes:"DBSIZ" length:6];
+   
 	NSData* response = [self synchronousRequest:request urgent:YES];
+   
 	if (!response.length) [NSException raise:NSObjectInaccessibleException format:@"%@", NSLocalizedString(@"Failed to connect to the remote host. Is database sharing activated on the distant computer?", nil)];
 	if (response.length != sizeof(int)) [NSException raise:NSInternalInconsistencyException format:@"%@", NSLocalizedString(@"Invalid response data from remote host.", nil)];
 	return NSSwapBigIntToHost(*((int*)response.bytes));
@@ -346,6 +359,7 @@
 	
 	NSData* request = [NSMutableData dataWithBytes:"DATAB" length:6];
 	NSArray* context = [NSArray arrayWithObjects: thread, [NSNumber numberWithUnsignedInteger:databaseIndexSize], fileStream, [N2MutableUInteger mutableUIntegerWithUInteger:0], nil];
+   
 	[self synchronousRequest:request urgent:YES dataHandlerTarget:self selector:@selector(_connection:handleData_fetchDatabaseIndex:context:) context:context];
 	
 	[fileStream close];
@@ -381,9 +395,12 @@
 	return data.length;
 }
 
--(NSTimeInterval)fetchDatabaseTimestamp {
+-(NSTimeInterval)fetchDatabaseTimestamp
+{
 	NSMutableData* request = [NSMutableData dataWithBytes:"VERSI" length:6];
+   
 	NSData* response = [self synchronousRequest:request urgent:YES];
+   
 	if (!response.length) [NSException raise:NSObjectInaccessibleException format:@"%@", NSLocalizedString(@"Failed to connect to the remote host. Is database sharing activated on the distant computer?", nil)];
 	if (response.length != sizeof(NSSwappedDouble)) [NSException raise:NSInternalInconsistencyException format:@"%@", NSLocalizedString(@"Invalid response data from remote host.", nil)];
 	return NSSwapBigDoubleToHost(*((NSSwappedDouble*)response.bytes));
@@ -521,7 +538,9 @@
 	NSData* pathData = [path dataUsingEncoding:NSUnicodeStringEncoding];
 	[RemoteDicomDatabase _data:request appendInt:pathData.length];
 	[request appendData:pathData];
+   
 	NSData* response = [self synchronousRequest:request urgent:YES];
+   
 	if (!response.length) [NSException raise:NSObjectInaccessibleException format:@"%@", NSLocalizedString(@"Failed to connect to the remote host. Is database sharing activated on the distant computer?", nil)];
 	return [[[NSString alloc] initWithData:response encoding:NSUnicodeStringEncoding] autorelease];
 }
@@ -531,7 +550,9 @@
 	[RemoteDicomDatabase _data:request appendStringUTF8:object.objectID.URIRepresentation.absoluteString];
 	[RemoteDicomDatabase _data:request appendStringUTF8: [value isKindOfClass:[NSNumber class]]? [value stringValue] : value];
 	[RemoteDicomDatabase _data:request appendStringUTF8:key];
+   
 	[self synchronousRequest:request urgent:YES];
+   
 	_timestamp = [self fetchDatabaseTimestamp];
 }
 
@@ -612,6 +633,7 @@ enum RemoteDicomDatabaseStudiesAlbumAction { RemoteDicomDatabaseStudiesAlbumActi
 				[request replaceBytesInRange:NSMakeRange(6,count.length) withBytes:count.bytes length:count.length];
 				
 				NSMutableData* response = [[[self synchronousRequest:request urgent:YES] mutableCopy] autorelease];
+            
                 if (dbObjsInRequest.count && response.length)
                 {
 					unsigned int count;

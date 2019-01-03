@@ -2037,7 +2037,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         for( DicomImage *i in [study allWindowsStateSRSeries])
         {
             @try {
-                SRAnnotation *r = [[[SRAnnotation alloc] initWithContentsOfFile: [i completePathResolved]] autorelease];
+                SRAnnotation *r = [[[SRAnnotation alloc] initWithContentsOfFile: [i completePath]] autorelease];
                 
                 NSArray *viewers = [NSPropertyListSerialization propertyListFromData: r.dataEncapsulated mutabilityOption: NSPropertyListImmutable format: nil errorDescription: nil];
                 

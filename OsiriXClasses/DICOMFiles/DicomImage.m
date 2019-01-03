@@ -1,17 +1,3 @@
-/*=========================================================================
-  Program:   OsiriX
-
-  Copyright (c) OsiriX Team
-  All rights reserved.
-  Distributed under GNU - LGPL
-  
-  See http://www.osirix-viewer.com/copyright.html for details.
-
-     This software is distributed WITHOUT ANY WARRANTY; without even
-     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-     PURPOSE.
-=========================================================================*/
-
 #import "DicomImage.h"
 #import "DicomSeries.h"
 #import "DicomStudy.h"
@@ -30,16 +16,13 @@
 #import "RemoteDicomDatabase.h"
 #import "N2Debug.h"
 
-#ifdef OSIRIX_VIEWER
 #import "DCMPix.h"
 #import "SRAnnotation.h"
 #import "VRController.h"
 #import "BrowserController.h"
-//#import "BonjourBrowser.h"
 #import "ThreadsManager.h"
 #import "DCMView.h"
 #import "AppController.h"
-#endif
 
 #define ROIDATABASE @"/ROIs/"
 
@@ -942,10 +925,12 @@ NSString* sopInstanceUIDDecode( unsigned char *r, int length)
 	[modality release];  modality = nil;
 	[fileType release];  fileType = nil;
 	[completePathCache release]; completePathCache = nil;
-    [_thumbnail release]; _thumbnail = nil;
+   [_thumbnail release]; _thumbnail = nil;
 }
 
--(NSString*) completePathWithDownload:(BOOL) download supportNonLocalDatabase: (BOOL) supportNonLocalDatabase
+/*
+-(NSString*) completePathWithDownload:(BOOL)download
+              supportNonLocalDatabase: (BOOL) supportNonLocalDatabase
 {
     @try
     {
@@ -1010,20 +995,40 @@ NSString* sopInstanceUIDDecode( unsigned char *r, int length)
 {
     return [self completePathWithDownload: download supportNonLocalDatabase: YES];
 }
+*/
+ 
+-(NSString*) completePathWithNoDownloadAndLocalOnly
+{
+   //return [self completePathWithDownload: NO supportNonLocalDatabase: NO];
+   return [self completePath];
+}
+
+
+
 
 -(NSString*) completePathResolved
 {
-	return [self completePathWithDownload: YES];
-}
-
--(NSString*) completePathWithNoDownloadAndLocalOnly
-{
-    return [self completePathWithDownload: NO supportNonLocalDatabase: NO];
+	//return [self completePathWithDownload: YES];
+   return [self completePath];
 }
 
 -(NSString*) completePath
 {
-	return [self completePathWithDownload: NO];
+   if(completePathCache) return completePathCache;
+   
+   if( [self.inDatabaseFolder boolValue] == YES)
+   {
+      if( [self.path characterAtIndex: 0] != '/')
+      {
+         [completePathCache release];
+         DicomDatabase* db = [DicomDatabase databaseForContext: self.managedObjectContext];
+         completePathCache = [[DicomImage completePathForLocalPath:self.path directory: db.dataBaseDirPath] retain];
+         return completePathCache;
+      }
+   }
+   return self.path;
+   
+   //return [self completePathWithDownload: NO];
 }
 
 - (BOOL)validateForDelete:(NSError **)error

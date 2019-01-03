@@ -654,7 +654,15 @@ ss
                 
                 @try
                 {
-                    DCMPix* dcmPix = [[DCMPix alloc] initWithPath:im.completePathResolved :0 :1 :nil :im.frameID.intValue :im.series.id.intValue isBonjour:NO imageObj:im];
+                    DCMPix* dcmPix = [[DCMPix alloc] initWithPath:im.completePath
+                                                                 :0
+                                                                 :1
+                                                                 :nil
+                                                                 :im.frameID.intValue
+                                                                 :im.series.id.intValue
+                                                        isBonjour:NO
+                                                         imageObj:im
+                                      ];
                     
                     if (dcmPix)
                     {
@@ -2870,7 +2878,7 @@ const NSString* const GenerateMovieDicomImagesParamKey = @"dicomImageArray";
             N2LogStackTrace( @"*** only JPEG are supported");
     }
     
-	DCMPix* dcmPix = [[[DCMPix alloc] initWithPath:dicomImage.completePathResolved :0 :1 :nil :dicomImage.frameID.intValue :dicomImage.series.id.intValue isBonjour:NO imageObj:dicomImage] autorelease];
+	DCMPix* dcmPix = [[[DCMPix alloc] initWithPath:dicomImage.completePath :0 :1 :nil :dicomImage.frameID.intValue :dicomImage.series.id.intValue isBonjour:NO imageObj:dicomImage] autorelease];
 	
 	if (!dcmPix)
 		return;

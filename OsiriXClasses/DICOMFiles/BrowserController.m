@@ -5957,17 +5957,7 @@ static NSConditionLock *threadLock = nil;
 	BOOL					matrixThumbnails = YES;
 	int						animState = [animationCheck state];
 	
-//	if( DICOMDIRCDMODE)
-//	{
-//		NSRunInformationalAlertPanel(NSLocalizedString(@"OsiriX CD/DVD", nil), NSLocalizedString(@"OsiriX is running in read-only mode, from a CD/DVD.", nil), NSLocalizedString(@"OK",nil), nil, nil);
-//		return;
-//	}*/
-	
-	
-	if( sender == nil)
-	{
-		matrixThumbnails = NO;
-	}
+	if( sender == nil) matrixThumbnails = NO;
 	else
 	{
 		if( ([sender isKindOfClass:[NSMenuItem class]] && [sender menu] == [oMatrix menu]) || [[self window] firstResponder] == oMatrix)
@@ -5981,11 +5971,8 @@ static NSConditionLock *threadLock = nil;
         return;
     
 	NSString *level = nil;
-	
-	if( matrixThumbnails)
-		level = NSLocalizedString( @"Selected Thumbnails", nil);
-	else
-		level = NSLocalizedString( @"Selected Lines", nil);
+	if( matrixThumbnails) level = NSLocalizedString( @"Selected Thumbnails", nil);
+	else level = NSLocalizedString( @"Selected Lines", nil);
 	
     if( matrixThumbnails == NO)
     {
@@ -6912,7 +6899,7 @@ static NSConditionLock *threadLock = nil;
 					NSTask *aTask = [[[NSTask alloc] init] autorelease];		
 					[aTask setEnvironment:[NSDictionary dictionaryWithObject:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/dicom.dic"] forKey:@"DCMDICTPATH"]];
 					[aTask setLaunchPath: [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent: @"/dsr2html"]];
-					[aTask setArguments: [NSArray arrayWithObjects: @"+X1", @"--unknown-relationship", @"--ignore-constraints", @"--ignore-item-errors", @"--skip-invalid-items", [im completePathResolved], htmlpath, nil]];
+					[aTask setArguments: [NSArray arrayWithObjects: @"+X1", @"--unknown-relationship", @"--ignore-constraints", @"--ignore-item-errors", @"--skip-invalid-items", [im completePath], htmlpath, nil]];
 					[aTask launch];
 					while( [aTask isRunning])
                         [NSThread sleepForTimeInterval: 0.1];
@@ -6959,7 +6946,7 @@ static NSConditionLock *threadLock = nil;
                                          NSLocalizedString(@"Cancel",nil),
                                          nil) == NSAlertDefaultReturn)
             {
-                DCMObject *dcmObj = [DCMObject objectWithContentsOfFile: im.completePathResolved decodingPixelData: NO];
+                DCMObject *dcmObj = [DCMObject objectWithContentsOfFile: im.completePath decodingPixelData: NO];
                 
                 DCMPix *pix = nil;
                 @synchronized( previewPixThumbnails)
@@ -13019,7 +13006,7 @@ static BOOL withReset = NO;
          //NSLog(@"%@",[toOpenArray[0][0] description]);
          if(([@[@"OT",@"DOC"]indexOfObject:[toOpenArray[0][0] valueForKey:@"storedModality"]]!=NSNotFound) && [[toOpenArray[0][0] sopInstanceUID] hasPrefix:@"2"])
          {
-            NSString *enclosingFile=[toOpenArray[0][0] completePathResolved];
+            NSString *enclosingFile=[toOpenArray[0][0] completePath];
             NSData *enclosingData=[NSData dataWithContentsOfFile:enclosingFile];
             NSUInteger enclosingLength=[enclosingData length];
             NSRange enclosingRange=NSMakeRange(0,enclosingLength);
@@ -18189,7 +18176,7 @@ static volatile int numberOfThreadsForJPEG = 0;
                         [[NSFileManager defaultManager] removeItemAtPath: [reportSR valueForKey: @"completePath"] error: nil];
                   }
                   
-                  NSString *reportPath = [DicomDatabase extractReportSR: [reportSR completePathResolved] contentDate: [reportSR valueForKey: @"date"]];
+                  NSString *reportPath = [DicomDatabase extractReportSR: [reportSR completePath] contentDate: [reportSR valueForKey: @"date"]];
                   
                   if( reportPath)
                   {
