@@ -123,13 +123,13 @@
         {
             if( [port intValue] == [[NSUserDefaults standardUserDefaults] integerForKey: @"AEPORT"])
             {
-                for( NSString *s in [[DefaultsOsiriX currentHost] names])
+                for( NSString *s in [[NSHost currentHost] names])
                 {
                     if( [hostname isEqualToString: s])
                         sameAddress = YES;
                 }
                 
-                for( NSString *s in [[DefaultsOsiriX currentHost] addresses])
+                for( NSString *s in [[NSHost currentHost] addresses])
                 {
                     if( [hostname isEqualToString: s])
                         sameAddress = YES;

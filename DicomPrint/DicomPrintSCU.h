@@ -1,7 +1,7 @@
 #ifndef AYDCMPRINTSCU_H
 #define AYDCMPRINTSCU_H
 
-#include "AYPrintManager.h"
+#include "PrintManager.h"
 
 #include <time.h>
 #include <iostream>
@@ -13,19 +13,8 @@ using namespace std;
 #include "ofstd.h"
 #include "dctk.h"
 
-#include <xercesc/parsers/XercesDOMParser.hpp>
-#include <xercesc/dom/DOM.hpp>
-#include <xercesc/sax/HandlerBase.hpp>
-#include <xercesc/util/XMLString.hpp>
-XERCES_CPP_NAMESPACE_USE
 
-
-
-
-/**
- * 
- */
-class AYDcmPrintSCU
+class DicomPrintSCU
 {
   public:
 
@@ -102,37 +91,38 @@ class AYDcmPrintSCU
     };
 
 
-    /**
+    /*JF
      * Constructor.
      * @param logpath Directory where the logfiles should be written to. NULL sets logging to stderr.
      * @param loglevel Loglevel which should be logged (Default is LOG_ERROR).
-     */
-    AYDcmPrintSCU(const char *logpath = NULL, int loglevel = LOG_ERROR, const char *basename = NULL);
+     
+    DicomPrintSCU(const char *logpath = NULL, int loglevel = LOG_ERROR, const char *basename = NULL);
+*/
 
-
-    /**
+    /*JF
      * Destructor.
-     */
-    ~AYDcmPrintSCU();
+     
+    ~DicomPrintSCU();
+*/
 
-
-    /**
+    /*JF
      * This is the main method which has to be called from a program to trigger the
      * print SCU. The only parameter is the configfile with all information about
      * the printjob.
      * @param configfile Absolute path to the configfile.
      * @return Errorstatus
-     */
+     
     int sendPrintjob(const char *configfile);
+     */
 
 
   private:
 
-    /**  */
+    /*JF
     XercesDOMParser *m_pParser;
-
+    */
     /**  */
-    AYPrintManager *m_pPrintManager;
+    PrintManager *m_pPrintManager;
 
 
     // Association parameters
@@ -141,7 +131,6 @@ class AYDcmPrintSCU
     string m_sAETitleSender;
     string m_sAETitleReceiver;
     int m_nMaxPDUSize;
-    bool m_bUseColorPrinting;
     bool m_bUseAnnotationBoxes;
     bool m_bUsePresentationLUT;
     bool m_bUseFilmSessionActionRequest;
@@ -182,7 +171,7 @@ class AYDcmPrintSCU
     /**
      *
      */
-    int openAssociation(DOMNode *pAssociation);
+    //JF int openAssociation(DOMNode *pAssociation);
 
 
     /**
@@ -191,44 +180,44 @@ class AYDcmPrintSCU
     int closeAssociation();
 
 
-    /**
+    /*JF
      *
-     */
+     
     int processFilmSession(DOMNode *pFilmSession);
+*/
 
-
-    /**
+    /*JF
      *
-     */
+     
     int processFilmBox(DOMNode *pXMLFilmBox, OFString sReferencedFilmSessionInstanceUID, int &nImageCounter);
+     */
 
-
-    /**
+    /*JF
      * Reads the association parameters from the XML node
      * pNode and sets them to the attributes.
      * @param pNode XML node from the configuration which represents an association.
      * @return Errorstatus (NO_ERROR if all association parameters are valid.)
-     */
+     
     int setAssociationParameters(DOMNode *pNode);
+*/
 
-
-    /**
+    /*JF
      *
-     */
+     
     int addFilmSessionParameters(DOMNode *pNode, DcmDataset *pDataset);
+*/
 
-
-    /**
+    /*JF
      *
-     */
+     
     int addFilmBoxParameters(DOMNode *pNode, DcmDataset *pDataset);
+*/
 
-
-    /**
+    /*JF
      *
-     */
+     
     int addImageBoxParameters(DOMNode *pNode, DcmDataset *pDataset);
-
+*/
 
     /**
      * Checks if a string value is an integer.
@@ -238,23 +227,23 @@ class AYDcmPrintSCU
     bool isInteger(string sValue);
 
 
-    /**
+    /*JF
      * Checks if pNode contains an attribute with name sAttrName.
      * @param pNode XML node to be checked for the attribute.
      * @param sAttrName Name of the attribute which is searched.
      * @return true if attribute exists in pNode, false otherwise.
-     */
+     
     bool isXMLAttributeAvailable(DOMNode *pNode, string sAttrName);
+*/
 
-
-    /**
+    /*JF
      * Returns the value of attribute with name sAttrName.
      * @param pNode XML node to be checked for the attribute.
      * @param sAttrName Name of the attribute which is searched.
      * @return String containing the value of the attribute.
-     */
+     
     string getXMLAttributeValue(DOMNode *pNode, string sAttributeName);
-
+*/
 
     /**
      * Checks if a DICOM tag with key oKey is available in pDataset.
@@ -274,7 +263,7 @@ class AYDcmPrintSCU
     string getDicomAttributeValue(DcmDataset *pDataset, DcmTagKey oKey);
 
 
-    /**
+    /*JF
      * Searchs for an attribute with key oKey in DICOM dataset pDataset and the XML node pNode
      * and writes the found attribute to the DICOM item pItem. The value in pNote has a higher priority
      * than the value in pDataset. Optional attributes are added if they are available at least in one
@@ -293,9 +282,9 @@ class AYDcmPrintSCU
      *           An error occured while adding the attribute to the new item.
      *         - MISSING_ATTRIBUTE_ERROR
      *           The attribute was flaged as mandatory but not found in one of the sources
-     */
+     
     int addImageBoxAttribute(DcmDataset *pDataset, DcmTagKey oKey, DOMNode *pNode, string sAttrName, DcmItem *pItem, bool bIsMandatory);
-
+*/
 
     /**
      * Returns a formatted string with the current date and time.

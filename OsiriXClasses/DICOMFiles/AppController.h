@@ -102,15 +102,12 @@ extern AppController* OsiriX;
 //singleton
 + (AppController*) sharedAppController;
 
-+ (BOOL) hasMacOSXSnowLeopard;
-
 +(NSString*)UID;
 
 #pragma mark-
 #pragma mark initialization of the main event loop
 
 + (void) resizeWindowWithAnimation:(NSWindow*) window newSize: (NSRect) newWindowFrame;
-+ (void) pause __deprecated;
 + (ThumbnailsListPanel*)thumbnailsListPanelForScreen:(NSScreen*)screen;
 + (NSString*)printStackTrace:(NSException*)e __deprecated; // use -[NSException printStackTrace] form NSException+N2
 + (BOOL) isKDUEngineAvailable;
@@ -127,9 +124,8 @@ extern AppController* OsiriX;
 #pragma mark-
 #pragma mark static menu items
 //===============OSIRIX========================
-- (IBAction) about:(id)sender; /**< Display the about window */
-- (IBAction) aboutPlugins:(id)sender;
-- (IBAction) showPreferencePanel:(id)sender; /**< Show Preferences window */
+- (IBAction) about:(id)sender;
+- (IBAction) showPreferencePanel:(id)sender;
 - (IBAction) autoQueryRefresh:(id)sender;
 //===============WINDOW========================
 - (IBAction) setFixedTilingRows: (id) sender;

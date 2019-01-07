@@ -1,22 +1,8 @@
-/*=========================================================================
-  Program:   OsiriX
-
-  Copyright (c) OsiriX Team
-  All rights reserved.
-  Distributed under GNU - LGPL
-  
-  See http://www.osirix-viewer.com/copyright.html for details.
-
-     This software is distributed WITHOUT ANY WARRANTY; without even
-     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-     PURPOSE.
-=========================================================================*/
-
 #import "QueryController.h"
-#import "AYDicomPrintWindowController.h"
-#import "AYDicomPrintPref.h"
+#import "DicomPrintWindowController.h"
+#import "DicomPrintPref.h"
 #import "NSFont_OpenGL.h"
-#import "AYNSImageToDicom.h"
+#import "NSImageToDicomPrint.h"
 #import "Notifications.h"
 #import "OSIWindow.h"
 #import "ThreadsManager.h"
@@ -24,7 +10,7 @@
 #import "N2Debug.h"
 #import "AppController.h"
 
-#define VERSIONNUMBERSTRING	@"v1.00.000"
+#define VERSIONNUMBERSTRING	@"v0.01.000"
 #define ECHOTIMEOUT 5
 
 NSString *filmOrientationTag[] = {@"Portrait", @"Landscape"};
@@ -42,7 +28,7 @@ NSString *priorityTag[] = {@"HIGH", @"MED", @"LOW"};
 NSString *mediumTag[] = {@"Blue Film", @"Clear Film", @"Paper"};
 
 
-@interface AYDicomPrintWindowController (Private)
+@interface DicomPrintWindowController (Private)
 - (void) _createPrintjob: (id) object;
 - (void) _sendPrintjob: (NSString *) xmlPath;
 - (BOOL) _verifyConnection: (NSDictionary *) dict;
@@ -51,7 +37,7 @@ NSString *mediumTag[] = {@"Blue Film", @"Clear Film", @"Paper"};
 - (ViewerController *) _currentViewer;
 @end
 
-@implementation AYDicomPrintWindowController
+@implementation DicomPrintWindowController
 
 #define NUM_OF(x) (sizeof (x) / sizeof *(x))
 
@@ -71,7 +57,7 @@ NSString *mediumTag[] = {@"Blue Film", @"Clear Film", @"Paper"};
 + (void) updateAllPreferencesFormat
 {
 	BOOL updated = NO;
-	NSMutableArray *printers = [[[[NSUserDefaults standardUserDefaults] arrayForKey: @"AYDicomPrinter"] mutableCopy] autorelease];
+	NSMutableArray *printers = [[[[NSUserDefaults standardUserDefaults] arrayForKey: @"DicomPrinter"] mutableCopy] autorelease];
 	
 	for( int i = 0 ; i < [printers count] ; i++)
 	{
@@ -81,17 +67,17 @@ NSString *mediumTag[] = {@"Blue Film", @"Clear Film", @"Paper"};
 		{
 			NSMutableDictionary *mDict = [NSMutableDictionary dictionaryWithDictionary: dict];
 			
-			[mDict setObject: [AYDicomPrintWindowController tagForKey: [dict valueForKey: @"filmOrientation"] array: filmOrientationTag size: NUM_OF(filmOrientationTag)] forKey: @"filmOrientationTag"];
+			[mDict setObject: [DicomPrintWindowController tagForKey: [dict valueForKey: @"filmOrientation"] array: filmOrientationTag size: NUM_OF(filmOrientationTag)] forKey: @"filmOrientationTag"];
              
-			[mDict setObject: [AYDicomPrintWindowController tagForKey: [dict valueForKey: @"filmDestination"] array: filmDestinationTag size: NUM_OF(filmDestinationTag)] forKey: @"filmDestinationTag"];
-			[mDict setObject: [AYDicomPrintWindowController tagForKey: [dict valueForKey: @"filmSize"] array: filmSizeTag size: NUM_OF(filmSizeTag)] forKey: @"filmSizeTag"];
-			[mDict setObject: [AYDicomPrintWindowController tagForKey: [dict valueForKey: @"magnificationType"] array: magnificationTypeTag size: NUM_OF(magnificationTypeTag)] forKey: @"magnificationTypeTag"];
-			[mDict setObject: [AYDicomPrintWindowController tagForKey: [dict valueForKey: @"trim"] array: trimTag size: NUM_OF(trimTag)] forKey: @"trimTag"];
-			[mDict setObject: [AYDicomPrintWindowController tagForKey: [dict valueForKey: @"imageDisplayFormat"] array: imageDisplayFormatTag size: NUM_OF(imageDisplayFormatTag)] forKey: @"imageDisplayFormatTag"];
-			[mDict setObject: [AYDicomPrintWindowController tagForKey: [dict valueForKey: @"borderDensity"] array: borderDensityTag size: NUM_OF(borderDensityTag)] forKey: @"borderDensityTag"];
-			[mDict setObject: [AYDicomPrintWindowController tagForKey: [dict valueForKey: @"emptyImageDensity"] array: emptyImageDensityTag size: NUM_OF(emptyImageDensityTag)] forKey: @"emptyImageDensityTag"];
-			[mDict setObject: [AYDicomPrintWindowController tagForKey: [dict valueForKey: @"priority"] array: priorityTag size: NUM_OF(priorityTag)] forKey: @"priorityTag"];
-			[mDict setObject: [AYDicomPrintWindowController tagForKey: [dict valueForKey: @"medium"] array: mediumTag size: NUM_OF(mediumTag)] forKey: @"mediumTag"];
+			[mDict setObject: [DicomPrintWindowController tagForKey: [dict valueForKey: @"filmDestination"] array: filmDestinationTag size: NUM_OF(filmDestinationTag)] forKey: @"filmDestinationTag"];
+			[mDict setObject: [DicomPrintWindowController tagForKey: [dict valueForKey: @"filmSize"] array: filmSizeTag size: NUM_OF(filmSizeTag)] forKey: @"filmSizeTag"];
+			[mDict setObject: [DicomPrintWindowController tagForKey: [dict valueForKey: @"magnificationType"] array: magnificationTypeTag size: NUM_OF(magnificationTypeTag)] forKey: @"magnificationTypeTag"];
+			[mDict setObject: [DicomPrintWindowController tagForKey: [dict valueForKey: @"trim"] array: trimTag size: NUM_OF(trimTag)] forKey: @"trimTag"];
+			[mDict setObject: [DicomPrintWindowController tagForKey: [dict valueForKey: @"imageDisplayFormat"] array: imageDisplayFormatTag size: NUM_OF(imageDisplayFormatTag)] forKey: @"imageDisplayFormatTag"];
+			[mDict setObject: [DicomPrintWindowController tagForKey: [dict valueForKey: @"borderDensity"] array: borderDensityTag size: NUM_OF(borderDensityTag)] forKey: @"borderDensityTag"];
+			[mDict setObject: [DicomPrintWindowController tagForKey: [dict valueForKey: @"emptyImageDensity"] array: emptyImageDensityTag size: NUM_OF(emptyImageDensityTag)] forKey: @"emptyImageDensityTag"];
+			[mDict setObject: [DicomPrintWindowController tagForKey: [dict valueForKey: @"priority"] array: priorityTag size: NUM_OF(priorityTag)] forKey: @"priorityTag"];
+			[mDict setObject: [DicomPrintWindowController tagForKey: [dict valueForKey: @"medium"] array: mediumTag size: NUM_OF(mediumTag)] forKey: @"mediumTag"];
 			
 			[printers replaceObjectAtIndex: i withObject: mDict];
 			
@@ -101,7 +87,7 @@ NSString *mediumTag[] = {@"Blue Film", @"Clear Film", @"Paper"};
 	
 	if( updated)
 	{
-		[[NSUserDefaults standardUserDefaults] setObject: printers forKey: @"AYDicomPrinter"];
+		[[NSUserDefaults standardUserDefaults] setObject: printers forKey: @"DicomPrinter"];
 	}
 }
 
@@ -109,7 +95,7 @@ NSString *mediumTag[] = {@"Blue Film", @"Clear Film", @"Paper"};
 {
 	if (self = [super init])
 	{
-		[AYDicomPrintWindowController updateAllPreferencesFormat];
+		[DicomPrintWindowController updateAllPreferencesFormat];
 		
 		// fetch current viewer
 		m_CurrentViewer = [self _currentViewer];
@@ -169,7 +155,7 @@ NSString *mediumTag[] = {@"Blue Film", @"Clear Film", @"Paper"};
 
 - (NSString *) windowNibName
 {
-	return @"AYDicomPrint";
+	return @"DicomPrint";
 }
 
 - (void) awakeFromNib
@@ -428,6 +414,7 @@ NSString *mediumTag[] = {@"Blue Film", @"Clear Film", @"Paper"};
 	return nil;
 }
 
+#pragma mark TODO replace  by dcmpsprt invocation
 - (void) _createPrintjob: (id) object
 {
     // show progress sheet
@@ -453,8 +440,6 @@ NSString *mediumTag[] = {@"Blue Film", @"Clear Film", @"Paper"};
 		aeTitle = @"OSIRIX_DICOM_PRINT";
 	[association addAttribute: [NSXMLNode attributeWithName: @"aetitle_sender" stringValue: aeTitle]];
 	[association addAttribute: [NSXMLNode attributeWithName: @"aetitle_receiver" stringValue: [dict valueForKey: @"aeTitle"]]];
-	if ([[dict valueForKey: @"colorPrint"] boolValue])
-		[association addAttribute: [NSXMLNode attributeWithName: @"colorprint" stringValue: @"YES"]];
 	[printjob addChild: association];
 
 	// filmsession
@@ -506,9 +491,12 @@ NSString *mediumTag[] = {@"Blue Film", @"Clear Film", @"Paper"};
 
             NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys: [NSNumber numberWithInt: columns], @"columns", [NSNumber numberWithInt: rows], @"rows", [NSNumber numberWithInt: [[m_ImageSelection selectedCell] tag]], @"mode", [NSNumber numberWithInt: from], @"from", [NSNumber numberWithInt: to], @"to", [NSNumber numberWithInt: [entireSeriesInterval intValue]], @"interval", nil];
             
-            // collect images for printing
-            AYNSImageToDicom *dicomConverter = [[[AYNSImageToDicom alloc] init] autorelease];
-            NSArray *images = [dicomConverter dicomFileListForViewer: m_CurrentViewer destinationPath: destPath options: options asColorPrint: [[dict valueForKey: @"colorPrint"] intValue] withAnnotations: NO];
+#pragma mark collect images for printing
+            NSImageToDicomPrint *dicomConverter = [[[NSImageToDicomPrint alloc] init] autorelease];
+            NSArray *images = [dicomConverter dicomFileListForViewer: m_CurrentViewer
+                                                     destinationPath: destPath
+                                                             options: options
+                                                     withAnnotations: NO];
             
             // check, if images were collected
             if ([images count] == 0)
@@ -557,7 +545,7 @@ NSString *mediumTag[] = {@"Blue Film", @"Clear Film", @"Paper"};
                 else
                 {
                     // send printjob
-                    
+#pragma mark TODO calls _sendPrintJob:
                     NSThread* t = [[[NSThread alloc] initWithTarget:self selector:@selector(_sendPrintjob:) object: xmlPath] autorelease];
                     t.name = NSLocalizedString( @"DICOM Printing...", nil);
                     [[ThreadsManager defaultManager] addThreadAndStart: t];
@@ -585,17 +573,35 @@ NSString *mediumTag[] = {@"Blue Film", @"Clear Film", @"Paper"};
 	@try 
 	{
 		// dicom log path & basename
-		NSString *logPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Logs/AYDicomPrint"];
-		NSString *baseName = @"AYDicomPrint";
+		NSString *logPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Library/Logs/dcmprscu"];
+		NSString *baseName = @"dcmprscu";
 
 		// create log directory, if it does not exist
 		NSFileManager *fileManager = [NSFileManager defaultManager];
 		if (![fileManager fileExistsAtPath: logPath])
-			[fileManager createDirectoryAtPath: logPath attributes: nil];
-		
+			[fileManager createDirectoryAtPath:logPath
+                withIntermediateDirectories:NO
+                                 attributes:nil
+                                      error:nil];
+/*
 		NSTask *theTask = [[NSTask alloc] init];
 		
 		[theTask setArguments: [NSArray arrayWithObjects: logPath, baseName, xmlPath, nil]];
+      
+      
+#pragma mark TODO replace sendPrintJob
+      //int status = -1;
+      
+      //   argv[ 1] : logPath
+      //   argv[ 2] : baseName
+      //   argv[ 3] : xmlPath
+      // send printjob
+      //DicomPrintSCU printSCU = DicomPrintSCU( argv[ 1], 0, argv[ 2]);
+      
+      //status = printSCU.sendPrintjob( argv[ 3]);
+
+      
+//NO EXISTE MAS COMO TARGET SEPARADO !!!!!!!!
 		[theTask setLaunchPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"/DICOMPrint"]];
 		[theTask launch];
 		while( [theTask isRunning]) [NSThread sleepForTimeInterval: 0.01];
@@ -603,14 +609,15 @@ NSString *mediumTag[] = {@"Blue Film", @"Clear Film", @"Paper"};
 		
 		int status = [theTask terminationStatus];
 		[theTask release];
-
+*/
+      int status = 0;
 		if (status != 0)
 		{
 			[self performSelectorOnMainThread:@selector(errorMessage:) withObject:[NSArray arrayWithObjects: NSLocalizedString(@"Print failed", nil), NSLocalizedString(@"Couldn't print images.", nil), NSLocalizedString(@"OK", nil), nil] waitUntilDone:NO];
 		}
 
 		// remove temporary files
-		[[NSFileManager defaultManager] removeFileAtPath: [xmlPath stringByDeletingLastPathComponent] handler: nil];
+		[fileManager removeFileAtPath: [xmlPath stringByDeletingLastPathComponent] handler: nil];
 		
 	}
 	@catch (NSException * e) 

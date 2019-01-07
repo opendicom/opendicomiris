@@ -3599,14 +3599,6 @@ Gw
                     <connections>
                         <binding destination="898" name="value" keyPath="passwordForExportEncryption" id="13839"/>
                         <binding destination="12279" name="enabled" keyPath="values.encryptForExport" id="13840"/>
-                        <binding destination="12279" name="enabled2" keyPath="values.hasMacOSXSnowLeopard" previousBinding="13840" id="13842">
-                            <dictionary key="options">
-                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
-                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
-                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
-                                <integer key="NSNullPlaceholder" value="-1"/>
-                            </dictionary>
-                        </binding>
                     </connections>
                 </textField>
             </subviews>

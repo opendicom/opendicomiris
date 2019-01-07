@@ -537,7 +537,7 @@ static void* const SearchDicomNodesContext = @"SearchDicomNodesContext";
 /*JF*/
         if (context == RemoteBrowserSourcesContext)
         {
-            NSHost* currentHost = [DefaultsOsiriX currentHost];
+            NSHost* currentHost = [NSHost currentHost];
             NSArray* a = [[NSUserDefaults standardUserDefaults] objectForKey:@"OSIRIXSERVERS"];
             // remove old items
             for (DataNodeIdentifier* dni in [[_browser.sources.content copy] autorelease])

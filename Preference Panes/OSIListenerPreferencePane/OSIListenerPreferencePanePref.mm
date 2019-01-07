@@ -73,11 +73,8 @@
 
 -(NSArray*)IPv4Address;
 {
-	NSEnumerator* e = [[[DefaultsOsiriX currentHost] addresses] objectEnumerator];
-	NSString* addr;
-	NSMutableArray* r = [NSMutableArray array];
-
-	while (addr = (NSString*)[e nextObject])
+   NSMutableArray* r = [NSMutableArray array];
+	for (NSString* addr in [[NSHost currentHost] addresses])
 	{
 		if ([[addr componentsSeparatedByString:@"."] count] == 4 && ![addr isEqualToString:@"127.0.0.1"])
 		{

@@ -15,7 +15,7 @@
 #import "NSImage+N2.h"
 #import "DefaultsOsiriX.h"
 #import "NSAppleScript+HandlerCalls.h"
-#import "AYDicomPrintWindowController.h"
+#import "DicomPrintWindowController.h"
 #import "MyOutlineView.h"
 #import "Plugin.h"
 #import "DCMPix.h"
@@ -18929,16 +18929,14 @@ static BOOL viewerControllerPlaying = NO;
 	[NSApp beginSheet: printWindow modalForWindow:nil modalDelegate:self didEndSelector:nil contextInfo:nil];
 }
 
-#ifndef OSIRIX_LIGHT
 - (void) printDICOM:(id) sender
 {
 	[self checkEverythingLoaded];
     
     [self.window makeKeyAndOrderFront: self];
     
-	[[[AYDicomPrintWindowController alloc] init] autorelease];
+	[[[DicomPrintWindowController alloc] init] autorelease];
 }
-#endif
 
 -(NSImage*) imageForFrame:(NSNumber*) cur maxFrame:(NSNumber*) max
 {

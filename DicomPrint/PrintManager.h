@@ -1,6 +1,3 @@
-#ifndef CAYPRINTMANAGER_H
-#define CAYPRINTMANAGER_H
-
 #include "dctk.h"
 #include "dimse.h"
 #include "ofstring.h"
@@ -36,16 +33,16 @@ public:
 /** 
  * representation of an association used for DICOM Basic Grayscale Print.
  */
-class AYPrintManager
+class PrintManager
 {
 public:
 
   /// default constructor
-  AYPrintManager();
+  PrintManager();
 
 
   /// destructor
-  virtual ~AYPrintManager();
+  virtual ~PrintManager();
 
 
 
@@ -177,7 +174,6 @@ public:
    *  @param peerMaxPDU maximum PDU size to negotiate, must be between 8192 and 65536.
    *  @param negotiatePresentationLUT if true, Presentation LUT SOP Class is negotiated
    *  @param negotiateAnnotationBox if true, Basic Annotation Box SOP Class is negotiated
-   *  @param negotiateColorjob if true, BasicColorPrintManagementMetaSOPClass is negotiated
    *  @param implicitOnly if true, only the default implicit VR transfer syntax is proposed,
    *    otherwise all uncompressed transfer syntaxes are proposed.
    *  @return status code that can be checked with the SUCCESS macro. If successful, an association
@@ -272,11 +268,11 @@ public:
 private:
 
   /// private undefined copy constructor
-  AYPrintManager(const AYPrintManager& copy);
+  PrintManager(const PrintManager& copy);
 
 
   /// private undefined assignment operator
-  AYPrintManager& operator=(const AYPrintManager& copy);
+  PrintManager& operator=(const PrintManager& copy);
 
 
 
@@ -356,4 +352,3 @@ private:
 
 };
 
-#endif

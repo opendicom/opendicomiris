@@ -54,7 +54,6 @@
 -(void)convertPasswordToHashIfNeeded;
 
 -(BOOL)validatePassword:(NSString**)value error:(NSError**)error;
--(BOOL)validateDownloadZIP:(NSNumber**)value error:(NSError**)error;
 -(BOOL)validateName:(NSString**)value error:(NSError**)error;
 -(BOOL)validateStudyPredicate:(NSString**)value error:(NSError**)error;
 

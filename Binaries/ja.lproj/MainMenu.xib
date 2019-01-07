@@ -1803,11 +1803,6 @@ CA
                             <menuItem title="Otro" id="T8G-XC-wcY">
                                 <menu key="submenu" title="Otro" id="mSO-ws-TCy"/>
                             </menuItem>
-                            <menuItem title="Acerca de ..." id="bHD-wx-vWn">
-                                <connections>
-                                    <action selector="aboutPlugins:" target="694" id="8D7-iS-c5g"/>
-                                </connections>
-                            </menuItem>
                         </items>
                     </menu>
                 </menuItem>
@@ -3727,14 +3722,6 @@ Gw
                     <connections>
                         <binding destination="898" name="value" keyPath="passwordForExportEncryption" id="13839"/>
                         <binding destination="12279" name="enabled" keyPath="values.encryptForExport" id="13840"/>
-                        <binding destination="12279" name="enabled2" keyPath="values.hasMacOSXSnowLeopard" previousBinding="13840" id="13842">
-                            <dictionary key="options">
-                                <integer key="NSMultipleValuesPlaceholder" value="-1"/>
-                                <integer key="NSNoSelectionPlaceholder" value="-1"/>
-                                <integer key="NSNotApplicablePlaceholder" value="-1"/>
-                                <integer key="NSNullPlaceholder" value="-1"/>
-                            </dictionary>
-                        </binding>
                     </connections>
                 </textField>
             </subviews>
@@ -3834,9 +3821,6 @@ Gw
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
-                                    <connections>
-                                        <binding destination="12279" name="hidden" keyPath="values.LP64bit" id="14528"/>
-                                    </connections>
                                 </textField>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" preferredMaxLayoutWidth="330" translatesAutoresizingMaskIntoConstraints="NO" id="14501">
                                     <rect key="frame" x="60" y="85" width="335" height="17"/>
@@ -3861,9 +3845,6 @@ Gw
                             <constraint firstItem="14503" firstAttribute="centerX" secondItem="14501" secondAttribute="centerX" id="tYR-7r-qgR"/>
                             <constraint firstItem="14504" firstAttribute="top" secondItem="14472" secondAttribute="top" constant="6" id="wfq-rq-MFE"/>
                         </constraints>
-                        <connections>
-                            <binding destination="12279" name="hidden" keyPath="values.LP64bit" id="14542"/>
-                        </connections>
                     </box>
                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="14473">
                         <rect key="frame" x="117" y="238" width="296" height="15"/>

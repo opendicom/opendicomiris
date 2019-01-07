@@ -1,154 +1,19 @@
-/*=========================================================================
- Program:   OsiriX
- 
- Copyright (c) OsiriX Team
- All rights reserved.
- Distributed under GNU - LGPL
- 
- See http://www.osirix-viewer.com/copyright.html for details.
- 
- This software is distributed WITHOUT ANY WARRANTY; without even
- the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
- PURPOSE.
- =========================================================================*/
-
 #import "DefaultsOsiriX.h"
+
 #import "PluginManager.h"
 #import "NSUserDefaults+OsiriX.h"
 #import "OsiriX/DCMAbstractSyntaxUID.h"
 #import <AVFoundation/AVFoundation.h>
 
-#ifdef OSIRIX_VIEWER
 #import "DCMNetServiceDelegate.h"
-#endif
 
 #include <IOKit/graphics/IOGraphicsLib.h>
 
 
-//static BOOL isHcugeCh = NO, isUnigeCh = NO, testIsHugDone = NO, testIsUniDone = NO;
-//static NSString *hostName = @"";
-static NSHost *currentHost = nil;
-
 @implementation DefaultsOsiriX
 
-+(NSHost*) currentHost
-{
-	@synchronized( NSApp)
-	{
-		if( currentHost == nil)
-			currentHost = [[NSHost currentHost] retain];
-	}
-	return currentHost;
-}
-
-// Test if the computer is in the HUG (domain name == hcuge.ch)
-//+ (NSString*) hostName
-//{
-//	return hostName;
-//}
-
-//+ (BOOL) isHUG
-//{
-//	if( testIsHugDone == NO)
-//	{
-////		NSArray	*names = [[DefaultsOsiriX currentHost] names];
-////		int i;
-////		for( i = 0; i < [names count] && !isHcugeCh; i++)
-////		{
-////			int len = [[names objectAtIndex: i] length];
-////			if ( len < 8 ) continue;  // Fixed out of bounds error in following line when domainname is short.
-////			NSString *domainName = [[names objectAtIndex: i] substringFromIndex: len - 8];
-////
-////			if([domainName isEqualToString: @"hcuge.ch"])
-////			{
-////				isHcugeCh = YES;
-////				hostName = [[names objectAtIndex: i] retain];
-////			}
-////		}
-//		
-//		char s[_POSIX_HOST_NAME_MAX+1];
-//		gethostname(s,_POSIX_HOST_NAME_MAX);
-//		NSString *c = [NSString stringWithCString:s encoding:NSUTF8StringEncoding];
-//		
-//		if( [c length] > 8 )
-//		{
-//			NSString *domainName = [c substringFromIndex: [c length] - 8];
-//
-//			if([domainName isEqualToString: @"hcuge.ch"])
-//			{
-//				isHcugeCh = YES;
-//				hostName = [c retain];
-//			}
-//		}
-//		
-//		testIsHugDone = YES;
-//	}
-//	return isHcugeCh;
-//}
-
-//+ (BOOL) isUniGE
-//{
-//	if( testIsUniDone == NO)
-//	{
-////		NSArray	*names = [[DefaultsOsiriX currentHost] names];
-////		int i;
-////		for( i = 0; i < [names count] && !isUnigeCh; i++)
-////		{
-////			int len = [[names objectAtIndex: i] length];
-////			if ( len < 8 ) continue;  // Fixed out of bounds error in following line when domainname is short.
-////			NSString *domainName = [[names objectAtIndex: i] substringFromIndex: len - 8];
-////
-////			if([domainName isEqualToString: @"unige.ch"])
-////			{
-////				isUnigeCh = YES;
-////				hostName = [[names objectAtIndex: i] retain];
-////			}
-////		}
-//		
-//		char s[_POSIX_HOST_NAME_MAX+1];
-//		gethostname(s,_POSIX_HOST_NAME_MAX);
-//		NSString *c = [NSString stringWithCString:s encoding:NSUTF8StringEncoding];
-//		
-//		if( [c length] > 8 )
-//		{
-//			NSString *domainName = [c substringFromIndex: [c length] - 8];
-//
-//			if([domainName isEqualToString: @"unige.ch"])
-//			{
-//				isUnigeCh = YES;
-//				hostName = [c retain];
-//			}
-//		}
-//		
-//		testIsUniDone = YES;
-//	}
-//	return isUnigeCh;
-//}
-
-//+ (BOOL) isLAVIM
-//{
-//	#ifdef OSIRIX_VIEWER
-//	if( [self isHUG])
-//	{
-//		int i;
-//		
-//		for( i = 0; i < [[PluginManager preProcessPlugins] count]; i++)
-//		{
-//			id filter = [[PluginManager preProcessPlugins] objectAtIndex:i];
-//			
-//			if( [[filter className] isEqualToString:@"LavimAnonymize"]) return YES;
-//		}
-//	}
-//	else if([self isUniGE])
-//	{
-//		if ([hostName isEqualToString:@"lavimcmu1.unige.ch"]) return YES;
-//	}
-//	#endif
-//	
-//	return NO;
-//}
-
-+ (void) addCLUT: (NSString*) filename dictionary: (NSMutableDictionary*) clutValues
++ (void) addCLUT: (NSString*) filename
+      dictionary: (NSMutableDictionary*) clutValues
 {
 	NSDictionary *d = [NSDictionary dictionaryWithContentsOfFile: [[NSBundle mainBundle] pathForResource:filename ofType:@"plist"]];
 	
@@ -158,7 +23,11 @@ static NSHost *currentHost = nil;
 		NSLog(@"CLUT plist not found: %@", filename);
 }
 
-+ (void) addConvolutionFilter: (short) size :(short*) vals :(NSString*) name :(NSMutableDictionary*) convValues
+
++ (void) addConvolutionFilter: (short)
+                        size :(short*)
+                        vals :(NSString*)
+                        name :(NSMutableDictionary*) convValues
 {
 	long				i;
 	NSMutableDictionary *aConvFilter = [NSMutableDictionary dictionary];

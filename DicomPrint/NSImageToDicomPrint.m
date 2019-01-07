@@ -1,18 +1,4 @@
-/*=========================================================================
-  Program:   OsiriX
-
-  Copyright (c) OsiriX Team
-  All rights reserved.
-  Distributed under GNU - LGPL
-  
-  See http://www.osirix-viewer.com/copyright.html for details.
-
-     This software is distributed WITHOUT ANY WARRANTY; without even
-     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-     PURPOSE.
-=========================================================================*/
-
-#import "AYNSImageToDicom.h"
+#import "NSImageToDicomPrint.h"
 #import "OSIWindow.h"
 #import "NSFont_OpenGL.h"
 #import "Notifications.h"
@@ -20,17 +6,28 @@
 
 extern BOOL FULL32BITPIPELINE;
 
-@interface AYNSImageToDicom (private)
-- (NSString *) _createDicomImageWithViewer: (ViewerController *) viewer toDestinationPath: (NSString *) destPath asColorPrint: (BOOL) colorPrint withAnnotations: (BOOL) annotations;
+@interface NSImageToDicomPrint (private)
+- (NSString *) _createDicomImageWithViewer: (ViewerController *) viewer
+                         toDestinationPath: (NSString *) destPath
+                           withAnnotations: (BOOL) annotations;
+
 - (struct rawData) _convertRGBToGrayscale: (NSImage *) image;
 - (struct rawData) _convertImageToBitmap: (NSImage *) image;
 - (NSString *) generateUniqueFileName:(NSString *) destinationPath;
-- (NSString*) _writeDICOMHeaderAndData: (NSDictionary*)patientDict destinationPath: (NSString*) destPath imageData:(NSImage*) image colorPrint: (BOOL)  colorPrint;
-- (void) _drawAnnotationsInRect: (NSRect) imageRect forTile: (NSDictionary*) tileDict  isPrinting:(BOOL) print;
+
+- (NSString*) _writeDICOMHeaderAndData: (NSDictionary*)patientDict
+                       destinationPath: (NSString*) destPath
+                             imageData: (NSImage*) image;
+
+- (void) _drawAnnotationsInRect: (NSRect) imageRect
+                        forTile: (NSDictionary*) tileDict
+                     isPrinting:(BOOL) print;
+
 - (NSDictionary *) _getAnnotationDictionary: (ViewerController *) viewController;
+
 @end
 
-@implementation AYNSImageToDicom
+@implementation NSImageToDicomPrint
 
 - (id) init
 {
@@ -52,11 +49,7 @@ extern BOOL FULL32BITPIPELINE;
 	[super dealloc];
 }
 
-//********************************************************************************************
 // returnValue must be retained and released by caller
-//********************************************************************************************
-
-//********************************************************************************************
 - (NSDictionary*) _getAnnotationDictionary: (ViewerController*) viewController
 {
 	int					currentPos = [[viewController imageView] curImage];
@@ -139,15 +132,20 @@ extern BOOL FULL32BITPIPELINE;
 	return infoDict;
 }
 
-- (NSArray *) dicomFileListForViewer: (ViewerController *) currentViewer destinationPath: (NSString *) destPath options: (NSDictionary*) options asColorPrint: (BOOL) colorPrint withAnnotations: (BOOL) annotations 
+
+
+- (NSArray *) dicomFileListForViewer: (ViewerController *) currentViewer
+                     destinationPath: (NSString *) destPath
+                             options: (NSDictionary*) options
+                     withAnnotations: (BOOL) annotations
 {
+   //fileList selection before calling image generation
 	NSMutableArray *images = [NSMutableArray array];
 	NSArray *fileList = [currentViewer fileList];
 	
 	if( [[options valueForKey:@"mode"] intValue] == eCurrentImage)
 	{
 		int i;
-		
 		if( [[currentViewer imageView] flippedData]) i = (long) [fileList count] -1 -[[currentViewer imageView] curImage];
 		else i = [[currentViewer imageView] curImage];
 		
@@ -156,7 +154,10 @@ extern BOOL FULL32BITPIPELINE;
 	else if ([[options valueForKey:@"mode"] intValue] == eAllImages)
 	{
 		int i;
-		for (i = [[options valueForKey:@"from"] intValue]; i < [[options valueForKey:@"to"] intValue]; i += [[options valueForKey:@"interval"] intValue])
+		for (i = [[options valueForKey:@"from"] intValue];
+           i < [[options valueForKey:@"to"] intValue];
+           i += [[options valueForKey:@"interval"] intValue]
+           )
 		{
 			[images addObject: [NSNumber numberWithInt: i]];
 		}
@@ -181,19 +182,26 @@ extern BOOL FULL32BITPIPELINE;
 		}
 	}
 
-	return [self dicomFileListForViewer: currentViewer destinationPath: destPath options: options fileList: images asColorPrint: colorPrint withAnnotations: annotations];
+	return [self dicomFileListForViewer: currentViewer
+                       destinationPath: destPath
+                               options: options
+                              fileList: images
+                       withAnnotations: annotations
+           ];
 }
 
-//********************************************************************************************
+
 // returnValue must be retained and released by caller
-//********************************************************************************************
-- (NSArray *) dicomFileListForViewer: (ViewerController *) currentViewer destinationPath: (NSString *) destPath options: (NSDictionary*) options fileList: (NSArray *) fileList asColorPrint: (BOOL) colorPrint withAnnotations: (BOOL) annotations 
+- (NSArray *) dicomFileListForViewer: (ViewerController *) currentViewer
+                     destinationPath: (NSString *) destPath
+                             options: (NSDictionary*) options
+                            fileList: (NSArray *) fileList
+                     withAnnotations: (BOOL) annotations
 {
 	NSMutableArray	*dicomFilePathList = [NSMutableArray array];
 	int currentImageIndex = [[currentViewer imageView] curImage];
-	
-	/////// ****************
-	
+
+//modify user default
 	float fontSizeCopy = [[NSUserDefaults standardUserDefaults] floatForKey: @"FONTSIZE"];
 	float scaleFactor = 1.0;
 	
@@ -215,8 +223,8 @@ extern BOOL FULL32BITPIPELINE;
 	NSPoint o = [[[currentViewer window] screen] visibleFrame].origin;
 	o.y += [[[currentViewer window] screen] visibleFrame].size.height;
 	
-	/////// ****************
-	
+
+   
 	[OSIWindowController setDontEnterMagneticFunctions: YES];
 	[OSIWindowController setDontEnterWindowDidChangeScreen: YES];
 	
@@ -226,9 +234,10 @@ extern BOOL FULL32BITPIPELINE;
 		[currentViewer setImageRows: 1 columns: 1];
 	
 	BOOL copyFULL32BITPIPELINE = FULL32BITPIPELINE;
-	
-    FULL32BITPIPELINE = NO;
-    
+   FULL32BITPIPELINE = NO;
+ 
+   
+//loop
 	for(NSNumber *imageIndex in fileList)
 	{
 		NSAutoreleasePool	*pool = [[NSAutoreleasePool alloc] init];
@@ -254,8 +263,7 @@ extern BOOL FULL32BITPIPELINE;
 			if( rf.size.height * scaleFactor > cMAXWindowSize)
 				scaleFactor = cMAXWindowSize / rf.size.height;
 			
-			if( scaleFactor <= 1.0)
-				scaleFactor = 1.0;
+			if( scaleFactor <= 1.0) scaleFactor = 1.0;
 			else
 			{
 				windowSizeChanged = YES;
@@ -271,20 +279,19 @@ extern BOOL FULL32BITPIPELINE;
 			[[NSNotificationCenter defaultCenter] postNotificationName: OsirixGLFontChangeNotification object: currentViewer];
 		}
 		
-		[dicomFilePathList addObject: [self _createDicomImageWithViewer: currentViewer toDestinationPath: destPath asColorPrint: colorPrint withAnnotations: annotations]];
+		[dicomFilePathList addObject: [self _createDicomImageWithViewer: currentViewer
+                                                    toDestinationPath: destPath
+                                                      withAnnotations: annotations]];
 		
 		if( windowSizeChanged)
 			[[currentViewer window] setFrame: NSMakeRect( o.x, o.y, rf.size.width, rf.size.height) display: YES];
 		
 		[pool release];
 	}
-	
+
+//reset user default
 	FULL32BITPIPELINE = copyFULL32BITPIPELINE;
-	
-	/////// ****************
-	
 	[[NSUserDefaults standardUserDefaults] setBool: YES forKey: @"allowSmartCropping"];
-	
 	if( fontSizeCopy != [[NSUserDefaults standardUserDefaults] floatForKey: @"FONTSIZE"])
 	{
 		[[NSUserDefaults standardUserDefaults] setFloat: fontSizeCopy forKey: @"FONTSIZE"];
@@ -302,8 +309,6 @@ extern BOOL FULL32BITPIPELINE;
 	[OSIWindowController setDontEnterMagneticFunctions: NO];
 	[OSIWindowController setDontEnterWindowDidChangeScreen: NO];
 	
-	/////// ****************
-	
 	[[currentViewer imageView] setIndex: currentImageIndex];
 	[[currentViewer imageView] sendSyncMessage:0];
 	[currentViewer adjustSlider];
@@ -311,14 +316,17 @@ extern BOOL FULL32BITPIPELINE;
 	return dicomFilePathList;
 }
 
-//********************************************************************************************
-- (NSString *) _createDicomImageWithViewer: (ViewerController *) viewer toDestinationPath: (NSString *) destPath asColorPrint: (BOOL) colorPrint withAnnotations: (BOOL) annotations
+
+
+- (NSString *) _createDicomImageWithViewer: (ViewerController *) viewer
+                         toDestinationPath: (NSString *) destPath
+                            withAnnotations: (BOOL) annotations
 {
 	NSImage *currentImage = [[viewer imageView] nsimage];
 	
 	NSDictionary *patientInfoDict = [self _getAnnotationDictionary: viewer];
 	
-	NSString *imagePath = [self _writeDICOMHeaderAndData: patientInfoDict destinationPath: destPath imageData: currentImage colorPrint: colorPrint];
+	NSString *imagePath = [self _writeDICOMHeaderAndData: patientInfoDict destinationPath: destPath imageData: currentImage];
 	
 	if( imagePath == nil)
 	{
@@ -329,7 +337,7 @@ extern BOOL FULL32BITPIPELINE;
 }
 
 
-//********************************************************************************************
+
 - (NSString*) generateUniqueFileName:(NSString*) destinationPath
 {
 	NSTimeInterval secs = [NSDate timeIntervalSinceReferenceDate];
@@ -351,7 +359,8 @@ extern BOOL FULL32BITPIPELINE;
 	return tempFilePath;
 }
 
-//********************************************************************************************
+
+
 - (struct rawData) _convertImageToBitmap: (NSImage *) image
 {
 	NSBitmapImageRep *imageRepresentation = [NSBitmapImageRep imageRepWithData: [image TIFFRepresentation]];
@@ -388,7 +397,7 @@ extern BOOL FULL32BITPIPELINE;
 	return rawImage;
 }
 
-//********************************************************************************************
+
 - (struct rawData) _convertRGBToGrayscale: (NSImage *) image
 {
 	NSBitmapImageRep *imageRepresentation = [NSBitmapImageRep imageRepWithData: [image TIFFRepresentation]];
@@ -444,7 +453,7 @@ extern BOOL FULL32BITPIPELINE;
 }
 
 
-//********************************************************************************************
+
 - (void) _drawString: (id) stringObj atPoint: (NSPoint) point withFontSize: (float) fontSize atRightBorder: (BOOL) rightBorder
 {
 	float whiteXOffset = 1.0;
@@ -559,8 +568,10 @@ extern BOOL FULL32BITPIPELINE;
 	[self _drawString: [NSString stringWithFormat: @"perf.Ph.: %@", [tileDict objectForKey: @"performingPhysician"]] atPoint: NSMakePoint(nextX, nextY) withFontSize: fontSize atRightBorder: YES];
 }
 
-//********************************************************************************************
-- (NSString*) _writeDICOMHeaderAndData: (NSDictionary *) patientDict destinationPath: (NSString *) destPath imageData: (NSImage *) image colorPrint: (BOOL) colorPrint
+
+- (NSString*) _writeDICOMHeaderAndData: (NSDictionary *) patientDict
+                       destinationPath: (NSString *) destPath
+                             imageData: (NSImage *) image
 {
 	NSString *path = nil;
 	path = [self generateUniqueFileName: destPath];
@@ -907,10 +918,9 @@ extern BOOL FULL32BITPIPELINE;
 		//Basic Color Image Sequence  (2020,0111) SQ
 
 	fwrite(&group, 2, 1, outFile);
-	if (colorPrint)
-		element = CFSwapInt16HostToLittle(0x0111);
-	else
-		element = CFSwapInt16HostToLittle(0x0110);
+   
+	element = CFSwapInt16HostToLittle(0x0110);
+   
 	fwrite(&element, 2, 1, outFile);
 	fwrite("SQ", 2, 1, outFile);
 	dummyShort = CFSwapInt16HostToLittle(0x0000);
@@ -939,8 +949,9 @@ extern BOOL FULL32BITPIPELINE;
 	fwrite("US", 2, 1, outFile);
 	dummyShort = CFSwapInt16HostToLittle(0x0002);
 	fwrite(&dummyShort, 2, 1, outFile);
-	if (colorPrint) samplePerPixel = 3;
-	else samplePerPixel = 1;
+   
+	samplePerPixel = 1;
+   
 	dummyShort = CFSwapInt16HostToLittle(samplePerPixel);
 	fwrite(&dummyShort, 2, 1, outFile);
 	
@@ -951,16 +962,13 @@ extern BOOL FULL32BITPIPELINE;
 	element = CFSwapInt16HostToLittle(0x0004);
 	fwrite(&element, 2, 1, outFile);
 	fwrite("CS", 2, 1, outFile);
-	if (colorPrint)
-		dummyShort = CFSwapInt16HostToLittle(strlen("RGB "));
-	else
-		dummyShort = CFSwapInt16HostToLittle(strlen("MONOCHROME2 "));
+   
+	dummyShort = CFSwapInt16HostToLittle(strlen("MONOCHROME2 "));
+   
 	fwrite(&dummyShort, 2, 1, outFile);
 	dummyShort = CFSwapInt16HostToLittle(0x001);
-	if (colorPrint)
-		fwrite("RGB ", strlen("RGB "), 1, outFile);
-	else
-		fwrite("MONOCHROME2 ", strlen("MONOCHROME2 "), 1, outFile);
+   
+	fwrite("MONOCHROME2 ", strlen("MONOCHROME2 "), 1, outFile);
 
 // 08 C.7.6.3.1.3 Planar Configuration 
 //Planar Configuration (0028,0006) indicates whether the color pixel data are sent color-by-plane or 
@@ -969,19 +977,6 @@ extern BOOL FULL32BITPIPELINE;
 
 // in image box picture: 1 (frame interleave) 
 // dcmtk dcmprscp:   cannot update Basic Grayscale Image Box: unsupported attribute in basic grayscale image sequence
-
-	if (colorPrint)
-	{
-		// planarConfiguration
-		fwrite(&group, 2, 1, outFile);
-		element = CFSwapInt16HostToLittle(0x0006);
-		fwrite(&element, 2, 1, outFile);
-		fwrite("US", 2, 1, outFile);
-		dummyShort = CFSwapInt16HostToLittle(0x0002);
-		fwrite(&dummyShort, 2, 1, outFile);
-		dummyShort = CFSwapInt16HostToLittle(0x0000);
-		fwrite(&dummyShort, 2, 1, outFile);
-	}
 
 	// rows
 	fwrite(&group, 2, 1, outFile);
@@ -1123,10 +1118,7 @@ extern BOOL FULL32BITPIPELINE;
 	fwrite(&dummyLong, 4, 1, outFile);
 
 	struct rawData rawImage;
-	if (colorPrint)
-		rawImage = [self _convertImageToBitmap: image];
-	else
-		rawImage = [self _convertRGBToGrayscale: image];
+	rawImage = [self _convertRGBToGrayscale: image];
 	
 	if( rawImage.bytesWritten && m_ImageDataBytes)
 	{

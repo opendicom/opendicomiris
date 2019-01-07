@@ -124,12 +124,7 @@ enum	{kSuccess = 0,
 #include <arpa/inet.h>
 
 
-#ifdef OSIRIX_LIGHT
-void exitOsiriX(void)
-{
-	[NSException raise: @"JPEG error exception raised" format: @"JPEG error exception raised - See Console.app for error message"];
-}
-#endif
+
 
 static char *privateIPstring = nil;
 
@@ -565,8 +560,6 @@ static NSDate *lastWarningDate = nil;
 
 
 static BOOL initialized = NO;
-static BOOL _hasMacOSXSnowLeopard=NO;
-+(BOOL) hasMacOSXSnowLeopard { return _hasMacOSXSnowLeopard;}
 
 + (void) initialize
 {
@@ -580,7 +573,6 @@ static BOOL _hasMacOSXSnowLeopard=NO;
          NSOperatingSystemVersion osv=[[NSProcessInfo processInfo]  operatingSystemVersion];
          NSLog(@"[AppController initialize] macos %d.%d.%d",osv.majorVersion,osv.minorVersion,osv.patchVersion);
          int osxaabbc=(osv.majorVersion*1000)+(osv.minorVersion*10)+osv.patchVersion;
-         _hasMacOSXSnowLeopard=(osxaabbc > 10059);
          NSBundle * mainBundle=[NSBundle mainBundle];
          NSDictionary * infoDictionary=[mainBundle infoDictionary];
          if( [infoDictionary[@"CFBundlePackageType"] isEqualToString: @"APPL"])
@@ -932,7 +924,332 @@ static BOOL _hasMacOSXSnowLeopard=NO;
    }
    
    return self;
+   
+   //other initializations in applicationWillFinishLaunching
 }
+
+
+
+- (void) applicationWillFinishLaunching: (NSNotification *) aNotification
+{
+   NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+   
+   //JF At launch, there shouldn´t be any subProcess hanging.
+   //[AppController cleanOsiriXSubProcesses];
+   
+#pragma mark verifyHardwareInterpolation
+   
+   NSUInteger size = 32, size2 = size*size;
+   
+   NSWindow* win = [[NSWindow alloc] initWithContentRect:NSMakeRect(0,0,size,size) styleMask:NSTitledWindowMask backing:NSBackingStoreBuffered defer:NO];
+   
+   
+   //memorize previous
+   long annotCopy = [standardUserDefaults integerForKey:@"ANNOTATIONS"];
+   long clutBarsCopy = [standardUserDefaults integerForKey:@"CLUTBARS"];
+   BOOL noInterpolationCopy = [standardUserDefaults boolForKey:@"NOINTERPOLATION"];
+   BOOL highQInterpolationCopy = [standardUserDefaults boolForKey:@"SOFTWAREINTERPOLATION"];
+   
+   
+   float pixData[] = {0,1,1,0};
+   DCMPix* dcmPix = [[DCMPix alloc] initWithData:pixData :32 :2 :2 :1 :1 :0 :0 :0];
+   DCMView* dcmView;
+   unsigned char gray_2[size2];
+   unsigned char gray_1[size2];
+   
+   //remove annotations and clutbars
+   [standardUserDefaults setInteger:annotNone forKey:@"ANNOTATIONS"];
+   [standardUserDefaults setInteger:barHide forKey:@"CLUTBARS"];
+   
+   // pix 1: no interpolation
+   
+   [standardUserDefaults setBool:YES forKey:@"NOINTERPOLATION"];
+   [standardUserDefaults setBool:NO forKey:@"SOFTWAREINTERPOLATION"];
+   [standardUserDefaults setBool:YES forKey:@"FULL32BITPIPELINE"];
+   
+   dcmView = [[DCMView alloc] initWithFrame:NSMakeRect(0, 0, size,size)];
+   [dcmView setPixels:[NSMutableArray arrayWithObject:dcmPix] files:NULL rois:NULL firstImage:0 level:'i' reset:YES];
+   [dcmView setScaleValueCentered:size];
+   [win.contentView addSubview:dcmView];
+   [dcmView drawRect:NSMakeRect(0,0,size,size)];
+   
+   float imOrigin[ 3], imSpacing[ 2];
+   long width, height, spp, bpp;
+   unsigned char *data = [dcmView getRawPixelsViewWidth: &width
+                                                 height: &height
+                                                    spp: &spp
+                                                    bpp: &bpp
+                                          screenCapture: YES
+                                             force8bits: YES
+                                        removeGraphical: YES
+                                           squarePixels: YES
+                                     allowSmartCropping: NO
+                                                 origin: imOrigin
+                                                spacing: imSpacing
+                                                 offset: nil
+                                               isSigned: nil
+                          ];
+   
+   assert( spp == 3);
+   
+   if( data)
+   {
+      for (int i = 0; i < size2; ++i)
+         gray_1[i] = (data[i*3]+data[i*3+1]+data[i*3+2])/3;
+      free( data);
+      /*
+       planes[0] = gray_1;
+       NSBitmapImageRep* representation =
+       [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:planes
+       pixelsWide:size
+       pixelsHigh:size
+       bitsPerSample:8
+       samplesPerPixel:1
+       hasAlpha:NO
+       isPlanar:NO
+       colorSpaceName:NSCalibratedBlackColorSpace bytesPerRow:size
+       bitsPerPixel:8];
+       [[representation TIFFRepresentation] writeToFile:@"/tmp/aaaaa1.tif" atomically:YES];
+       [representation release];
+       */
+   }
+   [dcmView removeFromSuperview];
+   [dcmView release];
+   
+   
+   
+   // pix 2: interpolation
+   
+   [standardUserDefaults setBool:NO forKey:@"NOINTERPOLATION"];
+   [standardUserDefaults setBool:NO forKey:@"SOFTWAREINTERPOLATION"];
+   [standardUserDefaults setBool:YES forKey:@"FULL32BITPIPELINE"];
+   dcmView = [[DCMView alloc] initWithFrame: NSMakeRect(0, 0, size,size)];
+   [dcmView setPixels:[NSMutableArray arrayWithObject:dcmPix] files:NULL rois:NULL firstImage:0 level:'i' reset:YES];
+   [dcmView setScaleValueCentered:size];
+   [win.contentView addSubview:dcmView];
+   [dcmView drawRect:NSMakeRect(0,0,size,size)];
+   
+   {
+      float imOrigin[ 3], imSpacing[ 2];
+      long width, height, spp, bpp;
+      
+      unsigned char *data = [dcmView getRawPixelsViewWidth: &width height: &height spp: &spp bpp: &bpp screenCapture: YES force8bits: YES removeGraphical: YES squarePixels: YES allowSmartCropping: NO origin: imOrigin spacing: imSpacing offset: nil isSigned: nil];
+      
+      assert( spp == 3);
+      
+      if( data)
+      {
+         for (int i = 0; i < size2; ++i)
+            gray_1[i] = (data[i*3]+data[i*3+1]+data[i*3+2])/3;
+         free( data);
+         
+         /*
+          planes[0] = gray_1;
+          NSBitmapImageRep* representation =
+          [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:planes
+          pixelsWide:size
+          pixelsHigh:size
+          bitsPerSample:8
+          samplesPerPixel:1
+          hasAlpha:NO
+          isPlanar:NO
+          colorSpaceName:NSCalibratedBlackColorSpace bytesPerRow:size
+          bitsPerPixel:8];
+          [[representation TIFFRepresentation] writeToFile:@"/tmp/aaaaa1.tif" atomically:YES];
+          [representation release];
+          */
+      }
+   }
+   [dcmView removeFromSuperview];
+   [dcmView release];
+   
+   [win release];
+   [dcmPix release];
+   
+   
+   [standardUserDefaults setInteger: annotCopy forKey:@"ANNOTATIONS"];
+   [standardUserDefaults setInteger: clutBarsCopy forKey:@"CLUTBARS"];
+   [standardUserDefaults setBool: noInterpolationCopy forKey:@"NOINTERPOLATION"];
+   [standardUserDefaults setBool: highQInterpolationCopy forKey:@"SOFTWAREINTERPOLATION"];
+   
+   [DCMView setCLUTBARS:clutBarsCopy ANNOTATIONS:annotCopy];
+   
+   // eval results
+   
+   CGFloat delta = 0;
+   for (int i = 0; i < size2; ++i)
+      delta += fabsf((float)gray_1[i]-(float)gray_2[i]);
+   BOOL has32bitPipeline = delta > 1000; // we may want to raise this..
+   
+   if (has32bitPipeline)
+   {
+      NSLog( @"-- 32bit pipeline available : delta = %f", delta);
+      [standardUserDefaults setBool:YES forKey:@"hasFULL32BITPIPELINE"];
+      [standardUserDefaults setBool:YES forKey:@"FULL32BITPIPELINE"];
+   }
+   else
+   {
+      NSLog( @"-- 32bit pipeline inactivated : delta = %f", delta);
+      [standardUserDefaults setBool:NO forKey:@"hasFULL32BITPIPELINE"];
+      [standardUserDefaults setBool:NO forKey:@"FULL32BITPIPELINE"];
+   }
+   
+#pragma mark tmp
+   
+   
+   if( ![[NSFileManager defaultManager] fileExistsAtPath: @"/tmp/"])
+      [[NSFileManager defaultManager] createDirectoryAtPath:@"/tmp/" withIntermediateDirectories:NO attributes:nil error:nil];
+   
+   if ([[standardUserDefaults valueForKey:@"COPYDATABASEMODE"] intValue] == 1) // tag 1 "if on CD", disappeared after new CD/DVD import system
+      [standardUserDefaults setInteger:2 forKey:@"COPYDATABASEMODE"];
+   
+   
+   if( [standardUserDefaults boolForKey: @"hideListenerError"] == NO)
+   {
+      @try
+      {
+         ILCrashReporter *reporter = [ILCrashReporter defaultReporter];
+         
+         
+         
+         if( [standardUserDefaults valueForKey: @"crashReporterSMTPServer"]) {
+            reporter.SMTPServer = [standardUserDefaults valueForKey: @"crashReporterSMTPServer"];
+            int port = [standardUserDefaults integerForKey: @"crashReporterSMTPPort"];
+            reporter.SMTPPort = port? port : 25;
+            // if these are empty, set them to empty
+            reporter.SMTPUsername = [standardUserDefaults valueForKey: @"crashReporterSMTPUsername"];
+            reporter.SMTPPassword = [standardUserDefaults valueForKey: @"crashReporterSMTPPassword"];
+         }
+         
+         if( [standardUserDefaults valueForKey: @"crashReporterFromAddress"])
+            reporter.fromAddress = [standardUserDefaults valueForKey: @"crashReporterFromAddress"];
+         
+         NSString *reportAddr = @"jacquesfauquex@gmail.com";
+         if( [standardUserDefaults valueForKey: @"crashReporterToAddress"])
+            reportAddr = [standardUserDefaults valueForKey: @"crashReporterToAddress"];
+         
+         reporter.automaticReport = [standardUserDefaults boolForKey: @"crashReporterAutomaticReport"];
+         
+         [reporter launchReporterForCompany: @"opendicom" reportAddr: reportAddr];
+      }
+      @catch (NSException *e)
+      {
+         NSLog( @"**** Exception ILCrashReporter: %@", e);
+      }
+   }
+   
+   //passes IBOutlets to be filled to PluginManager at init
+   pluginManager = [[PluginManager alloc] initForMenus:reportMenu :databaseMenu :imageFilterMenu :roiToolMenu];
+   if (pluginManager==nil) exit(-1);
+   
+   appController = self;
+   
+   
+#pragma mark dcmtk with watchdog...
+   [self initDCMTK];
+   [self restartSTORESCP];
+   [NSTimer scheduledTimerWithTimeInterval: 2 target: self selector: @selector(checkForRestartStoreSCPOrder:) userInfo: nil repeats: YES];
+   
+   [DicomDatabase initializeDicomDatabaseClass];
+   [BrowserController initializeBrowserControllerClass];
+   [WebPortal initializeWebPortalClass];
+   
+   if( [standardUserDefaults boolForKey:@"httpXMLRPCServer"]) {
+      if(XMLRPCServer == nil) XMLRPCServer = [[XMLRPCInterface alloc] init];
+   }
+   
+#pragma mark notifications
+   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+   [nc addObserver: self
+          selector: @selector(UpdateWLWWMenu:)
+              name: OsirixUpdateWLWWMenuNotification
+            object: nil];
+   [nc addObserver: self
+          selector: @selector(UpdateConvolutionMenu:)
+              name: OsirixUpdateConvolutionMenuNotification
+            object: nil];
+   [nc addObserver: self
+          selector: @selector(UpdateCLUTMenu:)
+              name: OsirixUpdateCLUTMenuNotification
+            object: nil];
+   [nc addObserver: self
+          selector: @selector(UpdateOpacityMenu:)
+              name: OsirixUpdateOpacityMenuNotification
+            object: nil];
+   
+   [nc postNotificationName: OsirixUpdateOpacityMenuNotification
+                     object: NSLocalizedString(@"Linear Table", nil)
+                   userInfo: nil];
+   [nc postNotificationName: OsirixUpdateCLUTMenuNotification
+                     object: NSLocalizedString(@"No CLUT", nil)
+                   userInfo: nil];
+   [nc postNotificationName: OsirixUpdateWLWWMenuNotification
+                     object: NSLocalizedString(@"Other", nil)
+                   userInfo: nil];
+   [nc postNotificationName: OsirixUpdateConvolutionMenuNotification
+                     object:NSLocalizedString( @"No Filter", nil)
+                   userInfo: nil];
+   
+   [nc addObserver:self selector:@selector(applicationDidChangeScreenParameters:)
+              name:NSApplicationDidChangeScreenParametersNotification
+            object:NSApp];
+   
+   [AppController resetThumbnailsList];
+   
+   
+   previousDefaults = [[standardUserDefaults dictionaryRepresentation] retain];
+   showRestartNeeded = YES;
+   
+   [nc addObserver: self
+          selector: @selector(preferencesUpdated:)
+              name: NSUserDefaultsDidChangeNotification
+            object: nil];
+   
+   [standardUserDefaults setBool:YES forKey: @"SAMESTUDY"];
+   
+   [standardUserDefaults setBool: YES forKey: @"UseKDUForJPEG2000"];
+   [standardUserDefaults setBool: YES forKey: @"useDCMTKForJP2K"];
+   
+   if( [[standardUserDefaults objectForKey:@"HOTKEYS"] count] < SetKeyImageAction) {
+      NSMutableDictionary *hk = [[[standardUserDefaults objectForKey:@"HOTKEYS"] mutableCopy] autorelease];
+      
+      BOOL f = NO;
+      for( NSString *key in hk) {
+         if( [[hk objectForKey: key] integerValue] == FullScreenAction)
+            f = YES;
+         
+         if( [[hk objectForKey: key] integerValue] == Sync3DAction)
+            f = YES;
+         
+         if( [[hk objectForKey: key] integerValue] == SetKeyImageAction)
+            f = YES;
+      }
+      
+      if( f == NO) {
+         [hk setObject: @(FullScreenAction) forKey: @"dbl-click"];
+         [hk setObject: @(Sync3DAction) forKey: @"dbl-click + alt"];
+         [hk setObject: @(SetKeyImageAction) forKey: @"dbl-click + cmd"];
+         
+         [standardUserDefaults setObject: hk forKey: @"HOTKEYS"];
+      }
+   }
+   [standardUserDefaults setBool: NO forKey: @"EncryptCD"];
+   [standardUserDefaults setBool: NO forKey: @"encryptForExport"];
+   
+   [self initTilingWindows];
+   
+   NSString* inc = [[DicomDatabase activeLocalDatabase] incomingDirPath];
+   for (NSString* path in [NSArray arrayWithObjects: [[DicomDatabase activeLocalDatabase] tempDirPath], [[DicomDatabase activeLocalDatabase] decompressionDirPath], nil])
+      for (NSString* f in [[NSFileManager defaultManager] enumeratorAtPath:path filesOnly:NO recursive:NO])
+         [[NSFileManager defaultManager] moveItemAtPath:[path stringByAppendingPathComponent:f] toPath:[inc stringByAppendingPathComponent:f] error:NULL];
+   
+   if( [AppController isKDUEngineAvailable])
+      NSLog( @"/*\\ /*\\ KDU Engine AVAILABLE /*\\ /*\\");
+   else
+      NSLog( @"KDU Engine NOT available");
+}
+
+
 
 // Manage private URL scheme opendicomiris
 
@@ -1090,11 +1407,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 }
 
 #pragma mark -
-
-+ (void) pause
-{
-	[[AppController sharedAppController] performSelectorOnMainThread: @selector(pause) withObject: nil waitUntilDone: NO];
-}
 
 -(void)applicationDidChangeScreenParameters:(NSNotification*)aNotification
 {
@@ -1254,7 +1566,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	
 	NSLog( @"start DNSResolve");
 	
-	for( NSString *s in [[DefaultsOsiriX currentHost] names])
+	for( NSString *s in [[NSHost currentHost] names])
 	{
 		NSLog( @"%@", s);
 	}
@@ -1305,14 +1617,6 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
 	return r;
 }
 
-- (void) pause
-{ // __deprecated
-	[[[BrowserController currentBrowser] database] lock]; // was checkIncomingLock
-	sleep( 2);
-	[[[BrowserController currentBrowser] database] unlock]; // was checkIncomingLock
-}
-
-
 - (NSString *)computerName
 {
 	return [(id)SCDynamicStoreCopyComputerName(NULL, NULL) autorelease];
@@ -1335,14 +1639,11 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
     [NSApp stopModal];
 }
 
-#ifndef OSIRIX_LIGHT
 - (IBAction) autoQueryRefresh:(id)sender
 {
 	[[QueryController currentAutoQueryController] refreshAutoQR: sender];
 }
-#endif
 
-//———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
 #pragma mark-
 
 - (void) waitForPID: (NSNumber*) pidNumber
@@ -1552,8 +1853,7 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         
         if( [defaults integerForKey: @"httpWebServer"] == 1 && [defaults integerForKey: @"httpWebServer"] != [[previousDefaults valueForKey: @"httpWebServer"] intValue])
         {
-            if( [AppController hasMacOSXSnowLeopard] == NO)
-                NSRunCriticalAlertPanel( NSLocalizedString( @"Unsupported", nil), NSLocalizedString( @"It is highly recommend to upgrade to MacOS 10.6 or higher to use the OsiriX Web Server.", nil), NSLocalizedString( @"OK", nil) , nil, nil);
+            NSRunCriticalAlertPanel( NSLocalizedString( @"Unsupported", nil), NSLocalizedString( @"It is highly recommend to upgrade to MacOS 10.6 or higher to use the OsiriX Web Server.", nil), NSLocalizedString( @"OK", nil) , nil, nil);
         }
         
         [previousDefaults release];
@@ -1667,10 +1967,8 @@ withReplyEvent:(NSAppleEventDescriptor *)replyEvent
         
         Use_kdu_IfAvailable = [[NSUserDefaults standardUserDefaults] boolForKey:@"UseKDUForJPEG2000"];
         
-        #ifndef OSIRIX_LIGHT
         [DCMPixelDataAttribute setUse_kdu_IfAvailable: Use_kdu_IfAvailable];
-        #endif
-        
+       
         [[BrowserController currentBrowser] setNetworkLogs];
         [DicomFile resetDefaults];
         
@@ -2539,9 +2837,7 @@ static BOOL firstCall = YES;
 	
 	[[BrowserController currentBrowser] browserPrepareForClose];
     
-#ifndef OSIRIX_LIGHT
 	[WebPortal finalizeWebPortalClass];
-#endif
 
 	[ROI saveDefaultSettings];
 	
@@ -2830,7 +3126,7 @@ static BOOL firstCall = YES;
     }
 }
 
-//JF URL
+/*JF URL
 - (void) checkForOsirixMimeType
 {
 	NSString *path = @"~/Library/Preferences/com.apple.LaunchServices.plist";
@@ -2847,13 +3143,14 @@ static BOOL firstCall = YES;
 	
 	NSMutableDictionary *mutableDict = [NSMutableDictionary dictionaryWithDictionary: dict];
 	
-	NSDictionary *handlerForOsiriX = [NSDictionary dictionaryWithObjectsAndKeys: @"com.rossetantoine.osirix", @"LSHandlerRoleAll", @"dicom", @"LSHandlerURLScheme", nil];
+	NSDictionary *handlerForOpendicomiris = [NSDictionary dictionaryWithObjectsAndKeys: @"com.opendicom.opendicomiris", @"LSHandlerRoleAll", @"dicom", @"LSHandlerURLScheme", nil];
 	
-	[mutableDict setObject: [[dict objectForKey: @"LSHandlers"] arrayByAddingObject: handlerForOsiriX] forKey: @"LSHandlers"];
+	[mutableDict setObject: [[dict objectForKey: @"LSHandlers"] arrayByAddingObject: handlerForOpendicomiris] forKey: @"LSHandlers"];
 	
 	[[NSFileManager defaultManager] removeItemAtPath: [path stringByExpandingTildeInPath]  error: nil];
 	[mutableDict writeToFile: [path stringByExpandingTildeInPath]  atomically: YES];
 }
+*/
 
 #define kIOPCIDevice                "IOPCIDevice"
 #define kIONameKey                  "IOName"
@@ -2904,305 +3201,6 @@ static BOOL firstCall = YES;
     return GPUs;
 }
 
--(void)verifyHardwareInterpolation
-{
-
-    
-	NSUInteger size = 32, size2 = size*size;
-	
-	NSWindow* win = [[NSWindow alloc] initWithContentRect:NSMakeRect(0,0,size,size) styleMask:NSTitledWindowMask backing:NSBackingStoreBuffered defer:NO];
-	
-	long annotCopy = [[NSUserDefaults standardUserDefaults] integerForKey:@"ANNOTATIONS"];
-	long clutBarsCopy = [[NSUserDefaults standardUserDefaults] integerForKey:@"CLUTBARS"];
-	BOOL noInterpolationCopy = [[NSUserDefaults standardUserDefaults] boolForKey:@"NOINTERPOLATION"];
-	BOOL highQInterpolationCopy = [[NSUserDefaults standardUserDefaults] boolForKey:@"SOFTWAREINTERPOLATION"];
-	
-	float pixData[] = {0,1,1,0};
-	DCMPix* dcmPix = [[DCMPix alloc] initWithData:pixData :32 :2 :2 :1 :1 :0 :0 :0];
-	
-	DCMView* dcmView;
-	unsigned char gray_2[size2];
-    unsigned char gray_1[size2];
-    
-	[[NSUserDefaults standardUserDefaults] setInteger:annotNone forKey:@"ANNOTATIONS"];
-	[[NSUserDefaults standardUserDefaults] setInteger:barHide forKey:@"CLUTBARS"];
-	
-	// pix 1: no interpolation
-    
-	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NOINTERPOLATION"];
-	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"SOFTWAREINTERPOLATION"];
-	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FULL32BITPIPELINE"];
-	
-	dcmView = [[DCMView alloc] initWithFrame:NSMakeRect(0, 0, size,size)];
-	[dcmView setPixels:[NSMutableArray arrayWithObject:dcmPix] files:NULL rois:NULL firstImage:0 level:'i' reset:YES];
-	[dcmView setScaleValueCentered:size];
-	[win.contentView addSubview:dcmView];
-	[dcmView drawRect:NSMakeRect(0,0,size,size)];
-    
-    {
-        float imOrigin[ 3], imSpacing[ 2];
-        long width, height, spp, bpp;
-        
-        unsigned char *data = [dcmView getRawPixelsViewWidth: &width height: &height spp: &spp bpp: &bpp screenCapture: YES force8bits: YES removeGraphical: YES squarePixels: YES allowSmartCropping: NO origin: imOrigin spacing: imSpacing offset: nil isSigned: nil];
-        
-        assert( spp == 3);
-        
-        if( data)
-        {
-            for (int i = 0; i < size2; ++i)
-                gray_1[i] = (data[i*3]+data[i*3+1]+data[i*3+2])/3;
-            free( data);
-            
-//            planes[0] = gray_1;
-//            NSBitmapImageRep* representation = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:planes
-//                                                                                       pixelsWide:size pixelsHigh:size bitsPerSample:8
-//                                                                                  samplesPerPixel:1 hasAlpha:NO isPlanar:NO
-//                                                                                   colorSpaceName:NSCalibratedBlackColorSpace bytesPerRow:size
-//                                                                                     bitsPerPixel:8];
-//            [[representation TIFFRepresentation] writeToFile:@"/tmp/aaaaa1.tif" atomically:YES];
-//            [representation release];
-        }
-    }
-    
-	[dcmView removeFromSuperview];
-	[dcmView release];
-	
-	// pix 2: interpolation
-	
-	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"NOINTERPOLATION"];
-	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"SOFTWAREINTERPOLATION"];
-	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FULL32BITPIPELINE"];
-	dcmView = [[DCMView alloc] initWithFrame: NSMakeRect(0, 0, size,size)];
-	[dcmView setPixels:[NSMutableArray arrayWithObject:dcmPix] files:NULL rois:NULL firstImage:0 level:'i' reset:YES];
-	[dcmView setScaleValueCentered:size];
-	[win.contentView addSubview:dcmView];
-	[dcmView drawRect:NSMakeRect(0,0,size,size)];
-	
-    {
-        float imOrigin[ 3], imSpacing[ 2];
-        long width, height, spp, bpp;
-        
-        unsigned char *data = [dcmView getRawPixelsViewWidth: &width height: &height spp: &spp bpp: &bpp screenCapture: YES force8bits: YES removeGraphical: YES squarePixels: YES allowSmartCropping: NO origin: imOrigin spacing: imSpacing offset: nil isSigned: nil];
-        
-        assert( spp == 3);
-        
-        if( data)
-        {
-            for (int i = 0; i < size2; ++i)
-                gray_1[i] = (data[i*3]+data[i*3+1]+data[i*3+2])/3;
-            free( data);
-            
-//            planes[0] = gray_1;
-//            NSBitmapImageRep* representation = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:planes
-//                                                                                       pixelsWide:size pixelsHigh:size bitsPerSample:8
-//                                                                                  samplesPerPixel:1 hasAlpha:NO isPlanar:NO
-//                                                                                   colorSpaceName:NSCalibratedBlackColorSpace bytesPerRow:size
-//                                                                                     bitsPerPixel:8];
-//            [[representation TIFFRepresentation] writeToFile:@"/tmp/aaaaa2.tif" atomically:YES];
-//            [representation release];
-        }
-    }
-	[dcmView removeFromSuperview];
-	[dcmView release];
-	
-	[win release];
-	[dcmPix release];
-	
-	
-	[[NSUserDefaults standardUserDefaults] setInteger: annotCopy forKey:@"ANNOTATIONS"];
-	[[NSUserDefaults standardUserDefaults] setInteger: clutBarsCopy forKey:@"CLUTBARS"];
-	[[NSUserDefaults standardUserDefaults] setBool: noInterpolationCopy forKey:@"NOINTERPOLATION"];
-	[[NSUserDefaults standardUserDefaults] setBool: highQInterpolationCopy forKey:@"SOFTWAREINTERPOLATION"];
-	
-	[DCMView setCLUTBARS:clutBarsCopy ANNOTATIONS:annotCopy];
-	
-	// eval results
-	
-	CGFloat delta = 0;
-	for (int i = 0; i < size2; ++i)
-		delta += fabsf((float)gray_1[i]-(float)gray_2[i]);
-	BOOL has32bitPipeline = delta > 1000; // we may want to raise this..
-	
-	if (has32bitPipeline)
-	{
-		NSLog( @"-- 32bit pipeline available : delta = %f", delta);
-		[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasFULL32BITPIPELINE"];
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"FULL32BITPIPELINE"];
-	}
-	else
-	{
-		NSLog( @"-- 32bit pipeline inactivated : delta = %f", delta);
-		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"hasFULL32BITPIPELINE"];
-		[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"FULL32BITPIPELINE"];
-	}
-}
-
-- (void) applicationWillFinishLaunching: (NSNotification *) aNotification
-{
-   NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
-   
-   [AppController cleanOsiriXSubProcesses];
-    
-   [self verifyHardwareInterpolation];
-
-   
-	if( ![[NSFileManager defaultManager] fileExistsAtPath: @"/tmp/"])
-      [[NSFileManager defaultManager] createDirectoryAtPath:@"/tmp/" withIntermediateDirectories:NO attributes:nil error:nil];
-	
-    if ([[d valueForKey:@"COPYDATABASEMODE"] intValue] == 1) // tag 1 "if on CD", disappeared after new CD/DVD import system
-        [d setInteger:2 forKey:@"COPYDATABASEMODE"];
-	
-	
-    if( [d boolForKey: @"hideListenerError"] == NO)
-    {
-        @try
-        {
-            ILCrashReporter *reporter = [ILCrashReporter defaultReporter];
-            
-           
-            
-            if( [d valueForKey: @"crashReporterSMTPServer"]) {
-                reporter.SMTPServer = [d valueForKey: @"crashReporterSMTPServer"];
-                int port = [d integerForKey: @"crashReporterSMTPPort"];
-                reporter.SMTPPort = port? port : 25;
-                // if these are empty, set them to empty
-                reporter.SMTPUsername = [d valueForKey: @"crashReporterSMTPUsername"];
-                reporter.SMTPPassword = [d valueForKey: @"crashReporterSMTPPassword"];
-            }
-            
-            if( [d valueForKey: @"crashReporterFromAddress"])
-                reporter.fromAddress = [d valueForKey: @"crashReporterFromAddress"];
-            
-            NSString *reportAddr = @"jacquesfauquex@gmail.com";
-            if( [d valueForKey: @"crashReporterToAddress"])
-                reportAddr = [d valueForKey: @"crashReporterToAddress"];
-            
-            reporter.automaticReport = [d boolForKey: @"crashReporterAutomaticReport"];
-            
-            [reporter launchReporterForCompany: @"opendicom" reportAddr: reportAddr];
-        }
-        @catch (NSException *e)
-        {
-            NSLog( @"**** Exception ILCrashReporter: %@", e);
-        }
-    }
-	
-   //passes IBOutlets to be filled to PluginManager at init
-   pluginManager = [[PluginManager alloc] initForMenus:reportMenu :databaseMenu :imageFilterMenu :roiToolMenu];
-   if (pluginManager==nil) exit(-1);
-
-	appController = self;
-   
-   
-#pragma mark dcmtk with watchdog...
-	[self initDCMTK];
-	[self restartSTORESCP];
-	[NSTimer scheduledTimerWithTimeInterval: 2 target: self selector: @selector(checkForRestartStoreSCPOrder:) userInfo: nil repeats: YES];
-	
-	[DicomDatabase initializeDicomDatabaseClass];
-	[BrowserController initializeBrowserControllerClass];
-	[WebPortal initializeWebPortalClass];
-
-	if( [d boolForKey:@"httpXMLRPCServer"]) {
-		if(XMLRPCServer == nil) XMLRPCServer = [[XMLRPCInterface alloc] init];
-	}
-	
-#pragma mark notifications
-	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver: self
-           selector: @selector(UpdateWLWWMenu:)
-               name: OsirixUpdateWLWWMenuNotification
-             object: nil];
-    [nc addObserver: self
-           selector: @selector(UpdateConvolutionMenu:)
-               name: OsirixUpdateConvolutionMenuNotification
-             object: nil];
-	[nc addObserver: self
-           selector: @selector(UpdateCLUTMenu:)
-               name: OsirixUpdateCLUTMenuNotification
-             object: nil];
-	[nc addObserver: self
-           selector: @selector(UpdateOpacityMenu:)
-               name: OsirixUpdateOpacityMenuNotification
-             object: nil];
-	
-	[nc postNotificationName: OsirixUpdateOpacityMenuNotification
-                     object: NSLocalizedString(@"Linear Table", nil)
-                   userInfo: nil];
-	[nc postNotificationName: OsirixUpdateCLUTMenuNotification
-                     object: NSLocalizedString(@"No CLUT", nil)
-                   userInfo: nil];
-	[nc postNotificationName: OsirixUpdateWLWWMenuNotification
-                     object: NSLocalizedString(@"Other", nil)
-                   userInfo: nil];
-	[nc postNotificationName: OsirixUpdateConvolutionMenuNotification
-                     object:NSLocalizedString( @"No Filter", nil)
-                   userInfo: nil];
-	
-    [nc addObserver:self selector:@selector(applicationDidChangeScreenParameters:)
-               name:NSApplicationDidChangeScreenParametersNotification
-             object:NSApp];
-    
-    [AppController resetThumbnailsList];
-	
-	
-		
-	//Checks for Bonjour enabled dicom servers. Most likely other copies of OsiriX
-	//JF [DCMNetServiceDelegate sharedNetServiceDelegate];
-	
-	previousDefaults = [[d dictionaryRepresentation] retain];
-	showRestartNeeded = YES;
-		
-	[nc addObserver: self
-          selector: @selector(preferencesUpdated:)
-              name: NSUserDefaultsDidChangeNotification
-            object: nil];
-	
-	[d setBool:YES forKey: @"SAMESTUDY"];
-		
-	[d setBool: [AppController hasMacOSXSnowLeopard] forKey: @"hasMacOSXSnowLeopard"];
-	
-   [d setBool: YES forKey: @"UseKDUForJPEG2000"];
-   [d setBool: YES forKey: @"useDCMTKForJP2K"];
-    
-   if( [[d objectForKey:@"HOTKEYS"] count] < SetKeyImageAction) {
-        NSMutableDictionary *hk = [[[[NSUserDefaults standardUserDefaults] objectForKey:@"HOTKEYS"] mutableCopy] autorelease];
-        
-        BOOL f = NO;
-        for( NSString *key in hk) {
-            if( [[hk objectForKey: key] integerValue] == FullScreenAction)
-                f = YES;
-            
-            if( [[hk objectForKey: key] integerValue] == Sync3DAction)
-                f = YES;
-            
-            if( [[hk objectForKey: key] integerValue] == SetKeyImageAction)
-                f = YES;
-        }
-        
-        if( f == NO) {
-            [hk setObject: @(FullScreenAction) forKey: @"dbl-click"];
-            [hk setObject: @(Sync3DAction) forKey: @"dbl-click + alt"];
-            [hk setObject: @(SetKeyImageAction) forKey: @"dbl-click + cmd"];
-            
-            [d setObject: hk forKey: @"HOTKEYS"];
-        }
-    }
-   [d setBool: NO forKey: @"EncryptCD"];
-   [d setBool: NO forKey: @"encryptForExport"];
-	
-	[self initTilingWindows];
-    
-   NSString* inc = [[DicomDatabase activeLocalDatabase] incomingDirPath];
-   for (NSString* path in [NSArray arrayWithObjects: [[DicomDatabase activeLocalDatabase] tempDirPath], [[DicomDatabase activeLocalDatabase] decompressionDirPath], nil])
-         for (NSString* f in [[NSFileManager defaultManager] enumeratorAtPath:path filesOnly:NO recursive:NO])
-             [[NSFileManager defaultManager] moveItemAtPath:[path stringByAppendingPathComponent:f] toPath:[inc stringByAppendingPathComponent:f] error:NULL];
-
-	if( [AppController isKDUEngineAvailable])
-		NSLog( @"/*\\ /*\\ KDU Engine AVAILABLE /*\\ /*\\");
-	else
-		NSLog( @"KDU Engine NOT available");
-}
 
 - (IBAction) updateViews:(id) sender
 {
@@ -3330,20 +3328,9 @@ static BOOL firstCall = YES;
 
 - (IBAction) about: (id) sender
 {
-	if (splashController)
-		[splashController release];
+	if (splashController) [splashController release];
 	splashController = [[SplashScreen alloc] init];
 	[splashController showWindow:self];
-	[splashController affiche];
-}
-
-- (IBAction) aboutPlugins: (id) sender
-{
-   if (splashController)
-      [splashController release];
-   splashController = [[SplashScreen alloc] init];
-   [splashController showWindow:self];
-   [splashController affiche];
 }
 
 -(IBAction)showPreferencePanel:(id)sender
@@ -3352,13 +3339,11 @@ static BOOL firstCall = YES;
 }
 
 
-//———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
-
 -(void) dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver: self];
+   [[NSNotificationCenter defaultCenter] removeObserver: self];
 	
-    [browserController release];
+   [browserController release];
 	[dcmtkQRSCP release];
 	dcmtkQRSCP = nil;
 	
@@ -3401,7 +3386,7 @@ static BOOL firstCall = YES;
 	return viewersList;
 }
 
-//———————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+
 
 - (NSScreen *)dbScreen
 {

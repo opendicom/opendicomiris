@@ -16,7 +16,6 @@
 				AB0F3A421046BFB9004129DD /* PBXTargetDependency */,
 				4A2F590D078D124B00C514A2 /* PBXTargetDependency */,
 				AB72503C0ADE6F7000A212A0 /* PBXTargetDependency */,
-				CE8DF1260B470DC50035C230 /* PBXTargetDependency */,
 			);
 			name = "Build All Prerequisites";
 			productName = "Build All Prerequisites";
@@ -60,6 +59,10 @@
 		4A2A49D3218D3C4700B4D164 /* ired.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A2A49BD218D3C4700B4D164 /* ired.plist */; };
 		4A2A49D4218D3C4700B4D164 /* Flow.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A2A49BE218D3C4700B4D164 /* Flow.plist */; };
 		4A2A49D5218D3C4700B4D164 /* Rainbow2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4A2A49BF218D3C4700B4D164 /* Rainbow2.plist */; };
+		4A42B68921E2E67D008D2880 /* PrintManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A42B68721E2E67C008D2880 /* PrintManager.h */; };
+		4A42B68C21E37F84008D2880 /* DicomPrintPref.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A42B68A21E37F83008D2880 /* DicomPrintPref.h */; };
+		4A42B68D21E37F84008D2880 /* DicomPrintPref.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A42B68B21E37F84008D2880 /* DicomPrintPref.m */; };
+		4A42B69321E38877008D2880 /* DicomPrintPref.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A42B69121E38877008D2880 /* DicomPrintPref.xib */; };
 		4A62F21E21DCECF9001E318C /* PluginManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 847AFC351A14DFA20067AA07 /* PluginManager.h */; };
 		4A62F21F21DCED52001E318C /* PluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 847AFC361A14DFA20067AA07 /* PluginManager.m */; };
 		4A7E6F6F218A26D400BAF7B9 /* HL7.tif in Resources */ = {isa = PBXBuildFile; fileRef = 4A7E6F6E218A26D300BAF7B9 /* HL7.tif */; };
@@ -286,7 +289,6 @@
 		84281FFE13BC91380093BA26 /* N2OpenGLViewWithSplitsWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 84281FFC13BC91380093BA26 /* N2OpenGLViewWithSplitsWindow.m */; };
 		84281FFF13BC91380093BA26 /* N2OpenGLViewWithSplitsWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 84281FFD13BC91380093BA26 /* N2OpenGLViewWithSplitsWindow.h */; };
 		84321F23147E9BDA00C86CC1 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84321F22147E9BDA00C86CC1 /* Quartz.framework */; };
-		843F847B12439E00004FBBF6 /* AYDicomPrintPref.h in Headers */ = {isa = PBXBuildFile; fileRef = 843F847A12439E00004FBBF6 /* AYDicomPrintPref.h */; };
 		8440039A0E8CF99500A00EBD /* dciodvfy in Resources */ = {isa = PBXBuildFile; fileRef = 844003990E8CF99500A00EBD /* dciodvfy */; };
 		84701B2E1A15E7B7007825C7 /* NSString+N2.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84701B2D1A15E7B7007825C7 /* NSString+N2.mm */; };
 		84701B311A15EBBA007825C7 /* OsiriXHeaders.mm in Sources */ = {isa = PBXBuildFile; fileRef = 847AFCA81A14DFA30067AA07 /* OsiriXHeaders.mm */; };
@@ -920,7 +922,6 @@
 		84A205B61A1520D60005BD7D /* libCharLS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A205B51A1520D60005BD7D /* libCharLS.a */; };
 		84A205B71A1520D60005BD7D /* libCharLS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A205B51A1520D60005BD7D /* libCharLS.a */; };
 		84A205BD1A1522CA0005BD7D /* libkdu_v73R.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A205AC1A151EE10005BD7D /* libkdu_v73R.a */; };
-		84A205BE1A1523FA0005BD7D /* DICOMPrint.mm in Sources */ = {isa = PBXBuildFile; fileRef = 847AFB7D1A14DFA00067AA07 /* DICOMPrint.mm */; };
 		84A220E80F25E41800C6C3EB /* ROIs.tif in Resources */ = {isa = PBXBuildFile; fileRef = 84A220E60F25E41800C6C3EB /* ROIs.tif */; };
 		84A220E90F25E41800C6C3EB /* Keys.tif in Resources */ = {isa = PBXBuildFile; fileRef = 84A220E70F25E41800C6C3EB /* Keys.tif */; };
 		84A6790E0EEED04000AE5C98 /* jpeg_memsrc.h in Headers */ = {isa = PBXBuildFile; fileRef = 84A6790D0EEED04000AE5C98 /* jpeg_memsrc.h */; };
@@ -1581,10 +1582,10 @@
 		AB7824680D3BACC700460DCE /* WebServicesHTML in Resources */ = {isa = PBXBuildFile; fileRef = AB78245B0D3BACC700460DCE /* WebServicesHTML */; };
 		AB7CB7B20A6E3886008DFCC9 /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = AB7CB7AF0A6E3886008DFCC9 /* error.png */; };
 		AB7CB7B60A6E3922008DFCC9 /* smile.png in Resources */ = {isa = PBXBuildFile; fileRef = AB7CB7B30A6E3922008DFCC9 /* smile.png */; };
-		AB80EBAB0AF1F5B600E7E934 /* AYDicomPrintWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = AB80EBA50AF1F5B600E7E934 /* AYDicomPrintWindowController.h */; };
-		AB80EBAC0AF1F5B600E7E934 /* AYDicomPrintWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = AB80EBA60AF1F5B600E7E934 /* AYDicomPrintWindowController.mm */; };
-		AB80EBAD0AF1F5B600E7E934 /* AYNSImageToDicom.h in Headers */ = {isa = PBXBuildFile; fileRef = AB80EBA70AF1F5B600E7E934 /* AYNSImageToDicom.h */; };
-		AB80EBAE0AF1F5B600E7E934 /* AYNSImageToDicom.m in Sources */ = {isa = PBXBuildFile; fileRef = AB80EBA80AF1F5B600E7E934 /* AYNSImageToDicom.m */; };
+		AB80EBAB0AF1F5B600E7E934 /* DicomPrintWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = AB80EBA50AF1F5B600E7E934 /* DicomPrintWindowController.h */; };
+		AB80EBAC0AF1F5B600E7E934 /* DicomPrintWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = AB80EBA60AF1F5B600E7E934 /* DicomPrintWindowController.mm */; };
+		AB80EBAD0AF1F5B600E7E934 /* NSImageToDicomPrint.h in Headers */ = {isa = PBXBuildFile; fileRef = AB80EBA70AF1F5B600E7E934 /* NSImageToDicomPrint.h */; };
+		AB80EBAE0AF1F5B600E7E934 /* NSImageToDicomPrint.m in Sources */ = {isa = PBXBuildFile; fileRef = AB80EBA80AF1F5B600E7E934 /* NSImageToDicomPrint.m */; };
 		AB85C65D0BFADA9500C4B52E /* FileIcon.tif in Resources */ = {isa = PBXBuildFile; fileRef = AB85C65B0BFADA9500C4B52E /* FileIcon.tif */; };
 		AB87FA7A0C06BEB200CD2976 /* nifti1.h in Headers */ = {isa = PBXBuildFile; fileRef = AB87FA750C06BEB200CD2976 /* nifti1.h */; };
 		AB87FA7B0C06BEB200CD2976 /* nifti1_io.c in Sources */ = {isa = PBXBuildFile; fileRef = AB87FA760C06BEB200CD2976 /* nifti1_io.c */; };
@@ -2589,7 +2590,7 @@
 		CE3F996E0C84724B00CB38F1 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3F99380C84724B00CB38F1 /* MainMenu.xib */; };
 		CE3F996F0C84724B00CB38F1 /* Wait.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3F993A0C84724B00CB38F1 /* Wait.xib */; };
 		CE3F99710C84724B00CB38F1 /* XMLViewer.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3F993E0C84724B00CB38F1 /* XMLViewer.xib */; };
-		CE3F99720C84724B00CB38F1 /* AYDicomPrint.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3F99400C84724B00CB38F1 /* AYDicomPrint.xib */; };
+		CE3F99720C84724B00CB38F1 /* DicomPrint.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3F99400C84724B00CB38F1 /* DicomPrint.xib */; };
 		CE40ED590D86D634007C6D49 /* 3DPosition.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE40ED570D86D634007C6D49 /* 3DPosition.xib */; };
 		CE44401E1165D1B70034BF18 /* jaricom.c in Sources */ = {isa = PBXBuildFile; fileRef = BFBF3C1409B6828200545F5E /* jaricom.c */; };
 		CE44401F1165D1B70034BF18 /* jcapimin.c in Sources */ = {isa = PBXBuildFile; fileRef = BFBF3C1509B6828200545F5E /* jcapimin.c */; };
@@ -2834,14 +2835,11 @@
 		CE52264F077C48D900EED851 /* Sync.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE522648077C48D900EED851 /* Sync.pdf */; };
 		CE5487410989346800CF4C60 /* BrushPalette.tif in Resources */ = {isa = PBXBuildFile; fileRef = CE5487400989346800CF4C60 /* BrushPalette.tif */; };
 		CE54877A0989363200CF4C60 /* Brush.tif in Resources */ = {isa = PBXBuildFile; fileRef = CE5487790989363200CF4C60 /* Brush.tif */; };
-		CE586CC40C74B75D00DB7D5A /* libdcmprintscu.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE586CC30C74B75D00DB7D5A /* libdcmprintscu.dylib */; };
-		CE586CCA0C74B7DB00DB7D5A /* libdcmprintscu.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE586CC30C74B75D00DB7D5A /* libdcmprintscu.dylib */; };
 		CE59440B155E3838007BDF5B /* NSString+SymlinksAndAliases.h in Headers */ = {isa = PBXBuildFile; fileRef = CE594405155E3838007BDF5B /* NSString+SymlinksAndAliases.h */; };
 		CE59440C155E3838007BDF5B /* NSString+SymlinksAndAliases.m in Sources */ = {isa = PBXBuildFile; fileRef = CE594406155E3838007BDF5B /* NSString+SymlinksAndAliases.m */; };
 		CE5D33B509E1C26400CC6884 /* add-large.tif in Resources */ = {isa = PBXBuildFile; fileRef = CE5D33B309E1C26400CC6884 /* add-large.tif */; };
 		CE5D33B609E1C26400CC6884 /* minus-large.tif in Resources */ = {isa = PBXBuildFile; fileRef = CE5D33B409E1C26400CC6884 /* minus-large.tif */; };
 		CE65D9F115C4843300E9D94C /* DiskArbitration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE65D9F015C4843300E9D94C /* DiskArbitration.framework */; };
-		CE6693C70AF551210073D923 /* libxerces-c.27.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6693C60AF551210073D923 /* libxerces-c.27.dylib */; };
 		CE6C77ED09739B3100F951C2 /* Rotate3DCursor.tif in Resources */ = {isa = PBXBuildFile; fileRef = CE6C77EB09739B3100F951C2 /* Rotate3DCursor.tif */; };
 		CE6C77EE09739B3100F951C2 /* Rotate3DCameraCursor.tif in Resources */ = {isa = PBXBuildFile; fileRef = CE6C77EC09739B3100F951C2 /* Rotate3DCameraCursor.tif */; };
 		CE72D7C31263702500874EF6 /* Pause.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE72D7C21263702500874EF6 /* Pause.pdf */; };
@@ -2853,7 +2851,6 @@
 		CE81E2A50FDA9F00000D3D96 /* OsiriX.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = CE8D057D0FD8505000165DDE /* OsiriX.framework */; };
 		CE897DD50C21D951005C669E /* texture.tif in Resources */ = {isa = PBXBuildFile; fileRef = CE897DD30C21D951005C669E /* texture.tif */; };
 		CE8A5017181BA499009A453B /* OsiriX Report.pages in Resources */ = {isa = PBXBuildFile; fileRef = CE8A5016181BA499009A453B /* OsiriX Report.pages */; };
-		CE8CAB0E0B4715DD0068DBAE /* DICOMPrint in Resources */ = {isa = PBXBuildFile; fileRef = CE8CAB0A0B4715DD0068DBAE /* DICOMPrint */; };
 		CE8CDAF212B3C88D00268E4F /* DatabaseIcon.tif in Resources */ = {isa = PBXBuildFile; fileRef = CE8CDAF112B3C88D00268E4F /* DatabaseIcon.tif */; };
 		CE8D057E0FD8505000165DDE /* OsiriX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE8D057D0FD8505000165DDE /* OsiriX.framework */; };
 		CE8D05CE0FD851F400165DDE /* DCMAbstractSyntaxUID.h in Headers */ = {isa = PBXBuildFile; fileRef = CE79D9860FD84C350043DD73 /* DCMAbstractSyntaxUID.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2868,8 +2865,6 @@
 		CE96D11D0BEE732A00C4E397 /* mdfdsman.cc in Sources */ = {isa = PBXBuildFile; fileRef = CE96D1170BEE732900C4E397 /* mdfdsman.cc */; };
 		CE995076183E05D60087E409 /* PerpendicularLines.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CE995075183E05D60087E409 /* PerpendicularLines.pdf */; };
 		CE99E890073AB4C500725ABC /* iPhoto.icns in Resources */ = {isa = PBXBuildFile; fileRef = CE99E88E073AB4C500725ABC /* iPhoto.icns */; };
-		CE9A04440C7DBC060007809F /* libxerces-c.27.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = CE6693C60AF551210073D923 /* libxerces-c.27.dylib */; };
-		CE9A04450C7DBC060007809F /* libdcmprintscu.dylib in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = CE586CC30C74B75D00DB7D5A /* libdcmprintscu.dylib */; };
 		CE9C734A0B34946B0062FCCC /* echoscu in Resources */ = {isa = PBXBuildFile; fileRef = CE9C73490B34946B0062FCCC /* echoscu */; };
 		CE9E11D013DBB5DD008B2848 /* opendicomiris.sdef in Resources */ = {isa = PBXBuildFile; fileRef = CE9E11CF13DBB5DD008B2848 /* opendicomiris.sdef */; };
 		CEA4F07515AEA5FE009584C7 /* Cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA4F07215AEA5FE009584C7 /* Cloud.png */; };
@@ -3025,8 +3020,6 @@
 		CEB98C791335087D0083F3FD /* OSI3DPreferencePanePref.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB98C751335087D0083F3FD /* OSI3DPreferencePanePref.xib */; };
 		CEB98C7A1335087D0083F3FD /* OSI3DPreferencePane.h in Headers */ = {isa = PBXBuildFile; fileRef = CEB98C771335087D0083F3FD /* OSI3DPreferencePane.h */; };
 		CEB98C7B1335087D0083F3FD /* OSI3DPreferencePane.mm in Sources */ = {isa = PBXBuildFile; fileRef = CEB98C781335087D0083F3FD /* OSI3DPreferencePane.mm */; };
-		CEB98C841335088C0083F3FD /* AYDicomPrintPref.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB98C801335088C0083F3FD /* AYDicomPrintPref.m */; };
-		CEB98C851335088C0083F3FD /* AYDicomPrintPref.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB98C811335088C0083F3FD /* AYDicomPrintPref.xib */; };
 		CEBA5FE011B244EA005F3A0E /* SpectroIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CEBA5FDF11B244EA005F3A0E /* SpectroIcon.jpg */; };
 		CEBD79A914F1AD6B000DA1FE /* libvtkGraphics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEBD798414F1AD6B000DA1FE /* libvtkGraphics.a */; };
 		CEBD79AA14F1AD6B000DA1FE /* libvtkIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEBD798514F1AD6B000DA1FE /* libvtkIO.a */; };
@@ -6392,11 +6385,6 @@
 		CEDEF7D80D020E9100CADB15 /* JPEGSmall.tif in Resources */ = {isa = PBXBuildFile; fileRef = CEDEF7D50D020E9100CADB15 /* JPEGSmall.tif */; };
 		CEDF64B717E1B751009BB3F3 /* DCMAbstractSyntaxUID.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79D9870FD84C350043DD73 /* DCMAbstractSyntaxUID.m */; };
 		CEDF64B817E1B77D009BB3F3 /* DCMCalendarDate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF61E58D06A5BB9E001C0B29 /* DCMCalendarDate.m */; };
-		CEDF6DC60B46FE99008B45B8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
-		CEDF6DC90B46FE99008B45B8 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
-		CEDF6DCB0B46FE99008B45B8 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6D320C05B3159D0002F793 /* IOKit.framework */; };
-		CEDF6DCC0B46FE99008B45B8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFBF3AA009B681F500545F5E /* libz.dylib */; };
-		CEDF6E010B46FED2008B45B8 /* libxerces-c.27.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6693C60AF551210073D923 /* libxerces-c.27.dylib */; };
 		CEE619EF0912C73000C31D78 /* OrientationWidget.tif in Resources */ = {isa = PBXBuildFile; fileRef = CEE619EE0912C73000C31D78 /* OrientationWidget.tif */; };
 		CEE6717D077D5ECF00E4BB10 /* SyncLock.pdf in Resources */ = {isa = PBXBuildFile; fileRef = CEE67176077D5ECE00E4BB10 /* SyncLock.pdf */; };
 		CEE75F701470698F00A83306 /* DefaultBanner.png in Resources */ = {isa = PBXBuildFile; fileRef = CEE75F6F1470698F00A83306 /* DefaultBanner.png */; };
@@ -6453,13 +6441,6 @@
 			remoteGlobalIDString = AB724F300ADE6ECB00A212A0;
 			remoteInfo = Decompress;
 		};
-		CE8DF1250B470DC50035C230 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CEDF6C600B46FE99008B45B8;
-			remoteInfo = DICOMPrint;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -6471,9 +6452,7 @@
 			files = (
 				59F1A515104BA8AE009E3215 /* OsiriXAPI.framework in Copy Frameworks */,
 				CE81E2A50FDA9F00000D3D96 /* OsiriX.framework in Copy Frameworks */,
-				CE9A04440C7DBC060007809F /* libxerces-c.27.dylib in Copy Frameworks */,
 				84F453570FC3DF5400D29666 /* ILCrashReporter.framework in Copy Frameworks */,
-				CE9A04450C7DBC060007809F /* libdcmprintscu.dylib in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6490,7 +6469,7 @@
 		20C0D2C720D5DE7500569F76 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = Binaries/ja.lproj/AnonymizationSavePanel.xib; sourceTree = "<group>"; };
 		20C0D2C820D5DE7E00569F76 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = Binaries/ja.lproj/AnonymizationTemplateNamePanel.xib; sourceTree = "<group>"; };
 		20C0D2C920D5DE8800569F76 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = Binaries/ja.lproj/AnonymizationView.xib; sourceTree = "<group>"; };
-		20C0D2CA20D5DE9000569F76 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = Binaries/ja.lproj/AYDicomPrint.xib; sourceTree = "<group>"; };
+		20C0D2CA20D5DE9000569F76 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = Binaries/ja.lproj/DicomPrint.xib; sourceTree = "<group>"; };
 		20C0D2CB20D5DE9A00569F76 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = Binaries/ja.lproj/BurnViewer.xib; sourceTree = "<group>"; };
 		20C0D2CC20D5DEA200569F76 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = Binaries/ja.lproj/CalciumScoring.xib; sourceTree = "<group>"; };
 		20C0D2CD20D5DEAC00569F76 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = Binaries/ja.lproj/CPR.xib; sourceTree = "<group>"; };
@@ -6557,6 +6536,11 @@
 		4A2A49BD218D3C4700B4D164 /* ired.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ired.plist; sourceTree = "<group>"; };
 		4A2A49BE218D3C4700B4D164 /* Flow.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Flow.plist; sourceTree = "<group>"; };
 		4A2A49BF218D3C4700B4D164 /* Rainbow2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Rainbow2.plist; sourceTree = "<group>"; };
+		4A42B68621E2E67C008D2880 /* DicomPrintSCU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DicomPrintSCU.h; path = DicomPrint/DicomPrintSCU.h; sourceTree = "<group>"; };
+		4A42B68721E2E67C008D2880 /* PrintManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrintManager.h; path = DicomPrint/PrintManager.h; sourceTree = "<group>"; };
+		4A42B68A21E37F83008D2880 /* DicomPrintPref.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DicomPrintPref.h; path = "Preference Panes/DicomPrintPreferencePane/DicomPrintPref.h"; sourceTree = "<group>"; };
+		4A42B68B21E37F84008D2880 /* DicomPrintPref.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DicomPrintPref.m; path = "Preference Panes/DicomPrintPreferencePane/DicomPrintPref.m"; sourceTree = "<group>"; };
+		4A42B69221E38877008D2880 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = "Preference Panes/DicomPrintPreferencePane/English.lproj/DicomPrintPref.xib"; sourceTree = "<group>"; };
 		4A7E6F6E218A26D300BAF7B9 /* HL7.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = HL7.tif; sourceTree = "<group>"; };
 		4AE9A9CE21C184E8002D0C3D /* ImagePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePlugin.m; sourceTree = "<group>"; };
 		4AE9A9CF21C184E9002D0C3D /* FusionPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FusionPlugin.m; sourceTree = "<group>"; };
@@ -6784,7 +6768,6 @@
 		84281FFC13BC91380093BA26 /* N2OpenGLViewWithSplitsWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = N2OpenGLViewWithSplitsWindow.m; path = nitrogen/Sources/N2OpenGLViewWithSplitsWindow.m; sourceTree = "<group>"; };
 		84281FFD13BC91380093BA26 /* N2OpenGLViewWithSplitsWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = N2OpenGLViewWithSplitsWindow.h; path = nitrogen/Sources/N2OpenGLViewWithSplitsWindow.h; sourceTree = "<group>"; };
 		84321F22147E9BDA00C86CC1 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = ../../../../System/Library/Frameworks/Quartz.framework; sourceTree = "<group>"; };
-		843F847A12439E00004FBBF6 /* AYDicomPrintPref.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AYDicomPrintPref.h; path = "Preference Panes/AYDicomPrintPreferencePane/AYDicomPrintPref.h"; sourceTree = SOURCE_ROOT; };
 		844003990E8CF99500A00EBD /* dciodvfy */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = dciodvfy; path = Binaries/dciodvfy; sourceTree = "<group>"; };
 		844719AF0FD8EF50003BFDF8 /* OsiriX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OsiriX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84701B2D1A15E7B7007825C7 /* NSString+N2.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = "NSString+N2.mm"; path = "nitrogen/Sources/NSString+N2.mm"; sourceTree = "<group>"; };
@@ -7705,12 +7688,10 @@
 		AB78245B0D3BACC700460DCE /* WebServicesHTML */ = {isa = PBXFileReference; lastKnownFileType = folder; name = WebServicesHTML; path = Binaries/WebServicesHTML; sourceTree = "<group>"; };
 		AB7CB7AF0A6E3886008DFCC9 /* error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error.png; sourceTree = "<group>"; };
 		AB7CB7B30A6E3922008DFCC9 /* smile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smile.png; sourceTree = "<group>"; };
-		AB80EBA40AF1F5B600E7E934 /* AYDcmPrintSCU.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = AYDcmPrintSCU.h; path = AYDicomPrint/AYDcmPrintSCU.h; sourceTree = "<group>"; };
-		AB80EBA50AF1F5B600E7E934 /* AYDicomPrintWindowController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AYDicomPrintWindowController.h; sourceTree = "<group>"; };
-		AB80EBA60AF1F5B600E7E934 /* AYDicomPrintWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = AYDicomPrintWindowController.mm; sourceTree = "<group>"; };
-		AB80EBA70AF1F5B600E7E934 /* AYNSImageToDicom.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AYNSImageToDicom.h; sourceTree = "<group>"; };
-		AB80EBA80AF1F5B600E7E934 /* AYNSImageToDicom.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AYNSImageToDicom.m; sourceTree = "<group>"; };
-		AB80EBA90AF1F5B600E7E934 /* AYPrintManager.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = AYPrintManager.h; path = AYDicomPrint/AYPrintManager.h; sourceTree = "<group>"; };
+		AB80EBA50AF1F5B600E7E934 /* DicomPrintWindowController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = DicomPrintWindowController.h; sourceTree = "<group>"; };
+		AB80EBA60AF1F5B600E7E934 /* DicomPrintWindowController.mm */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.objcpp; path = DicomPrintWindowController.mm; sourceTree = "<group>"; };
+		AB80EBA70AF1F5B600E7E934 /* NSImageToDicomPrint.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NSImageToDicomPrint.h; sourceTree = "<group>"; };
+		AB80EBA80AF1F5B600E7E934 /* NSImageToDicomPrint.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSImageToDicomPrint.m; sourceTree = "<group>"; };
 		AB85C65B0BFADA9500C4B52E /* FileIcon.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = FileIcon.tif; sourceTree = "<group>"; };
 		AB87FA750C06BEB200CD2976 /* nifti1.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = nifti1.h; sourceTree = "<group>"; };
 		AB87FA760C06BEB200CD2976 /* nifti1_io.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = nifti1_io.c; sourceTree = "<group>"; };
@@ -7812,7 +7793,6 @@
 		ABE881440FC1444D009F5C80 /* ILCrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ILCrashReporter.framework; path = Binaries/ILCrashReporter.framework; sourceTree = "<group>"; };
 		ABEF846909A23EF5006CEC3E /* ReportTemplate.doc */ = {isa = PBXFileReference; lastKnownFileType = file; name = ReportTemplate.doc; path = Binaries/ReportTemplate.doc; sourceTree = "<group>"; };
 		ABF09BB80642FD220044FE6C /* Stereo.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Stereo.icns; sourceTree = "<group>"; };
-		ABFDE81610A8003100E33E0F /* Deployment-Info OsiriXLite.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Deployment-Info OsiriXLite.plist"; sourceTree = "<group>"; };
 		ABFF0A95056D97800066794C /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
 		B78DA71A0ACEDA9A005C2C04 /* Shutter.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Shutter.tif; sourceTree = "<group>"; };
 		B7CDAC730AB3003200068D70 /* PAGES */ = {isa = PBXFileReference; lastKnownFileType = folder; name = PAGES; path = Binaries/PAGES; sourceTree = "<group>"; };
@@ -8722,7 +8702,7 @@
 		CE3F99390C84724B00CB38F1 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Binaries/English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		CE3F993B0C84724B00CB38F1 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Binaries/English.lproj/Wait.xib; sourceTree = "<group>"; };
 		CE3F993F0C84724B00CB38F1 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Binaries/English.lproj/XMLViewer.xib; sourceTree = "<group>"; };
-		CE3F99410C84724B00CB38F1 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Binaries/English.lproj/AYDicomPrint.xib; sourceTree = "<group>"; };
+		CE3F99410C84724B00CB38F1 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Binaries/English.lproj/DicomPrint.xib; sourceTree = "<group>"; };
 		CE40ED580D86D634007C6D49 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = Binaries/English.lproj/3DPosition.xib; sourceTree = "<group>"; };
 		CE49E2C50760B93500444203 /* Empty.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = Empty.tif; path = Binaries/Icons/Empty.tif; sourceTree = SOURCE_ROOT; };
 		CE4B5CFB10E5F9DE00C11948 /* Safari.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Safari.tif; sourceTree = "<group>"; };
@@ -8736,7 +8716,6 @@
 		CE522648077C48D900EED851 /* Sync.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Sync.pdf; sourceTree = "<group>"; };
 		CE5487400989346800CF4C60 /* BrushPalette.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = BrushPalette.tif; sourceTree = "<group>"; };
 		CE5487790989363200CF4C60 /* Brush.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Brush.tif; sourceTree = "<group>"; };
-		CE586CC30C74B75D00DB7D5A /* libdcmprintscu.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libdcmprintscu.dylib; path = AYDicomPrint/libdcmprintscu.dylib; sourceTree = "<group>"; };
 		CE58A260146ECCE800F50080 /* WebPortalDB 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WebPortalDB 5.xcdatamodel"; sourceTree = "<group>"; };
 		CE594405155E3838007BDF5B /* NSString+SymlinksAndAliases.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SymlinksAndAliases.h"; sourceTree = "<group>"; };
 		CE594406155E3838007BDF5B /* NSString+SymlinksAndAliases.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SymlinksAndAliases.m"; sourceTree = "<group>"; };
@@ -8755,7 +8734,6 @@
 		CE79D9870FD84C350043DD73 /* DCMAbstractSyntaxUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMAbstractSyntaxUID.m; sourceTree = "<group>"; };
 		CE897DD30C21D951005C669E /* texture.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = texture.tif; path = Binaries/Icons/texture.tif; sourceTree = "<group>"; };
 		CE8A5016181BA499009A453B /* OsiriX Report.pages */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "OsiriX Report.pages"; path = "Binaries/OsiriX Report.pages"; sourceTree = "<group>"; };
-		CE8CAB0A0B4715DD0068DBAE /* DICOMPrint */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = DICOMPrint; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE8CDAF112B3C88D00268E4F /* DatabaseIcon.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = DatabaseIcon.tif; sourceTree = "<group>"; };
 		CE8D057D0FD8505000165DDE /* OsiriX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OsiriX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE902EA1181C004C00CC4B88 /* pages2pages09.applescript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.applescript; name = pages2pages09.applescript; path = Binaries/ReportsToPDF/pages2pages09.applescript; sourceTree = "<group>"; };
@@ -8923,9 +8901,7 @@
 		CEB98C761335087D0083F3FD /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = "Preference Panes/OSI3DPreferencePane/English.lproj/OSI3DPreferencePanePref.xib"; sourceTree = "<group>"; };
 		CEB98C771335087D0083F3FD /* OSI3DPreferencePane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OSI3DPreferencePane.h; path = "Preference Panes/OSI3DPreferencePane/OSI3DPreferencePane.h"; sourceTree = "<group>"; };
 		CEB98C781335087D0083F3FD /* OSI3DPreferencePane.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = OSI3DPreferencePane.mm; path = "Preference Panes/OSI3DPreferencePane/OSI3DPreferencePane.mm"; sourceTree = "<group>"; };
-		CEB98C7F1335088C0083F3FD /* AYDicomPrintPref.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AYDicomPrintPref.h; path = "Preference Panes/AYDicomPrintPreferencePane/AYDicomPrintPref.h"; sourceTree = "<group>"; };
-		CEB98C801335088C0083F3FD /* AYDicomPrintPref.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AYDicomPrintPref.m; path = "Preference Panes/AYDicomPrintPreferencePane/AYDicomPrintPref.m"; sourceTree = "<group>"; };
-		CEB98C821335088C0083F3FD /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = "Preference Panes/AYDicomPrintPreferencePane/English.lproj/AYDicomPrintPref.xib"; sourceTree = "<group>"; };
+		CEB98C821335088C0083F3FD /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = "Preference Panes/AYDicomPrintPreferencePane/English.lproj/DicomPrintPref.xib"; sourceTree = "<group>"; };
 		CEBA5FDF11B244EA005F3A0E /* SpectroIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = SpectroIcon.jpg; sourceTree = "<group>"; };
 		CEBD798414F1AD6B000DA1FE /* libvtkGraphics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvtkGraphics.a; path = Binaries/VTKLibs/libvtkGraphics.a; sourceTree = "<group>"; };
 		CEBD798514F1AD6B000DA1FE /* libvtkIO.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvtkIO.a; path = Binaries/VTKLibs/libvtkIO.a; sourceTree = "<group>"; };
@@ -12289,7 +12265,6 @@
 		CEDEF7D30D020E9100CADB15 /* TIFFSmall.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = TIFFSmall.tif; sourceTree = "<group>"; };
 		CEDEF7D40D020E9100CADB15 /* MailSmall.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = MailSmall.tif; sourceTree = "<group>"; };
 		CEDEF7D50D020E9100CADB15 /* JPEGSmall.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = JPEGSmall.tif; sourceTree = "<group>"; };
-		CEDF6DD00B46FE99008B45B8 /* DICOMPrint */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DICOMPrint; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE619EE0912C73000C31D78 /* OrientationWidget.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = OrientationWidget.tif; sourceTree = "<group>"; };
 		CEE67176077D5ECE00E4BB10 /* SyncLock.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = SyncLock.pdf; sourceTree = "<group>"; };
 		CEE75F6F1470698F00A83306 /* DefaultBanner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultBanner.png; sourceTree = "<group>"; };
@@ -12347,11 +12322,9 @@
 				7E54303D07A05E7100500ABB /* DiscRecording.framework in Frameworks */,
 				7E54303E07A05E7100500ABB /* DiscRecordingUI.framework in Frameworks */,
 				CE2C82EC0C708B380093C162 /* CoreVideo.framework in Frameworks */,
-				CE6693C70AF551210073D923 /* libxerces-c.27.dylib in Frameworks */,
 				BFBF3AA309B681F500545F5E /* libxml2.dylib in Frameworks */,
 				BFBF3AA409B681F500545F5E /* libz.dylib in Frameworks */,
 				84A205B61A1520D60005BD7D /* libCharLS.a in Frameworks */,
-				CE586CC40C74B75D00DB7D5A /* libdcmprintscu.dylib in Frameworks */,
 				ABE881450FC1444D009F5C80 /* ILCrashReporter.framework in Frameworks */,
 				CE8D057E0FD8505000165DDE /* OsiriX.framework in Frameworks */,
 				CE790A1B105D4DE200CE6AAF /* Security.framework in Frameworks */,
@@ -12512,19 +12485,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CEDF6DC40B46FE99008B45B8 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CEDF6DC60B46FE99008B45B8 /* Foundation.framework in Frameworks */,
-				CEDF6DC90B46FE99008B45B8 /* Cocoa.framework in Frameworks */,
-				CEDF6DCB0B46FE99008B45B8 /* IOKit.framework in Frameworks */,
-				CEDF6DCC0B46FE99008B45B8 /* libz.dylib in Frameworks */,
-				CEDF6E010B46FED2008B45B8 /* libxerces-c.27.dylib in Frameworks */,
-				CE586CCA0C74B7DB00DB7D5A /* libdcmprintscu.dylib in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -12534,7 +12494,7 @@
 				847AFA1E1A14DF9E0067AA07 /* OsiriXClasses */,
 				CEB989E9133506D40083F3FD /* Built-in Panes */,
 				8417219210D8D707001A833F /* HTTP-HTTPS Server */,
-				AB80EBA30AF1F5B600E7E934 /* AYDicomPrint */,
+				AB80EBA30AF1F5B600E7E934 /* DicomPrint */,
 				AB87FA740C06BEB200CD2976 /* NIfTI_Library */,
 				CE96D0F20BEE71E800C4E397 /* mdfconen.cc */,
 				CE96D0F30BEE71E800C4E397 /* mdfconen.h */,
@@ -12584,7 +12544,6 @@
 				84701B2F1A15E872007825C7 /* OsiriXAPI.framework */,
 				ABE881440FC1444D009F5C80 /* ILCrashReporter.framework */,
 				CE2BE05D1524344D00AE6156 /* Growl.framework */,
-				CE586CC30C74B75D00DB7D5A /* libdcmprintscu.dylib */,
 				CE6693C60AF551210073D923 /* libxerces-c.27.dylib */,
 				CE8D057D0FD8505000165DDE /* OsiriX.framework */,
 			);
@@ -12596,7 +12555,6 @@
 			children = (
 				ABA71D3F06726B1800335A62 /* opendicomiris.app */,
 				AB724FF60ADE6ECB00A212A0 /* Decompress */,
-				CEDF6DD00B46FE99008B45B8 /* DICOMPrint */,
 				844719AF0FD8EF50003BFDF8 /* OsiriX.framework */,
 				AB0F3A2C1046BD2B004129DD /* OsiriXAPI.framework */,
 			);
@@ -12606,6 +12564,7 @@
 		29B97314FDCFA39411CA2CEA /* OsiriX */ = {
 			isa = PBXGroup;
 			children = (
+				4A42B69121E38877008D2880 /* DicomPrintPref.xib */,
 				4A406FAB218F1D0C00742304 /* NS categories */,
 				AB451801149F44DD006674BF /* JPEG-LS (CharLS) */,
 				84A9D44712F7F8BE00DA1F99 /* KDU SDK */,
@@ -12639,7 +12598,6 @@
 				CECDBE690C95467B006B11A5 /* AnnotationsDefault.plist */,
 				CE897DD30C21D951005C669E /* texture.tif */,
 				844003990E8CF99500A00EBD /* dciodvfy */,
-				CE8CAB0A0B4715DD0068DBAE /* DICOMPrint */,
 				AB7250370ADE6F5D00A212A0 /* Decompress */,
 				596D30AC1439B979004EE9EC /* odt2pdf */,
 				596D30AE1439B98A004EE9EC /* pages2pdf.applescript */,
@@ -12665,7 +12623,7 @@
 				5997897511B7B423002DB107 /* AnonymizationSavePanel.xib */,
 				5997897711B7B423002DB107 /* AnonymizationTemplateNamePanel.xib */,
 				5997897911B7B423002DB107 /* AnonymizationView.xib */,
-				CE3F99400C84724B00CB38F1 /* AYDicomPrint.xib */,
+				CE3F99400C84724B00CB38F1 /* DicomPrint.xib */,
 				CE3F992C0C84724B00CB38F1 /* BurnViewer.xib */,
 				CE3F99000C84724B00CB38F1 /* CalciumScoring.xib */,
 				CE90551612F5B68100263AB6 /* CPR.xib */,
@@ -12705,7 +12663,6 @@
 				CE3F991A0C84724B00CB38F1 /* WaitRendering.xib */,
 				CE3F993E0C84724B00CB38F1 /* XMLViewer.xib */,
 				ABBFDA3F063480490011BD0A /* Deployment-Info.plist */,
-				ABFDE81610A8003100E33E0F /* Deployment-Info OsiriXLite.plist */,
 				CE286C100964196C001A4573 /* Localizable.strings */,
 				CE9E11CF13DBB5DD008B2848 /* opendicomiris.sdef */,
 				B7CDAC730AB3003200068D70 /* PAGES */,
@@ -14103,16 +14060,15 @@
 			path = "Binaries/dcmtk-source/dcmjpeg";
 			sourceTree = "<group>";
 		};
-		AB80EBA30AF1F5B600E7E934 /* AYDicomPrint */ = {
+		AB80EBA30AF1F5B600E7E934 /* DicomPrint */ = {
 			isa = PBXGroup;
 			children = (
-				843F847A12439E00004FBBF6 /* AYDicomPrintPref.h */,
-				AB80EBA50AF1F5B600E7E934 /* AYDicomPrintWindowController.h */,
-				AB80EBA60AF1F5B600E7E934 /* AYDicomPrintWindowController.mm */,
-				AB80EBA70AF1F5B600E7E934 /* AYNSImageToDicom.h */,
-				AB80EBA80AF1F5B600E7E934 /* AYNSImageToDicom.m */,
+				AB80EBA50AF1F5B600E7E934 /* DicomPrintWindowController.h */,
+				AB80EBA60AF1F5B600E7E934 /* DicomPrintWindowController.mm */,
+				AB80EBA70AF1F5B600E7E934 /* NSImageToDicomPrint.h */,
+				AB80EBA80AF1F5B600E7E934 /* NSImageToDicomPrint.m */,
 			);
-			path = AYDicomPrint;
+			path = DicomPrint;
 			sourceTree = "<group>";
 		};
 		AB87FA740C06BEB200CD2976 /* NIfTI_Library */ = {
@@ -15754,9 +15710,9 @@
 		CEB98CFA13350DAB0083F3FD /* DicomPrint */ = {
 			isa = PBXGroup;
 			children = (
-				CEB98C7F1335088C0083F3FD /* AYDicomPrintPref.h */,
-				CEB98C801335088C0083F3FD /* AYDicomPrintPref.m */,
-				CEB98C811335088C0083F3FD /* AYDicomPrintPref.xib */,
+				4A42B68A21E37F83008D2880 /* DicomPrintPref.h */,
+				4A42B68B21E37F84008D2880 /* DicomPrintPref.m */,
+				CEB98C811335088C0083F3FD /* DicomPrintPref.xib */,
 			);
 			name = DicomPrint;
 			sourceTree = "<group>";
@@ -19099,8 +19055,8 @@
 		CEDF6E1E0B46FF46008B45B8 /* DICOMPrint */ = {
 			isa = PBXGroup;
 			children = (
-				AB80EBA40AF1F5B600E7E934 /* AYDcmPrintSCU.h */,
-				AB80EBA90AF1F5B600E7E934 /* AYPrintManager.h */,
+				4A42B68621E2E67C008D2880 /* DicomPrintSCU.h */,
+				4A42B68721E2E67C008D2880 /* PrintManager.h */,
 			);
 			name = DICOMPrint;
 			sourceTree = "<group>";
@@ -19627,8 +19583,8 @@
 				BF3F21C709CB8772002736A5 /* ditranst.h in Headers */,
 				BF3F21C909CB8773002736A5 /* diutils.h in Headers */,
 				BFE2CDA609D1FE6400AE615D /* dcmqrdbq.h in Headers */,
-				AB80EBAB0AF1F5B600E7E934 /* AYDicomPrintWindowController.h in Headers */,
-				AB80EBAD0AF1F5B600E7E934 /* AYNSImageToDicom.h in Headers */,
+				AB80EBAB0AF1F5B600E7E934 /* DicomPrintWindowController.h in Headers */,
+				AB80EBAD0AF1F5B600E7E934 /* NSImageToDicomPrint.h in Headers */,
 				CE96D0F90BEE71E800C4E397 /* mdfconen.h in Headers */,
 				CE96D11C0BEE732A00C4E397 /* mdfdsman.h in Headers */,
 				AB87FA7A0C06BEB200CD2976 /* nifti1.h in Headers */,
@@ -19733,7 +19689,6 @@
 				592CFF141212F84F00176E39 /* N2XMLRPCConnection.h in Headers */,
 				592CFF161212F84F00176E39 /* N2WSDL.h in Headers */,
 				592CFF181212F84F00176E39 /* N2SOAPWebServiceClient.h in Headers */,
-				843F847B12439E00004FBBF6 /* AYDicomPrintPref.h in Headers */,
 				59526E9E1281896F0016F6C0 /* NSMutableString+N2.h in Headers */,
 				CEFFFE261286895300D69BB8 /* djdec2k.h in Headers */,
 				CEFFFE3B12868F5400D69BB8 /* djdijp2k.h in Headers */,
@@ -20684,6 +20639,7 @@
 				CEBD89E214F1ADDA000DA1FE /* tttypes.h in Headers */,
 				CEBD89E314F1ADDA000DA1FE /* ttunpat.h in Headers */,
 				847AFDE01A14DFA40067AA07 /* AnonymizationSavePanelController.h in Headers */,
+				4A42B68C21E37F84008D2880 /* DicomPrintPref.h in Headers */,
 				CEBD89E414F1ADDA000DA1FE /* unchecked.h in Headers */,
 				CEBD89E514F1ADDA000DA1FE /* uri 2.h in Headers */,
 				CEBD89E614F1ADDA000DA1FE /* uri.h in Headers */,
@@ -21991,6 +21947,7 @@
 				CEBD8EB714F1ADDB000DA1FE /* vtkMesaImageMapper.h in Headers */,
 				CEBD8EB814F1ADDB000DA1FE /* vtkMesaImageSliceMapper.h in Headers */,
 				CEBD8EB914F1ADDB000DA1FE /* vtkMesaLight.h in Headers */,
+				4A42B68921E2E67D008D2880 /* PrintManager.h in Headers */,
 				CEBD8EBA14F1ADDB000DA1FE /* vtkMesaLightingPainter.h in Headers */,
 				847AFED71A14DFA40067AA07 /* OsiriXToolbar.h in Headers */,
 				CEBD8EBB14F1ADDB000DA1FE /* vtkMesaPainterDeviceAdapter.h in Headers */,
@@ -23467,22 +23424,6 @@
 			productReference = AB724FF60ADE6ECB00A212A0 /* Decompress */;
 			productType = "com.apple.product-type.tool";
 		};
-		CEDF6C600B46FE99008B45B8 /* DICOMPrint */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CEDF6DCD0B46FE99008B45B8 /* Build configuration list for PBXNativeTarget "DICOMPrint" */;
-			buildPhases = (
-				CEDF6C610B46FE99008B45B8 /* Sources */,
-				CEDF6DC40B46FE99008B45B8 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = DICOMPrint;
-			productName = SafeDBRebuild;
-			productReference = CEDF6DD00B46FE99008B45B8 /* DICOMPrint */;
-			productType = "com.apple.product-type.tool";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -23525,7 +23466,6 @@
 				4A2F5931078D148300C514A2 /* Unzip Binaries */,
 				4A2F58D8078D118700C514A2 /* Build All Prerequisites */,
 				AB724F300ADE6ECB00A212A0 /* Decompress */,
-				CEDF6C600B46FE99008B45B8 /* DICOMPrint */,
 				AB0F3A2B1046BD2B004129DD /* OsiriX API */,
 			);
 		};
@@ -23547,6 +23487,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A42B69321E38877008D2880 /* DicomPrintPref.xib in Resources */,
 				CE902EA3181C034E00CC4B88 /* pages2pages09.applescript in Resources */,
 				596D30B31439B9CD004EE9EC /* word2pdf.applescript in Resources */,
 				CE0C4792183139C400D4C50E /* pages092pdf.applescript in Resources */,
@@ -23690,7 +23631,6 @@
 				AB9E05470B30107A00661F7E /* key.png in Resources */,
 				CE9C734A0B34946B0062FCCC /* echoscu in Resources */,
 				CE1366B50B41D0F200944876 /* mpeg2.tif in Resources */,
-				CE8CAB0E0B4715DD0068DBAE /* DICOMPrint in Resources */,
 				CEDCFB3C0B4C4A4B00510ABD /* SyncSmall.tif in Resources */,
 				CEDCFB460B4C4E3900510ABD /* SyncSmallLocked.tif in Resources */,
 				CEBD8E5F0B675A75008FD772 /* Propagate.tif in Resources */,
@@ -23777,7 +23717,7 @@
 				4A2A49C1218D3C4700B4D164 /* Spectrum.plist in Resources */,
 				4A2A49C4218D3C4700B4D164 /* VR Red Vessels.plist in Resources */,
 				CE3F99710C84724B00CB38F1 /* XMLViewer.xib in Resources */,
-				CE3F99720C84724B00CB38F1 /* AYDicomPrint.xib in Resources */,
+				CE3F99720C84724B00CB38F1 /* DicomPrint.xib in Resources */,
 				CECDBE6A0C95467B006B11A5 /* AnnotationsDefault.plist in Resources */,
 				A97B73980CB380EF00E5348D /* osirixplugin.icns in Resources */,
 				CEEB5CCC0CCDD161008803E2 /* Centerline.tif in Resources */,
@@ -23863,7 +23803,6 @@
 				CEB98C6B1335086B0083F3FD /* OSIAutoroutingPreferencePanePref.xib in Resources */,
 				CEB98C791335087D0083F3FD /* OSI3DPreferencePanePref.xib in Resources */,
 				4A2A49C3218D3C4700B4D164 /* NIH.plist in Resources */,
-				CEB98C851335088C0083F3FD /* AYDicomPrintPref.xib in Resources */,
 				CE9E11D013DBB5DD008B2848 /* opendicomiris.sdef in Resources */,
 				59C447E21451705900D71580 /* Eject_gray.pdf in Resources */,
 				59C447E41451705900D71580 /* Eject_lightgray.pdf in Resources */,
@@ -24303,8 +24242,8 @@
 				847AFF6B1A14DFA50067AA07 /* WebPortalDatabase.mm in Sources */,
 				4AE9A9CC21B5B894002D0C3D /* PluginManager.m in Sources */,
 				BF8B2A4C09F470F400F1F759 /* dcmqrsrv.mm in Sources */,
-				AB80EBAC0AF1F5B600E7E934 /* AYDicomPrintWindowController.mm in Sources */,
-				AB80EBAE0AF1F5B600E7E934 /* AYNSImageToDicom.m in Sources */,
+				AB80EBAC0AF1F5B600E7E934 /* DicomPrintWindowController.mm in Sources */,
+				AB80EBAE0AF1F5B600E7E934 /* NSImageToDicomPrint.m in Sources */,
 				CE96D0F80BEE71E800C4E397 /* mdfconen.cc in Sources */,
 				CE96D11D0BEE732A00C4E397 /* mdfdsman.cc in Sources */,
 				AB87FA7B0C06BEB200CD2976 /* nifti1_io.c in Sources */,
@@ -24496,7 +24435,6 @@
 				CEB98C6D1335086B0083F3FD /* OSIAutoroutingPreferencePanePref.m in Sources */,
 				CEB98C6F1335086B0083F3FD /* RoutesTableView.m in Sources */,
 				CEB98C7B1335087D0083F3FD /* OSI3DPreferencePane.mm in Sources */,
-				CEB98C841335088C0083F3FD /* AYDicomPrintPref.m in Sources */,
 				847AFF591A14DFA50067AA07 /* ROIVolume.mm in Sources */,
 				59B696651337C957009356ED /* N2DirectoryEnumerator.mm in Sources */,
 				84281FFE13BC91380093BA26 /* N2OpenGLViewWithSplitsWindow.m in Sources */,
@@ -25000,6 +24938,7 @@
 				847AFE3F1A14DFA40067AA07 /* XMLControllerDCMTKCategory.mm in Sources */,
 				ABE46FED0A76411900327466 /* jclossls.c in Sources */,
 				ABE46FEE0A76411900327466 /* jclossy.c in Sources */,
+				4A42B68D21E37F84008D2880 /* DicomPrintPref.m in Sources */,
 				847AFEE71A14DFA40067AA07 /* PreferencesView.mm in Sources */,
 				847AFE501A14DFA40067AA07 /* DCMTKQueryRetrieveSCP.mm in Sources */,
 				ABE46FEF0A76411900327466 /* jcmainct.c in Sources */,
@@ -25616,14 +25555,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CEDF6C610B46FE99008B45B8 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				84A205BE1A1523FA0005BD7D /* DICOMPrint.mm in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -25647,14 +25578,17 @@
 			target = AB724F300ADE6ECB00A212A0 /* Decompress */;
 			targetProxy = AB72503B0ADE6F7000A212A0 /* PBXContainerItemProxy */;
 		};
-		CE8DF1260B470DC50035C230 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CEDF6C600B46FE99008B45B8 /* DICOMPrint */;
-			targetProxy = CE8DF1250B470DC50035C230 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		4A42B69121E38877008D2880 /* DicomPrintPref.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4A42B69221E38877008D2880 /* English */,
+			);
+			name = DicomPrintPref.xib;
+			sourceTree = "<group>";
+		};
 		5926822111CF60BD00CFA81F /* ThreadModalForWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -26051,13 +25985,13 @@
 			name = XMLViewer.xib;
 			sourceTree = "<group>";
 		};
-		CE3F99400C84724B00CB38F1 /* AYDicomPrint.xib */ = {
+		CE3F99400C84724B00CB38F1 /* DicomPrint.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				CE3F99410C84724B00CB38F1 /* English */,
 				20C0D2CA20D5DE9000569F76 /* ja */,
 			);
-			name = AYDicomPrint.xib;
+			name = DicomPrint.xib;
 			sourceTree = "<group>";
 		};
 		CE40ED570D86D634007C6D49 /* 3DPosition.xib */ = {
@@ -26190,12 +26124,12 @@
 			name = OSI3DPreferencePanePref.xib;
 			sourceTree = "<group>";
 		};
-		CEB98C811335088C0083F3FD /* AYDicomPrintPref.xib */ = {
+		CEB98C811335088C0083F3FD /* DicomPrintPref.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				CEB98C821335088C0083F3FD /* English */,
 			);
-			name = AYDicomPrintPref.xib;
+			name = DicomPrintPref.xib;
 			sourceTree = "<group>";
 		};
 		CEF09315182D23B20020C70A /* ThumbnailsList.xib */ = {
@@ -26325,12 +26259,9 @@
 					"\"$(PROJECT_DIR)/Binaries/LibTiff\"",
 					"\"$(PROJECT_DIR)/Binaries/CharLS\"",
 					"\"$(PROJECT_DIR)/ITK180/lib\"",
-					"$(PROJECT_DIR)/Binaries/Ming",
 					ITK180,
 					ITK180/Modules/Core/Common/include,
-					AYDicomPrint,
 					"$(PROJECT_DIR)/Binaries/VTKLibs",
-					"$(PROJECT_DIR)/Binaries/Ming",
 					"$(PROJECT_DIR)/Binaries/CharLS",
 				);
 				OTHER_CPLUSPLUSFLAGS = (
@@ -26406,10 +26337,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				HEADER_SEARCH_PATHS = (
-					/usr/include/libxml2,
-					AYDicomPrint,
-				);
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				IBC_FLATTEN_NIBS = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				OTHER_CFLAGS = "-fvisibility=default";
@@ -26493,38 +26421,6 @@
 			};
 			name = Development;
 		};
-		CEDF6DCE0B46FE99008B45B8 /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_RESOURCE_RULES_PATH = "";
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)";
-				COPY_PHASE_STRIP = NO;
-				DEPLOYMENT_LOCATION = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(FRAMEWORK_SEARCH_PATHS)",
-					"$(SRCROOT)",
-				);
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					Binaries/LibTiff,
-					AYDicomPrint,
-				);
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PRODUCT_NAME = DICOMPrint;
-				SKIP_INSTALL = YES;
-				SYMROOT = build;
-			};
-			name = Development;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -26580,14 +26476,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AB724FF40ADE6ECB00A212A0 /* Development */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
-		};
-		CEDF6DCD0B46FE99008B45B8 /* Build configuration list for PBXNativeTarget "DICOMPrint" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CEDF6DCE0B46FE99008B45B8 /* Development */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Development;

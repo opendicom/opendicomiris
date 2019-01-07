@@ -1,14 +1,14 @@
-#import "AYDicomPrintPref.h"
+#import "DicomPrintPref.h"
 #import <SecurityInterface/SFAuthorizationView.h>
-#import "AYDicomPrintWindowController.h"
+#import "DicomPrintWindowController.h"
 
-@implementation AYDicomPrintPref
+@implementation DicomPrintPref
 
 - (id) initWithBundle:(NSBundle *)bundle
 {
 	if( self = [super init])
 	{
-		NSNib *nib = [[[NSNib alloc] initWithNibNamed: @"AYDicomPrintPref" bundle: nil] autorelease];
+		NSNib *nib = [[[NSNib alloc] initWithNibNamed: @"DicomPrintPref" bundle: nil] autorelease];
 		[nib instantiateNibWithOwner:self topLevelObjects: nil];
 		
 		[self setMainView: [mainWindow contentView]];
@@ -32,7 +32,7 @@
 
 - (void) awakeFromNib
 {
-	[AYDicomPrintWindowController updateAllPreferencesFormat];
+	[DicomPrintWindowController updateAllPreferencesFormat];
 	
 	// select default printer
 	NSArray *printer = [m_PrinterController arrangedObjects];
@@ -51,9 +51,9 @@
 	}
 
 	// set printer defaults for undo
-	if ([[NSUserDefaults standardUserDefaults] objectForKey: @"AYDicomPrinter"])
+	if ([[NSUserDefaults standardUserDefaults] objectForKey: @"DicomPrinter"])
 	{
-		m_PrinterDefaults = [[NSArray arrayWithArray: [[NSUserDefaults standardUserDefaults] objectForKey: @"AYDicomPrinter"]] retain];
+		m_PrinterDefaults = [[NSArray arrayWithArray: [[NSUserDefaults standardUserDefaults] objectForKey: @"DicomPrinter"]] retain];
 	}
 }
 

@@ -261,15 +261,6 @@ static NSMutableDictionary *studiesForUserCache = nil;
 	return YES;
 }
 
--(BOOL)validateDownloadZIP:(NSNumber**)value error:(NSError**)error {
-	if ([*value boolValue] && !AppController.hasMacOSXSnowLeopard) {
-		if (error) *error = [NSError osirixErrorWithCode:-31 localizedDescription:NSLocalizedString(@"ZIP download requires MacOS 10.6 or higher.", NULL)];
-		return NO;
-	}
-	
-	return YES;
-}
-
 -(BOOL)validateName:(NSString**)value error:(NSError**)error {
 	if ([*value length] < 2) {
 		if (error) *error = [NSError osirixErrorWithCode:-31 localizedDescription:NSLocalizedString(@"Name needs to be at least 2 characters long.", NULL)];

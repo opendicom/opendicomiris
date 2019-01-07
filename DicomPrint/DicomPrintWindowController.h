@@ -1,30 +1,14 @@
-/*=========================================================================
-  Program:   OsiriX
-
-  Copyright (c) OsiriX Team
-  All rights reserved.
-  Distributed under GNU - LGPL
-  
-  See http://www.osirix-viewer.com/copyright.html for details.
-
-     This software is distributed WITHOUT ANY WARRANTY; without even
-     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-     PURPOSE.
-=========================================================================*/
-
-
 #import <Cocoa/Cocoa.h>
 
 @class ViewerController;
 
-/** \brief Window Controller for DICOM printing */
-@interface AYDicomPrintWindowController : NSWindowController <NSWindowDelegate>
+@interface DicomPrintWindowController : NSWindowController <NSWindowDelegate>
 {
 	NSImage *m_PrinterOnImage;
 	NSImage *m_PrinterOffImage;
 	ViewerController *m_CurrentViewer;
 
-	IBOutlet NSMatrix *m_ImageSelection;
+	IBOutlet NSMatrix          *m_ImageSelection;
 	IBOutlet NSArrayController *m_PrinterController;
 
 	IBOutlet NSPanel *m_ProgressSheet;
